@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Assets — Reimagine FX</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .filter-btn {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--gold-border);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .product-card:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+    .product-thumb {
+      aspect-ratio: 16/9;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-thumb-placeholder {
+      text-align: center;
+    }
+    .product-thumb-placeholder p { font-size: 11px; color: var(--text3); font-family: var(--font-head); letter-spacing: 1px; margin-top: 8px; }
+    .product-body { padding: 20px; }
+    .product-cat {
+      font-family: var(--font-head);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .product-name {
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .product-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 20px; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-cta {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      background: var(--gold);
+      color: #0A0A0C;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .product-cta:hover { background: var(--gold2); }
+    .patreon-teaser {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 48px;
+      text-align: center;
+      border-top: 3px solid #FF424D;
+    }
+    @media(max-width:768px){
+      .products-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:480px){
+      .products-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="page-hero-label fade-up">Digital Assets</p>
+      <h1 class="fade-up fade-up-d1">DIGITAL<br>ASSETS</h1>
+      <p class="fade-up fade-up-d2">Professional VFX tools built for working artists. Every asset is production-tested and used in real projects.</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg2);">
+    <div class="container">
+      <div class="filter-bar fade-up" id="filterBar">
+        <button class="filter-btn active" data-filter="all">All Products</button>
+        <button class="filter-btn" data-filter="3d">3D Assets</button>
+        <button class="filter-btn" data-filter="maps">Maps & HDRI</button>
+        <button class="filter-btn" data-filter="vdb">VDB Packs</button>
+        <button class="filter-btn" data-filter="plugins">Maya Plugins</button>
+        <button class="filter-btn" data-filter="projects">Project Files</button>
+      </div>
+
+      <div class="products-grid fade-up fade-up-d1" id="productsGrid">
+        <div class="product-card" data-cat="3d">
+          <div class="product-thumb" style="background:linear-gradient(135deg,#1a0a06,#2d1500);">
+            <div class="product-thumb-placeholder">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="3" stroke="#5A5855" stroke-width="1"/><path d="M10 16l4 4 8-8" stroke="#5A5855" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <p>Add thumbnail</p>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">3D Assets</div>
+            <div class="product-name">3D Asset Pack</div>
+            <div class="product-desc">Production-ready 3D models and assets for use in Maya, Houdini, and Unreal Engine.</div>
+            <div class="product-footer">
+              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb" style="background:linear-gradient(135deg,#060a1a,#001030);">
+            <div class="product-thumb-placeholder">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="#5A5855" stroke-width="1"/><path d="M16 5v22M5 16h22" stroke="#5A5855" stroke-width="1"/></svg>
+              <p>Add thumbnail</p>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Maps</div>
+            <div class="product-name">HDRI Map Collection</div>
+            <div class="product-desc">High dynamic range images for photorealistic lighting. Multiple environments and intensities.</div>
+            <div class="product-footer">
+              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb" style="background:linear-gradient(135deg,#0a1206,#001a10);">
+            <div class="product-thumb-placeholder">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="3" stroke="#5A5855" stroke-width="1"/><path d="M4 20l7-7 5 5 4-4 8 8" stroke="#5A5855" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <p>Add thumbnail</p>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Maps</div>
+            <div class="product-name">Terrain Map Pack</div>
+            <div class="product-desc">Detailed terrain and displacement maps for landscape and environment work.</div>
+            <div class="product-footer">
+              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb" style="background:linear-gradient(135deg,#1a1206,#2d1a00);">
+            <div class="product-thumb-placeholder">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="3" stroke="#5A5855" stroke-width="1"/><circle cx="16" cy="16" r="6" stroke="#5A5855" stroke-width="1"/></svg>
+              <p>Add thumbnail</p>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Maps</div>
+            <div class="product-name">Greyscale Map Pack</div>
+            <div class="product-desc">High-quality greyscale texture maps for displacement, bump, and masking workflows.</div>
+            <div class="product-footer">
+              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb" style="background:linear-gradient(135deg,#0d0a1a,#18001a);">
+            <div class="product-thumb-placeholder">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="10" width="20" height="14" rx="2" stroke="#5A5855" stroke-width="1"/><path d="M12 10V8a4 4 0 0 1 8 0v2" stroke="#5A5855" stroke-width="1" stroke-linecap="round"/></svg>
+              <p>Add thumbnail</p>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Maps</div>
+            <div class="product-name">Area Light Map Pack</div>
+            <div class="product-desc">Curated area light maps for use in physically-based rendering environments.</div>
+            <div class="product-footer">
+              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="vdb">
+          <div class="product-thumb" style="background:linear-gradient(135deg,#1a0606,#2d0000);">
+            <div class="product-thumb-placeholder">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4c-4 4-8 6-8 12s4 10 8 12c4-2 8-6 8-12S20 8 16 4z" stroke="#5A5855" stroke-width="1"/></svg>
+              <p>Add thumbnail</p>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">VDB Packs</div>
+            <div class="product-name">VDB Volume Pack</div>
+            <div class="product-desc">Volumetric VDB files — smoke, fire, clouds, and atmospheric effects ready for render.</div>
+            <div class="product-footer">
+              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="plugins">
+          <div class="product-thumb" style="background:linear-gradient(135deg,#060a1a,#001030);">
+            <div class="product-thumb-placeholder">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="6" width="10" height="10" rx="2" stroke="#5A5855" stroke-width="1"/><rect x="16" y="16" width="10" height="10" rx="2" stroke="#5A5855" stroke-width="1"/><path d="M16 11h6v5" stroke="#5A5855" stroke-width="1" stroke-linecap="round"/></svg>
+              <p>Add thumbnail</p>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Maya Plugins</div>
+            <div class="product-name">Maya Plugin Pack</div>
+            <div class="product-desc">Custom Maya plugins and scripts to speed up your FX and compositing workflow.</div>
+            <div class="product-footer">
+              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="projects">
+          <div class="product-thumb" style="background:linear-gradient(135deg,#0a1206,#001a10);">
+            <div class="product-thumb-placeholder">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M8 4h10l6 6v18H8z" stroke="#5A5855" stroke-width="1" stroke-linejoin="round"/><path d="M18 4v6h6" stroke="#5A5855" stroke-width="1" stroke-linecap="round"/></svg>
+              <p>Add thumbnail</p>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Project Files</div>
+            <div class="product-name">Project File Templates</div>
+            <div class="product-desc">Complete project file setups and templates — ready to use, fully organised, production-ready.</div>
+            <div class="product-footer">
+              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATREON TEASER -->
+  <section class="section" style="background:var(--bg);">
+    <div class="container">
+      <div class="patreon-teaser fade-up">
+        <p style="font-family:var(--font-head);font-size:10px;font-weight:700;letter-spacing:3px;color:#FF424D;text-transform:uppercase;margin-bottom:12px;">Coming soon</p>
+        <h2 style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--text);margin-bottom:12px;">Exclusive content on Patreon</h2>
+        <p style="font-size:15px;color:var(--text2);max-width:480px;margin:0 auto 28px;line-height:1.7;">Early access to new assets, exclusive project files, behind-the-scenes breakdowns, and supporter-only tutorials.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a href="https://discord.gg/cjGQJzZzp" target="_blank" class="btn btn-outline">Join Discord for updates</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="../js/shared.js"></script>
+  <script>
+    document.getElementById('nav-placeholder').outerHTML = buildNav('Products');
+    document.getElementById('footer-placeholder').outerHTML = buildFooter();
+    initNav();
+
+    document.getElementById('filterBar').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.product-card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reimagine FX — 3D Compositor | FX Artist | Motion Designer</title>
+  <meta name="description" content="Reimagine FX — Professional 3D Compositing, VFX, and Motion Design by Amar Shinde. Digital assets, training, and freelance services.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-video-wrap iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 56.25vw;
+      min-height: 100vh;
+      min-width: 177.77vh;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,12,0.4) 0%,
+        rgba(10,10,12,0.3) 40%,
+        rgba(10,10,12,0.8) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 14vw, 160px);
+      letter-spacing: 8px;
+      line-height: 0.9;
+      color: var(--text);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s both;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-head);
+      font-size: clamp(13px, 1.5vw, 16px);
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: var(--text2);
+      text-transform: uppercase;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s both;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.2s both;
+    }
+
+    .hero-scroll span {
+      font-family: var(--font-head);
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: var(--text3);
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* ── DISCIPLINES ── */
+    .disciplines-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .discipline-item {
+      background: var(--surface);
+      padding: 40px 32px;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .discipline-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .discipline-item:hover { background: var(--surface2); }
+    .discipline-item:hover::before { transform: scaleX(1); }
+
+    .discipline-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      letter-spacing: 2px;
+      color: var(--border2);
+      line-height: 1;
+      margin-bottom: 16px;
+      transition: color 0.3s;
+    }
+
+    .discipline-item:hover .discipline-num { color: var(--gold-border); }
+
+    .discipline-name {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .discipline-tools {
+      font-size: 13px;
+      color: var(--text3);
+      line-height: 1.6;
+    }
+
+    /* ── FEATURED WORK ── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .work-item {
+      position: relative;
+      aspect-ratio: 4/3;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .work-item-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.5s ease;
+    }
+
+    .work-item:hover .work-item-bg { transform: scale(1.04); }
+
+    .work-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,12,0.9) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .work-item-cat {
+      font-family: var(--font-head);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .work-item-title {
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .work-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .work-placeholder-inner {
+      text-align: center;
+    }
+
+    .work-placeholder-icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+
+    .work-placeholder-text {
+      font-size: 11px;
+      color: var(--text3);
+      font-family: var(--font-head);
+      letter-spacing: 1px;
+    }
+
+    /* ── ASSETS STRIP ── */
+    .assets-strip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .assets-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .assets-right {
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .assets-price-label {
+      font-size: 12px;
+      color: var(--text3);
+      margin-bottom: 16px;
+      font-family: var(--font-head);
+      letter-spacing: 1px;
+    }
+
+    /* ── TRAINING ── */
+    .training-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .training-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: border-color 0.3s, transform 0.3s;
+      text-decoration: none;
+    }
+
+    .training-card:hover {
+      border-color: var(--gold-border);
+      transform: translateY(-2px);
+    }
+
+    .training-logo {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .training-logo-yt { background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.2); color: #ff4444; }
+    .training-logo-sk { background: rgba(0,160,255,0.1); border: 1px solid rgba(0,160,255,0.2); color: #4488ff; }
+
+    .training-info { flex: 1; }
+
+    .training-name {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .training-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .training-cta {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .training-cta::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+
+    .training-card:hover .training-cta::after { transform: translateX(4px); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .stat-item {
+      background: var(--surface);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 56px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--text3);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .disciplines-grid { grid-template-columns: 1fr; }
+      .work-grid { grid-template-columns: 1fr 1fr; }
+      .training-cards { grid-template-columns: 1fr; }
+      .assets-strip { flex-direction: column; text-align: center; }
+      .stats-bar { grid-template-columns: 1fr; }
+      .hero-title { font-size: clamp(60px, 18vw, 120px); }
+    }
+
+    @media (max-width: 480px) {
+      .work-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/_t78FyP6n88?autoplay=1&mute=1&loop=1&playlist=_t78FyP6n88&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        title="Reimagine FX Showreel">
+      </iframe>
+    </div>
+    <div class="hero-grid-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">3D · VFX · Motion Design</p>
+      <h1 class="hero-title">REIMAGINE<br>FX</h1>
+      <p class="hero-tagline">Crafting Worlds. Compositing Reality.</p>
+      <div class="hero-btns">
+        <a href="reel.html" class="btn btn-primary">Watch Reel</a>
+        <a href="gallery.html" class="btn btn-outline">Explore Work</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- DISCIPLINES -->
+  <section class="section" style="background: var(--bg2);">
+    <div class="container">
+      <p class="section-label fade-up">What I do</p>
+      <h2 class="section-title fade-up fade-up-d1">Disciplines</h2>
+      <p class="section-subtitle fade-up fade-up-d2">8+ years pushing the boundaries of visual storytelling through technical mastery and artistic vision.</p>
+      <div class="disciplines-grid fade-up fade-up-d3">
+        <div class="discipline-item">
+          <div class="discipline-num">01</div>
+          <div class="discipline-name">3D Compositing</div>
+          <div class="discipline-tools">Maya · Nuke · Unreal Engine · After Effects</div>
+        </div>
+        <div class="discipline-item">
+          <div class="discipline-num">02</div>
+          <div class="discipline-name">FX & Simulation</div>
+          <div class="discipline-tools">Houdini · VDB Packs · Particle Systems · Dynamics</div>
+        </div>
+        <div class="discipline-item">
+          <div class="discipline-num">03</div>
+          <div class="discipline-name">Motion Design</div>
+          <div class="discipline-tools">After Effects · Cinema 4D · Resolve · Motion Graphics</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section-sm" style="background: var(--bg);">
+    <div class="container">
+      <div class="stats-bar fade-up">
+        <div class="stat-item">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">10K+</div>
+          <div class="stat-label">Students Taught</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK -->
+  <section class="section" style="background: var(--bg2);">
+    <div class="container">
+      <p class="section-label fade-up">Portfolio</p>
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:16px;">
+        <h2 class="section-title fade-up fade-up-d1" style="margin-bottom:0">Featured work</h2>
+        <a href="gallery.html" class="btn btn-ghost fade-up fade-up-d2">View all work →</a>
+      </div>
+      <div class="work-grid fade-up fade-up-d3">
+        <div class="work-item">
+          <div class="work-item-bg" style="background: linear-gradient(135deg, #1a0a06, #3d1500);"></div>
+          <div class="work-placeholder">
+            <div class="work-placeholder-inner">
+              <div class="work-placeholder-icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="#5A5855" stroke-width="1"/><path d="M6 9l2 2 4-4" stroke="#5A5855" stroke-width="1" stroke-linecap="round"/></svg>
+              </div>
+              <div class="work-placeholder-text">Add your image</div>
+            </div>
+          </div>
+          <div class="work-item-overlay">
+            <div class="work-item-cat">VFX Breakdown</div>
+            <div class="work-item-title">Project Title Here</div>
+          </div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-bg" style="background: linear-gradient(135deg, #060a1a, #001030);"></div>
+          <div class="work-placeholder">
+            <div class="work-placeholder-inner">
+              <div class="work-placeholder-icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="#5A5855" stroke-width="1"/><path d="M6 9l2 2 4-4" stroke="#5A5855" stroke-width="1" stroke-linecap="round"/></svg>
+              </div>
+              <div class="work-placeholder-text">Add your image</div>
+            </div>
+          </div>
+          <div class="work-item-overlay">
+            <div class="work-item-cat">3D Render</div>
+            <div class="work-item-title">Project Title Here</div>
+          </div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-bg" style="background: linear-gradient(135deg, #06100a, #002015);"></div>
+          <div class="work-placeholder">
+            <div class="work-placeholder-inner">
+              <div class="work-placeholder-icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="#5A5855" stroke-width="1"/><path d="M6 9l2 2 4-4" stroke="#5A5855" stroke-width="1" stroke-linecap="round"/></svg>
+              </div>
+              <div class="work-placeholder-text">Add your image</div>
+            </div>
+          </div>
+          <div class="work-item-overlay">
+            <div class="work-item-cat">Motion Design</div>
+            <div class="work-item-title">Project Title Here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIGITAL ASSETS -->
+  <section class="section" style="background: var(--bg);">
+    <div class="container">
+      <p class="section-label fade-up">Digital Assets</p>
+      <div class="assets-strip fade-up fade-up-d1">
+        <div class="assets-left">
+          <h2 style="font-family: var(--font-head); font-size: clamp(24px,3vw,36px); font-weight:800; color: var(--text); margin-bottom:10px; line-height:1.2;">Professional VFX tools,<br>built by a working artist</h2>
+          <p style="font-size:15px; color: var(--text2); max-width:480px; line-height:1.7; margin-bottom:20px;">Everything I use on real productions — available for instant download on Gumroad.</p>
+          <div class="assets-tags">
+            <span class="tag">3D Assets</span>
+            <span class="tag">HDRI Maps</span>
+            <span class="tag">VDB Packs</span>
+            <span class="tag">Maya Plugins</span>
+            <span class="tag">Project Files</span>
+            <span class="tag">Terrain Maps</span>
+            <span class="tag">Greyscale Maps</span>
+            <span class="tag">Area Light Maps</span>
+          </div>
+        </div>
+        <div class="assets-right">
+          <p class="assets-price-label">Available on</p>
+          <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="btn btn-primary" style="display:block; margin-bottom:12px;">Shop on Gumroad →</a>
+          <a href="products.html" class="btn btn-ghost" style="display:block;">Browse all products</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section class="section" style="background: var(--bg2);">
+    <div class="container">
+      <p class="section-label fade-up">Training</p>
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:16px;">
+        <div>
+          <h2 class="section-title fade-up fade-up-d1" style="margin-bottom:8px;">Learn from me</h2>
+          <p class="section-subtitle fade-up fade-up-d2" style="margin-bottom:0;">Free tutorials and structured courses from a working VFX professional.</p>
+        </div>
+        <a href="training.html" class="btn btn-ghost fade-up fade-up-d2">All training →</a>
+      </div>
+      <div class="training-cards fade-up fade-up-d3">
+        <a href="https://www.youtube.com/@reimaginefx" target="_blank" class="training-card">
+          <div class="training-logo training-logo-yt">YT</div>
+          <div class="training-info">
+            <div class="training-name">YouTube</div>
+            <div class="training-desc">Free tutorials, VFX breakdowns, and behind-the-scenes content. New videos regularly.</div>
+            <div class="training-cta">Subscribe free</div>
+          </div>
+        </a>
+        <a href="https://www.skillshare.com/en/user/reimaginefx" target="_blank" class="training-card">
+          <div class="training-logo training-logo-sk">SK</div>
+          <div class="training-info">
+            <div class="training-name">Skillshare</div>
+            <div class="training-desc">In-depth structured courses covering 3D compositing, FX, and motion design workflows.</div>
+            <div class="training-cta">Enroll now</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section class="section-sm" style="background: var(--bg); border-top: 1px solid var(--border);">
+    <div class="container" style="text-align:center;">
+      <p class="section-label fade-up" style="justify-content:center;">Work together</p>
+      <h2 style="font-family:var(--font-display); font-size:clamp(40px,6vw,72px); letter-spacing:4px; color:var(--text); margin-bottom:16px;" class="fade-up fade-up-d1">LET'S CREATE<br><span style="color:var(--gold);">SOMETHING</span><br>EXTRAORDINARY</h2>
+      <p style="font-size:16px; color:var(--text2); margin-bottom:36px; max-width:480px; margin-left:auto; margin-right:auto;" class="fade-up fade-up-d2">Available for freelance commissions, collaborations, and commercial projects.</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;" class="fade-up fade-up-d3">
+        <a href="contact.html" class="btn btn-primary">Get in touch</a>
+        <a href="about.html" class="btn btn-outline">About me</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/shared.js"></script>
+  <script>
+    document.getElementById('nav-placeholder').outerHTML = buildNav('Home');
+    document.getElementById('footer-placeholder').outerHTML = buildFooter();
+    initNav();
+  </script>
+</body>
+</html>
