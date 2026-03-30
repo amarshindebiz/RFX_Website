@@ -37,7 +37,7 @@ function buildNav(activePage) {
 
   return `
   <nav id="nav">
-    <a href="index.html" class="nav-logo">REIMAGINE FX</a>
+    <a href="index.html" class="nav-logo"><img src="https://github.com/amarshindebiz/reimaginefx/blob/main/logo.png?raw=true" alt="Reimagine FX" style="height:36px;width:auto;vertical-align:middle;margin-right:10px;">REIMAGINE FX</a>
     <ul class="nav-links" id="navLinks">${linksHTML}</ul>
     <div class="nav-socials">${socialsHTML}</div>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
@@ -55,7 +55,7 @@ function buildFooter() {
   <footer>
     <div class="footer-grid">
       <div>
-        <div class="footer-logo">REIMAGINE FX</div>
+        <div class="footer-logo"><img src="https://github.com/amarshindebiz/reimaginefx/blob/main/logo.png?raw=true" alt="Reimagine FX" style="height:40px;width:auto;vertical-align:middle;margin-right:10px;">REIMAGINE FX</div>
         <p class="footer-tagline">Crafting Worlds.<br>Compositing Reality.</p>
         <div class="footer-socials">${socialsHTML}</div>
       </div>
