@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Reimagine FX</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="description" content="Gallery — 3D renders, VFX work and motion design by Reimagine FX.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .gallery-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+    .filter-btn { font-family: var(--font-head); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 18px; border-radius: 2px; border: 1px solid var(--border); background: transparent; color: var(--text3); cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--gold-border); color: var(--gold); background: var(--gold-dim); }
+    .gallery-grid { columns: 3; column-gap: 12px; }
+    .gallery-item { break-inside: avoid; margin-bottom: 12px; position: relative; border-radius: 6px; overflow: hidden; background: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: transform 0.3s, border-color 0.3s; }
+    .gallery-item:hover { transform: scale(1.01); border-color: var(--gold-border); }
+    .gallery-item img { width: 100%; display: block; transition: transform 0.5s; }
+    .gallery-item:hover img { transform: scale(1.03); }
+    .gallery-item video { width: 100%; display: block; }
+    .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,12,0.9) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay-cat { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+    .gallery-overlay-title { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--text); }
+    .video-badge { position: absolute; top: 10px; right: 10px; background: rgba(10,10,12,0.7); border: 1px solid var(--gold-border); border-radius: 2px; padding: 3px 8px; font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+    @media(max-width: 768px) { .gallery-grid { columns: 2; } }
+    @media(max-width: 480px) { .gallery-grid { columns: 1; } }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="page-hero-label fade-up">Portfolio</p>
+      <h1 class="fade-up fade-up-d1">GALLERY</h1>
+      <p class="fade-up fade-up-d2">3D renders, VFX work, and personal projects. Every frame crafted with intent.</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg2);">
+    <div class="container">
+      <div class="gallery-filter fade-up" id="galleryFilter">
+        <button class="filter-btn active" data-filter="all">All Work</button>
+        <button class="filter-btn" data-filter="image">3D Renders</button>
+        <button class="filter-btn" data-filter="video">Video</button>
+      </div>
+
+      <div class="gallery-grid fade-up fade-up-d1" id="galleryGrid">
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-1.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-2.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v1.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-3.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-4.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-5.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v2.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-6.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-7.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-8.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-9.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v3.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-10.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-11.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-12.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v4.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-13.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-14.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-15.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-16.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v5.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-17.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-18.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-19.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v6.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-20.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-21.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-22.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-23.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v7.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-24.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-25.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-26.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v8.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-27.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-28.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-29.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-30.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v9.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-31.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-32.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-33.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v10.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-34.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-35.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-36.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-37.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v11.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-38.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-39.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-40.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v12.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-41.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-42.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-43.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-44.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v13.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-45.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-46.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-47.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="video"><video src="gallery/gallery-v14.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-48.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-49.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-50.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-51.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-52.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-53.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-54.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-55.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-56.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-57.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-58.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-59.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-60.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-61.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-62.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-63.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-64.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-65.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-66.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-67.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-68.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-69.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-70.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-71.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+        <div class="gallery-item" data-cat="image"><img src="gallery/gallery-72.png" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
+
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/shared.js"></script>
+  <script>
+    document.getElementById('nav-placeholder').outerHTML = buildNav('Gallery');
+    document.getElementById('footer-placeholder').outerHTML = buildFooter();
+    initNav();
+
+    document.getElementById('galleryFilter').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.style.display = (filter === 'all' || item.dataset.cat === filter) ? '' : 'none';
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target.querySelector('video');
+        if (!video) return;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.gallery-item[data-cat="video"]').forEach(item => {
+      observer.observe(item);
+    });
+  </script>
+</body>
+</html>
