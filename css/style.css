@@ -1,31 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
+  --bg: #0A0A0C;
+  --bg2: #111114;
+  --surface: rgba(255,255,255,0.045);
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.16);
+
+  --text: #F4F1EA;
+  --text2: rgba(244,241,234,0.72);
+  --text3: rgba(244,241,234,0.48);
+
+  --gold: #D8B246;
+  --gold2: #F0C85A;
+  --gold-dim: rgba(216,178,70,0.10);
+  --gold-border: rgba(216,178,70,0.45);
+
   --font-main: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-html,
-body {
-  font-family: var(--font-main);
-  font-size: 16px;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
-}
-
-p,
-li {
-  line-height: 1.7;
-}
-
-h1,
-h2,
-h3,
-h4,
-.nav-logo,
-.nav-links a,
-.btn {
-  font-family: var(--font-main);
-  letter-spacing: -0.03em;
+  --font-body: var(--font-main);
+  --font-head: var(--font-main);
+  --font-display: var(--font-main);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
