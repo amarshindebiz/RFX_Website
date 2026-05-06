@@ -1,15 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg: #0A0A0C; --bg2: #0F0F12; --bg3: #141418;
-  --surface: #16161A; --surface2: #1C1C22;
-  --border: #222228; --border2: #2A2A32;
-  --gold: #C9A84C; --gold2: #E8C96A;
-  --gold-dim: rgba(201,168,76,0.15); --gold-border: rgba(201,168,76,0.25);
-  --ember: #E8593C; --text: #F0EDE6; --text2: #A09D96; --text3: #5A5855;
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-head: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-main: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html,
+body {
+  font-family: var(--font-main);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+p,
+li {
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+h4,
+.nav-logo,
+.nav-links a,
+.btn {
+  font-family: var(--font-main);
+  letter-spacing: -0.03em;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
