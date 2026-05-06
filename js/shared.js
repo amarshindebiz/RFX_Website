@@ -22,7 +22,7 @@ function buildNav(activePage) {
     { href: '/about', label: 'About' },
     { href: '/reel', label: 'Reel' },
     { href: '/products', label: 'Products' },
-    { href: '/maya-viewer', label: 'Maya Viewer' },
+    { href: '/mayaviewer', label: 'Maya Viewer' },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/training', label: 'Training' },
     { href: '/contact', label: 'Contact' }
