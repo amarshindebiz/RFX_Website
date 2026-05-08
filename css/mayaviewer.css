@@ -189,8 +189,52 @@
 #mayaviewer-page .mv-step p,
 #mayaviewer-page .mv-faq p { margin: 0; font-size: 15px; }
 
-#mayaviewer-page .mv-gallery { display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap:18px; margin-top:34px; }
-#mayaviewer-page .mv-shot { min-height: 260px; border: 1px dashed rgba(216,179,74,.42); border-radius:26px; display:flex; align-items:center; justify-content:center; text-align:center; padding: 20px; color: var(--mv-muted); background: linear-gradient(180deg,#15151b,#09090b); }
+#mayaviewer-page .mv-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 34px;
+}
+
+#mayaviewer-page .mv-shot {
+  overflow: hidden;
+  padding: 0;
+  min-height: auto;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+#mayaviewer-page .mv-shot img {
+  width: 100%;
+  aspect-ratio: 9 / 19.5;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+#mayaviewer-page .mv-shot figcaption {
+  padding: 14px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--mv-muted);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  #mayaviewer-page .mv-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  #mayaviewer-page .mv-gallery {
+    grid-template-columns: 1fr;
+  }
+}
 
 #mayaviewer-page .mv-steps { counter-reset: step; display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:18px; margin-top:34px; }
 #mayaviewer-page .mv-step::before { counter-increment: step; content: counter(step); display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center; border-radius:50%; margin-bottom:18px; background: var(--mv-gold); color:#09090b; font-weight:900; }
