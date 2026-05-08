@@ -1,0 +1,249 @@
+/* Maya Viewer page — ready upload replacement */
+#mayaviewer-page {
+  --mv-bg: #08080a;
+  --mv-bg-soft: #0d0d11;
+  --mv-panel: rgba(255,255,255,.055);
+  --mv-panel-2: rgba(255,255,255,.028);
+  --mv-text: #f5f2ea;
+  --mv-muted: rgba(245,242,234,.72);
+  --mv-gold: #d8b34a;
+  background: var(--mv-bg);
+  color: var(--mv-text);
+  overflow: hidden;
+}
+
+#mayaviewer-page *, #mayaviewer-page *::before, #mayaviewer-page *::after { box-sizing: border-box; }
+
+#mayaviewer-page .mv-container, #mayaviewer-page .mv-hero-grid {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+#mayaviewer-page .mv-hero {
+  min-height: 88vh;
+  padding: 170px 0 95px;
+  background:
+    radial-gradient(circle at 82% 20%, rgba(121,102,255,.22), transparent 32%),
+    radial-gradient(circle at 18% 18%, rgba(255,122,26,.16), transparent 30%),
+    linear-gradient(180deg, #060607 0%, #101015 100%);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+#mayaviewer-page .mv-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, .88fr);
+  gap: 66px;
+  align-items: center;
+}
+
+#mayaviewer-page .mv-eyebrow, #mayaviewer-page .section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 18px;
+  color: var(--mv-gold);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#mayaviewer-page .mv-eyebrow::before, #mayaviewer-page .section-label::before {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: var(--mv-gold);
+  opacity: .85;
+}
+
+#mayaviewer-page .mv-title {
+  margin: 0;
+  color: var(--mv-text);
+  font-size: clamp(58px, 8vw, 122px);
+  line-height: .86;
+  letter-spacing: -.055em;
+  max-width: 780px;
+}
+
+#mayaviewer-page .mv-tagline {
+  margin: 26px 0 18px;
+  color: var(--mv-text);
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  max-width: 720px;
+}
+
+#mayaviewer-page .mv-intro, #mayaviewer-page .section-subtitle, #mayaviewer-page .mv-card p,
+#mayaviewer-page .mv-step p, #mayaviewer-page .mv-faq p, #mayaviewer-page .mv-list li, #mayaviewer-page .mv-note {
+  color: var(--mv-muted);
+  line-height: 1.75;
+}
+
+#mayaviewer-page .mv-intro { max-width: 720px; font-size: 16.5px; }
+
+#mayaviewer-page .mv-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+#mayaviewer-page .btn {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(216,179,74,.38);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: 11px;
+  font-weight: 900;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+#mayaviewer-page .btn:hover { transform: translateY(-2px); }
+#mayaviewer-page .btn-primary { background: var(--mv-gold); color: #0b0b0c; border-color: var(--mv-gold); }
+#mayaviewer-page .btn-outline, #mayaviewer-page .btn-ghost { color: var(--mv-gold); background: rgba(216,179,74,.045); }
+#mayaviewer-page .mv-note { margin-top: 18px; font-size: 14px; }
+
+#mayaviewer-page .mv-device {
+  width: 100%;
+  max-width: 430px;
+  margin-left: auto;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 46px;
+  padding: 18px;
+  background: linear-gradient(180deg,#22222a,#070708);
+  box-shadow: 0 40px 120px rgba(0,0,0,.5);
+}
+#mayaviewer-page .mv-device-image { overflow: hidden; }
+#mayaviewer-page .mv-device-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 19.5;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 31px;
+}
+
+#mayaviewer-page .mv-screen {
+  min-height: 560px;
+  border-radius: 31px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 24%, rgba(216,179,74,.24), transparent 28%),
+    linear-gradient(180deg, #15151b 0%, #070708 100%);
+}
+#mayaviewer-page .mv-screen-top { display:flex; justify-content:space-between; gap:14px; color:#fff; font-size:12px; }
+#mayaviewer-page .mv-wire {
+  height: 300px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 28px;
+  background:
+    linear-gradient(45deg, transparent 49%, rgba(255,255,255,.16) 50%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, rgba(121,102,255,.26) 50%, transparent 51%);
+  background-size: 46px 46px;
+}
+#mayaviewer-page .mv-screen-bottom { display:flex; flex-wrap:wrap; gap:10px; }
+#mayaviewer-page .mv-pill { padding: 9px 11px; border: 1px solid rgba(255,255,255,.13); border-radius: 999px; background: rgba(255,255,255,.06); color:#fff; font-size:12px; }
+
+#mayaviewer-page .section { padding: 104px 0; background: var(--mv-bg); }
+#mayaviewer-page .section-sm { padding: 78px 0; background: var(--mv-bg-soft); }
+#mayaviewer-page .section-title {
+  margin: 0 0 18px;
+  color: var(--mv-text);
+  font-size: clamp(34px, 4.5vw, 64px);
+  line-height: .98;
+  letter-spacing: -.045em;
+  max-width: 800px;
+}
+#mayaviewer-page .section-subtitle { max-width: 720px; font-size: 16px; }
+
+#mayaviewer-page .mv-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:18px; margin-top: 40px; }
+#mayaviewer-page .card, #mayaviewer-page .mv-faq {
+  border: 1px solid rgba(255,255,255,.1);
+  background: linear-gradient(180deg, var(--mv-panel), var(--mv-panel-2));
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.18);
+}
+#mayaviewer-page .mv-card h3, #mayaviewer-page .mv-step h3, #mayaviewer-page .mv-faq h3 {
+  margin: 0 0 10px;
+  color: var(--mv-text);
+  font-size: 18px;
+  line-height: 1.25;
+}
+#mayaviewer-page .mv-card p, #mayaviewer-page .mv-step p, #mayaviewer-page .mv-faq p { margin: 0; font-size: 15px; }
+
+/* Screenshot gallery: clean phone cards */
+#mayaviewer-page .mv-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 34px;
+  align-items: start;
+}
+#mayaviewer-page .mv-shot {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  min-height: 0;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 28px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(216,179,74,.28);
+  box-shadow: 0 24px 70px rgba(0,0,0,.28);
+}
+#mayaviewer-page .mv-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: top center;
+}
+#mayaviewer-page .mv-shot figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 36px 12px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,0));
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#mayaviewer-page .mv-steps { counter-reset: step; display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:18px; margin-top:34px; }
+#mayaviewer-page .mv-step::before { counter-increment: step; content: counter(step); display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center; border-radius:50%; margin-bottom:18px; background: var(--mv-gold); color:#09090b; font-weight:900; }
+#mayaviewer-page .mv-code { display:block; margin-top:28px; padding:22px; border-radius:18px; border:1px solid rgba(255,255,255,.12); background:#050506; color:#fff; line-height:1.8; overflow:auto; }
+
+#mayaviewer-page .mv-two { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:54px; align-items:start; }
+#mayaviewer-page .mv-list { margin: 24px 0 0; padding-left: 20px; }
+#mayaviewer-page .mv-list li { margin-bottom: 10px; }
+#mayaviewer-page .mv-meta { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:14px; margin-top:28px; }
+#mayaviewer-page .mv-meta div { padding:18px; border-radius:18px; border:1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); }
+#mayaviewer-page .mv-meta span { display:block; color: var(--mv-muted); font-size:13px; margin-bottom:6px; }
+#mayaviewer-page .mv-meta strong { color: var(--mv-text); word-break: break-word; }
+#mayaviewer-page .mv-faq-wrap { display:grid; gap:14px; }
+
+@media (max-width: 980px) {
+  #mayaviewer-page .mv-hero-grid, #mayaviewer-page .mv-two { grid-template-columns: 1fr; }
+  #mayaviewer-page .mv-device { margin-inline: auto; }
+  #mayaviewer-page .mv-grid, #mayaviewer-page .mv-steps, #mayaviewer-page .mv-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  #mayaviewer-page .mv-container, #mayaviewer-page .mv-hero-grid { width: min(100% - 32px, 1180px); }
+  #mayaviewer-page .mv-hero { padding-top: 132px; }
+  #mayaviewer-page .mv-grid, #mayaviewer-page .mv-steps, #mayaviewer-page .mv-gallery, #mayaviewer-page .mv-meta { grid-template-columns: 1fr; }
+  #mayaviewer-page .mv-actions .btn { width: 100%; }
+  #mayaviewer-page .mv-screen { min-height: 420px; }
+}
