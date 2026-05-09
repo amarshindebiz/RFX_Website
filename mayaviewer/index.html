@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maya Viewer for iOS | Reimagine Fx</title>
+  <meta name="description" content="Maya Viewer lets 3D artists review Autodesk Maya scenes on iPhone and in AR using a lightweight Maya Python plugin." />
+  <meta property="og:title" content="Maya Viewer for iOS | Reimagine Fx" />
+  <meta property="og:description" content="Review Autodesk Maya scenes on iPhone and in AR using a lightweight Maya Python plugin." />
+  <meta property="og:image" content="https://www.reimaginefx.com/mayaviewer/og-mayaviewer.jpg" />
+  <meta property="og:url" content="https://www.reimaginefx.com/mayaviewer" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/mayaviewer.css" />
+</head>
+<body>
+  <div id="nav"></div>
+  <main id="mayaviewer-page">
+    <section class="mv-hero">
+      <div class="mv-hero-grid">
+        <div>
+          <div class="mv-eyebrow">Reimagine Fx iOS Tool</div>
+          <h1 class="mv-title">Maya Viewer</h1>
+          <h2 class="mv-tagline">Review Maya scenes on iPhone and in AR.</h2>
+          <p class="mv-intro">Maya Viewer is built by Amar Shinde at Reimagine Fx to help 3D artists review Autodesk Maya scenes directly on iPhone. It connects to a lightweight Maya Python server and streams scene geometry, materials, textures, cameras, lights, and object statistics into a clean mobile viewer and AR preview.</p>
+          <div class="mv-actions">
+            <a class="btn btn-primary" href="/downloads/RFX_MayaViewer.zip" download>Download Maya Plugin</a>
+            <a class="btn btn-outline" href="#ios-download" aria-disabled="true">Coming soon on the App Store</a>
+          </div>
+          <p class="mv-note">Free Maya Python plugin required to connect Maya Viewer to Autodesk Maya.</p>
+        </div>
+        <div class="mv-device mv-device-image" aria-label="Maya Viewer iPhone preview">
+          <img src="/mvimages/main-maya-viewer.png" alt="Maya Viewer app interface showing scene preview on iPhone">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mv-container">
+        <div class="section-label">Features</div>
+        <h2 class="section-title">Built for fast Maya scene review</h2>
+        <p class="section-subtitle">A lightweight companion workflow for artists who want scene inspection, AR checks, and mobile review without replacing the desktop DCC pipeline.</p>
+        <div class="mv-grid">
+          <article class="card mv-card"><h3>Live Maya scene preview on iPhone</h3><p>Connect to your local Maya session and inspect scene data from a clean mobile viewer.</p></article>
+          <article class="card mv-card"><h3>AR mode for real-world placement</h3><p>Use camera access only for AR preview and place Maya scenes in physical space.</p></article>
+          <article class="card mv-card"><h3>Wireframe, texture, light, camera, and selection tools</h3><p>Switch review modes and focus on the data that matters for asset checks.</p></article>
+          <article class="card mv-card"><h3>Maya camera support</h3><p>Preview scene cameras and review composition away from the desktop.</p></article>
+          <article class="card mv-card"><h3>Mesh, vertex, triangle, and light stats</h3><p>Inspect object and scene statistics for lightweight production review.</p></article>
+          <article class="card mv-card"><h3>Object transform controls</h3><p>Move, rotate, and scale supported objects from the mobile interface.</p></article>
+          <article class="card mv-card"><h3>Snapshot and refresh support</h3><p>Refresh the scene state and capture review moments during iteration.</p></article>
+          <article class="card mv-card"><h3>Offline demo mode</h3><p>Try the app without Maya using the built-in demo workflow.</p></article>
+          <article class="card mv-card"><h3>Local-network multi-device support</h3><p>Multiple devices can connect when reachable on the same local network.</p></article>
+          <article class="card mv-card"><h3>Optional PIN protection</h3><p>Add basic connection protection for the Maya server session.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="mv-container">
+        <div class="section-label">Screenshots</div>
+        <h2 class="section-title">App screenshots</h2>
+<div class="mv-gallery">
+  <figure class="mv-shot">
+    <img src="/mvimages/iphone-scene-viewer.png" alt="Maya Viewer iPhone scene viewer screenshot">
+    <figcaption>iPhone Scene Viewer</figcaption>
+  </figure>
+
+  <figure class="mv-shot">
+    <img src="/mvimages/ar-preview.png" alt="Maya Viewer AR preview screenshot">
+    <figcaption>AR Preview</figcaption>
+  </figure>
+
+  <figure class="mv-shot">
+    <img src="/mvimages/connection-screen.png" alt="Maya Viewer connection screen screenshot">
+    <figcaption>Maya Connection Screen</figcaption>
+  </figure>
+
+  <figure class="mv-shot">
+    <img src="/mvimages/settings-about.png" alt="Maya Viewer settings screenshot">
+    <figcaption>Settings / About</figcaption>
+  </figure>
+</div>
+      </div>
+    </section>
+
+    <section class="section" id="setup">
+      <div class="mv-container">
+        <div class="section-label">Setup</div>
+        <h2 class="section-title">How it works</h2>
+        <div class="mv-steps">
+          <article class="card mv-step"><h3>Download the plugin</h3><p>Download the free Maya Viewer Python plugin from this page.</p></article>
+          <article class="card mv-step"><h3>Copy to Maya scripts</h3><p>Copy the plugin into your Autodesk Maya scripts folder.</p></article>
+          <article class="card mv-step"><h3>Run the server</h3><p>In Maya, run the plugin/server from the script editor or shelf setup.</p></article>
+          <article class="card mv-step"><h3>Open Maya Viewer</h3><p>Launch Maya Viewer on your iPhone or iPad.</p></article>
+          <article class="card mv-step"><h3>Enter connection details</h3><p>Enter the Maya computer IP address, port, and optional PIN.</p></article>
+          <article class="card mv-step"><h3>Connect and review</h3><p>Tap Connect and start reviewing the scene on your device.</p></article>
+        </div>
+        <code class="mv-code">import rfx_mayaviewer as mv<br />mv.start_server(pin=&quot;optional-pin&quot;)</code>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="mv-container mv-two">
+        <div>
+          <div class="section-label">Requirements</div>
+          <h2 class="section-title">What you need</h2>
+          <ul class="mv-list">
+            <li>Autodesk Maya required on the desktop machine.</li>
+            <li>iPhone or iPad required for the iOS app.</li>
+            <li>Maya computer and iPhone should be on the same local network for normal use.</li>
+            <li>Optional PIN is available for basic connection protection.</li>
+            <li>Remote access over different WiFi/mobile data is not officially supported unless the user has their own secure network/VPN setup.</li>
+            <li>Maya Viewer is a scene preview and AR review tool, not an Arnold renderer replacement.</li>
+          </ul>
+        </div>
+        <div id="ios-download">
+          <div class="section-label">Download</div>
+          <h2 class="section-title">Plugin + iOS app</h2>
+          <p class="section-subtitle">Use the free Python plugin to connect Autodesk Maya to Maya Viewer. The iOS App Store link can be swapped in when the app is approved.</p>
+          <div class="mv-actions"><a class="btn btn-primary" href="/downloads/RFX_MayaViewer.zip" download>Download Plugin</a><a class="btn btn-ghost" href="#">Coming soon on the App Store</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="privacy">
+      <div class="mv-container">
+        <div class="section-label">Privacy Policy</div>
+        <h2 class="section-title">Maya Viewer Privacy Policy</h2>
+        <p class="section-subtitle">Maya Viewer is designed as a local companion tool for Autodesk Maya. It does not collect personal data and does not send scene data to Reimagine Fx.</p>
+        <ul class="mv-list">
+          <li>Maya Viewer does not collect personal data.</li>
+          <li>Maya Viewer does not use analytics, ads, or tracking.</li>
+          <li>Camera access is used only for AR mode and remains local on the device.</li>
+          <li>Local Network access is used only to connect the iPhone/iPad to the user’s own Maya session.</li>
+          <li>Server IP address, port, and optional PIN may be stored locally on the device for convenience.</li>
+          <li>Scene data, geometry, materials, textures, cameras, lights, and transforms are transferred only between the user’s Maya session and the user’s device.</li>
+          <li>Reimagine Fx does not receive, store, or process the user’s Maya scene data.</li>
+          <li>No personal data is sold or shared.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="mv-container">
+        <div class="section-label">Apple Review Support</div>
+        <h2 class="section-title">App Store metadata</h2>
+        <div class="mv-meta">
+          <div><span>App name</span><strong>Maya Viewer</strong></div><div><span>Developer</span><strong>Amar Shinde / Reimagine Fx</strong></div>
+          <div><span>Website</span><strong>https://www.reimaginefx.com</strong></div><div><span>Support URL</span><strong>https://www.reimaginefx.com/mayaviewer</strong></div>
+          <div><span>Privacy Policy URL</span><strong>https://www.reimaginefx.com/mayaviewer/privacy</strong></div><div><span>Version / Build</span><strong>1.0.0 / 1</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mv-container mv-two">
+        <div><div class="section-label">About</div><h2 class="section-title">Built by Reimagine Fx</h2><p class="section-subtitle">Maya Viewer was built by Amar Shinde at Reimagine Fx to help 3D artists review Maya scenes faster, cleaner, and closer to the way they actually work. It is designed as a companion to Autodesk Maya, giving artists a lightweight way to inspect scenes, check assets, preview cameras, review materials, and experience their work in AR without leaving their creative workflow.</p></div>
+        <div><div class="section-label">FAQ</div><div class="mv-faq-wrap"><article class="mv-faq"><h3>Is the Maya plugin free?</h3><p>Yes, the Maya Python plugin is free to download from this page.</p></article><article class="mv-faq"><h3>Does Maya Viewer render with Arnold?</h3><p>No. Maya Viewer previews scene data on iPhone and in AR. It is not a replacement for Arnold rendering.</p></article><article class="mv-faq"><h3>Can multiple devices connect to one Maya session?</h3><p>Yes, multiple devices can connect when they are on the same reachable local network.</p></article><article class="mv-faq"><h3>Can I connect over mobile data or a different WiFi network?</h3><p>Not officially. For normal use, Maya Viewer is designed for local network connections. Remote use should only be attempted through a secure VPN or private network setup.</p></article><article class="mv-faq"><h3>Does the app collect my scene files?</h3><p>No. Scene data moves only between your Maya session and your device. Reimagine Fx does not receive or store your files.</p></article></div></div>
+      </div>
+    </section>
+  </main>
+  <div id="footer"></div>
+  <script src="/js/shared.js"></script>
+  <script>document.getElementById('nav').innerHTML = buildNav('Maya Viewer'); document.getElementById('footer').innerHTML = buildFooter(); initNav();</script>
+</body>
+</html>
