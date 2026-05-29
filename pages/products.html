@@ -4,290 +4,441 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Assets — Reimagine FX</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="description" content="Professional VFX digital assets by Reimagine FX — terrain maps, HDRI, VDB packs, 3D assets and Maya plugins.">
+  <link rel="stylesheet" href="/css/style.css">
   <style>
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-    }
-    .filter-btn {
-      font-family: var(--font-head);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      border-radius: 2px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text3);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      border-color: var(--gold-border);
-      color: var(--gold);
-      background: var(--gold-dim);
-    }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .product-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+    .filter-btn { font-family: var(--font-head); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 18px; border-radius: 2px; border: 1px solid var(--border); background: transparent; color: var(--text3); cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--gold-border); color: var(--gold); background: var(--gold-dim); }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
     .product-card:hover { border-color: var(--gold-border); transform: translateY(-3px); }
-    .product-thumb {
-      aspect-ratio: 16/9;
-      background: var(--bg3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .product-thumb-placeholder {
-      text-align: center;
-    }
-    .product-thumb-placeholder p { font-size: 11px; color: var(--text3); font-family: var(--font-head); letter-spacing: 1px; margin-top: 8px; }
+    .product-thumb { aspect-ratio: 3/4; background: var(--bg3); overflow: hidden; position: relative; cursor: pointer; }
+    .product-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+    .product-card:hover .product-thumb img { transform: scale(1.04); }
+    .product-thumb-hint { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10,10,12,0.55); opacity: 0; transition: opacity 0.25s; font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold2); pointer-events: none; }
+    .product-card:hover .product-thumb-hint { opacity: 1; }
+    .product-thumb:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
     .product-body { padding: 20px; }
-    .product-cat {
-      font-family: var(--font-head);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .product-name {
-      font-family: var(--font-head);
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
+    .product-cat { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+    .product-name { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.3; cursor: pointer; }
+    .product-name:hover { color: var(--gold2); }
     .product-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 20px; }
-    .product-footer { display: flex; align-items: center; justify-content: space-between; }
-    .product-cta {
-      font-family: var(--font-head);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 10px 16px;
-      background: var(--gold);
-      color: #0A0A0C;
-      border-radius: 2px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s;
-      text-decoration: none;
-      display: inline-block;
-    }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .product-footer-right { display: flex; align-items: center; gap: 8px; }
+    .product-cta { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 10px 16px; background: var(--gold); color: #0A0A0C; border-radius: 2px; border: none; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; white-space: nowrap; }
     .product-cta:hover { background: var(--gold2); }
-    .patreon-teaser {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 48px;
-      text-align: center;
-      border-top: 3px solid #FF424D;
+    .product-cta.coming { background: transparent; border: 1px solid var(--border2); color: var(--text3); cursor: default; }
+    .product-details-btn { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 10px 16px; background: transparent; border: 1px solid var(--border2); color: var(--text2); border-radius: 2px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .product-details-btn:hover { border-color: var(--gold-border); color: var(--gold); background: var(--gold-dim); }
+    .product-badge { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; white-space: nowrap; }
+    .badge-free { background: rgba(30,200,100,0.1); border: 1px solid rgba(30,200,100,0.2); color: #1EC864; }
+    .badge-soon { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: var(--gold); }
+    .patreon-teaser { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 48px; text-align: center; border-top: 3px solid #FF424D; }
+
+    /* ---- Product preview modal ---- */
+    .product-modal { position: fixed; inset: 0; z-index: 2000; display: none; }
+    .product-modal.open { display: block; }
+    .product-modal-backdrop { position: absolute; inset: 0; background: rgba(5,5,7,0.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .product-modal-dialog { position: relative; z-index: 1; max-width: 920px; width: calc(100% - 48px); max-height: 88vh; margin: 6vh auto 0; background: var(--bg2); border: 1px solid var(--border2); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); box-shadow: 0 30px 80px rgba(0,0,0,0.6); animation: pmIn 0.25s ease; }
+    @keyframes pmIn { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+    .product-modal-media { background: var(--bg3); position: relative; min-height: 320px; }
+    .product-modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .product-modal-content { padding: 36px; overflow-y: auto; max-height: 88vh; }
+    .product-modal-cat { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+    .product-modal-name { font-family: var(--font-head); font-size: 24px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+    .product-modal-price { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--gold2); margin-bottom: 20px; }
+    .product-modal-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
+    .product-modal-desc p { margin-bottom: 14px; }
+    .product-modal-desc h4 { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); margin: 18px 0 10px; }
+    .product-modal-desc ul { list-style: none; margin: 0 0 14px; padding: 0; }
+    .product-modal-desc li { position: relative; padding-left: 18px; margin-bottom: 7px; color: var(--text2); }
+    .product-modal-desc li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+    .product-modal-desc .pm-compat { font-size: 12.5px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px; }
+    .product-modal-content .product-cta { margin-top: 24px; font-size: 11px; padding: 13px 22px; }
+    .product-modal-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; background: rgba(10,10,12,0.6); border: 1px solid var(--border2); color: var(--text); font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: all 0.2s; }
+    .product-modal-close:hover { background: var(--gold); color: #0A0A0C; border-color: var(--gold); }
+
+    @media(max-width:768px){ .products-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:680px){
+      .product-modal-dialog { grid-template-columns: 1fr; max-height: 92vh; margin: 4vh auto 0; }
+      .product-modal-media { min-height: 200px; max-height: 38vh; }
+      .product-modal-content { padding: 24px; max-height: 54vh; }
     }
-    @media(max-width:768px){
-      .products-grid{grid-template-columns:1fr 1fr;}
-    }
-    @media(max-width:480px){
-      .products-grid{grid-template-columns:1fr;}
-    }
+    @media(max-width:480px){ .products-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div id="nav-placeholder"></div>
-
   <section class="page-hero">
     <div class="container">
       <p class="page-hero-label fade-up">Digital Assets</p>
       <h1 class="fade-up fade-up-d1">DIGITAL<br>ASSETS</h1>
-      <p class="fade-up fade-up-d2">Professional VFX tools built for working artists. Every asset is production-tested and used in real projects.</p>
+      <p class="fade-up fade-up-d2">Professional VFX tools built for working artists. Every asset is production-tested.</p>
     </div>
   </section>
-
   <section class="section" style="background:var(--bg2);">
     <div class="container">
       <div class="filter-bar fade-up" id="filterBar">
         <button class="filter-btn active" data-filter="all">All Products</button>
-        <button class="filter-btn" data-filter="3d">3D Assets</button>
-        <button class="filter-btn" data-filter="maps">Maps & HDRI</button>
+        <button class="filter-btn" data-filter="maps">Maps</button>
         <button class="filter-btn" data-filter="vdb">VDB Packs</button>
+        <button class="filter-btn" data-filter="3d">3D Assets</button>
         <button class="filter-btn" data-filter="plugins">Maya Plugins</button>
-        <button class="filter-btn" data-filter="projects">Project Files</button>
+        <button class="filter-btn" data-filter="free">Free</button>
       </div>
-
       <div class="products-grid fade-up fade-up-d1" id="productsGrid">
-        <div class="product-card" data-cat="3d">
-          <div class="product-thumb" style="background:linear-gradient(135deg,#1a0a06,#2d1500);">
-            <div class="product-thumb-placeholder">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="3" stroke="#5A5855" stroke-width="1"/><path d="M10 16l4 4 8-8" stroke="#5A5855" stroke-width="1.5" stroke-linecap="round"/></svg>
-              <p>Add thumbnail</p>
-            </div>
-          </div>
+
+        <div class="product-card" data-cat="maps plugins">
+          <div class="product-thumb"><img src="/products/product-14.png" alt="Area Light Maps Volume 1"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
-            <div class="product-cat">3D Assets</div>
-            <div class="product-name">3D Asset Pack</div>
-            <div class="product-desc">Production-ready 3D models and assets for use in Maya, Houdini, and Unreal Engine.</div>
-            <div class="product-footer">
-              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
-            </div>
+            <div class="product-cat">Maps · Area Light</div>
+            <div class="product-name">Area Light Maps Volume 1</div>
+            <div class="product-desc">Curated area light maps for physically-based rendering. Studio and environmental lighting setups.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/rfxarealightmaps" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$19.99" hidden>
+            <p>50 professional EXR area light maps built for lighting and LookDev artists who want beautiful, physically accurate lighting in a single click — soft, natural, and production-ready straight out of the box.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>50 EXR area light maps at 2K resolution</li>
+              <li>50 PNG thumbnail previews</li>
+              <li>Reimagine Fx ALM Plugin for Maya &amp; Arnold — visual browser, one-click apply, Favourites tab, Color Temperature / Kelvin control with live Attribute Editor sync, full undo, settings saved with your scene</li>
+            </ul>
+            <p class="pm-compat"><strong>Compatible with:</strong> EXR maps work in any 3D app (Blender, Houdini, Cinema 4D, 3ds Max). Plugin is Maya 2025/2026 + Arnold, Windows 10/11.</p>
           </div>
         </div>
 
-        <div class="product-card" data-cat="maps">
-          <div class="product-thumb" style="background:linear-gradient(135deg,#060a1a,#001030);">
-            <div class="product-thumb-placeholder">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="#5A5855" stroke-width="1"/><path d="M16 5v22M5 16h22" stroke="#5A5855" stroke-width="1"/></svg>
-              <p>Add thumbnail</p>
-            </div>
-          </div>
+        <div class="product-card" data-cat="plugins free">
+          <div class="product-thumb"><img src="/products/product-15.png" alt="Focus Picker"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
-            <div class="product-cat">Maps</div>
-            <div class="product-name">HDRI Map Collection</div>
-            <div class="product-desc">High dynamic range images for photorealistic lighting. Multiple environments and intensities.</div>
-            <div class="product-footer">
-              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
-            </div>
+            <div class="product-cat">Maya Plugin · Camera</div>
+            <div class="product-name">Focus Picker — Free Maya Tool</div>
+            <div class="product-desc">A free camera focus tool for Maya and Arnold — one-click viewport pick with live two-way sync, DOF toggle, and aperture control.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-free">Free</span><a href="https://reimagine-fx.gumroad.com/l/rfxfocuspicker" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
           </div>
-        </div>
-
-        <div class="product-card" data-cat="maps">
-          <div class="product-thumb" style="background:linear-gradient(135deg,#0a1206,#001a10);">
-            <div class="product-thumb-placeholder">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="3" stroke="#5A5855" stroke-width="1"/><path d="M4 20l7-7 5 5 4-4 8 8" stroke="#5A5855" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <p>Add thumbnail</p>
-            </div>
-          </div>
-          <div class="product-body">
-            <div class="product-cat">Maps</div>
-            <div class="product-name">Terrain Map Pack</div>
-            <div class="product-desc">Detailed terrain and displacement maps for landscape and environment work.</div>
-            <div class="product-footer">
-              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card" data-cat="maps">
-          <div class="product-thumb" style="background:linear-gradient(135deg,#1a1206,#2d1a00);">
-            <div class="product-thumb-placeholder">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="3" stroke="#5A5855" stroke-width="1"/><circle cx="16" cy="16" r="6" stroke="#5A5855" stroke-width="1"/></svg>
-              <p>Add thumbnail</p>
-            </div>
-          </div>
-          <div class="product-body">
-            <div class="product-cat">Maps</div>
-            <div class="product-name">Greyscale Map Pack</div>
-            <div class="product-desc">High-quality greyscale texture maps for displacement, bump, and masking workflows.</div>
-            <div class="product-footer">
-              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card" data-cat="maps">
-          <div class="product-thumb" style="background:linear-gradient(135deg,#0d0a1a,#18001a);">
-            <div class="product-thumb-placeholder">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="10" width="20" height="14" rx="2" stroke="#5A5855" stroke-width="1"/><path d="M12 10V8a4 4 0 0 1 8 0v2" stroke="#5A5855" stroke-width="1" stroke-linecap="round"/></svg>
-              <p>Add thumbnail</p>
-            </div>
-          </div>
-          <div class="product-body">
-            <div class="product-cat">Maps</div>
-            <div class="product-name">Area Light Map Pack</div>
-            <div class="product-desc">Curated area light maps for use in physically-based rendering environments.</div>
-            <div class="product-footer">
-              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card" data-cat="vdb">
-          <div class="product-thumb" style="background:linear-gradient(135deg,#1a0606,#2d0000);">
-            <div class="product-thumb-placeholder">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4c-4 4-8 6-8 12s4 10 8 12c4-2 8-6 8-12S20 8 16 4z" stroke="#5A5855" stroke-width="1"/></svg>
-              <p>Add thumbnail</p>
-            </div>
-          </div>
-          <div class="product-body">
-            <div class="product-cat">VDB Packs</div>
-            <div class="product-name">VDB Volume Pack</div>
-            <div class="product-desc">Volumetric VDB files — smoke, fire, clouds, and atmospheric effects ready for render.</div>
-            <div class="product-footer">
-              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
-            </div>
+          <div class="pm-data" data-price="Free" hidden>
+            <p>A professional depth-of-field workflow tool for Maya and Arnold. Stop reading numbers off the HUD — one click in the viewport ray-casts any surface and writes the exact focus distance straight to your Arnold camera. No guesswork, no interruption to your flow.</p>
+            <h4>Features</h4>
+            <ul>
+              <li>One-click viewport pick to set focus distance instantly</li>
+              <li>Live two-way sync with Arnold's Attribute Editor &amp; the Channel Box</li>
+              <li>Ctrl+MMB or label drag to scrub values like Maya's Channel Box</li>
+              <li>DOF toggle and aperture (aiApertureSize) control</li>
+              <li>Camera management — create, delete and switch render cameras</li>
+              <li>One-click shelf installer (never duplicates), resizable window</li>
+              <li>Arnold-first with native Maya focus fallback</li>
+            </ul>
+            <p class="pm-compat"><strong>Requirements:</strong> Maya 2025/2026, Arnold (MtoA), Windows 10/11. Includes plugin folder, installation guide PDF and shelf installer.</p>
           </div>
         </div>
 
         <div class="product-card" data-cat="plugins">
-          <div class="product-thumb" style="background:linear-gradient(135deg,#060a1a,#001030);">
-            <div class="product-thumb-placeholder">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="6" width="10" height="10" rx="2" stroke="#5A5855" stroke-width="1"/><rect x="16" y="16" width="10" height="10" rx="2" stroke="#5A5855" stroke-width="1"/><path d="M16 11h6v5" stroke="#5A5855" stroke-width="1" stroke-linecap="round"/></svg>
-              <p>Add thumbnail</p>
-            </div>
-          </div>
+          <div class="product-thumb"><img src="/products/product-16.png" alt="Light Target"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
-            <div class="product-cat">Maya Plugins</div>
-            <div class="product-name">Maya Plugin Pack</div>
-            <div class="product-desc">Custom Maya plugins and scripts to speed up your FX and compositing workflow.</div>
-            <div class="product-footer">
-              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
-            </div>
+            <div class="product-cat">Maya Plugin</div>
+            <div class="product-name">Light Target</div>
+            <div class="product-desc">A Maya plugin for precise light targeting — point any light directly at any object in your scene instantly.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/lighttarget" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$2.99" hidden>
+            <p>Aim any Arnold light at any point in your scene and keep it locked there. Drop a target locator at world origin or snap it to a mesh surface in one click — the light tracks it through an aim constraint. Move the target and the light follows. Set it once and never touch light rotation again.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>Single-light workflow — create / snap / reposition the target, hide, show, lock, resize, rename, unlink without deleting, full undo</li>
+              <li>Multi-light workflow — checklist of all Arnold lights, per-light or one shared target for many lights, bulk hide / show / lock / delete</li>
+              <li>Production-ready — targets tracked by UUID (rename-safe), links saved with the scene, dockable panel, auto-refresh, no conflicts with other RFX plugins</li>
+            </ul>
+            <p class="pm-compat"><strong>Requirements:</strong> Maya 2025/2026, Arnold / MtoA 5.5.x+, Windows 10/11. Includes plugin folder, one-click shelf installer and PDF guide.</p>
           </div>
         </div>
 
-        <div class="product-card" data-cat="projects">
-          <div class="product-thumb" style="background:linear-gradient(135deg,#0a1206,#001a10);">
-            <div class="product-thumb-placeholder">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M8 4h10l6 6v18H8z" stroke="#5A5855" stroke-width="1" stroke-linejoin="round"/><path d="M18 4v6h6" stroke="#5A5855" stroke-width="1" stroke-linecap="round"/></svg>
-              <p>Add thumbnail</p>
-            </div>
-          </div>
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-1.jpg" alt="Terrain Collection Vol 1"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
-            <div class="product-cat">Project Files</div>
-            <div class="product-name">Project File Templates</div>
-            <div class="product-desc">Complete project file setups and templates — ready to use, fully organised, production-ready.</div>
-            <div class="product-footer">
-              <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="product-cta">Get on Gumroad →</a>
-            </div>
+            <div class="product-cat">Maps · Terrain</div>
+            <div class="product-name">Terrain Collection Vol 1</div>
+            <div class="product-desc">High-quality terrain displacement and height maps for realistic landscape and environment work.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/terrainvol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$4.99" hidden>
+            <p>Production-ready terrain displacement maps for realistic landscape and environment work, with a render preview for every shape.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>6 displacement maps at 8K resolution, TIFF format</li>
+              <li>Color &amp; normal maps at 8K resolution, PNG format</li>
+              <li>A render preview for each terrain shape</li>
+            </ul>
+            <p class="pm-compat"><strong>Compatible with:</strong> Maya, Cinema 4D, 3ds Max, Blender, MODO, Houdini — and Arnold, Octane, Redshift, Corona, V-Ray, Pro-Render, Physical.</p>
           </div>
         </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-2.jpg" alt="Terrain Collection Vol 2"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · Terrain</div>
+            <div class="product-name">Terrain Collection Vol 2</div>
+            <div class="product-desc">The second volume of production-ready terrain maps — expanded environments and detail levels.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/terrainvol2" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$4.95" hidden>
+            <p>The second volume of production-ready terrain maps — expanded shapes and detail levels, with a render preview for each.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>6 displacement maps at 8K resolution, TIFF format</li>
+              <li>Diffuse &amp; normal maps included</li>
+              <li>A render preview for each terrain shape</li>
+            </ul>
+            <p class="pm-compat"><strong>Compatible with:</strong> Maya, Cinema 4D, 3ds Max, Blender, MODO, Houdini — and Arnold, Octane, Redshift, Corona, V-Ray, Pro-Render, Physical.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="vdb">
+          <div class="product-thumb"><img src="/products/product-3.jpg" alt="Cloud VDB Collection Vol 1"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">VDB Pack · Clouds</div>
+            <div class="product-name">Cloud VDB Collection Vol 1</div>
+            <div class="product-desc">Volumetric cloud VDB files ready for render — multiple formations, densities, and scales.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/cloudvdbvol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$4.99" hidden>
+            <p>Boost your daily renders with ready-to-use volumetric cloud VDBs. Drop one into your scene and create eye-catching, atmospheric renders without building volumes from scratch.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>20 high-quality static cloud OpenVDB files</li>
+              <li>A rendered preview of each cloud</li>
+            </ul>
+            <p class="pm-compat"><strong>Details:</strong> approx. 2.75 GB, .rar download. Works in any VDB-compatible software.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-4.jpg" alt="Canyon Collection Vol 1"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · Canyon</div>
+            <div class="product-name">Canyon Collection Vol 1</div>
+            <div class="product-desc">Detailed canyon and rocky terrain displacement maps for dramatic landscape environments.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/canyonvol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$4.95" hidden>
+            <p>Dramatic canyon and rocky terrain displacement maps for cinematic landscape environments, with a render preview for each shape.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>10 displacement maps at 4K resolution, TIFF format</li>
+              <li>Diffuse &amp; normal maps included</li>
+              <li>1 bonus canyon</li>
+            </ul>
+            <p class="pm-compat"><strong>Compatible with:</strong> Maya, Cinema 4D, 3ds Max, Blender, MODO, Houdini — and Arnold, Octane, Redshift, Corona, V-Ray, Pro-Render, Physical. Approx. 1.69 GB.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-5.jpg" alt="Valley Collection Vol 1"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · Valley</div>
+            <div class="product-name">Valley Collection Vol 1</div>
+            <div class="product-desc">Sweeping valley terrain maps for wide environment shots and cinematic landscape renders.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/valleyvol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$4.99" hidden>
+            <p>Sweeping valley terrain maps for wide environment shots and cinematic landscape renders, with a preview for each shape.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>20 displacement maps at 4K resolution, TIFF format</li>
+              <li>Diffuse &amp; normal maps included</li>
+            </ul>
+            <p class="pm-compat"><strong>Compatible with:</strong> Maya, Cinema 4D, 3ds Max, Blender, MODO, Houdini — and Arnold, Octane, Redshift, Corona, V-Ray, Pro-Render, Physical.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-6.jpg" alt="Puddle Collection Vol 1"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · Surface</div>
+            <div class="product-name">Puddle Collection Vol 1</div>
+            <div class="product-desc">Realistic puddle and wet surface displacement maps for ground-level detail and rain effects.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/puddlevol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$4.99" hidden>
+            <p>Realistic puddle and wet-surface maps for ground-level detail and rain effects — a full material set for believable wet ground.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>20 displacement maps at 4K resolution</li>
+              <li>Diffuse, roughness, specular &amp; normal maps</li>
+              <li>1 bonus puddle</li>
+            </ul>
+            <p class="pm-compat"><strong>Compatible with:</strong> Maya, Cinema 4D, 3ds Max, Blender, MODO, Houdini — and Arnold, Octane, Redshift, Corona, V-Ray, Pro-Render, Physical. Tutorials on YouTube — Reimagine Fx.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps free">
+          <div class="product-thumb"><img src="/products/product-7.jpg" alt="FREE Puddle Map"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · Surface</div>
+            <div class="product-name">FREE Puddle Map</div>
+            <div class="product-desc">A free sample puddle displacement map — perfect for testing your workflow before going full pack.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-free">Free</span><a href="https://reimagine-fx.gumroad.com/l/freepuddle" target="_blank" class="product-cta">Get Free →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="Free" hidden>
+            <p>A free sample puddle displacement map — a thank-you to the community for their support. Perfect for testing your wet-surface workflow before going for the full pack.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>1 free puddle displacement map at 4K resolution</li>
+            </ul>
+            <p class="pm-compat"><strong>Compatible with:</strong> any 3D program or render engine.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-8.jpg" alt="HDRI Studio Essential Kit"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · HDRI</div>
+            <div class="product-name">HDRI Studio Essential Kit</div>
+            <div class="product-desc">Professional studio HDRI maps for photorealistic lighting setups in any 3D renderer.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/hdristudiovol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$29.99" hidden>
+            <p>90 unique HDRIs that give your renders a moody, distinctive look. No more manual lighting for your scenes — drop one HDRI in and you're good to go.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>90 HDRIs at 10K × 5K, 32-bit HDR format</li>
+              <li>Organised into 8 folders — Basic, Dark, Sepia, Neon, Stripes, Tint, Vivid and Bonus</li>
+              <li>A thumbnail preview for each HDRI</li>
+            </ul>
+            <p class="pm-compat"><strong>Compatible with:</strong> any 3D program and render engine.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-9.jpg" alt="Rivulet Collection Volume 1"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · Water</div>
+            <div class="product-name">Rivulet Collection Volume 1</div>
+            <div class="product-desc">Fine water flow and rivulet surface maps for detailed wet surface and water trickle effects.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/rivuletvol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$9.95" hidden>
+            <p>150+ unique greyscale maps for fine water flow and rivulet detail. Use them as bump, displacement, emission or roughness maps to give your dailies a fresh new look.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>150 greyscale maps at 4K × 4K, PNG 16-bit</li>
+              <li>15 bonus maps at 2K × 2K, PNG 16-bit</li>
+            </ul>
+            <p class="pm-compat"><strong>Details:</strong> approx. 3.61 GB. Compatible with any 3D program or render engine.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="3d">
+          <div class="product-thumb"><img src="/products/product-10.jpg" alt="Cloth Collection Volume 1"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">3D Assets · Cloth</div>
+            <div class="product-name">Cloth Collection Volume 1</div>
+            <div class="product-desc">Production-ready cloth and fabric 3D assets for use in Maya, Houdini, and Unreal Engine.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/clothvol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$4.99" hidden>
+            <p>100 unique static cloth models to drape, drop and stage in your scenes, plus a bonus animated cloth file. Give your dailies a fresh new look.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>100 static cloth models, 150×150 subdivision, OBJ format</li>
+              <li>100 preview images for all models</li>
+              <li>1 bonus animated cloth file, Alembic format</li>
+            </ul>
+            <p class="pm-compat"><strong>Details:</strong> approx. 213 MB. Compatible with any 3D program or render engine.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-11.png" alt="West Coast Volume 1"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · Coastal</div>
+            <div class="product-name">West Coast Volume 1</div>
+            <div class="product-desc">Coastal terrain and cliff face displacement maps inspired by dramatic west coast landscapes.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/westcoastvol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$4.99" hidden>
+            <p>15 coastal terrain maps inspired by dramatic west-coast cliffs and shorelines. Light 2K maps that are fast and easy to use for daily projects.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>15 maps at 2K × 2K, PNG 16-bit + OpenEXR 32-bit</li>
+              <li>Each file includes color, normal &amp; displacement maps</li>
+              <li>1 bonus map at 4K × 4K (PNG 16-bit + OpenEXR 32-bit)</li>
+              <li>A thumbnail preview for each terrain</li>
+            </ul>
+            <p class="pm-compat"><strong>Details:</strong> approx. 1.01 GB. Compatible with any 3D program or render engine.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-12.png" alt="Algorithmic Collection Volume 1"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · Algorithmic</div>
+            <div class="product-name">Algorithmic Collection Volume 1</div>
+            <div class="product-desc">Procedurally-generated algorithmic surface maps for abstract, technical, and sci-fi environments.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/algorithmicvol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$9.99+" hidden>
+            <p>200 unique high-resolution greyscale maps for abstract, technical and sci-fi surfaces. Use them as bump, displacement, emission or roughness maps for a fresh new look.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>200 greyscale maps at 8K × 8K, PNG 16-bit</li>
+              <li>20 bonus maps at 8K × 8K, PNG 16-bit</li>
+            </ul>
+            <p class="pm-compat"><strong>Details:</strong> approx. 1.65 GB. Compatible with any 3D program or render engine.</p>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="maps">
+          <div class="product-thumb"><img src="/products/product-13.png" alt="Planetize Collection Volume 1"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maps · Planetary</div>
+            <div class="product-name">Planetize Collection Volume 1</div>
+            <div class="product-desc">Planetary surface and terrain maps for space, sci-fi, and alien world environment work.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/Planetize" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+          <div class="pm-data" data-price="$9.95" hidden>
+            <p>Detailed displacement maps for mesmerizing micro and planetary renders. Turn your 3D designs into intricate masterpieces — use them as bump, displacement, color or roughness maps.</p>
+            <h4>What's included</h4>
+            <ul>
+              <li>20 color maps at 4K × 4K, PNG 16-bit</li>
+              <li>20 greyscale maps at 4K × 4K, PNG 16-bit</li>
+            </ul>
+            <p class="pm-compat"><strong>Details:</strong> approx. 1.74 GB. Compatible with any 3D program or render engine.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
-
-  <!-- PATREON TEASER -->
   <section class="section" style="background:var(--bg);">
     <div class="container">
       <div class="patreon-teaser fade-up">
         <p style="font-family:var(--font-head);font-size:10px;font-weight:700;letter-spacing:3px;color:#FF424D;text-transform:uppercase;margin-bottom:12px;">Coming soon</p>
         <h2 style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--text);margin-bottom:12px;">Exclusive content on Patreon</h2>
-        <p style="font-size:15px;color:var(--text2);max-width:480px;margin:0 auto 28px;line-height:1.7;">Early access to new assets, exclusive project files, behind-the-scenes breakdowns, and supporter-only tutorials.</p>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-          <a href="https://discord.gg/cjGQJzZzp" target="_blank" class="btn btn-outline">Join Discord for updates</a>
-        </div>
+        <p style="font-size:15px;color:var(--text2);max-width:480px;margin:0 auto 28px;line-height:1.7;">Early access to new assets, exclusive project files, and supporter-only tutorials.</p>
+        <a href="https://discord.gg/cjGQJzZzp" target="_blank" class="btn btn-outline">Join Discord for updates</a>
       </div>
     </div>
   </section>
 
+  <div class="product-modal" id="productModal" aria-hidden="true">
+    <div class="product-modal-backdrop" data-close></div>
+    <div class="product-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="pmName">
+      <button class="product-modal-close" type="button" data-close aria-label="Close preview">&times;</button>
+      <div class="product-modal-media"><img id="pmImg" src="" alt=""></div>
+      <div class="product-modal-content">
+        <div class="product-modal-cat" id="pmCat"></div>
+        <h2 class="product-modal-name" id="pmName"></h2>
+        <div class="product-modal-price" id="pmPrice"></div>
+        <div class="product-modal-desc" id="pmDesc"></div>
+        <a class="product-cta" id="pmCta" href="#" target="_blank" rel="noopener">Get on Gumroad →</a>
+      </div>
+    </div>
+  </div>
+
   <div id="footer-placeholder"></div>
-  <script src="../js/shared.js"></script>
+  <script src="/js/shared.js"></script>
   <script>
     document.getElementById('nav-placeholder').outerHTML = buildNav('Products');
     document.getElementById('footer-placeholder').outerHTML = buildFooter();
@@ -300,9 +451,64 @@
       btn.classList.add('active');
       const filter = btn.dataset.filter;
       document.querySelectorAll('.product-card').forEach(card => {
-        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+        if (filter === 'all') { card.style.display = ''; return; }
+        card.style.display = card.dataset.cat.includes(filter) ? '' : 'none';
       });
     });
+
+    // ---- Product preview modal ----
+    const modal = document.getElementById('productModal');
+    const pmImg = document.getElementById('pmImg');
+    const pmCat = document.getElementById('pmCat');
+    const pmName = document.getElementById('pmName');
+    const pmPrice = document.getElementById('pmPrice');
+    const pmDesc = document.getElementById('pmDesc');
+    const pmCta = document.getElementById('pmCta');
+
+    function openModal(card) {
+      const img = card.querySelector('.product-thumb img');
+      const data = card.querySelector('.pm-data');
+      const cta = card.querySelector('.product-cta');
+      pmImg.src = img.src;
+      pmImg.alt = img.alt;
+      pmCat.textContent = card.querySelector('.product-cat').textContent;
+      pmName.textContent = card.querySelector('.product-name').textContent;
+      pmPrice.textContent = data.dataset.price || '';
+      pmDesc.innerHTML = data.innerHTML;
+      pmCta.href = cta.href;
+      pmCta.textContent = cta.textContent;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      modal.querySelector('.product-modal-content').scrollTop = 0;
+      modal.querySelector('.product-modal-close').focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('productsGrid').addEventListener('click', e => {
+      if (e.target.closest('.product-cta')) return; // let Gumroad link work normally
+      const trigger = e.target.closest('.product-thumb, .product-name, .product-details-btn');
+      if (!trigger) return;
+      openModal(trigger.closest('.product-card'));
+    });
+
+    // Keyboard access on thumbnails
+    document.querySelectorAll('.product-thumb').forEach(thumb => {
+      thumb.setAttribute('tabindex', '0');
+      thumb.setAttribute('role', 'button');
+      thumb.setAttribute('aria-label', 'View product details');
+      thumb.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(thumb.closest('.product-card')); }
+      });
+    });
+
+    modal.addEventListener('click', e => { if (e.target.closest('[data-close]')) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
   </script>
 </body>
 </html>
