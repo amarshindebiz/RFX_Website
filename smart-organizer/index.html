@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RFX Smart Organizer — Maya Scene Organization Tool | Reimagine FX</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="description" content="RFX Smart Organizer scans your Maya scene, classifies every object by type, and sorts them into clean Display Layers and Outliner Groups in seconds. Maya 2025+.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    ::selection { background-color: #bef264; color: #000; }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] > summary .faq-plus { transform: rotate(45deg); }
+    .faq-plus { transition: transform 0.2s; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#07080a] text-white antialiased">
+
+  <!-- Ambient glows -->
+  <div class="pointer-events-none fixed inset-0 overflow-hidden" style="z-index:0">
+    <div class="absolute left-1/2 top-[-10%] h-[520px] w-[720px] -translate-x-1/2 rounded-full bg-lime-300/10 blur-[140px]"></div>
+    <div class="absolute bottom-[-20%] right-[-10%] h-[520px] w-[520px] rounded-full bg-white/5 blur-[120px]"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 border-b border-white/10 bg-[#07080a]/80 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+      <a href="#top" class="flex items-center gap-3">
+        <div class="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-lime-300 text-black" style="box-shadow:0 0 24px rgba(190,242,100,0.24)">
+          <i data-lucide="boxes" class="h-5 w-5"></i>
+        </div>
+        <div>
+          <div class="text-sm font-black tracking-tight">RFX Smart Organizer</div>
+          <div class="text-xs text-white/45">by Reimagine Fx</div>
+        </div>
+      </a>
+      <nav class="hidden items-center gap-7 text-sm text-white/55 md:flex">
+        <a href="#features" class="transition-colors hover:text-white">Features</a>
+        <a href="#workflow" class="transition-colors hover:text-white">Workflow</a>
+        <a href="#faq" class="transition-colors hover:text-white">FAQ</a>
+        <a href="/products" class="transition-colors hover:text-white">← All Products</a>
+      </nav>
+      <a href="https://reimagine-fx.gumroad.com/l/rfxsmartorg" target="_blank" rel="noopener"
+        class="rounded-xl bg-white px-4 py-2 text-sm font-bold text-black transition hover:bg-lime-300">
+        Get Plugin — $9.99
+      </a>
+    </div>
+  </header>
+
+  <main id="top" class="relative" style="z-index:10">
+
+    <!-- ── HERO ── -->
+    <section class="mx-auto max-w-7xl px-5 pb-16 pt-16 md:px-8 md:pb-24 md:pt-24">
+      <div class="mx-auto max-w-4xl text-center">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-lime-300/20 bg-lime-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">
+          <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+          Maya 2025+ Scene Organization Tool
+        </div>
+        <h1 class="mt-4 text-5xl font-black text-white md:text-7xl lg:text-8xl" style="letter-spacing:-0.06em;line-height:1.05">
+          Clean Maya scenes without manually hunting through the <span class="text-lime-300">Outliner.</span>
+        </h1>
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/60 md:text-xl">
+          RFX Smart Organizer scans your Maya scene, classifies objects by type and naming rules, then sorts them into clean Display Layers and Outliner Groups with artist-safe controls.
+        </p>
+        <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+          <a href="https://reimagine-fx.gumroad.com/l/rfxsmartorg" target="_blank" rel="noopener"
+            class="group inline-flex items-center justify-center gap-2 rounded-xl bg-lime-300 px-6 py-3 text-sm font-semibold text-black transition-all duration-300 hover:bg-lime-200" style="box-shadow:0 0 32px rgba(190,242,100,0.22)">
+            Get RFX Smart Organizer — $9.99
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+          </a>
+          <a href="#features"
+            class="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/[0.12] bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-lime-300/60 hover:bg-lime-300/10">
+            View Features
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Plugin Window Mockup -->
+      <div class="mt-14 relative mx-auto w-full max-w-5xl overflow-hidden rounded-3xl border border-white/[0.12] bg-[#111317]" style="box-shadow:0 25px 60px rgba(0,0,0,0.6)">
+        <!-- Window chrome -->
+        <div class="flex items-center justify-between border-b border-white/10 bg-[#171a20] px-5 py-3">
+          <div class="flex items-center gap-2">
+            <span class="block h-3 w-3 rounded-full bg-red-400/80"></span>
+            <span class="block h-3 w-3 rounded-full bg-yellow-400/80"></span>
+            <span class="block h-3 w-3 rounded-full bg-lime-300/80"></span>
+          </div>
+          <div class="text-xs font-medium text-white/45">RFX Smart Organizer · Maya 2026</div>
+        </div>
+        <!-- Window body: sidebar + main -->
+        <div class="grid lg:grid-cols-[280px_1fr]">
+          <aside class="border-r border-white/10 bg-[#0d0f12] p-5">
+            <div class="mb-5 flex items-center gap-3">
+              <div class="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-lime-300 text-black">
+                <i data-lucide="boxes" class="h-5 w-5"></i>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white">RFX Smart Organizer</div>
+                <div class="text-xs text-white/45">Production Scene Tools</div>
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between rounded-xl bg-lime-300/[0.12] px-3 py-2 text-sm text-lime-200 ring-1 ring-lime-300/20">
+                <span>Organizer</span><span class="block h-1.5 w-1.5 rounded-full bg-lime-300"></span>
+              </div>
+              <div class="rounded-xl px-3 py-2 text-sm text-white/55">Settings</div>
+              <div class="rounded-xl px-3 py-2 text-sm text-white/55">Renamer</div>
+              <div class="rounded-xl px-3 py-2 text-sm text-white/55">Scene Intel</div>
+              <div class="rounded-xl px-3 py-2 text-sm text-white/55">Performance</div>
+            </div>
+            <div class="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <div class="mb-2 text-xs font-semibold uppercase tracking-widest text-white/40">Scene Summary</div>
+              <div class="grid grid-cols-2 gap-3">
+                <div><div class="text-xl font-bold text-white">248</div><div class="text-xs text-white/45">DAG Nodes</div></div>
+                <div><div class="text-xl font-bold text-white">12</div><div class="text-xs text-white/45">Categories</div></div>
+              </div>
+            </div>
+          </aside>
+          <div class="bg-[#14171d] p-5 md:p-7">
+            <div class="mb-5 flex flex-col justify-between gap-4 md:flex-row md:items-center">
+              <div>
+                <h3 class="text-xl font-bold text-white">Organizer</h3>
+                <p class="mt-1 text-sm text-white/50">Scan, classify, and sort your Maya scene.</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button class="cursor-default rounded-lg border border-white/10 px-3 py-2 text-xs font-semibold text-white/70">Scan Scene</button>
+                <button class="cursor-default rounded-lg bg-lime-300 px-3 py-2 text-xs font-bold text-black">Auto-Sort All</button>
+              </div>
+            </div>
+            <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+              <div class="rounded-2xl border border-white/10 bg-[#0f1217] p-4">
+                <div class="mb-3 flex items-start justify-between gap-4">
+                  <div><div class="font-semibold text-white">Geometry</div><div class="mt-1 text-xs text-white/40">Meshes, surfaces, model data</div></div>
+                  <div class="rounded-lg bg-lime-300/10 px-2 py-1 text-sm font-bold text-lime-200">86</div>
+                </div>
+                <div class="h-1.5 overflow-hidden rounded-full bg-white/[0.08]"><div class="h-full rounded-full bg-lime-300" style="width:78%"></div></div>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-[#0f1217] p-4">
+                <div class="mb-3 flex items-start justify-between gap-4">
+                  <div><div class="font-semibold text-white">Lights</div><div class="mt-1 text-xs text-white/40">Area, skydome, mesh lights</div></div>
+                  <div class="rounded-lg bg-lime-300/10 px-2 py-1 text-sm font-bold text-lime-200">14</div>
+                </div>
+                <div class="h-1.5 overflow-hidden rounded-full bg-white/[0.08]"><div class="h-full rounded-full bg-lime-300" style="width:20%"></div></div>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-[#0f1217] p-4">
+                <div class="mb-3 flex items-start justify-between gap-4">
+                  <div><div class="font-semibold text-white">Cameras</div><div class="mt-1 text-xs text-white/40">User-created shot cameras</div></div>
+                  <div class="rounded-lg bg-lime-300/10 px-2 py-1 text-sm font-bold text-lime-200">4</div>
+                </div>
+                <div class="h-1.5 overflow-hidden rounded-full bg-white/[0.08]"><div class="h-full rounded-full bg-lime-300" style="width:16%"></div></div>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-[#0f1217] p-4">
+                <div class="mb-3 flex items-start justify-between gap-4">
+                  <div><div class="font-semibold text-white">Curves</div><div class="mt-1 text-xs text-white/40">Guides, splines, helpers</div></div>
+                  <div class="rounded-lg bg-lime-300/10 px-2 py-1 text-sm font-bold text-lime-200">22</div>
+                </div>
+                <div class="h-1.5 overflow-hidden rounded-full bg-white/[0.08]"><div class="h-full rounded-full bg-lime-300" style="width:28%"></div></div>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-[#0f1217] p-4">
+                <div class="mb-3 flex items-start justify-between gap-4">
+                  <div><div class="font-semibold text-white">nDynamics</div><div class="mt-1 text-xs text-white/40">Sim nodes and caches</div></div>
+                  <div class="rounded-lg bg-lime-300/10 px-2 py-1 text-sm font-bold text-lime-200">9</div>
+                </div>
+                <div class="h-1.5 overflow-hidden rounded-full bg-white/[0.08]"><div class="h-full rounded-full bg-lime-300" style="width:16%"></div></div>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-[#0f1217] p-4">
+                <div class="mb-3 flex items-start justify-between gap-4">
+                  <div><div class="font-semibold text-white">Unsorted</div><div class="mt-1 text-xs text-white/40">Review manually</div></div>
+                  <div class="rounded-lg bg-lime-300/10 px-2 py-1 text-sm font-bold text-lime-200">6</div>
+                </div>
+                <div class="h-1.5 overflow-hidden rounded-full bg-white/[0.08]"><div class="h-full rounded-full bg-lime-300" style="width:16%"></div></div>
+              </div>
+            </div>
+            <div class="mt-5 grid gap-3 md:grid-cols-3">
+              <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <i data-lucide="check-circle-2" class="mb-3 h-5 w-5 text-lime-300"></i>
+                <div class="text-sm font-semibold text-white">Display Layers</div>
+                <div class="mt-1 text-xs text-white/45">Ready for clean handoff</div>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <i data-lucide="check-circle-2" class="mb-3 h-5 w-5 text-lime-300"></i>
+                <div class="text-sm font-semibold text-white">Outliner Groups</div>
+                <div class="mt-1 text-xs text-white/45">Ready for clean handoff</div>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <i data-lucide="check-circle-2" class="mb-3 h-5 w-5 text-lime-300"></i>
+                <div class="text-sm font-semibold text-white">Scene Intel</div>
+                <div class="mt-1 text-xs text-white/45">Ready for clean handoff</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 hero badges -->
+      <div class="mx-auto mt-8 grid max-w-5xl gap-3 sm:grid-cols-3">
+        <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-center">
+          <div class="font-semibold text-white">Zero-risk scan</div>
+          <p class="mt-1 text-sm text-white/50">Scan Scene reads data only.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-center">
+          <div class="font-semibold text-white">Artist-safe sorting</div>
+          <p class="mt-1 text-sm text-white/50">Control how existing groups are handled.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-center">
+          <div class="font-semibold text-white">Production handoff</div>
+          <p class="mt-1 text-sm text-white/50">Cleaner structure for teams and clients.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROBLEM ── -->
+    <section class="border-y border-white/10 bg-white/[0.025]">
+      <div class="mx-auto grid max-w-7xl gap-8 px-5 py-16 md:grid-cols-[0.9fr_1.1fr] md:px-8 md:py-24">
+        <div>
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-lime-300/20 bg-lime-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">
+            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+            The Problem
+          </div>
+          <h2 class="text-4xl font-black text-white md:text-5xl" style="letter-spacing:-0.04em">
+            Messy Maya scenes slow down every department.
+          </h2>
+        </div>
+        <div class="space-y-5 text-lg leading-8 text-white/60">
+          <p>Production scenes accumulate geometry, cameras, lights, rig controls, caches, helper locators, curves, Bifrost nodes, image planes, and unsorted technical data. The Outliner becomes a search problem before the actual work even starts.</p>
+          <p>RFX Smart Organizer gives artists a compact Maya panel for scanning, reviewing, sorting, renaming, analyzing, and exporting scene health information before handoff.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FEATURES ── -->
+    <section id="features" class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-lime-300/20 bg-lime-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">
+          <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+          Core Features
+        </div>
+        <h2 class="text-4xl font-black text-white md:text-6xl" style="letter-spacing:-0.04em">
+          Built for artists who need scenes to stay readable.
+        </h2>
+        <p class="mt-5 text-lg leading-8 text-white/55">
+          Practical scene structure tools, not generic cleanup. Designed around Maya Display Layers, Outliner Groups, naming workflows, and scene hygiene checks.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <article class="group rounded-3xl border border-white/10 bg-[#101216] p-6 transition duration-300 hover:-translate-y-1 hover:border-lime-300/35 hover:bg-[#12161b]">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-300/10 text-lime-300 ring-1 ring-lime-300/20 transition group-hover:bg-lime-300 group-hover:text-black">
+            <i data-lucide="layers" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">Smart Scene Organizer</h3>
+          <p class="mt-3 leading-7 text-white/55">Scan Maya DAG content and classify scene objects into production-friendly categories like Geometry, Lights, Cameras, Curves, Locators, Volumes, Bifrost, nDynamics, and Unsorted.</p>
+        </article>
+        <article class="group rounded-3xl border border-white/10 bg-[#101216] p-6 transition duration-300 hover:-translate-y-1 hover:border-lime-300/35 hover:bg-[#12161b]">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-300/10 text-lime-300 ring-1 ring-lime-300/20 transition group-hover:bg-lime-300 group-hover:text-black">
+            <i data-lucide="folder-tree" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">Layers + Outliner Groups</h3>
+          <p class="mt-3 leading-7 text-white/55">Sort into Display Layers, Outliner Groups, or both. Use Merge, Skip, and Replace conflict modes to respect existing artist structure when needed.</p>
+        </article>
+        <article class="group rounded-3xl border border-white/10 bg-[#101216] p-6 transition duration-300 hover:-translate-y-1 hover:border-lime-300/35 hover:bg-[#12161b]">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-300/10 text-lime-300 ring-1 ring-lime-300/20 transition group-hover:bg-lime-300 group-hover:text-black">
+            <i data-lucide="settings-2" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">Custom Category Rules</h3>
+          <p class="mt-3 leading-7 text-white/55">Create studio-specific categories using node types, name patterns, or both. Save and load rule presets for consistent organization across projects.</p>
+        </article>
+        <article class="group rounded-3xl border border-white/10 bg-[#101216] p-6 transition duration-300 hover:-translate-y-1 hover:border-lime-300/35 hover:bg-[#12161b]">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-300/10 text-lime-300 ring-1 ring-lime-300/20 transition group-hover:bg-lime-300 group-hover:text-black">
+            <i data-lucide="wand-2" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">Batch Renamer</h3>
+          <p class="mt-3 leading-7 text-white/55">Rename selections with prefix, suffix, numbering, padding, search and replace, and trim tools while keeping namespaced assets safe.</p>
+        </article>
+        <article class="group rounded-3xl border border-white/10 bg-[#101216] p-6 transition duration-300 hover:-translate-y-1 hover:border-lime-300/35 hover:bg-[#12161b]">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-300/10 text-lime-300 ring-1 ring-lime-300/20 transition group-hover:bg-lime-300 group-hover:text-black">
+            <i data-lucide="shield-check" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">Scene Intel Checks</h3>
+          <p class="mt-3 leading-7 text-white/55">Analyze common scene hygiene issues, get clear guidance, and apply fixes only where the action is safe for production scenes.</p>
+        </article>
+        <article class="group rounded-3xl border border-white/10 bg-[#101216] p-6 transition duration-300 hover:-translate-y-1 hover:border-lime-300/35 hover:bg-[#12161b]">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-300/10 text-lime-300 ring-1 ring-lime-300/20 transition group-hover:bg-lime-300 group-hover:text-black">
+            <i data-lucide="gauge" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">Performance Overview</h3>
+          <p class="mt-3 leading-7 text-white/55">Review scene totals, mesh counts, polygon faces, light counts, category distribution, and heavy mesh detection without writing custom commands.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── WORKFLOW ── -->
+    <section id="workflow" class="border-y border-white/10 bg-[#0b0d10]">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div class="max-w-2xl">
+            <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-lime-300/20 bg-lime-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">
+              <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+              Workflow
+            </div>
+            <h2 class="text-4xl font-black text-white md:text-5xl" style="letter-spacing:-0.04em">
+              From cluttered file to clean handoff in one focused pass.
+            </h2>
+          </div>
+          <p class="max-w-md text-base leading-7 text-white/55">
+            Keep the tool compact inside Maya while still covering the most common organization, naming, and review steps artists need.
+          </p>
+        </div>
+        <div class="mt-12 grid gap-3 md:grid-cols-6">
+          <div class="relative rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-lime-300 text-sm font-black text-black">1</div>
+            <h3 class="text-lg font-bold text-white">Scan Scene</h3>
+            <i data-lucide="arrow-right" class="absolute right-4 top-8 hidden h-4 w-4 text-white/25 md:block"></i>
+          </div>
+          <div class="relative rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-lime-300 text-sm font-black text-black">2</div>
+            <h3 class="text-lg font-bold text-white">Review Categories</h3>
+            <i data-lucide="arrow-right" class="absolute right-4 top-8 hidden h-4 w-4 text-white/25 md:block"></i>
+          </div>
+          <div class="relative rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-lime-300 text-sm font-black text-black">3</div>
+            <h3 class="text-lg font-bold text-white">Sort</h3>
+            <i data-lucide="arrow-right" class="absolute right-4 top-8 hidden h-4 w-4 text-white/25 md:block"></i>
+          </div>
+          <div class="relative rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-lime-300 text-sm font-black text-black">4</div>
+            <h3 class="text-lg font-bold text-white">Rename</h3>
+            <i data-lucide="arrow-right" class="absolute right-4 top-8 hidden h-4 w-4 text-white/25 md:block"></i>
+          </div>
+          <div class="relative rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-lime-300 text-sm font-black text-black">5</div>
+            <h3 class="text-lg font-bold text-white">Analyse</h3>
+            <i data-lucide="arrow-right" class="absolute right-4 top-8 hidden h-4 w-4 text-white/25 md:block"></i>
+          </div>
+          <div class="relative rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-lime-300 text-sm font-black text-black">6</div>
+            <h3 class="text-lg font-bold text-white">Export</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WHO IT'S FOR ── -->
+    <section class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-lime-300/20 bg-lime-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">
+            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+            Who It Is For
+          </div>
+          <h2 class="text-4xl font-black text-white md:text-5xl" style="letter-spacing:-0.04em">
+            Useful across layout, lighting, modeling, FX, and pipeline work.
+          </h2>
+          <p class="mt-5 text-lg leading-8 text-white/55">
+            Designed for artists and small teams who need cleaner Maya files without building a custom studio tool from scratch.
+          </p>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <i data-lucide="check-circle-2" class="h-5 w-5 flex-none text-lime-300"></i>
+            <span class="font-medium text-white/80">Maya Generalists</span>
+          </div>
+          <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <i data-lucide="check-circle-2" class="h-5 w-5 flex-none text-lime-300"></i>
+            <span class="font-medium text-white/80">Lighting Artists</span>
+          </div>
+          <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <i data-lucide="check-circle-2" class="h-5 w-5 flex-none text-lime-300"></i>
+            <span class="font-medium text-white/80">Layout Artists</span>
+          </div>
+          <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <i data-lucide="check-circle-2" class="h-5 w-5 flex-none text-lime-300"></i>
+            <span class="font-medium text-white/80">Modelers</span>
+          </div>
+          <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <i data-lucide="check-circle-2" class="h-5 w-5 flex-none text-lime-300"></i>
+            <span class="font-medium text-white/80">FX Artists</span>
+          </div>
+          <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <i data-lucide="check-circle-2" class="h-5 w-5 flex-none text-lime-300"></i>
+            <span class="font-medium text-white/80">Pipeline TDs</span>
+          </div>
+          <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:col-span-2">
+            <i data-lucide="check-circle-2" class="h-5 w-5 flex-none text-lime-300"></i>
+            <span class="font-medium text-white/80">Small Studios</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── COMPATIBILITY ── -->
+    <section class="mx-auto max-w-7xl px-5 pb-16 md:px-8 md:pb-24">
+      <div class="grid overflow-hidden rounded-[2rem] border border-lime-300/20 bg-lime-300/[0.06] lg:grid-cols-[0.9fr_1.1fr]">
+        <div class="p-8 md:p-12">
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-lime-300/20 bg-lime-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">
+            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+            Compatibility
+          </div>
+          <h2 class="text-4xl font-black text-white md:text-5xl" style="letter-spacing:-0.04em">
+            Built and tested for Autodesk Maya 2025+.
+          </h2>
+          <p class="mt-5 text-lg leading-8 text-white/55">
+            Does not require Arnold for the core organization workflow. Focuses on Maya scene structure, Display Layers, Outliner Groups, object naming, and scene analysis.
+          </p>
+        </div>
+        <div class="border-t border-white/10 bg-black/20 p-8 md:p-12 lg:border-l lg:border-t-0">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <i data-lucide="cpu" class="mb-4 h-6 w-6 text-lime-300"></i>
+              <div class="font-bold text-white">Maya 2025+</div>
+              <div class="mt-1 text-sm text-white/45">Primary supported version</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <i data-lucide="search" class="mb-4 h-6 w-6 text-lime-300"></i>
+              <div class="font-bold text-white">DAG Scan</div>
+              <div class="mt-1 text-sm text-white/45">Read-only scene scan</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <i data-lucide="layers" class="mb-4 h-6 w-6 text-lime-300"></i>
+              <div class="font-bold text-white">Display Layers</div>
+              <div class="mt-1 text-sm text-white/45">Layer organization</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <i data-lucide="folder-tree" class="mb-4 h-6 w-6 text-lime-300"></i>
+              <div class="font-bold text-white">Outliner Groups</div>
+              <div class="mt-1 text-sm text-white/45">Group organization</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section id="faq" class="border-y border-white/10 bg-[#0b0d10]">
+      <div class="mx-auto max-w-4xl px-5 py-16 md:px-8 md:py-24">
+        <div class="text-center">
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-lime-300/20 bg-lime-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">
+            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+            FAQ
+          </div>
+          <h2 class="text-4xl font-black text-white md:text-5xl" style="letter-spacing:-0.04em">Questions before installing?</h2>
+        </div>
+        <div class="mt-10 divide-y divide-white/10 rounded-3xl border border-white/10 bg-white/[0.03]">
+          <details class="group p-6">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-white">
+              <span class="flex items-center gap-3"><i data-lucide="help-circle" class="h-5 w-5 flex-none text-lime-300"></i>What version of Maya is supported?</span>
+              <span class="faq-plus flex-none text-xl text-lime-300">+</span>
+            </summary>
+            <p class="mt-4 pl-8 leading-7 text-white/55">RFX Smart Organizer supports Autodesk Maya 2025 or newer.</p>
+          </details>
+          <details class="group p-6">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-white">
+              <span class="flex items-center gap-3"><i data-lucide="help-circle" class="h-5 w-5 flex-none text-lime-300"></i>Does it require Arnold?</span>
+              <span class="faq-plus flex-none text-xl text-lime-300">+</span>
+            </summary>
+            <p class="mt-4 pl-8 leading-7 text-white/55">No. The organizer itself does not require Arnold. Some Scene Intel checks may mention Arnold-specific lighting guidance when relevant, but the core organizer works without a renderer dependency.</p>
+          </details>
+          <details class="group p-6">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-white">
+              <span class="flex items-center gap-3"><i data-lucide="help-circle" class="h-5 w-5 flex-none text-lime-300"></i>Does Scan Scene modify my scene?</span>
+              <span class="faq-plus flex-none text-xl text-lime-300">+</span>
+            </summary>
+            <p class="mt-4 pl-8 leading-7 text-white/55">No. Scan Scene only reads the scene and updates the UI.</p>
+          </details>
+          <details class="group p-6">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-white">
+              <span class="flex items-center gap-3"><i data-lucide="help-circle" class="h-5 w-5 flex-none text-lime-300"></i>Can I organize only selected objects?</span>
+              <span class="faq-plus flex-none text-xl text-lime-300">+</span>
+            </summary>
+            <p class="mt-4 pl-8 leading-7 text-white/55">Yes. Use Sort Selected when you want to organize only part of the scene.</p>
+          </details>
+          <details class="group p-6">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-white">
+              <span class="flex items-center gap-3"><i data-lucide="help-circle" class="h-5 w-5 flex-none text-lime-300"></i>Can I create my own categories?</span>
+              <span class="faq-plus flex-none text-xl text-lime-300">+</span>
+            </summary>
+            <p class="mt-4 pl-8 leading-7 text-white/55">Yes. Use Settings &gt; Add Custom Category. You can match by Maya node types, name patterns, or both.</p>
+          </details>
+          <details class="group p-6">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-white">
+              <span class="flex items-center gap-3"><i data-lucide="help-circle" class="h-5 w-5 flex-none text-lime-300"></i>Can I export a report?</span>
+              <span class="faq-plus flex-none text-xl text-lime-300">+</span>
+            </summary>
+            <p class="mt-4 pl-8 leading-7 text-white/55">Yes. Scene Intel includes an Export Report option that you can share with your team.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BUY CTA ── -->
+    <section id="buy" class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+      <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-[#101216] p-8 text-center shadow-2xl shadow-black/30 md:p-14">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-lime-300/20 bg-lime-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">
+          <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+          Get The Plugin
+        </div>
+        <h2 class="mx-auto max-w-3xl text-4xl font-black text-white md:text-6xl" style="letter-spacing:-0.04em">
+          Turn messy Maya files into clean production scenes.
+        </h2>
+        <p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/55">
+          Scan, organize, rename, analyze, and hand off scenes from one compact Maya panel.
+        </p>
+        <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <a href="https://reimagine-fx.gumroad.com/l/rfxsmartorg" target="_blank" rel="noopener"
+            class="group inline-flex items-center justify-center gap-2 rounded-xl bg-lime-300 px-6 py-3 text-sm font-semibold text-black transition-all duration-300 hover:bg-lime-200" style="box-shadow:0 0 32px rgba(190,242,100,0.22)">
+            Get RFX Smart Organizer — $9.99
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+          </a>
+          <a href="/products"
+            class="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/[0.12] bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-lime-300/60 hover:bg-lime-300/10">
+            ← Browse All Products
+          </a>
+        </div>
+        <div class="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-3 text-sm text-white/45">
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1.5">
+            <i data-lucide="check-circle-2" class="h-4 w-4 text-lime-300"></i> Maya 2025+
+          </span>
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1.5">
+            <i data-lucide="download" class="h-4 w-4 text-lime-300"></i> Gumroad Delivery
+          </span>
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1.5">
+            <i data-lucide="file-text" class="h-4 w-4 text-lime-300"></i> Export Scene Intel Report
+          </span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative border-t border-white/10 px-5 py-8 md:px-8" style="z-index:10">
+    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-white/45 md:flex-row md:items-center">
+      <div>Created by Amar Shinde / Reimagine Fx.</div>
+      <div class="flex flex-wrap gap-4">
+        <a href="https://www.reimaginefx.com" class="transition-colors hover:text-white">Website</a>
+        <a href="mailto:reimaginefx@gmail.com" class="transition-colors hover:text-white">Email</a>
+        <a href="/products" class="transition-colors hover:text-white">All Products</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

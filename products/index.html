@@ -35,6 +35,7 @@
     .product-badge { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; white-space: nowrap; }
     .badge-free { background: rgba(30,200,100,0.1); border: 1px solid rgba(30,200,100,0.2); color: #1EC864; }
     .badge-soon { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: var(--gold); }
+    .badge-new { background: rgba(120,180,255,0.12); border: 1px solid rgba(120,180,255,0.28); color: #7BB4FF; }
     .patreon-teaser { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 48px; text-align: center; border-top: 3px solid #FF424D; }
 
     /* ---- Product preview modal ---- */
@@ -408,6 +409,16 @@
           </div>
         </div>
 
+        <div class="product-card" data-cat="plugins" data-landing="/smart-organizer/">
+          <div class="product-thumb"><img src="/products/product-17.png" alt="RFX Smart Organizer"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Maya Plugin · Scene Tools</div>
+            <div class="product-name">RFX Smart Organizer</div>
+            <div class="product-desc">Scan, classify, and sort your entire Maya scene into clean Display Layers and Outliner Groups in one click. Includes Batch Renamer, Scene Intel, and Performance tools.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-new">New</span><a href="https://reimagine-fx.gumroad.com/l/rfxsmartorg" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -494,7 +505,10 @@
       if (e.target.closest('.product-cta')) return; // let Gumroad link work normally
       const trigger = e.target.closest('.product-thumb, .product-name, .product-details-btn');
       if (!trigger) return;
-      openModal(trigger.closest('.product-card'));
+      const card = trigger.closest('.product-card');
+      const landing = card.dataset.landing;
+      if (landing) { window.location.href = landing; return; } // full landing page
+      openModal(card);
     });
 
     // Keyboard access on thumbnails
@@ -503,7 +517,12 @@
       thumb.setAttribute('role', 'button');
       thumb.setAttribute('aria-label', 'View product details');
       thumb.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(thumb.closest('.product-card')); }
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const card = thumb.closest('.product-card');
+          if (card.dataset.landing) { window.location.href = card.dataset.landing; return; }
+          openModal(card);
+        }
       });
     });
 
