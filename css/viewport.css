@@ -137,12 +137,16 @@
     radial-gradient(circle at 50% 38%, rgba(84,208,230,.18), transparent 60%),
     linear-gradient(180deg, #14161c 0%, #060708 100%);
   box-shadow: 0 40px 120px rgba(0,0,0,.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 42px;
+  overflow: hidden;
+  padding: 0;
 }
-#viewport-page .mv-logo-tile img { width: 78%; height: auto; display: block; border-radius: 28px; }
+#viewport-page .mv-logo-tile img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 40px;
+}
 
 #viewport-page .section { padding: 104px 0; background: var(--vp-bg); }
 #viewport-page .section-sm { padding: 78px 0; background: var(--vp-bg-soft); }
