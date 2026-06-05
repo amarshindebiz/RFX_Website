@@ -23,6 +23,7 @@ function buildNav(activePage) {
     { href: '/reel', label: 'Reel', key: 'reel' },
     { href: '/products', label: 'Products', key: 'products' },
     { href: '/mayaviewer', label: 'Maya Viewer', key: 'mayaviewer' },
+    { href: '/viewport', label: 'Viewport', key: 'viewport' },
     { href: '/portfolio', label: 'Portfolio', key: 'portfolio' },
     { href: '/training', label: 'Training', key: 'training' },
     { href: '/contact', label: 'Contact', key: 'contact' }
@@ -73,6 +74,8 @@ function buildFooter() {
         <h4>Work</h4>
         <ul>
           <li><a href="/products">Digital Assets</a></li>
+          <li><a href="/mayaviewer">Maya Viewer</a></li>
+          <li><a href="/viewport">Viewport</a></li>
           <li><a href="/training">Training</a></li>
           <li><a href="/contact">Contact</a></li>
           <li><a href="https://reimagine-fx.gumroad.com/" target="_blank">Gumroad Shop</a></li>
