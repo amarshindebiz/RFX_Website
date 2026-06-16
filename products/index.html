@@ -36,6 +36,7 @@
     .badge-free { background: rgba(30,200,100,0.1); border: 1px solid rgba(30,200,100,0.2); color: #1EC864; }
     .badge-soon { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: var(--gold); }
     .badge-new { background: rgba(120,180,255,0.12); border: 1px solid rgba(120,180,255,0.28); color: #7BB4FF; }
+    .badge-bundle { background: rgba(255,120,80,0.12); border: 1px solid rgba(255,120,80,0.32); color: #FF9670; }
     .patreon-teaser { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 48px; text-align: center; border-top: 3px solid #FF424D; }
 
     /* ---- Product preview modal ---- */
@@ -83,12 +84,33 @@
     <div class="container">
       <div class="filter-bar fade-up" id="filterBar">
         <button class="filter-btn active" data-filter="all">All Products</button>
+        <button class="filter-btn" data-filter="bundles">Bundles</button>
         <button class="filter-btn" data-filter="mayaplugin">Maya Plugins</button>
         <button class="filter-btn" data-filter="nukeplugin">Nuke Plugins</button>
         <button class="filter-btn" data-filter="maps">Maps & HDRI</button>
         <button class="filter-btn" data-filter="free">Free</button>
       </div>
       <div class="products-grid fade-up fade-up-d1" id="productsGrid">
+
+        <div class="product-card" data-cat="bundles" data-external="https://reimagine-fx.gumroad.com/l/rfxvault">
+          <div class="product-thumb"><img src="/products/product-20.png" alt="RFX Vault — Every Reimagine FX Collection in One Bundle"><span class="product-thumb-hint">View on Gumroad +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Bundle · Mega Collection</div>
+            <div class="product-name">RFX VAULT — Every Collection in One Bundle</div>
+            <div class="product-desc">12 collections · 28 GB · over 400 maps, 20 VDB clouds, 100 cloth models, and the full HDRI Studio Essential Kit. Lifetime updates, royalty-free license.</div>
+            <div class="product-footer"><span class="product-badge badge-bundle">Bundle</span><a href="https://reimagine-fx.gumroad.com/l/rfxvault" target="_blank" class="product-cta">Get on Gumroad →</a></div>
+          </div>
+        </div>
+
+        <div class="product-card" data-cat="bundles maps" data-external="https://reimagine-fx.gumroad.com/l/tandl">
+          <div class="product-thumb"><img src="/products/product-19.png" alt="RFX Vault — Terrains & Landscapes Bundle"><span class="product-thumb-hint">View on Gumroad +</span></div>
+          <div class="product-body">
+            <div class="product-cat">Bundle · Terrains & Landscapes</div>
+            <div class="product-name">RFX Vault — Terrains & Landscapes</div>
+            <div class="product-desc">6 terrain and landscape collections in one bundle — Terrain Vol 1 & 2, Canyon, Valley, West Coast, and Planetize. 17 GB total, save $10.</div>
+            <div class="product-footer"><span class="product-badge badge-bundle">Bundle</span><a href="https://reimagine-fx.gumroad.com/l/tandl" target="_blank" class="product-cta">Get on Gumroad →</a></div>
+          </div>
+        </div>
 
         <div class="product-card" data-cat="mayaplugin" data-landing="/smart-organizer/">
           <div class="product-thumb"><img src="/products/product-17.png" alt="RFX Smart Organizer"><span class="product-thumb-hint">View details +</span></div>
@@ -282,8 +304,8 @@
       const trigger = e.target.closest('.product-thumb, .product-name, .product-details-btn');
       if (!trigger) return;
       const card = trigger.closest('.product-card');
-      const landing = card.dataset.landing;
-      if (landing) { window.location.href = landing; return; } // full landing page
+      if (card.dataset.external) { window.open(card.dataset.external, '_blank', 'noopener'); return; } // direct to Gumroad
+      if (card.dataset.landing) { window.location.href = card.dataset.landing; return; } // full landing page
       openModal(card);
     });
 
@@ -296,6 +318,7 @@
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           const card = thumb.closest('.product-card');
+          if (card.dataset.external) { window.open(card.dataset.external, '_blank', 'noopener'); return; }
           if (card.dataset.landing) { window.location.href = card.dataset.landing; return; }
           openModal(card);
         }
