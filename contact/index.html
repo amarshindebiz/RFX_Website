@@ -6,6 +6,8 @@
   <title>Contact — Reimagine FX</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <meta name="description" content="Contact Reimagine FX — available for freelance commissions, collaborations and commercial projects.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
@@ -87,11 +89,16 @@
     </div>
   </section>
   <div id="footer-placeholder"></div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="/js/shared.js"></script>
+  <script src="/js/motion.js"></script>
   <script>
     document.getElementById('nav-placeholder').outerHTML = buildNav('Contact');
     document.getElementById('footer-placeholder').outerHTML = buildFooter();
     initNav();
+    initMotion();
     const socialsEl = document.getElementById('contactSocials');
     if (socialsEl) {
       ['instagram','youtube','facebook','x','vimeo','discord'].forEach(k => {

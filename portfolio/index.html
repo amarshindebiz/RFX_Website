@@ -6,6 +6,8 @@
   <title>Portfolio — Reimagine FX</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <meta name="description" content="Portfolio — 3D renders, VFX work and motion design by Reimagine FX.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .gallery-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
@@ -37,12 +39,12 @@
   </section>
   <section class="section" style="background:var(--bg2);">
     <div class="container">
-      <div class="gallery-filter fade-up" id="galleryFilter">
+      <div class="gallery-filter" data-reveal id="galleryFilter">
         <button class="filter-btn active" data-filter="all">All Work</button>
         <button class="filter-btn" data-filter="image">3D Renders</button>
         <button class="filter-btn" data-filter="video">Video</button>
       </div>
-      <div class="gallery-grid fade-up fade-up-d1" id="galleryGrid">
+      <div class="gallery-grid" data-reveal id="galleryGrid">
         <div class="gallery-item" data-cat="image"><img src="/gallery/gallery-1.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
         <div class="gallery-item" data-cat="image"><img src="/gallery/gallery-2.jpg" alt="3D Render" loading="lazy"><div class="gallery-overlay"><div class="gallery-overlay-cat">3D Render</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
         <div class="gallery-item" data-cat="video"><video src="/gallery/gallery-v1.mp4" muted loop playsinline preload="none"></video><div class="video-badge">Video</div><div class="gallery-overlay"><div class="gallery-overlay-cat">VFX</div><div class="gallery-overlay-title">Reimagine FX</div></div></div>
@@ -133,11 +135,16 @@
     </div>
   </section>
   <div id="footer-placeholder"></div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="/js/shared.js"></script>
+  <script src="/js/motion.js"></script>
   <script>
     document.getElementById('nav-placeholder').outerHTML = buildNav('Portfolio');
     document.getElementById('footer-placeholder').outerHTML = buildFooter();
     initNav();
+    initMotion();
     document.getElementById('galleryFilter').addEventListener('click', e => {
       const btn = e.target.closest('.filter-btn');
       if (!btn) return;

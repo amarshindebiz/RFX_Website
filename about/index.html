@@ -6,6 +6,8 @@
   <title>About — Reimagine FX</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <meta name="description" content="About Amar Shinde — Founder of Reimagine FX. 8+ years of professional VFX, 3D compositing, and motion design.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .about-hero { padding: 140px 48px 80px; background: var(--bg); border-bottom: 1px solid var(--border); }
@@ -69,10 +71,10 @@
   </section>
   <section class="section" style="background: var(--bg2);">
     <div class="container">
-      <p class="section-label fade-up">Technical skills</p>
-      <h2 class="section-title fade-up fade-up-d1">The toolkit</h2>
-      <p class="section-subtitle fade-up fade-up-d2">Industry-standard software used on professional productions.</p>
-      <div class="toolkit-grid fade-up fade-up-d3">
+      <p class="section-label" data-reveal>Technical skills</p>
+      <h2 class="section-title" data-reveal>The toolkit</h2>
+      <p class="section-subtitle" data-reveal>Industry-standard software used on professional productions.</p>
+      <div class="toolkit-grid" data-reveal>
         <div class="toolkit-item"><div class="toolkit-name">Maya</div><div class="toolkit-type">3D · Rigging · FX</div></div>
         <div class="toolkit-item"><div class="toolkit-name">Nuke</div><div class="toolkit-type">Compositing</div></div>
         <div class="toolkit-item"><div class="toolkit-name">Houdini</div><div class="toolkit-type">FX · Simulation</div></div>
@@ -82,18 +84,18 @@
         <div class="toolkit-item"><div class="toolkit-name">DaVinci Resolve</div><div class="toolkit-type">Colour · Edit</div></div>
         <div class="toolkit-item"><div class="toolkit-name">Substance</div><div class="toolkit-type">Texturing</div></div>
       </div>
-      <div class="about-stats fade-up fade-up-d4">
-        <div class="about-stat"><div class="about-stat-num">8+</div><div class="about-stat-label">Years in VFX</div></div>
-        <div class="about-stat"><div class="about-stat-num">50+</div><div class="about-stat-label">Projects delivered</div></div>
-        <div class="about-stat"><div class="about-stat-num">1K+</div><div class="about-stat-label">Students reached</div></div>
+      <div class="about-stats" data-reveal>
+        <div class="about-stat"><div class="about-stat-num" data-count="8" data-count-suffix="+">0</div><div class="about-stat-label">Years in VFX</div></div>
+        <div class="about-stat"><div class="about-stat-num" data-count="50" data-count-suffix="+">0</div><div class="about-stat-label">Projects delivered</div></div>
+        <div class="about-stat"><div class="about-stat-num" data-count="1000" data-count-suffix="+">0</div><div class="about-stat-label">Students reached</div></div>
       </div>
     </div>
   </section>
   <section class="section" style="background: var(--bg);">
     <div class="container">
-      <p class="section-label fade-up">Journey</p>
-      <h2 class="section-title fade-up fade-up-d1">The story so far</h2>
-      <div class="timeline fade-up fade-up-d2">
+      <p class="section-label" data-reveal>Journey</p>
+      <h2 class="section-title" data-reveal>The story so far</h2>
+      <div class="timeline" data-reveal>
         <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-content"><div class="timeline-title">Reimagine FX — Expanded</div><div class="timeline-desc">Launched new digital asset store on Gumroad, VDB packs, HDRI maps, Maya plugins and more.</div></div></div>
         <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-content"><div class="timeline-title">Reimagine FX — Founded</div><div class="timeline-desc">Launched Reimagine FX as an independent creative studio, offering freelance VFX, 3D compositing, and motion design services worldwide.</div></div></div>
         <div class="timeline-item"><div class="timeline-year">2020</div><div class="timeline-content"><div class="timeline-title">Education platform launched</div><div class="timeline-desc">Started sharing knowledge on YouTube and Skillshare — tutorials and full courses covering professional VFX workflows.</div></div></div>
@@ -103,20 +105,25 @@
   </section>
   <section class="section-sm" style="background: var(--bg2); border-top: 1px solid var(--border); text-align:center;">
     <div class="container">
-      <h2 style="font-family:var(--font-display); font-size:clamp(36px,5vw,64px); letter-spacing:4px; color:var(--text); margin-bottom:16px;" class="fade-up">READY TO COLLABORATE?</h2>
-      <p style="font-size:16px; color:var(--text2); margin-bottom:32px; max-width:440px; margin-left:auto; margin-right:auto;" class="fade-up fade-up-d1">Open for freelance projects, brand collaborations, and commercial work.</p>
-      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;" class="fade-up fade-up-d2">
+      <h2 style="font-family:var(--font-display); font-size:clamp(36px,5vw,64px); letter-spacing:4px; color:var(--text); margin-bottom:16px;"  data-reveal>READY TO COLLABORATE?</h2>
+      <p style="font-size:16px; color:var(--text2); margin-bottom:32px; max-width:440px; margin-left:auto; margin-right:auto;"  data-reveal>Open for freelance projects, brand collaborations, and commercial work.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;"  data-reveal>
         <a href="/contact" class="btn btn-primary">Get in touch</a>
         <a href="/products" class="btn btn-outline">Shop my assets</a>
       </div>
     </div>
   </section>
   <div id="footer-placeholder"></div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="/js/shared.js"></script>
+  <script src="/js/motion.js"></script>
   <script>
     document.getElementById('nav-placeholder').outerHTML = buildNav('About');
     document.getElementById('footer-placeholder').outerHTML = buildFooter();
     initNav();
+    initMotion();
   </script>
 </body>
 </html>

@@ -6,6 +6,8 @@
   <title>Motion Reel — Reimagine FX</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <meta name="description" content="Motion Reel — 3D compositing, VFX and motion design work by Reimagine FX.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .reel-hero { padding: 100px 48px 0; background: var(--bg); }
@@ -33,9 +35,9 @@
   </section>
   <section class="section" style="background:var(--bg);">
     <div class="container">
-      <p class="section-label fade-up">Reel breakdown</p>
-      <h2 class="section-title fade-up fade-up-d1">What's inside</h2>
-      <div class="reel-breakdown fade-up fade-up-d2">
+      <p class="section-label" data-reveal>Reel breakdown</p>
+      <h2 class="section-title" data-reveal>What's inside</h2>
+      <div class="reel-breakdown" data-reveal>
         <div class="breakdown-card"><div class="breakdown-num">01</div><div class="breakdown-title">3D Compositing</div><div class="breakdown-desc">Seamless integration of CG elements into live footage. Shot in Maya and composited in Nuke with full lighting passes.</div></div>
         <div class="breakdown-card"><div class="breakdown-num">02</div><div class="breakdown-title">FX Simulation</div><div class="breakdown-desc">Large-scale destruction, fluid, fire, and particle simulations built in Houdini. Rendered with physically accurate lighting.</div></div>
         <div class="breakdown-card"><div class="breakdown-num">03</div><div class="breakdown-title">Motion Design</div><div class="breakdown-desc">Kinetic typography, brand animations, and motion graphics created in After Effects and Cinema 4D.</div></div>
@@ -44,20 +46,25 @@
   </section>
   <section class="section-sm" style="background:var(--bg2);border-top:1px solid var(--border);text-align:center;">
     <div class="container">
-      <h2 style="font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--text);margin-bottom:12px;" class="fade-up">More work on Vimeo</h2>
-      <p style="font-size:15px;color:var(--text2);margin-bottom:28px;" class="fade-up fade-up-d1">Extended cuts, project files, and additional reels.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;" class="fade-up fade-up-d2">
+      <h2 style="font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--text);margin-bottom:12px;"  data-reveal>More work on Vimeo</h2>
+      <p style="font-size:15px;color:var(--text2);margin-bottom:28px;"  data-reveal>Extended cuts, project files, and additional reels.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"  data-reveal>
         <a href="https://vimeo.com/reimaginefx" target="_blank" class="btn btn-primary">Watch on Vimeo</a>
         <a href="/portfolio" class="btn btn-outline">View gallery</a>
       </div>
     </div>
   </section>
   <div id="footer-placeholder"></div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="/js/shared.js"></script>
+  <script src="/js/motion.js"></script>
   <script>
     document.getElementById('nav-placeholder').outerHTML = buildNav('Reel');
     document.getElementById('footer-placeholder').outerHTML = buildFooter();
     initNav();
+    initMotion();
   </script>
 </body>
 </html>

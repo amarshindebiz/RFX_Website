@@ -6,6 +6,8 @@
   <title>Training — Reimagine FX</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <meta name="description" content="Learn VFX and motion design from a working professional — YouTube, Skillshare and Patreon.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .platform-section { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
@@ -37,7 +39,7 @@
   </section>
   <section class="section" style="background:var(--bg2);">
     <div class="container">
-      <div class="platform-section fade-up">
+      <div class="platform-section" data-reveal>
         <div class="platform-card">
           <div class="platform-header"><div class="platform-icon platform-icon-yt">YT</div><div><div class="platform-name">YouTube</div><div class="platform-handle">@reimaginefx</div></div></div>
           <p class="platform-desc">Free tutorials, VFX breakdowns, and behind-the-scenes content covering 3D compositing, FX simulation, and motion design.</p>
@@ -63,7 +65,7 @@
           <a href="https://www.skillshare.com/en/user/reimaginefx" target="_blank" class="btn btn-primary">Enroll on Skillshare →</a>
         </div>
       </div>
-      <div class="patreon-card fade-up">
+      <div class="patreon-card" data-reveal>
         <p style="font-family:var(--font-head);font-size:10px;font-weight:700;letter-spacing:3px;color:#FF424D;text-transform:uppercase;margin-bottom:12px;">Coming soon</p>
         <h2 style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--text);margin-bottom:12px;">Advanced training on Patreon</h2>
         <p style="font-size:15px;color:var(--text2);max-width:520px;margin:0 auto 28px;line-height:1.7;">Exclusive in-depth tutorials, early access to new content, and direct access to Amar for questions and feedback.</p>
@@ -72,11 +74,16 @@
     </div>
   </section>
   <div id="footer-placeholder"></div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="/js/shared.js"></script>
+  <script src="/js/motion.js"></script>
   <script>
     document.getElementById('nav-placeholder').outerHTML = buildNav('Training');
     document.getElementById('footer-placeholder').outerHTML = buildFooter();
     initNav();
+    initMotion();
   </script>
 </body>
 </html>
