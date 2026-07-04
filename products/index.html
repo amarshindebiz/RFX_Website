@@ -3,152 +3,417 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Assets — Reimagine FX</title>
+  <title>Products — Reimagine FX</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <meta name="description" content="Professional VFX digital assets by Reimagine FX — terrain maps, HDRI, VDB packs, 3D assets and Maya plugins.">
+  <meta name="description" content="The RFX toolkit — Maya plugins, Nuke plugins, iOS apps, bundles and digital assets for working VFX artists. Built by artists, for artists.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
-    .filter-btn { font-family: var(--font-head); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 18px; border-radius: 2px; border: 1px solid var(--border); background: transparent; color: var(--text3); cursor: pointer; transition: all 0.2s; }
-    .filter-btn:hover, .filter-btn.active { border-color: var(--gold-border); color: var(--gold); background: var(--gold-dim); }
-    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
-    .product-card:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+    /* ---------- Hero ---------- */
+    .ph-hero {
+      padding: 168px 48px 72px;
+      position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .ph-hero::before {
+      content: '';
+      position: absolute; top: -30%; left: 55%;
+      width: 760px; height: 760px; border-radius: 50%;
+      background: radial-gradient(circle, var(--gold-dim), transparent 62%);
+      pointer-events: none;
+    }
+    .ph-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 4px;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .ph-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+    .ph-title {
+      font-family: var(--font-display);
+      font-size: clamp(56px, 10vw, 148px);
+      font-weight: 700; line-height: 0.92; letter-spacing: -0.03em;
+      color: var(--text); margin-bottom: 26px;
+      perspective: 900px;
+    }
+    .ph-sub { font-size: 17px; color: var(--text2); max-width: 560px; line-height: 1.7; margin-bottom: 30px; }
+    .ph-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+    .ph-chip {
+      font-size: 11.5px; font-weight: 600; letter-spacing: 0.5px;
+      color: var(--text2);
+      padding: 8px 16px; border-radius: var(--r-pill);
+      border: 1px solid var(--border); background: var(--surface);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .ph-chip b { color: var(--gold); font-weight: 700; }
+
+    /* ---------- Category bento ---------- */
+    .cat-bento-section { padding: 72px 48px; background: var(--bg2); }
+    .cat-tile { cursor: pointer; text-align: left; width: 100%; font-family: var(--font-body); }
+    .cat-count {
+      position: absolute; top: 26px; right: 28px;
+      font-family: var(--font-display);
+      font-size: 42px; font-weight: 700; line-height: 1;
+      color: color-mix(in srgb, var(--acc) 28%, transparent);
+      transition: color var(--dur-med);
+    }
+    .cat-tile:hover .cat-count { color: var(--acc); }
+    .cat-mosaic {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+      margin-bottom: 22px;
+    }
+    .cat-mosaic img {
+      aspect-ratio: 3/4.2; object-fit: cover; width: 100%;
+      border-radius: var(--r-md); border: 1px solid var(--border);
+      transition: transform var(--dur-med) var(--ease-out);
+    }
+    .cat-tile:hover .cat-mosaic img { transform: translateY(-4px); }
+    .cat-tile:hover .cat-mosaic img:nth-child(2) { transition-delay: 0.04s; }
+    .cat-tile:hover .cat-mosaic img:nth-child(3) { transition-delay: 0.08s; }
+    .cat-tile:hover .cat-mosaic img:nth-child(4) { transition-delay: 0.12s; }
+    .cat-icons { display: flex; gap: 14px; margin-bottom: 22px; }
+    .cat-icons img {
+      width: 74px; height: 74px; border-radius: 18px;
+      border: 1px solid var(--border); object-fit: cover;
+      transition: transform var(--dur-med) var(--ease-out);
+    }
+    .cat-tile:hover .cat-icons img { transform: translateY(-4px) scale(1.03); }
+    .hub-tile { border: 1px solid transparent; background:
+      linear-gradient(var(--black-2), var(--black-2)) padding-box,
+      linear-gradient(120deg, rgba(155,140,255,0.55), rgba(155,140,255,0.06), rgba(216,178,70,0.35)) border-box;
+      animation: hubGlow 5s ease-in-out infinite alternate;
+    }
+    @keyframes hubGlow { from { box-shadow: 0 0 24px rgba(155,140,255,0.05); } to { box-shadow: 0 0 44px rgba(155,140,255,0.16); } }
+
+    /* ---------- Filters + grid ---------- */
+    .grid-section { padding: 88px 48px 100px; }
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 44px; }
+    .filter-btn {
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 10px 20px; border-radius: var(--r-pill);
+      border: 1px solid var(--border);
+      background: var(--surface); color: var(--text3);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .filter-btn:hover { border-color: var(--border2); color: var(--text); transform: translateY(-1px); }
+    .filter-btn.active { border-color: var(--gold-border); color: var(--gold); background: var(--gold-dim); }
+
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .product-card {
+      --acc: var(--gold);
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: border-color var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out), box-shadow var(--dur-med);
+      display: flex; flex-direction: column;
+    }
+    .product-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--acc), transparent);
+      opacity: 0; transition: opacity var(--dur-med);
+    }
+    .product-card:hover {
+      border-color: color-mix(in srgb, var(--acc) 40%, transparent);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.45);
+    }
+    .product-card:hover::after { opacity: 1; }
     .product-thumb { aspect-ratio: 3/4; background: var(--bg3); overflow: hidden; position: relative; cursor: pointer; }
-    .product-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
-    .product-card:hover .product-thumb img { transform: scale(1.04); }
-    .product-thumb-hint { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10,10,12,0.55); opacity: 0; transition: opacity 0.25s; font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold2); pointer-events: none; }
+    .product-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s var(--ease-out); }
+    .product-card:hover .product-thumb img { transform: scale(1.045); }
+    .product-thumb-hint {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(5,5,7,0.55);
+      opacity: 0; transition: opacity 0.25s;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--acc); pointer-events: none;
+    }
     .product-card:hover .product-thumb-hint { opacity: 1; }
     .product-thumb:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
-    .product-body { padding: 20px; }
-    .product-cat { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
-    .product-name { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.3; cursor: pointer; }
-    .product-name:hover { color: var(--gold2); }
-    .product-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 20px; }
+    .product-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+    .product-cat {
+      font-size: 9px; font-weight: 700; letter-spacing: 2px;
+      color: var(--acc); text-transform: uppercase; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .product-cat::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 8px var(--acc); flex: none; }
+    .product-name {
+      font-family: var(--font-display);
+      font-size: 16.5px; font-weight: 700; color: var(--text);
+      margin-bottom: 8px; line-height: 1.3; cursor: pointer;
+      transition: color var(--dur-fast);
+    }
+    .product-name:hover { color: var(--acc); }
+    .product-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 20px; flex: 1; }
     .product-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .product-footer-right { display: flex; align-items: center; gap: 8px; }
-    .product-cta { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 10px 16px; background: var(--gold); color: #0A0A0C; border-radius: 2px; border: none; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; white-space: nowrap; }
-    .product-cta:hover { background: var(--gold2); }
-    .product-cta.coming { background: transparent; border: 1px solid var(--border2); color: var(--text3); cursor: default; }
-    .product-details-btn { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 10px 16px; background: transparent; border: 1px solid var(--border2); color: var(--text2); border-radius: 2px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-    .product-details-btn:hover { border-color: var(--gold-border); color: var(--gold); background: var(--gold-dim); }
-    .product-badge { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; white-space: nowrap; }
-    .badge-free { background: rgba(30,200,100,0.1); border: 1px solid rgba(30,200,100,0.2); color: #1EC864; }
-    .badge-soon { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: var(--gold); }
-    .badge-new { background: rgba(120,180,255,0.12); border: 1px solid rgba(120,180,255,0.28); color: #7BB4FF; }
-    .badge-bundle { background: rgba(255,120,80,0.12); border: 1px solid rgba(255,120,80,0.32); color: #FF9670; }
-    .patreon-teaser { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 48px; text-align: center; border-top: 3px solid #FF424D; }
+    .product-cta {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase;
+      padding: 11px 18px;
+      background: var(--gold); color: var(--black-0);
+      border-radius: var(--r-pill); border: none; cursor: pointer;
+      transition: background var(--dur-fast), box-shadow var(--dur-fast);
+      text-decoration: none; display: inline-block; white-space: nowrap;
+    }
+    .product-cta:hover { background: var(--gold2); box-shadow: var(--gold-glow); }
+    .product-details-btn {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase;
+      padding: 11px 18px;
+      background: transparent; border: 1px solid var(--border2); color: var(--text2);
+      border-radius: var(--r-pill); cursor: pointer;
+      transition: all var(--dur-fast); white-space: nowrap;
+    }
+    .product-details-btn:hover { border-color: color-mix(in srgb, var(--acc) 50%, transparent); color: var(--acc); }
+    .product-badge {
+      font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 11px; border-radius: var(--r-pill); white-space: nowrap;
+    }
+    .badge-free { background: rgba(30,200,100,0.1); border: 1px solid rgba(30,200,100,0.25); color: var(--acc-free); }
+    .badge-new { background: rgba(123,180,255,0.1); border: 1px solid rgba(123,180,255,0.28); color: var(--acc-ios); }
+    .badge-bundle { background: rgba(255,107,74,0.1); border: 1px solid rgba(255,107,74,0.3); color: var(--acc-bundle); }
 
-    /* ---- Product preview modal ---- */
+    /* ---------- Teaser ---------- */
+    .teaser {
+      padding: 56px 48px; text-align: center;
+      border-radius: var(--r-xl); position: relative; overflow: hidden;
+    }
+    .teaser::before {
+      content: '';
+      position: absolute; top: -60%; left: 50%; transform: translateX(-50%);
+      width: 640px; height: 640px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,66,77,0.10), transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ---------- Modal ---------- */
     .product-modal { position: fixed; inset: 0; z-index: 2000; display: none; }
     .product-modal.open { display: block; }
-    .product-modal-backdrop { position: absolute; inset: 0; background: rgba(5,5,7,0.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-    .product-modal-dialog { position: relative; z-index: 1; max-width: 920px; width: calc(100% - 48px); max-height: 88vh; margin: 6vh auto 0; background: var(--bg2); border: 1px solid var(--border2); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); box-shadow: 0 30px 80px rgba(0,0,0,0.6); animation: pmIn 0.25s ease; }
-    @keyframes pmIn { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+    .product-modal-backdrop { position: absolute; inset: 0; background: rgba(4,4,6,0.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .product-modal-dialog {
+      position: relative; z-index: 1;
+      max-width: 920px; width: calc(100% - 48px); max-height: 88vh;
+      margin: 6vh auto 0;
+      background: var(--glass-heavy);
+      backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
+      border: 1px solid var(--border2); border-radius: var(--r-xl);
+      overflow: hidden;
+      display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      box-shadow: var(--shadow-2);
+      animation: pmIn 0.3s var(--ease-out);
+    }
+    @keyframes pmIn { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
     .product-modal-media { background: var(--bg3); position: relative; min-height: 320px; }
     .product-modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .product-modal-content { padding: 36px; overflow-y: auto; max-height: 88vh; }
-    .product-modal-cat { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
-    .product-modal-name { font-family: var(--font-head); font-size: 24px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
-    .product-modal-price { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--gold2); margin-bottom: 20px; }
+    .product-modal-cat { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+    .product-modal-name { font-family: var(--font-display); font-size: 25px; font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+    .product-modal-price { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--gold2); margin-bottom: 20px; }
     .product-modal-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
     .product-modal-desc p { margin-bottom: 14px; }
-    .product-modal-desc h4 { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); margin: 18px 0 10px; }
+    .product-modal-desc h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); margin: 18px 0 10px; }
     .product-modal-desc ul { list-style: none; margin: 0 0 14px; padding: 0; }
     .product-modal-desc li { position: relative; padding-left: 18px; margin-bottom: 7px; color: var(--text2); }
     .product-modal-desc li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
     .product-modal-desc .pm-compat { font-size: 12.5px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px; }
-    .product-modal-content .product-cta { margin-top: 24px; font-size: 11px; padding: 13px 22px; }
-    .product-modal-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; background: rgba(10,10,12,0.6); border: 1px solid var(--border2); color: var(--text); font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: all 0.2s; }
-    .product-modal-close:hover { background: var(--gold); color: #0A0A0C; border-color: var(--gold); }
+    .product-modal-content .product-cta { margin-top: 24px; font-size: 11px; padding: 14px 24px; }
+    .product-modal-close {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(8,8,11,0.6); border: 1px solid var(--border2); color: var(--text);
+      font-size: 20px; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      transition: all var(--dur-fast);
+    }
+    .product-modal-close:hover { background: var(--gold); color: var(--black-0); border-color: var(--gold); }
 
-    @media(max-width:768px){ .products-grid { grid-template-columns: 1fr 1fr; } }
+    /* ---------- Responsive ---------- */
+    @media(max-width:900px){ .products-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:768px){
+      .ph-hero { padding: 120px 20px 52px; }
+      .cat-bento-section, .grid-section { padding-left: 20px; padding-right: 20px; }
+      .cat-count { font-size: 30px; top: 20px; right: 22px; }
+    }
     @media(max-width:680px){
       .product-modal-dialog { grid-template-columns: 1fr; max-height: 92vh; margin: 4vh auto 0; }
       .product-modal-media { min-height: 200px; max-height: 38vh; }
       .product-modal-content { padding: 24px; max-height: 54vh; }
     }
-    @media(max-width:480px){ .products-grid { grid-template-columns: 1fr; } }
+    @media(max-width:560px){ .products-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div id="nav-placeholder"></div>
-  <section class="page-hero">
-    <div class="container">
-      <p class="page-hero-label fade-up">Digital Assets</p>
-      <h1 class="fade-up fade-up-d1">DIGITAL<br>ASSETS</h1>
-      <p class="fade-up fade-up-d2">Professional VFX tools built for working artists. Every asset is production-tested.</p>
+
+  <!-- ============ HERO ============ -->
+  <section class="ph-hero">
+    <div class="container-wide">
+      <p class="ph-eyebrow fade-up">The RFX Toolkit</p>
+      <h1 class="ph-title" data-split>PRODUCTS</h1>
+      <p class="ph-sub fade-up fade-up-d2">Plugins, apps and asset libraries built in production, for production. Every tool exists because it saved real hours on real shots.</p>
+      <div class="ph-chips fade-up fade-up-d3">
+        <span class="ph-chip"><b>4</b> Maya plugins</span>
+        <span class="ph-chip"><b>1</b> Nuke plugin</span>
+        <span class="ph-chip"><b>2</b> iOS apps</span>
+        <span class="ph-chip"><b>28 GB</b> of assets</span>
+        <span class="ph-chip"><b>Free</b> updates</span>
+      </div>
     </div>
   </section>
-  <section class="section" style="background:var(--bg2);">
-    <div class="container">
-      <div class="filter-bar fade-up" id="filterBar">
+
+  <!-- ============ CATEGORY BENTO ============ -->
+  <section class="cat-bento-section">
+    <div class="container-wide">
+      <div class="bento">
+
+        <button class="bento-tile cat-tile bs-7 rows-2" style="--acc:var(--acc-maya)" data-goto="mayaplugin" id="maya" data-reveal>
+          <span class="cat-count">04</span>
+          <div class="cat-mosaic" aria-hidden="true">
+            <img src="/products/product-17.png" alt="" loading="lazy">
+            <img src="/products/product-14.png" alt="" loading="lazy">
+            <img src="/products/product-15.png" alt="" loading="lazy">
+            <img src="/products/product-16.png" alt="" loading="lazy">
+          </div>
+          <span class="bento-tile-cat">Maya Plugins</span>
+          <span class="bento-tile-name">Production tools for Maya &amp; Arnold</span>
+          <span class="bento-tile-desc">Smart Organizer · Area Light Maps Pro · Focus Picker · Light Target</span>
+          <span class="bento-tile-link">Browse Maya plugins →</span>
+        </button>
+
+        <button class="bento-tile cat-tile bs-5" style="--acc:var(--acc-nuke)" data-goto="nukeplugin" id="nuke" data-reveal>
+          <span class="cat-count">01</span>
+          <span class="bento-tile-cat">Nuke Plugins</span>
+          <span class="bento-tile-name">Technical direction for the comp</span>
+          <span class="bento-tile-desc">Nuke Diagnostic Suite — script health, colorspace risk &amp; render-cost profiling.</span>
+          <span class="bento-tile-link">Browse Nuke plugins →</span>
+        </button>
+
+        <button class="bento-tile cat-tile bs-5" style="--acc:var(--acc-ios)" data-goto="apps" id="apps" data-reveal>
+          <span class="cat-count">02</span>
+          <div class="cat-icons" aria-hidden="true">
+            <img src="/vpimages/viewport-icon.png" alt="" loading="lazy">
+            <img src="/mvimages/main-maya-viewer.png" alt="" loading="lazy">
+          </div>
+          <span class="bento-tile-cat">iOS Apps</span>
+          <span class="bento-tile-name">Your pipeline, in your pocket</span>
+          <span class="bento-tile-desc">Viewport — 3D file viewer · Maya Viewer — live scene review on iPhone &amp; iPad.</span>
+          <span class="bento-tile-link">Browse iOS apps →</span>
+        </button>
+
+        <button class="bento-tile cat-tile bs-7" style="--acc:var(--acc-bundle)" data-goto="bundles" id="bundles" data-reveal>
+          <span class="cat-count">02</span>
+          <span class="bento-tile-cat">Bundles &amp; Assets</span>
+          <span class="bento-tile-name">Every collection, one library</span>
+          <span class="bento-tile-desc">RFX Vault — 12 collections, 28 GB · Terrains &amp; Landscapes — 6 collections · HDRI Studio Essential Kit.</span>
+          <span class="bento-tile-link">Browse bundles →</span>
+        </button>
+
+        <div class="bento-tile hub-tile bs-5" style="--acc:var(--acc-hub)" data-reveal>
+          <span class="bento-tile-cat">RFX Hub</span>
+          <span class="bento-tile-name">One app for every RFX tool <span class="badge" style="--acc:var(--acc-hub)">Coming soon</span></span>
+          <span class="bento-tile-desc">A desktop hub to install, update and manage the entire RFX suite — plugins, licenses and assets in one place.</span>
+          <a class="bento-tile-link" href="https://discord.gg/cjGQJzZzp" target="_blank" rel="noopener" style="color:var(--acc-hub)">Join Discord for the beta →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FILTERS + GRID ============ -->
+  <section class="grid-section" id="grid">
+    <div class="container-wide">
+      <div class="filter-bar" id="filterBar" data-reveal>
         <button class="filter-btn active" data-filter="all">All Products</button>
         <button class="filter-btn" data-filter="bundles">Bundles</button>
         <button class="filter-btn" data-filter="mayaplugin">Maya Plugins</button>
         <button class="filter-btn" data-filter="nukeplugin">Nuke Plugins</button>
-        <button class="filter-btn" data-filter="maps">Maps & HDRI</button>
+        <button class="filter-btn" data-filter="apps">iOS Apps</button>
+        <button class="filter-btn" data-filter="maps">Maps &amp; HDRI</button>
         <button class="filter-btn" data-filter="free">Free</button>
       </div>
-      <div class="products-grid fade-up fade-up-d1" id="productsGrid">
+      <div class="products-grid" id="productsGrid">
 
-        <div class="product-card" data-cat="bundles" data-external="https://reimagine-fx.gumroad.com/l/rfxvault">
-          <div class="product-thumb"><img src="/products/product-20.png" alt="RFX Vault — Every Reimagine FX Collection in One Bundle"><span class="product-thumb-hint">View on Gumroad +</span></div>
+        <div class="product-card" style="--acc:var(--acc-bundle)" data-cat="bundles" data-external="https://reimagine-fx.gumroad.com/l/rfxvault" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/products/product-20.png" alt="RFX Vault — Every Reimagine FX Collection in One Bundle" loading="lazy"><span class="product-thumb-hint">View on Gumroad +</span></div>
           <div class="product-body">
             <div class="product-cat">Bundle · Mega Collection</div>
             <div class="product-name">RFX VAULT — Every Collection in One Bundle</div>
             <div class="product-desc">12 collections · 28 GB · over 400 maps, 20 VDB clouds, 100 cloth models, and the full HDRI Studio Essential Kit. Lifetime updates, royalty-free license.</div>
-            <div class="product-footer"><span class="product-badge badge-bundle">Bundle</span><a href="https://reimagine-fx.gumroad.com/l/rfxvault" target="_blank" class="product-cta">Get on Gumroad →</a></div>
+            <div class="product-footer"><span class="product-badge badge-bundle">Bundle</span><a href="https://reimagine-fx.gumroad.com/l/rfxvault" target="_blank" rel="noopener" class="product-cta">Get on Gumroad →</a></div>
           </div>
         </div>
 
-        <div class="product-card" data-cat="bundles maps" data-external="https://reimagine-fx.gumroad.com/l/tandl">
-          <div class="product-thumb"><img src="/products/product-19.png" alt="RFX Vault — Terrains & Landscapes Bundle"><span class="product-thumb-hint">View on Gumroad +</span></div>
+        <div class="product-card" style="--acc:var(--acc-bundle)" data-cat="bundles maps" data-external="https://reimagine-fx.gumroad.com/l/tandl" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/products/product-19.png" alt="RFX Vault — Terrains & Landscapes Bundle" loading="lazy"><span class="product-thumb-hint">View on Gumroad +</span></div>
           <div class="product-body">
-            <div class="product-cat">Bundle · Terrains & Landscapes</div>
-            <div class="product-name">RFX Vault — Terrains & Landscapes</div>
-            <div class="product-desc">6 terrain and landscape collections in one bundle — Terrain Vol 1 & 2, Canyon, Valley, West Coast, and Planetize. 17 GB total, save $10.</div>
-            <div class="product-footer"><span class="product-badge badge-bundle">Bundle</span><a href="https://reimagine-fx.gumroad.com/l/tandl" target="_blank" class="product-cta">Get on Gumroad →</a></div>
+            <div class="product-cat">Bundle · Terrains &amp; Landscapes</div>
+            <div class="product-name">RFX Vault — Terrains &amp; Landscapes</div>
+            <div class="product-desc">6 terrain and landscape collections in one bundle — Terrain Vol 1 &amp; 2, Canyon, Valley, West Coast, and Planetize. 17 GB total, save $10.</div>
+            <div class="product-footer"><span class="product-badge badge-bundle">Bundle</span><a href="https://reimagine-fx.gumroad.com/l/tandl" target="_blank" rel="noopener" class="product-cta">Get on Gumroad →</a></div>
           </div>
         </div>
 
-        <div class="product-card" data-cat="mayaplugin" data-landing="/smart-organizer/">
-          <div class="product-thumb"><img src="/products/product-17.png" alt="RFX Smart Organizer"><span class="product-thumb-hint">View details +</span></div>
+        <div class="product-card" style="--acc:var(--acc-maya)" data-cat="mayaplugin" data-landing="/smart-organizer/" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/products/product-17.png" alt="RFX Smart Organizer" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
             <div class="product-cat">Maya Plugin · Scene Tools</div>
             <div class="product-name">RFX Smart Organizer</div>
             <div class="product-desc">Scan, classify, and sort your entire Maya scene into clean Display Layers and Outliner Groups in one click. Includes Batch Renamer, Scene Intel, and Performance tools.</div>
-            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-new">New</span><a href="https://reimagine-fx.gumroad.com/l/rfxsmartorg" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-new">New</span><a href="https://reimagine-fx.gumroad.com/l/rfxsmartorg" target="_blank" rel="noopener" class="product-cta">Get on Gumroad →</a></div></div>
           </div>
         </div>
 
-        <div class="product-card" data-cat="nukeplugin" data-landing="/nuke-diagnostic/">
-          <div class="product-thumb"><img src="/products/product-18.png" alt="RFX Nuke Diagnostic Suite"><span class="product-thumb-hint">View details +</span></div>
+        <div class="product-card" style="--acc:var(--acc-nuke)" data-cat="nukeplugin" data-landing="/nuke-diagnostic/" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/products/product-18.png" alt="RFX Nuke Diagnostic Suite" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
             <div class="product-cat">Nuke Plugin · Diagnostics</div>
             <div class="product-name">RFX Nuke Diagnostic Suite</div>
             <div class="product-desc">Technical diagnostics panel for Foundry Nuke and NukeX. Inspect script health, colorspace risk, render-cost, temporal stability, and graph intelligence — then export supervisor-ready reports.</div>
-            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-new">New</span><a href="https://reimagine-fx.gumroad.com/l/nukediagsuite" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-new">New</span><a href="https://reimagine-fx.gumroad.com/l/nukediagsuite" target="_blank" rel="noopener" class="product-cta">Get on Gumroad →</a></div></div>
           </div>
         </div>
 
-        <div class="product-card" data-cat="maps mayaplugin" data-landing="/area-light-maps-pro/">
-          <div class="product-thumb"><img src="/products/product-14.png" alt="Area Light Maps Pro"><span class="product-thumb-hint">View details +</span></div>
+        <div class="product-card" style="--acc:var(--acc-maya)" data-cat="mayaplugin maps" data-landing="/area-light-maps-pro/" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/products/product-14.png" alt="Area Light Maps Pro" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
             <div class="product-cat">Maya Plugin · Area Light</div>
             <div class="product-name">Area Light Maps Pro</div>
-            <div class="product-desc">145 professional EXR area light maps in a full Maya & Arnold lighting cockpit — visual browser, light mixer, light linking, one-click rigs, reflection placement, and reusable presets.</div>
-            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-new">New</span><a href="https://reimagine-fx.gumroad.com/l/arealightmapspro" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+            <div class="product-desc">145 professional EXR area light maps in a full Maya &amp; Arnold lighting cockpit — visual browser, light mixer, light linking, one-click rigs, reflection placement, and reusable presets.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-new">New</span><a href="https://reimagine-fx.gumroad.com/l/arealightmapspro" target="_blank" rel="noopener" class="product-cta">Get on Gumroad →</a></div></div>
           </div>
         </div>
 
-        <div class="product-card" data-cat="mayaplugin free">
-          <div class="product-thumb"><img src="/products/product-15.png" alt="Focus Picker"><span class="product-thumb-hint">View details +</span></div>
+        <div class="product-card" style="--acc:var(--acc-ios)" data-cat="apps" data-landing="/viewport/" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/vpimages/shot-viewport.png" alt="Viewport — 3D model viewer for iOS" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">iOS App · 3D Viewer</div>
+            <div class="product-name">Viewport — 3D Viewer for iPhone</div>
+            <div class="product-desc">Open, inspect and preview 3D files on iPhone. USD, OBJ, FBX, glTF and 20+ formats, render channels, animation playback, AR Quick Look — all on-device.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://apps.apple.com/app/viewport-3d/id6777973275" target="_blank" rel="noopener" class="product-cta">App Store →</a></div></div>
+          </div>
+        </div>
+
+        <div class="product-card" style="--acc:var(--acc-ios)" data-cat="apps free" data-landing="/mayaviewer/" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/mvimages/main-maya-viewer.png" alt="Maya Viewer — live scene review on iOS" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-body">
+            <div class="product-cat">iOS App · Scene Review</div>
+            <div class="product-name">Maya Viewer — Live Scene Review</div>
+            <div class="product-desc">Stream your Maya scene to iPhone or iPad in real time — review models, materials and lighting away from the desk, with AR preview support.</div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-free">Free</span><a href="https://apps.apple.com/us/app/maya-viewer/id6766898186" target="_blank" rel="noopener" class="product-cta">App Store →</a></div></div>
+          </div>
+        </div>
+
+        <div class="product-card" style="--acc:var(--acc-free)" data-cat="mayaplugin free" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/products/product-15.png" alt="Focus Picker" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
             <div class="product-cat">Maya Plugin · Camera</div>
             <div class="product-name">Focus Picker — Free Maya Tool</div>
             <div class="product-desc">A free camera focus tool for Maya and Arnold — one-click viewport pick with live two-way sync, DOF toggle, and aperture control.</div>
-            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-free">Free</span><a href="https://reimagine-fx.gumroad.com/l/rfxfocuspicker" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-free">Free</span><a href="https://reimagine-fx.gumroad.com/l/rfxfocuspicker" target="_blank" rel="noopener" class="product-cta">Get on Gumroad →</a></div></div>
           </div>
           <div class="pm-data" data-price="Free" hidden>
             <p>A professional depth-of-field workflow tool for Maya and Arnold. Stop reading numbers off the HUD — one click in the viewport ray-casts any surface and writes the exact focus distance straight to your Arnold camera. No guesswork, no interruption to your flow.</p>
@@ -166,13 +431,13 @@
           </div>
         </div>
 
-        <div class="product-card" data-cat="mayaplugin">
-          <div class="product-thumb"><img src="/products/product-16.png" alt="Light Target"><span class="product-thumb-hint">View details +</span></div>
+        <div class="product-card" style="--acc:var(--acc-maya)" data-cat="mayaplugin" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/products/product-16.png" alt="Light Target" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
             <div class="product-cat">Maya Plugin</div>
             <div class="product-name">Light Target</div>
             <div class="product-desc">A Maya plugin for precise light targeting — point any light directly at any object in your scene instantly.</div>
-            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/lighttarget" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/lighttarget" target="_blank" rel="noopener" class="product-cta">Get on Gumroad →</a></div></div>
           </div>
           <div class="pm-data" data-price="$2.99" hidden>
             <p>Aim any Arnold light at any point in your scene and keep it locked there. Drop a target locator at world origin or snap it to a mesh surface in one click — the light tracks it through an aim constraint. Move the target and the light follows. Set it once and never touch light rotation again.</p>
@@ -186,13 +451,13 @@
           </div>
         </div>
 
-        <div class="product-card" data-cat="maps">
-          <div class="product-thumb"><img src="/products/product-8.jpg" alt="HDRI Studio Essential Kit"><span class="product-thumb-hint">View details +</span></div>
+        <div class="product-card" style="--acc:var(--gold)" data-cat="maps" data-tilt data-reveal>
+          <div class="product-thumb"><img src="/products/product-8.jpg" alt="HDRI Studio Essential Kit" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
             <div class="product-cat">Maps · HDRI</div>
             <div class="product-name">HDRI Studio Essential Kit</div>
             <div class="product-desc">Professional studio HDRI maps for photorealistic lighting setups in any 3D renderer.</div>
-            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/hdristudiovol1" target="_blank" class="product-cta">Get on Gumroad →</a></div></div>
+            <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><a href="https://reimagine-fx.gumroad.com/l/hdristudiovol1" target="_blank" rel="noopener" class="product-cta">Get on Gumroad →</a></div></div>
           </div>
           <div class="pm-data" data-price="$29.99" hidden>
             <p>90 unique HDRIs that give your renders a moody, distinctive look. No more manual lighting for your scenes — drop one HDRI in and you're good to go.</p>
@@ -206,21 +471,23 @@
           </div>
         </div>
 
-
       </div>
     </div>
   </section>
-  <section class="section" style="background:var(--bg);">
+
+  <!-- ============ COMMUNITY TEASER ============ -->
+  <section class="section-sm" style="background:var(--bg2);">
     <div class="container">
-      <div class="patreon-teaser fade-up">
-        <p style="font-family:var(--font-head);font-size:10px;font-weight:700;letter-spacing:3px;color:#FF424D;text-transform:uppercase;margin-bottom:12px;">Coming soon</p>
-        <h2 style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--text);margin-bottom:12px;">Exclusive content on Patreon</h2>
-        <p style="font-size:15px;color:var(--text2);max-width:480px;margin:0 auto 28px;line-height:1.7;">Early access to new assets, exclusive project files, and supporter-only tutorials.</p>
-        <a href="https://discord.gg/cjGQJzZzp" target="_blank" class="btn btn-outline">Join Discord for updates</a>
+      <div class="glass teaser" data-reveal>
+        <p style="font-size:10px;font-weight:700;letter-spacing:3px;color:#FF424D;text-transform:uppercase;margin-bottom:12px;">Community</p>
+        <h2 style="font-family:var(--font-display);font-size:clamp(24px,3vw,32px);font-weight:700;color:var(--text);margin-bottom:12px;">Early access &amp; exclusive content</h2>
+        <p style="font-size:15px;color:var(--text2);max-width:480px;margin:0 auto 28px;line-height:1.7;">Beta builds of new tools, exclusive project files, and supporter-only tutorials — starting with the RFX Hub beta.</p>
+        <a href="https://discord.gg/cjGQJzZzp" target="_blank" rel="noopener" class="btn btn-outline">Join the Discord</a>
       </div>
     </div>
   </section>
 
+  <!-- ============ MODAL ============ -->
   <div class="product-modal" id="productModal" aria-hidden="true">
     <div class="product-modal-backdrop" data-close></div>
     <div class="product-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="pmName">
@@ -237,25 +504,59 @@
   </div>
 
   <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="/js/shared.js"></script>
+  <script src="/js/motion.js"></script>
   <script>
     document.getElementById('nav-placeholder').outerHTML = buildNav('Products');
     document.getElementById('footer-placeholder').outerHTML = buildFooter();
     initNav();
+    initMotion();
 
-    document.getElementById('filterBar').addEventListener('click', e => {
-      const btn = e.target.closest('.filter-btn');
-      if (!btn) return;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
+    /* ---- Filtering (with hash deep links: #maya #nuke #apps #bundles #maps #free) ---- */
+    const HASH_TO_FILTER = { maya: 'mayaplugin', nuke: 'nukeplugin', apps: 'apps', bundles: 'bundles', maps: 'maps', free: 'free' };
+
+    function applyFilter(filter) {
+      document.querySelectorAll('.filter-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.filter === filter));
       document.querySelectorAll('.product-card').forEach(card => {
         if (filter === 'all') { card.style.display = ''; return; }
         card.style.display = card.dataset.cat.includes(filter) ? '' : 'none';
       });
+    }
+
+    document.getElementById('filterBar').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      applyFilter(btn.dataset.filter);
+      const hash = Object.keys(HASH_TO_FILTER).find(k => HASH_TO_FILTER[k] === btn.dataset.filter);
+      history.replaceState(null, '', hash ? '#' + hash : location.pathname);
     });
 
-    // ---- Product preview modal ----
+    /* Category tiles scroll to grid + set filter */
+    document.querySelectorAll('.cat-tile').forEach(tile => {
+      tile.addEventListener('click', () => {
+        applyFilter(tile.dataset.goto);
+        history.replaceState(null, '', '#' + tile.id);
+        const grid = document.getElementById('grid');
+        if (window._lenis) window._lenis.scrollTo(grid, { offset: -70 });
+        else grid.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    /* Deep link on load */
+    (function () {
+      const h = location.hash.replace('#', '');
+      if (HASH_TO_FILTER[h]) {
+        applyFilter(HASH_TO_FILTER[h]);
+        setTimeout(() => document.getElementById('grid').scrollIntoView({ behavior: 'smooth' }), 350);
+      }
+    })();
+
+    /* ---- Product preview modal ---- */
     const modal = document.getElementById('productModal');
     const pmImg = document.getElementById('pmImg');
     const pmCat = document.getElementById('pmCat');
@@ -290,16 +591,15 @@
     }
 
     document.getElementById('productsGrid').addEventListener('click', e => {
-      if (e.target.closest('.product-cta')) return; // let Gumroad link work normally
+      if (e.target.closest('.product-cta')) return; // let CTA links work normally
       const trigger = e.target.closest('.product-thumb, .product-name, .product-details-btn');
       if (!trigger) return;
       const card = trigger.closest('.product-card');
-      if (card.dataset.external) { window.open(card.dataset.external, '_blank', 'noopener'); return; } // direct to Gumroad
-      if (card.dataset.landing) { window.location.href = card.dataset.landing; return; } // full landing page
+      if (card.dataset.external) { window.open(card.dataset.external, '_blank', 'noopener'); return; }
+      if (card.dataset.landing) { window.location.href = card.dataset.landing; return; }
       openModal(card);
     });
 
-    // Keyboard access on thumbnails
     document.querySelectorAll('.product-thumb').forEach(thumb => {
       thumb.setAttribute('tabindex', '0');
       thumb.setAttribute('role', 'button');
