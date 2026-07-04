@@ -52,7 +52,12 @@
       return;
     }
 
-    if (hasST) gsap.registerPlugin(ScrollTrigger);
+    if (hasST) {
+      gsap.registerPlugin(ScrollTrigger);
+      /* Failsafe: native scrolls (keyboard paging, anchor jumps, programmatic
+         scrollTo) bypass Lenis events — keep ScrollTrigger in sync anyway. */
+      window.addEventListener('scroll', function () { ScrollTrigger.update(); }, { passive: true });
+    }
 
     /* 1 ─ Lenis smooth scroll (desktop, fine pointer only) */
     if (!mobile && typeof window.Lenis !== 'undefined') {
@@ -85,46 +90,50 @@
         });
     });
 
-    /* 3 ─ Scroll reveals (batched, once) */
-    if (hasST) {
-      ScrollTrigger.batch('[data-reveal]', {
-        start: 'top 88%',
-        once: true,
-        onEnter: function (batch) {
-          gsap.to(batch, {
-            opacity: 1, y: 0,
-            duration: 0.9, ease: 'power3.out',
-            stagger: 0.08,
-            onComplete: function () {
-              batch.forEach(function (el) { el.classList.add('revealed'); });
-            }
-          });
-        }
-      });
-      /* Elements already above the fold on load */
-      ScrollTrigger.refresh();
-    } else {
-      document.querySelectorAll('[data-reveal]').forEach(function (el) {
-        el.classList.add('revealed');
-      });
-    }
-
-    /* 4 ─ Stat counters */
-    if (hasST) {
-      document.querySelectorAll('[data-count]').forEach(function (el) {
-        var target = parseFloat(el.dataset.count);
-        var suffix = el.dataset.countSuffix || '';
-        var obj = { v: 0 };
-        ScrollTrigger.create({
-          trigger: el, start: 'top 85%', once: true,
-          onEnter: function () {
-            gsap.to(obj, {
-              v: target, duration: 1.6, ease: 'power2.out',
-              onUpdate: function () { el.textContent = Math.round(obj.v) + suffix; }
-            });
+    /* 3 ─ Scroll reveals (IntersectionObserver — immune to how the user
+       scrolls: wheel, keyboard, anchor jumps, programmatic scrollTo) */
+    var revealEls = document.querySelectorAll('[data-reveal]');
+    if ('IntersectionObserver' in window && revealEls.length) {
+      var revealIO = new IntersectionObserver(function (entries) {
+        var batch = [];
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          revealIO.unobserve(entry.target);
+          batch.push(entry.target);
+        });
+        if (!batch.length) return;
+        gsap.to(batch, {
+          opacity: 1, y: 0,
+          duration: 0.9, ease: 'power3.out',
+          stagger: 0.08, overwrite: true,
+          onComplete: function () {
+            batch.forEach(function (el) { el.classList.add('revealed'); });
           }
         });
-      });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+      revealEls.forEach(function (el) { revealIO.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('revealed'); });
+    }
+
+    /* 4 ─ Stat counters (IntersectionObserver, once) */
+    var countEls = document.querySelectorAll('[data-count]');
+    if ('IntersectionObserver' in window && countEls.length) {
+      var countIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          countIO.unobserve(entry.target);
+          var el = entry.target;
+          var target = parseFloat(el.dataset.count);
+          var suffix = el.dataset.countSuffix || '';
+          var obj = { v: 0 };
+          gsap.to(obj, {
+            v: target, duration: 1.6, ease: 'power2.out',
+            onUpdate: function () { el.textContent = Math.round(obj.v) + suffix; }
+          });
+        });
+      }, { rootMargin: '0px 0px -10% 0px' });
+      countEls.forEach(function (el) { countIO.observe(el); });
     }
 
     /* 5 ─ 3D tilt cards (desktop only) */

@@ -3,163 +3,356 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reimagine FX — 3D Compositor | FX Artist | Motion Designer</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <meta name="description" content="Reimagine FX — Professional 3D Compositing, VFX, and Motion Design by Amar Shinde. Digital assets, training, and freelance services.">
-  <link rel="stylesheet" href="css/style.css">
+  <title>Reimagine FX — VFX Tools, Plugins & Training | Amar Shinde</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="description" content="Reimagine FX builds production-grade Maya & Nuke plugins, iOS apps and digital assets for VFX artists — crafted by compositor & FX artist Amar Shinde.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
   <style>
-    .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--bg); }
-    .hero-video-wrap { position: absolute; inset: 0; z-index: 0; }
-    .hero-video-wrap iframe { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; pointer-events: none; opacity: 0.35; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,12,0.4) 0%, rgba(10,10,12,0.3) 40%, rgba(10,10,12,0.8) 100%); z-index: 1; }
-    .hero-grid-bg { position: absolute; inset: 0; z-index: 1; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 60px 60px; }
-    .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; max-width: 900px; }
-    .hero-eyebrow { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease 0.2s both; }
-    .hero-title { font-family: var(--font-display); font-size: clamp(72px, 14vw, 160px); letter-spacing: 8px; line-height: 0.9; color: var(--text); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease 0.4s both; }
-    .hero-tagline { font-family: var(--font-head); font-size: clamp(13px, 1.5vw, 16px); font-weight: 400; letter-spacing: 3px; color: var(--text2); text-transform: uppercase; margin-bottom: 48px; opacity: 0; animation: fadeUp 0.8s ease 0.6s both; }
-    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s ease 0.8s both; }
-    .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeIn 1s ease 1.2s both; }
-    .hero-scroll span { font-family: var(--font-head); font-size: 9px; letter-spacing: 3px; color: var(--text3); text-transform: uppercase; }
-    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
-    @keyframes scrollPulse { 0%, 100% { opacity: 0.3; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.1); } }
-    .disciplines-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .discipline-item { background: var(--surface); padding: 40px 32px; transition: background 0.3s; position: relative; overflow: hidden; }
-    .discipline-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
-    .discipline-item:hover { background: var(--surface2); }
-    .discipline-item:hover::before { transform: scaleX(1); }
-    .discipline-num { font-family: var(--font-display); font-size: 48px; letter-spacing: 2px; color: var(--border2); line-height: 1; margin-bottom: 16px; transition: color 0.3s; }
-    .discipline-item:hover .discipline-num { color: var(--gold-border); }
-    .discipline-name { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
-    .discipline-tools { font-size: 13px; color: var(--text3); line-height: 1.6; }
-    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .work-item { position: relative; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; background: var(--surface); border: 1px solid var(--border); cursor: pointer; display: block; text-decoration: none; }
-    .work-item-bg { position: absolute; inset: 0; transition: transform 0.5s ease; }
-    .work-item-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .work-item:hover .work-item-bg { transform: scale(1.04); }
-    .work-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,12,0.9) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
-    .work-item-cat { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
-    .work-item-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text); }
-    .assets-strip { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 8px; padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-    .assets-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-    .assets-right { flex-shrink: 0; text-align: center; }
-    .assets-price-label { font-size: 12px; color: var(--text3); margin-bottom: 16px; font-family: var(--font-head); letter-spacing: 1px; }
-    .training-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .training-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 32px; display: flex; gap: 20px; align-items: flex-start; transition: border-color 0.3s, transform 0.3s; text-decoration: none; }
-    .training-card:hover { border-color: var(--gold-border); transform: translateY(-2px); }
-    .training-logo { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 1px; }
-    .training-logo-yt { background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.2); color: #ff4444; }
-    .training-logo-sk { background: rgba(0,160,255,0.1); border: 1px solid rgba(0,160,255,0.2); color: #4488ff; }
-    .training-info { flex: 1; }
-    .training-name { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .training-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 16px; }
-    .training-cta { font-family: var(--font-head); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
-    .training-cta::after { content: '→'; transition: transform 0.2s; }
-    .training-card:hover .training-cta::after { transform: translateX(4px); }
-    .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
-    .stat-item { background: var(--surface); padding: 40px 32px; text-align: center; }
-    .stat-num { font-family: var(--font-display); font-size: 56px; letter-spacing: 2px; color: var(--gold); line-height: 1; margin-bottom: 8px; }
-    .stat-label { font-family: var(--font-head); font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--text3); text-transform: uppercase; }
-    @media (max-width: 768px) {
-      .disciplines-grid { grid-template-columns: 1fr; }
-      .work-grid { grid-template-columns: 1fr 1fr; }
-      .training-cards { grid-template-columns: 1fr; }
-      .assets-strip { flex-direction: column; text-align: center; }
-      .stats-bar { grid-template-columns: 1fr; }
-      .hero-title { font-size: clamp(60px, 18vw, 120px); }
+    /* ============ HERO ============ */
+    .hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      position: relative; overflow: hidden;
+      padding: 110px 24px 80px;
     }
-    @media (max-width: 480px) { .work-grid { grid-template-columns: 1fr; } }
+    .hero-grid-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(216,178,70,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(216,178,70,0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 45%, black 30%, transparent 75%);
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 45%, black 30%, transparent 75%);
+    }
+    .hero-orb {
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      width: 780px; height: 780px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(216,178,70,0.10), rgba(216,178,70,0.03) 45%, transparent 68%);
+      pointer-events: none;
+      filter: blur(2px);
+    }
+    .hero-still {
+      position: absolute; right: -6%; bottom: -4%;
+      width: 46vw; max-width: 700px; aspect-ratio: 4/3;
+      object-fit: cover; opacity: 0.14;
+      -webkit-mask-image: radial-gradient(ellipse at 40% 40%, black 30%, transparent 72%);
+      mask-image: radial-gradient(ellipse at 40% 40%, black 30%, transparent 72%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 5px;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 26px; position: relative;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-hero);
+      font-weight: 700; line-height: 0.9; letter-spacing: -0.035em;
+      color: var(--text); position: relative;
+      perspective: 1000px;
+      margin-bottom: 8px;
+    }
+    .hero-title .fx, .hero-title .fx .split-char {
+      background: linear-gradient(115deg, var(--gold-deep) 10%, var(--gold2) 42%, #FFF3C4 50%, var(--gold2) 58%, var(--gold-deep) 90%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: shimmer 5.5s ease-in-out infinite;
+      display: inline-block;
+    }
+    @keyframes shimmer { 0%,100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
+    .hero-tag {
+      font-size: 14px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--text3); margin: 26px 0 40px; position: relative;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; position: relative; }
+    .hero-scroll {
+      position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      color: var(--text3); font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    }
+    .hero-scroll::after {
+      content: ''; width: 1px; height: 44px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
+
+    /* ============ HOME BENTO ============ */
+    .home-tile { min-height: 300px; }
+    .home-tile-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: top center; opacity: 0.42;
+      transition: opacity var(--dur-med), transform 0.8s var(--ease-out);
+    }
+    .bento-tile:hover .home-tile-img { opacity: 0.55; transform: scale(1.03); }
+    .home-tile-scrim {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(5,5,7,0.94) 18%, rgba(5,5,7,0.35) 55%, transparent);
+      pointer-events: none;
+    }
+    .home-tile > .bento-tile-cat, .home-tile > .bento-tile-name,
+    .home-tile > .bento-tile-desc, .home-tile > .bento-tile-link { position: relative; z-index: 1; }
+    .apps-icons-row { display: flex; gap: 12px; margin-bottom: 18px; position: relative; z-index: 1; }
+    .apps-icons-row img { width: 62px; height: 62px; border-radius: 15px; border: 1px solid var(--border); object-fit: cover; }
+
+    /* ============ STATS ============ */
+    .stats-band { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 56px 0; }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 64px); font-weight: 700; line-height: 1;
+      color: var(--gold); margin-bottom: 10px;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-label { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text3); }
+
+    /* ============ WORK ============ */
+    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .work-item {
+      position: relative; aspect-ratio: 4/3; border-radius: var(--r-lg);
+      overflow: hidden; background: var(--surface); border: 1px solid var(--border);
+      display: block; transition: border-color var(--dur-med), transform var(--dur-med) var(--ease-out);
+    }
+    .work-item:hover { border-color: var(--gold-border); transform: translateY(-4px); }
+    .work-item-bg { position: absolute; inset: 0; transition: transform 0.7s var(--ease-out); }
+    .work-item-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .work-item:hover .work-item-bg { transform: scale(1.05); }
+    .work-item-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(5,5,7,0.92) 0%, transparent 55%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 22px;
+    }
+    .work-item-cat { font-size: 9px; font-weight: 700; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; transform: translateY(6px); opacity: 0.8; transition: all var(--dur-med) var(--ease-out); }
+    .work-item-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--text); transform: translateY(6px); transition: transform var(--dur-med) var(--ease-out); }
+    .work-item:hover .work-item-cat, .work-item:hover .work-item-title { transform: translateY(0); opacity: 1; }
+    .section-head-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; flex-wrap: wrap; gap: 16px; }
+
+    /* ============ DISCIPLINES ============ */
+    .disc-row {
+      display: grid; grid-template-columns: 140px 1fr auto;
+      align-items: center; gap: 32px;
+      padding: 38px 8px; border-bottom: 1px solid var(--border);
+      transition: background var(--dur-med), padding-left var(--dur-med) var(--ease-out);
+    }
+    .disc-row:first-of-type { border-top: 1px solid var(--border); }
+    .disc-row:hover { background: var(--surface); padding-left: 24px; }
+    .disc-num {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 6vw, 80px); font-weight: 700; line-height: 1;
+      color: transparent; -webkit-text-stroke: 1px var(--border2);
+      transition: -webkit-text-stroke-color var(--dur-med), color var(--dur-med);
+    }
+    .disc-row:hover .disc-num { -webkit-text-stroke-color: var(--gold); }
+    .disc-name { font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 30px); font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .disc-tools { font-size: 13px; color: var(--text3); letter-spacing: 0.4px; }
+    .disc-arrow { font-size: 22px; color: var(--text3); transition: color var(--dur-fast), transform var(--dur-med) var(--ease-out); }
+    .disc-row:hover .disc-arrow { color: var(--gold); transform: translateX(6px); }
+
+    /* ============ TRAINING ============ */
+    .training-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .training-card {
+      display: flex; gap: 22px; align-items: flex-start;
+      padding: 30px; border-radius: var(--r-lg);
+      background: var(--surface); border: 1px solid var(--border);
+      transition: border-color var(--dur-med), transform var(--dur-med) var(--ease-out), background var(--dur-med);
+    }
+    .training-card:hover { border-color: var(--gold-border); transform: translateY(-3px); background: var(--surface2); }
+    .training-logo {
+      flex: none; width: 58px; height: 58px; border-radius: var(--r-md);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 17px;
+    }
+    .training-logo-yt { background: rgba(255,0,0,0.12); border: 1px solid rgba(255,0,0,0.3); color: #FF5252; }
+    .training-logo-sk { background: rgba(0,255,132,0.08); border: 1px solid rgba(0,255,132,0.25); color: #3DDC84; }
+    .training-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .training-desc { font-size: 13.5px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+    .training-cta { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+
+    /* ============ FINAL CTA ============ */
+    .final-cta {
+      text-align: center; padding: var(--sp-8) 24px;
+      position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute; bottom: -55%; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 900px; border-radius: 50%;
+      background: radial-gradient(circle, var(--gold-dim), transparent 62%);
+      pointer-events: none;
+    }
+    .cta-line {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 7.5vw, 104px);
+      font-weight: 700; line-height: 1.02; letter-spacing: -0.03em;
+      color: var(--text); position: relative;
+    }
+    .cta-line .gold-txt { color: var(--gold); }
+    .cta-sub { font-size: 16px; color: var(--text2); margin: 26px auto 38px; max-width: 480px; position: relative; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+    /* ============ Responsive ============ */
+    @media (max-width: 900px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .training-cards { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; padding: 40px 0; }
+    }
+    @media (max-width: 768px) {
+      .hero-still { display: none; }
+      .disc-row { grid-template-columns: 72px 1fr; }
+      .disc-arrow { display: none; }
+    }
   </style>
 </head>
 <body>
-
   <div id="nav-placeholder"></div>
 
+  <!-- ============ S1 · HERO ============ -->
   <section class="hero">
-    <div class="hero-video-wrap">
-      <iframe src="https://www.youtube.com/embed/EjAiirU7lEo?autoplay=1&mute=1&loop=1&playlist=EjAiirU7lEo&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media; accelerometer; gyroscope" allowfullscreen title="Reimagine FX Showreel"></iframe>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-orb" data-parallax="0.25"></div>
+    <img class="hero-still" src="/features/featured-1.jpg" alt="" aria-hidden="true" data-parallax="0.12">
+    <p class="hero-eyebrow fade-up">VFX Tools · Plugins · Training</p>
+    <h1 class="hero-title"><span data-split>REIMAGINE</span><br><span class="fx" data-split data-split-delay="0.55">FX</span></h1>
+    <p class="hero-tag fade-up fade-up-d4">Crafting worlds. Compositing reality.</p>
+    <div class="hero-actions fade-up fade-up-d5">
+      <a href="/products" class="btn btn-primary" data-magnetic>Explore Products</a>
+      <a href="/reel" class="btn btn-ghost" data-magnetic>Watch Showreel</a>
     </div>
-    <div class="hero-grid-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">3D · VFX · Motion Design</p>
-      <h1 class="hero-title">REIMAGINE<br>FX</h1>
-      <p class="hero-tagline">Crafting Worlds. Compositing Reality.</p>
-      <div class="hero-btns">
-        <a href="reel" class="btn btn-primary">Watch Reel</a>
-        <a href="portfolio" class="btn btn-outline">Explore Work</a>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
+    <div class="hero-scroll">Scroll</div>
   </section>
 
+  <!-- ============ S2 · TOOL MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Maya</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Nuke</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Houdini</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Arnold</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Unreal Engine</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">After Effects</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Cinema 4D</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Resolve</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Substance</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Maya</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Nuke</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Houdini</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Arnold</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Unreal Engine</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">After Effects</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Cinema 4D</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Resolve</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Substance</span><span class="marquee-dot">◆</span>
+    </div>
+  </div>
+
+  <!-- ============ S3 · PRODUCTS BENTO ============ -->
   <section class="section" style="background: var(--bg2);">
-    <div class="container">
-      <p class="section-label fade-up">What I do</p>
-      <h2 class="section-title fade-up fade-up-d1">Disciplines</h2>
-      <p class="section-subtitle fade-up fade-up-d2">8+ years pushing the boundaries of visual storytelling through technical mastery and artistic vision.</p>
-      <div class="disciplines-grid fade-up fade-up-d3">
-        <div class="discipline-item">
-          <div class="discipline-num">01</div>
-          <div class="discipline-name">3D Compositing</div>
-          <div class="discipline-tools">Maya · Nuke · Unreal Engine · After Effects</div>
+    <div class="container-wide">
+      <div class="section-head-row">
+        <div>
+          <p class="section-label" data-reveal>The Toolkit</p>
+          <h2 class="section-title" data-reveal style="margin-bottom:0;">Built for working artists</h2>
         </div>
-        <div class="discipline-item">
-          <div class="discipline-num">02</div>
-          <div class="discipline-name">FX & Simulation</div>
-          <div class="discipline-tools">Houdini · VDB Packs · Particle Systems · Dynamics</div>
-        </div>
-        <div class="discipline-item">
-          <div class="discipline-num">03</div>
-          <div class="discipline-name">Motion Design</div>
-          <div class="discipline-tools">After Effects · Cinema 4D · Resolve · Motion Graphics</div>
-        </div>
+        <a href="/products" class="btn btn-ghost" data-reveal>All products →</a>
       </div>
-    </div>
-  </section>
-
-  <section class="section-sm" style="background: var(--bg);">
-    <div class="container">
-      <div class="stats-bar fade-up">
-        <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Years Experience</div></div>
-        <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">Projects Completed</div></div>
-        <div class="stat-item"><div class="stat-num">1K+</div><div class="stat-label">Students Taught</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="background: var(--bg2);">
-    <div class="container">
-      <p class="section-label fade-up">Portfolio</p>
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:16px;">
-        <h2 class="section-title fade-up fade-up-d1" style="margin-bottom:0">Featured work</h2>
-        <a href="portfolio" class="btn btn-ghost fade-up fade-up-d2">View all work →</a>
-      </div>
-      <div class="work-grid fade-up fade-up-d3">
-        <a href="https://vimeo.com/1178522305?fl=ip&fe=ec" target="_blank" class="work-item">
-          <div class="work-item-bg">
-            <img src="features/featured-1.jpg" alt="Project Trinity">
+      <div class="bento">
+        <a class="bento-tile home-tile bs-7 rows-2" style="--acc:var(--acc-maya)" href="/smart-organizer/" data-reveal>
+          <img class="home-tile-img" src="/products/product-17.png" alt="" loading="lazy">
+          <div class="home-tile-scrim"></div>
+          <span class="bento-tile-cat">Maya Plugin · New</span>
+          <span class="bento-tile-name">RFX Smart Organizer</span>
+          <span class="bento-tile-desc">Scan, classify and sort entire Maya scenes into clean Display Layers and Outliner Groups — in one click.</span>
+          <span class="bento-tile-link">Explore →</span>
+        </a>
+        <a class="bento-tile home-tile bs-5" style="--acc:var(--acc-nuke)" href="/nuke-diagnostic/" data-reveal>
+          <img class="home-tile-img" src="/products/product-18.png" alt="" loading="lazy">
+          <div class="home-tile-scrim"></div>
+          <span class="bento-tile-cat">Nuke Plugin · New</span>
+          <span class="bento-tile-name">Nuke Diagnostic Suite</span>
+          <span class="bento-tile-desc">Find script problems before render finds them.</span>
+          <span class="bento-tile-link">Explore →</span>
+        </a>
+        <a class="bento-tile home-tile bs-5" style="--acc:var(--acc-maya)" href="/area-light-maps-pro/" data-reveal>
+          <img class="home-tile-img" src="/products/product-14.png" alt="" loading="lazy">
+          <div class="home-tile-scrim"></div>
+          <span class="bento-tile-cat">Maya Plugin · New</span>
+          <span class="bento-tile-name">Area Light Maps Pro</span>
+          <span class="bento-tile-desc">145 EXR light maps in a full Arnold lighting cockpit.</span>
+          <span class="bento-tile-link">Explore →</span>
+        </a>
+        <a class="bento-tile home-tile bs-4" style="--acc:var(--acc-bundle)" href="https://reimagine-fx.gumroad.com/l/rfxvault" target="_blank" rel="noopener" data-reveal>
+          <img class="home-tile-img" src="/products/product-20.png" alt="" loading="lazy">
+          <div class="home-tile-scrim"></div>
+          <span class="bento-tile-cat">Bundle</span>
+          <span class="bento-tile-name">RFX Vault</span>
+          <span class="bento-tile-desc">Every collection. 28 GB. One bundle.</span>
+          <span class="bento-tile-link">Get on Gumroad ↗</span>
+        </a>
+        <a class="bento-tile bs-4" style="--acc:var(--acc-ios)" href="/products/#apps" data-reveal>
+          <div class="apps-icons-row" aria-hidden="true">
+            <img src="/vpimages/viewport-icon.png" alt="" loading="lazy">
+            <img src="/mvimages/main-maya-viewer.png" alt="" loading="lazy">
           </div>
+          <span class="bento-tile-cat">iOS Apps</span>
+          <span class="bento-tile-name">Viewport &amp; Maya Viewer</span>
+          <span class="bento-tile-desc">Your pipeline, in your pocket — on iPhone &amp; iPad.</span>
+          <span class="bento-tile-link">See the apps →</span>
+        </a>
+        <div class="bento-tile bs-4" style="--acc:var(--acc-hub)" data-reveal>
+          <span class="bento-tile-cat">Coming Soon</span>
+          <span class="bento-tile-name">RFX Hub</span>
+          <span class="bento-tile-desc">One desktop app to install, update and manage every RFX tool.</span>
+          <a class="bento-tile-link" href="https://discord.gg/cjGQJzZzp" target="_blank" rel="noopener" style="color:var(--acc-hub)">Join the beta →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ S4 · STATS ============ -->
+  <section class="stats-band">
+    <div class="container">
+      <div class="stats-row">
+        <div class="stat-item" data-reveal><div class="stat-num" data-count="8" data-count-suffix="+">0</div><div class="stat-label">Years in VFX</div></div>
+        <div class="stat-item" data-reveal><div class="stat-num" data-count="50" data-count-suffix="+">0</div><div class="stat-label">Projects Completed</div></div>
+        <div class="stat-item" data-reveal><div class="stat-num" data-count="1000" data-count-suffix="+">0</div><div class="stat-label">Students Taught</div></div>
+        <div class="stat-item" data-reveal><div class="stat-num" data-count="10" data-count-suffix="+">0</div><div class="stat-label">Tools Shipped</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ S5 · FEATURED WORK ============ -->
+  <section class="section" style="background: var(--bg);">
+    <div class="container-wide">
+      <div class="section-head-row">
+        <div>
+          <p class="section-label" data-reveal>Featured Work</p>
+          <h2 class="section-title" data-reveal style="margin-bottom:0;">Selected projects</h2>
+        </div>
+        <a href="/portfolio" class="btn btn-ghost" data-reveal>View all work →</a>
+      </div>
+      <div class="work-grid">
+        <a href="https://vimeo.com/1178522305?fl=ip&fe=ec" target="_blank" rel="noopener" class="work-item" data-reveal>
+          <div class="work-item-bg"><img src="/features/featured-1.jpg" alt="Project Trinity" loading="lazy"></div>
           <div class="work-item-overlay">
             <div class="work-item-cat">VFX Breakdown</div>
             <div class="work-item-title">Project Trinity</div>
           </div>
         </a>
-        <a href="https://vimeo.com/1178522489" target="_blank" class="work-item">
-          <div class="work-item-bg">
-            <img src="features/featured-2.jpg" alt="Proximity — FX Portal">
-          </div>
+        <a href="https://vimeo.com/1178522489" target="_blank" rel="noopener" class="work-item" data-reveal>
+          <div class="work-item-bg"><img src="/features/featured-2.jpg" alt="Proximity — FX Portal" loading="lazy"></div>
           <div class="work-item-overlay">
             <div class="work-item-cat">Personal Project</div>
             <div class="work-item-title">Proximity — FX Portal</div>
           </div>
         </a>
-        <a href="https://www.behance.net/gallery/210015103/Building-Mount-Fuji" target="_blank" class="work-item">
-          <div class="work-item-bg">
-            <img src="features/featured-3.jpg" alt="Motion Design">
-          </div>
+        <a href="https://www.behance.net/gallery/210015103/Building-Mount-Fuji" target="_blank" rel="noopener" class="work-item" data-reveal>
+          <div class="work-item-bg"><img src="/features/featured-3.jpg" alt="Building Mount Fuji" loading="lazy"></div>
           <div class="work-item-overlay">
             <div class="work-item-cat">3D Compositing</div>
             <div class="work-item-title">Building Mount Fuji</div>
@@ -169,82 +362,95 @@
     </div>
   </section>
 
-  <section class="section" style="background: var(--bg);">
-    <div class="container">
-      <p class="section-label fade-up">Digital Assets</p>
-      <div class="assets-strip fade-up fade-up-d1">
-        <div class="assets-left">
-          <h2 style="font-family: var(--font-head); font-size: clamp(24px,3vw,36px); font-weight:800; color: var(--text); margin-bottom:10px; line-height:1.2;">Professional VFX tools,<br>built by a working artist</h2>
-          <p style="font-size:15px; color: var(--text2); max-width:480px; line-height:1.7; margin-bottom:20px;">Everything I use on real productions — available for instant download on Gumroad.</p>
-          <div class="assets-tags">
-            <span class="tag">3D Assets</span>
-            <span class="tag">HDRI Maps</span>
-            <span class="tag">VDB Packs</span>
-            <span class="tag">Maya Plugins</span>
-            <span class="tag">Project Files</span>
-            <span class="tag">Terrain Maps</span>
-            <span class="tag">Greyscale Maps</span>
-            <span class="tag">Area Light Maps</span>
-          </div>
-        </div>
-        <div class="assets-right">
-          <p class="assets-price-label">Available on</p>
-          <a href="https://reimagine-fx.gumroad.com/" target="_blank" class="btn btn-primary" style="display:block; margin-bottom:12px;">Shop on Gumroad →</a>
-          <a href="products" class="btn btn-ghost" style="display:block;">Browse all products</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- ============ S6 · DISCIPLINES ============ -->
   <section class="section" style="background: var(--bg2);">
     <div class="container">
-      <p class="section-label fade-up">Training</p>
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:16px;">
-        <div>
-          <h2 class="section-title fade-up fade-up-d1" style="margin-bottom:8px;">Learn from me</h2>
-          <p class="section-subtitle fade-up fade-up-d2" style="margin-bottom:0;">Free tutorials and structured courses from a working VFX professional.</p>
+      <p class="section-label" data-reveal>Disciplines</p>
+      <h2 class="section-title" data-reveal>What I do</h2>
+      <div style="margin-top: 40px;">
+        <div class="disc-row" data-reveal>
+          <div class="disc-num">01</div>
+          <div>
+            <div class="disc-name">3D Compositing</div>
+            <div class="disc-tools">Maya · Nuke · Unreal Engine · After Effects</div>
+          </div>
+          <div class="disc-arrow">→</div>
         </div>
-        <a href="training" class="btn btn-ghost fade-up fade-up-d2">All training →</a>
+        <div class="disc-row" data-reveal>
+          <div class="disc-num">02</div>
+          <div>
+            <div class="disc-name">FX &amp; Simulation</div>
+            <div class="disc-tools">Houdini · VDB Packs · Particle Systems · Dynamics</div>
+          </div>
+          <div class="disc-arrow">→</div>
+        </div>
+        <div class="disc-row" data-reveal>
+          <div class="disc-num">03</div>
+          <div>
+            <div class="disc-name">Motion Design</div>
+            <div class="disc-tools">After Effects · Cinema 4D · Resolve · Motion Graphics</div>
+          </div>
+          <div class="disc-arrow">→</div>
+        </div>
       </div>
-      <div class="training-cards fade-up fade-up-d3">
-        <a href="https://www.youtube.com/@reimaginefx" target="_blank" class="training-card">
+    </div>
+  </section>
+
+  <!-- ============ S7 · TRAINING ============ -->
+  <section class="section" style="background: var(--bg);">
+    <div class="container">
+      <div class="section-head-row">
+        <div>
+          <p class="section-label" data-reveal>Training</p>
+          <h2 class="section-title" data-reveal style="margin-bottom:8px;">Learn from me</h2>
+          <p class="section-subtitle" data-reveal style="margin-bottom:0;">Free tutorials and structured courses from a working VFX professional.</p>
+        </div>
+        <a href="/training" class="btn btn-ghost" data-reveal>All training →</a>
+      </div>
+      <div class="training-cards">
+        <a href="https://www.youtube.com/@reimaginefx" target="_blank" rel="noopener" class="training-card" data-reveal>
           <div class="training-logo training-logo-yt">YT</div>
-          <div class="training-info">
+          <div>
             <div class="training-name">YouTube</div>
             <div class="training-desc">Free tutorials, VFX breakdowns, and behind-the-scenes content. New videos regularly.</div>
-            <div class="training-cta">Subscribe free</div>
+            <div class="training-cta">Subscribe free →</div>
           </div>
         </a>
-        <a href="https://www.skillshare.com/en/user/reimaginefx" target="_blank" class="training-card">
+        <a href="https://www.skillshare.com/en/user/reimaginefx" target="_blank" rel="noopener" class="training-card" data-reveal>
           <div class="training-logo training-logo-sk">SK</div>
-          <div class="training-info">
+          <div>
             <div class="training-name">Skillshare</div>
-            <div class="training-desc">In-depth structured courses covering 3D compositing, FX, and motion design workflows.</div>
-            <div class="training-cta">Enroll now</div>
+            <div class="training-desc">Structured classes on compositing, FX and motion design — learn the full workflow.</div>
+            <div class="training-cta">Enroll →</div>
           </div>
         </a>
       </div>
     </div>
   </section>
 
-  <section class="section-sm" style="background: var(--bg); border-top: 1px solid var(--border);">
-    <div class="container" style="text-align:center;">
-      <p class="section-label fade-up" style="justify-content:center;">Work together</p>
-      <h2 style="font-family:var(--font-display); font-size:clamp(40px,6vw,72px); letter-spacing:4px; color:var(--text); margin-bottom:16px;" class="fade-up fade-up-d1">LET'S CREATE<br><span style="color:var(--gold);">SOMETHING</span><br>EXTRAORDINARY</h2>
-      <p style="font-size:16px; color:var(--text2); margin-bottom:36px; max-width:480px; margin-left:auto; margin-right:auto;" class="fade-up fade-up-d2">Available for freelance commissions, collaborations, and commercial projects.</p>
-      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;" class="fade-up fade-up-d3">
-        <a href="contact" class="btn btn-primary">Get in touch</a>
-        <a href="about" class="btn btn-outline">About me</a>
-      </div>
+  <!-- ============ S8 · FINAL CTA ============ -->
+  <section class="final-cta">
+    <h2 class="cta-line" data-reveal>LET'S CREATE</h2>
+    <h2 class="cta-line" data-reveal>SOMETHING <span class="gold-txt">EXTRAORDINARY</span></h2>
+    <p class="cta-sub" data-reveal>Available for freelance VFX work, tool development, and collaborations.</p>
+    <div class="cta-actions" data-reveal>
+      <a href="/contact" class="btn btn-primary" data-magnetic>Get in touch</a>
+      <a href="/about" class="btn btn-ghost" data-magnetic>About me</a>
     </div>
   </section>
 
   <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="/js/shared.js"></script>
+  <script src="/js/motion.js"></script>
   <script>
     document.getElementById('nav-placeholder').outerHTML = buildNav('Home');
     document.getElementById('footer-placeholder').outerHTML = buildFooter();
     initNav();
+    initMotion();
   </script>
 </body>
 </html>
