@@ -1,15 +1,22 @@
 /* ============================================================
    REIMAGINE FX — motion.js (v2)
-   GSAP 3 + ScrollTrigger (free) + Lenis smooth scroll via CDN.
+   GSAP 3 + ScrollTrigger (free) via CDN. Native scrolling (no Lenis).
    Load order in each redesigned page (end of <body>):
-     gsap.min.js → ScrollTrigger.min.js → lenis.min.js → shared.js → motion.js
+     gsap.min.js → ScrollTrigger.min.js → shared.js → motion.js
    Then call initMotion() after nav/footer injection.
+
+   NOTE: Lenis smooth-scroll was removed — it silently swallowed mouse-wheel
+   input in production, freezing the page (and, because reveals depend on
+   scrolling elements into view, blacking out everything below the hero).
+   Native scroll is reliable; anchor smoothness comes from CSS
+   `scroll-behavior: smooth`. A safety net force-reveals content if anything
+   ever prevents the IntersectionObserver from firing.
 
    Guardrails:
    - html.has-motion gates all [data-reveal] hiding (no-JS = fully visible)
-   - prefers-reduced-motion  → reveals shown instantly, no Lenis/tilt/magnetic
-   - mobile / coarse pointer → no Lenis, no tilt, no magnetic
-   - transform/opacity only · reveals are once:true (no persistent listeners)
+   - prefers-reduced-motion  → reveals shown instantly, no tilt/magnetic
+   - mobile / coarse pointer → no tilt, no magnetic
+   - transform/opacity only · reveals fire once · fail-safe reveal timeout
    ============================================================ */
 
 (function () {
@@ -59,24 +66,7 @@
       window.addEventListener('scroll', function () { ScrollTrigger.update(); }, { passive: true });
     }
 
-    /* 1 ─ Lenis smooth scroll (desktop, fine pointer only) */
-    if (!mobile && typeof window.Lenis !== 'undefined') {
-      var lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
-      lenis.on('scroll', function () { if (hasST) ScrollTrigger.update(); });
-      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-      gsap.ticker.lagSmoothing(0);
-      /* Anchor links play nice with Lenis */
-      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          var id = a.getAttribute('href');
-          if (id.length > 1 && document.querySelector(id)) {
-            e.preventDefault();
-            lenis.scrollTo(id, { offset: -80 });
-          }
-        });
-      });
-      window._lenis = lenis;
-    }
+    /* 1 ─ (Lenis smooth scroll removed — native scroll is used instead) */
 
     /* 2 ─ Hero split-letter entrance */
     document.querySelectorAll('[data-split]').forEach(function (el) {
@@ -190,5 +180,22 @@
         });
       });
     }
+
+    /* 8 ─ Fail-safe: content must NEVER stay invisible. If, for any reason,
+       the IntersectionObserver never fires for some elements (scroll frozen,
+       observer edge case, browser quirk), force everything visible after a
+       few seconds so the page can't black out. */
+    setTimeout(function () {
+      document.querySelectorAll('[data-reveal]:not(.revealed)').forEach(function (el) {
+        gsap.set(el, { opacity: 1, y: 0 });
+        el.classList.add('revealed');
+      });
+      /* A counter must never be left showing "0" if its tween never ran. */
+      document.querySelectorAll('[data-count]').forEach(function (el) {
+        if (el.textContent.trim() === '0' || el.textContent.trim() === '') {
+          el.textContent = Math.round(parseFloat(el.dataset.count)) + (el.dataset.countSuffix || '');
+        }
+      });
+    }, 3000);
   };
 })();
