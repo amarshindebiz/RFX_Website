@@ -105,6 +105,9 @@ button { cursor: pointer; font-family: var(--font-body); }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold-deep); }
 ::selection { background: var(--gold); color: var(--black-0); }
 
+/* Keyboard focus (a11y) — visible ring for tab navigation only */
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
 /* Film-grain noise overlay (brand signature — kept from v1) */
 body::before {
   content: '';
@@ -539,13 +542,13 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 7
   }
   .nav-links.open { display: flex; }
   .nav-links > li { flex-direction: column; align-items: stretch; }
-  .nav-links > li > a { font-size: 15px; padding: 14px 12px; border-radius: var(--r-md); letter-spacing: 1.5px; }
+  .nav-links > li > a, .nav-links .nav-row > a { font-size: 15px; padding: 14px 12px; border-radius: var(--r-md); letter-spacing: 1.5px; min-height: 44px; display: flex; align-items: center; }
   .nav-links a.nav-cta-pill { margin: 12px 0 0; text-align: center; justify-content: center; display: flex; }
 
   /* Row with chevron */
   .nav-row { display: flex; align-items: center; justify-content: space-between; }
   .nav-row > a { flex: 1; }
-  .nav-chevron { padding: 14px; }
+  .nav-chevron { padding: 14px; min-width: 44px; min-height: 44px; justify-content: center; }
   .nav-chevron svg { width: 15px; height: 15px; }
 
   /* Accordion submenus */
@@ -568,12 +571,30 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 7
   .nav-mega-foot { padding: 10px 12px; flex-direction: column; align-items: flex-start; gap: 8px; }
   .nav-hamburger { display: flex; }
   .nav-socials { display: none; }
-  .drawer-socials { display: flex !important; gap: 12px; padding: 20px 12px; margin-top: auto; }
-  .drawer-socials a { color: var(--text3); padding: 6px; }
-  .drawer-socials a:hover { color: var(--gold); }
+  /* Socials: a compact horizontal row pinned to the bottom of the drawer.
+     (.nav-links > li forces column direction on drawer items — override it,
+     and give each icon a proper 44px circular touch target.) */
+  .nav-links > li.drawer-socials {
+    display: flex !important;
+    flex-direction: row; align-items: center; justify-content: flex-start;
+    gap: 10px; padding: 20px 12px 8px; margin-top: auto;
+    border-top: 1px solid var(--border);
+  }
+  .nav-links > li.drawer-socials > a {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; padding: 0; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text3); transition: color var(--dur-fast), border-color var(--dur-fast);
+  }
+  .nav-links > li.drawer-socials > a:hover { color: var(--gold); border-color: var(--gold-border); }
   .drawer-socials svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* Touch-friendly control sizes on mobile (44px minimum) */
+  .filter-btn, .product-cta, .product-details-btn { min-height: 44px; }
+  .footer-social { width: 44px; height: 44px; }
 }
-.drawer-socials { display: none; }
+/* Hidden on desktop (must out-rank .nav-links > li { display:flex }) */
+.nav-links > li.drawer-socials { display: none; }
 
 @media (max-width: 768px) {
   .section, .section-sm { padding: var(--sp-6) 20px; }
