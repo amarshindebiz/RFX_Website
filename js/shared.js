@@ -5,7 +5,7 @@
        document.getElementById('nav-placeholder').outerHTML = buildNav('X')
        document.getElementById('nav').innerHTML = buildNav('X')   (viewport/mayaviewer)
    - activePage mapping keeps untouched pages highlighting correctly:
-       'Viewport' / 'Maya Viewer' -> Products · 'Portfolio' / 'Reel' -> Work
+       'Viewport' / 'Maya Viewer' / 'Blender Viewer' -> Products · 'Portfolio' / 'Reel' -> Work
    ============================================================ */
 
 const SOCIAL_LINKS = {
@@ -39,6 +39,8 @@ function _activeKey(activePage) {
     viewport: 'products',
     'maya viewer': 'products',
     mayaviewer: 'products',
+    'blender viewer': 'products',
+    blenderviewer: 'products',
     portfolio: 'work',
     reel: 'work',
     work: 'work'
@@ -77,7 +79,7 @@ function buildNav(activePage) {
             </a>
             <a class="mega-cat" href="/products/#apps" style="--acc:#7BB4FF">
               <span class="mega-cat-name">iOS Apps</span>
-              <span class="mega-cat-desc">Viewport — 3D viewer · Maya Viewer — scene review</span>
+              <span class="mega-cat-desc">Viewport — 3D viewer · Maya Viewer and Blender Viewer — live scene review</span>
             </a>
             <a class="mega-cat" href="/products/#bundles" style="--acc:#FF6B4A">
               <span class="mega-cat-name">Bundles &amp; Assets</span>

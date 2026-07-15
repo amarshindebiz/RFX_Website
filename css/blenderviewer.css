@@ -1,0 +1,296 @@
+/* Blender Viewer (iOS companion) page — Reimagine Fx */
+#blenderviewer-page {
+  --bv-bg: #07080a;
+  --bv-bg-soft: #0c0d11;
+  --bv-panel: rgba(255,255,255,.055);
+  --bv-panel-2: rgba(255,255,255,.028);
+  --bv-text: #f3f5f8;
+  --bv-muted: rgba(243,245,248,.72);
+  --bv-accent: #FF7B39;          /* Blender Viewer orange (matches the app) */
+  --bv-accent-2: #ffad75;        /* warm support */
+  background: var(--bv-bg);
+  color: var(--bv-text);
+  overflow: hidden;
+}
+
+#blenderviewer-page *, #blenderviewer-page *::before, #blenderviewer-page *::after { box-sizing: border-box; }
+
+#blenderviewer-page .mv-container, #blenderviewer-page .mv-hero-grid {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+#blenderviewer-page .mv-hero {
+  min-height: 88vh;
+  padding: 170px 0 95px;
+  background:
+    radial-gradient(circle at 82% 20%, rgba(255,123,57,.20), transparent 32%),
+    radial-gradient(circle at 18% 18%, rgba(255,173,117,.16), transparent 30%),
+    linear-gradient(180deg, #050607 0%, #0f1016 100%);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+#blenderviewer-page .mv-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, .88fr);
+  gap: 66px;
+  align-items: center;
+}
+
+#blenderviewer-page .mv-eyebrow, #blenderviewer-page .section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 18px;
+  color: var(--bv-accent);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#blenderviewer-page .mv-eyebrow::before, #blenderviewer-page .section-label::before {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: var(--bv-accent);
+  opacity: .85;
+}
+
+#blenderviewer-page .mv-title {
+  margin: 0;
+  color: var(--bv-text);
+  font-size: clamp(58px, 8vw, 122px);
+  line-height: .86;
+  letter-spacing: -.055em;
+  max-width: 780px;
+}
+
+#blenderviewer-page .mv-tagline {
+  margin: 26px 0 18px;
+  color: var(--bv-text);
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  max-width: 720px;
+}
+
+#blenderviewer-page .mv-intro, #blenderviewer-page .section-subtitle, #blenderviewer-page .mv-card p,
+#blenderviewer-page .mv-step p, #blenderviewer-page .mv-faq p, #blenderviewer-page .mv-list li, #blenderviewer-page .mv-note {
+  color: var(--bv-muted);
+  line-height: 1.75;
+}
+
+#blenderviewer-page .mv-intro { max-width: 720px; font-size: 16.5px; }
+
+#blenderviewer-page .mv-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+#blenderviewer-page .btn {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,123,57,.40);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: 11px;
+  font-weight: 900;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+#blenderviewer-page .btn:hover { transform: translateY(-2px); }
+#blenderviewer-page .btn-primary { background: var(--bv-accent); color: #051014; border-color: var(--bv-accent); }
+#blenderviewer-page .btn-outline, #blenderviewer-page .btn-ghost { color: var(--bv-accent); background: rgba(255,123,57,.05); }
+#blenderviewer-page .mv-note { margin-top: 18px; font-size: 14px; }
+
+#blenderviewer-page .mv-device {
+  width: 100%;
+  max-width: 430px;
+  margin-left: auto;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 46px;
+  padding: 18px;
+  background: linear-gradient(180deg,#1c1f25,#060708);
+  box-shadow: 0 40px 120px rgba(0,0,0,.5);
+}
+#blenderviewer-page .mv-device-image { overflow: hidden; }
+#blenderviewer-page .mv-device-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 19.5;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 31px;
+}
+
+/* Hero logo tile (used when showing the app icon instead of a screenshot) */
+#blenderviewer-page .mv-logo-tile {
+  width: 100%;
+  max-width: 380px;
+  margin-left: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 40px;
+  border: 1px solid rgba(255,255,255,.12);
+  background:
+    radial-gradient(circle at 50% 38%, rgba(255,123,57,.18), transparent 60%),
+    linear-gradient(180deg, #14161c 0%, #060708 100%);
+  box-shadow: 0 40px 120px rgba(0,0,0,.5);
+  overflow: hidden;
+  padding: 0;
+}
+#blenderviewer-page .mv-logo-tile img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 40px;
+}
+
+#blenderviewer-page .section { padding: 104px 0; background: var(--bv-bg); }
+#blenderviewer-page .section-sm { padding: 78px 0; background: var(--bv-bg-soft); }
+#blenderviewer-page .section-title {
+  margin: 0 0 18px;
+  color: var(--bv-text);
+  font-size: clamp(34px, 4.5vw, 64px);
+  line-height: .98;
+  letter-spacing: -.045em;
+  max-width: 800px;
+}
+#blenderviewer-page .section-subtitle { max-width: 720px; font-size: 16px; }
+
+#blenderviewer-page .mv-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:18px; margin-top: 40px; }
+#blenderviewer-page .card, #blenderviewer-page .mv-faq {
+  border: 1px solid rgba(255,255,255,.1);
+  background: linear-gradient(180deg, var(--bv-panel), var(--bv-panel-2));
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.18);
+}
+#blenderviewer-page .mv-card h3, #blenderviewer-page .mv-step h3, #blenderviewer-page .mv-faq h3 {
+  margin: 0 0 10px;
+  color: var(--bv-text);
+  font-size: 18px;
+  line-height: 1.25;
+}
+#blenderviewer-page .mv-card p, #blenderviewer-page .mv-step p, #blenderviewer-page .mv-faq p { margin: 0; font-size: 15px; }
+
+/* Requirement chips */
+#blenderviewer-page .bv-tags { display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+#blenderviewer-page .bv-tag {
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,123,57,.30);
+  background: rgba(255,123,57,.06);
+  color: var(--bv-text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+#blenderviewer-page .bv-tag.muted { border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.04); color: var(--bv-muted); }
+
+/* Screenshot gallery */
+#blenderviewer-page .mv-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 34px;
+  align-items: start;
+}
+#blenderviewer-page .mv-shot {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  min-height: 0;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 28px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,123,57,.28);
+  box-shadow: 0 24px 70px rgba(0,0,0,.28);
+}
+#blenderviewer-page .mv-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: top center;
+}
+#blenderviewer-page .mv-shot figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 36px 12px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,0));
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#blenderviewer-page .mv-steps { counter-reset: step; display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:18px; margin-top:34px; }
+#blenderviewer-page .mv-step::before { counter-increment: step; content: counter(step); display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center; border-radius:50%; margin-bottom:18px; background: var(--bv-accent); color:#051014; font-weight:900; }
+
+#blenderviewer-page .mv-two { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:54px; align-items:start; }
+#blenderviewer-page .mv-list { margin: 24px 0 0; padding-left: 20px; }
+#blenderviewer-page .mv-list li { margin-bottom: 10px; }
+#blenderviewer-page .mv-meta { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:14px; margin-top:28px; }
+#blenderviewer-page .mv-meta div { padding:18px; border-radius:18px; border:1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); }
+#blenderviewer-page .mv-meta span { display:block; color: var(--bv-muted); font-size:13px; margin-bottom:6px; }
+#blenderviewer-page .mv-meta strong { color: var(--bv-text); word-break: break-word; }
+#blenderviewer-page .mv-faq-wrap { display:grid; gap:14px; }
+
+#blenderviewer-page .btn-disabled {
+  color: rgba(243,245,248,.48);
+  border-color: rgba(243,245,248,.16);
+  background: rgba(243,245,248,.035);
+  cursor: not-allowed;
+  user-select: none;
+}
+#blenderviewer-page .btn-disabled:hover { transform: none; }
+#blenderviewer-page .bv-trademark-note {
+  max-width: 820px;
+  margin: 30px 0 0;
+  color: var(--bv-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+#blenderviewer-page .mv-policy-card h3 {
+  margin: 30px 0 8px;
+  color: var(--bv-text);
+  font-size: 19px;
+  line-height: 1.3;
+}
+#blenderviewer-page .mv-policy-card p {
+  margin: 0;
+  color: var(--bv-muted);
+  font-size: 15.5px;
+  line-height: 1.78;
+}
+#blenderviewer-page .mv-policy-card a { color: var(--bv-accent); }
+
+/* Privacy page: smaller hero title so the 2-line heading clears the intro */
+#blenderviewer-page.mv-privacy-page .mv-title { font-size: clamp(40px, 5.4vw, 78px); line-height: .94; }
+#blenderviewer-page .mv-privacy-hero { min-height: 0; padding: 150px 0 70px; }
+#blenderviewer-page .mv-privacy-hero .mv-intro { margin-top: 24px; }
+#blenderviewer-page .mv-policy-card { padding: 30px 32px; }
+#blenderviewer-page .mv-policy-card .section-title { font-size: 24px; line-height: 1.2; margin-bottom: 8px; }
+
+@media (max-width: 980px) {
+  #blenderviewer-page .mv-hero-grid, #blenderviewer-page .mv-two { grid-template-columns: 1fr; }
+  #blenderviewer-page .mv-device, #blenderviewer-page .mv-logo-tile { margin-inline: auto; }
+  #blenderviewer-page .mv-grid, #blenderviewer-page .mv-steps, #blenderviewer-page .mv-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  #blenderviewer-page .mv-container, #blenderviewer-page .mv-hero-grid { width: min(100% - 32px, 1180px); }
+  #blenderviewer-page .mv-hero { padding-top: 132px; }
+  #blenderviewer-page .mv-grid, #blenderviewer-page .mv-steps, #blenderviewer-page .mv-gallery, #blenderviewer-page .mv-meta { grid-template-columns: 1fr; }
+  #blenderviewer-page .mv-actions .btn { width: 100%; }
+}
