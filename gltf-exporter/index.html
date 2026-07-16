@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RFX glTF Exporter for Maya | Reimagine FX</title>
+  <meta name="description" content="Export production-ready glTF 2.0 and GLB files from Maya 2026 with materials, textures, lights, hierarchy, UVs, normals, and tangents preserved.">
+  <meta property="og:title" content="RFX glTF Exporter for Maya">
+  <meta property="og:description" content="Maya to GLB. Done right. Export clean, portable glTF 2.0 files with modern material and texture support.">
+  <meta property="og:image" content="https://reimaginefx.com/products/product-21.png">
+  <meta property="og:url" content="https://reimaginefx.com/gltf-exporter/">
+  <meta property="og:type" content="product">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://reimaginefx.com/gltf-exporter/">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    :root {
+      --gltf: #24d9e8;
+      --gltf-soft: rgba(36, 217, 232, 0.12);
+      --gltf-border: rgba(36, 217, 232, 0.28);
+      --gltf-glow: 0 0 70px rgba(36, 217, 232, 0.16);
+    }
+    body { overflow-x: hidden; }
+    .gx-shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .gx-hero {
+      min-height: 92vh;
+      padding: 150px 0 96px;
+      display: grid;
+      align-items: center;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .gx-hero::before {
+      content: '';
+      position: absolute;
+      width: 720px;
+      height: 720px;
+      right: -220px;
+      top: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(36,217,232,0.13), transparent 68%);
+      filter: blur(12px);
+      z-index: -1;
+    }
+    .gx-hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 78px; align-items: center; }
+    .gx-kicker { color: var(--gltf); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 800; margin-bottom: 22px; }
+    .gx-title { font-family: var(--font-display); font-size: clamp(54px, 7.5vw, 104px); line-height: 0.9; letter-spacing: -0.06em; margin-bottom: 26px; }
+    .gx-title span { color: var(--gltf); }
+    .gx-lead { max-width: 650px; color: var(--text2); font-size: clamp(17px, 2vw, 21px); line-height: 1.65; }
+    .gx-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .gx-btn {
+      min-height: 50px;
+      padding: 0 24px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    .gx-btn:hover { transform: translateY(-2px); }
+    .gx-btn-primary { color: #031012; background: var(--gltf); box-shadow: var(--gltf-glow); }
+    .gx-btn-primary:hover { background: #65edf5; }
+    .gx-btn-secondary { color: var(--text); border: 1px solid var(--border2); background: rgba(255,255,255,0.035); }
+    .gx-btn-secondary:hover { border-color: var(--gltf); }
+    .gx-note { margin-top: 17px; color: var(--text3); font-size: 12px; }
+    .gx-note strong { color: var(--text2); }
+    .gx-visual { position: relative; max-width: 520px; margin-left: auto; }
+    .gx-poster { width: 100%; display: block; border-radius: 28px; border: 1px solid var(--gltf-border); box-shadow: 0 32px 100px rgba(0,0,0,0.65), var(--gltf-glow); }
+    .gx-float {
+      position: absolute;
+      left: -34px;
+      bottom: 34px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border2);
+      background: rgba(10, 12, 16, 0.88);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-1);
+    }
+    .gx-float img { width: 42px; height: 42px; border-radius: 10px; }
+    .gx-float strong { display: block; font-size: 12px; }
+    .gx-float span { display: block; margin-top: 2px; color: var(--text3); font-size: 10px; }
+    .gx-proof { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.018); }
+    .gx-proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .gx-proof-item { padding: 29px 22px; text-align: center; border-right: 1px solid var(--border); }
+    .gx-proof-item:last-child { border-right: 0; }
+    .gx-proof-item strong { display: block; color: var(--text); font-family: var(--font-display); font-size: 16px; }
+    .gx-proof-item span { display: block; margin-top: 5px; color: var(--text3); font-size: 11px; }
+    .gx-section { padding: 112px 0; }
+    .gx-section-alt { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .gx-section-label { color: var(--gltf); font-size: 10px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 16px; }
+    .gx-section-title { max-width: 780px; font-family: var(--font-display); font-size: clamp(36px, 5vw, 62px); line-height: 1.03; letter-spacing: -0.045em; }
+    .gx-section-copy { max-width: 650px; color: var(--text2); margin-top: 20px; font-size: 16px; line-height: 1.75; }
+    .gx-grid { margin-top: 58px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .gx-card { min-height: 250px; padding: 28px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); transition: transform 0.3s ease, border-color 0.3s ease; }
+    .gx-card:hover { transform: translateY(-4px); border-color: var(--gltf-border); }
+    .gx-card-num { color: var(--gltf); font-size: 10px; font-weight: 800; letter-spacing: 0.16em; }
+    .gx-card h3 { margin-top: 45px; font-family: var(--font-display); font-size: 21px; }
+    .gx-card p { margin-top: 12px; color: var(--text2); font-size: 13.5px; line-height: 1.7; }
+    .gx-formats { margin-top: 58px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .gx-format { padding: 34px; border-radius: 24px; border: 1px solid var(--border); background: var(--surface); }
+    .gx-format-recommended { border-color: var(--gltf-border); background: linear-gradient(145deg, var(--gltf-soft), rgba(255,255,255,0.025)); box-shadow: var(--gltf-glow); }
+    .gx-format-top { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .gx-format h3 { font-family: var(--font-display); font-size: 31px; }
+    .gx-pill { padding: 7px 10px; border-radius: 999px; color: var(--gltf); border: 1px solid var(--gltf-border); font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+    .gx-format p { margin-top: 20px; color: var(--text2); line-height: 1.7; }
+    .gx-list { margin-top: 23px; display: grid; gap: 10px; list-style: none; }
+    .gx-list li { position: relative; padding-left: 22px; color: var(--text2); font-size: 13px; }
+    .gx-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--gltf); box-shadow: 0 0 12px var(--gltf); }
+    .gx-materials { margin-top: 52px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .gx-material { padding: 13px 16px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text2); font-size: 12px; }
+    .gx-steps { margin-top: 58px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: step; }
+    .gx-step { padding: 24px; border-top: 1px solid var(--gltf-border); background: linear-gradient(180deg, rgba(36,217,232,0.06), transparent); }
+    .gx-step::before { counter-increment: step; content: '0' counter(step); color: var(--gltf); font-family: var(--font-display); font-size: 11px; }
+    .gx-step h3 { margin-top: 40px; font-size: 16px; }
+    .gx-step p { margin-top: 10px; color: var(--text2); font-size: 12px; line-height: 1.65; }
+    .gx-download { padding: 112px 0; text-align: center; position: relative; overflow: hidden; }
+    .gx-download::before { content: ''; position: absolute; width: 640px; height: 420px; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(36,217,232,0.13), transparent 70%); z-index: -1; }
+    .gx-download-icon { width: 82px; height: 82px; border-radius: 20px; margin-bottom: 28px; border: 1px solid var(--gltf-border); box-shadow: var(--gltf-glow); }
+    .gx-download h2 { font-family: var(--font-display); font-size: clamp(38px, 5vw, 64px); letter-spacing: -0.045em; }
+    .gx-download p { max-width: 580px; margin: 18px auto 0; color: var(--text2); line-height: 1.7; }
+    .gx-download .gx-actions { justify-content: center; }
+    .gx-requirements { margin-top: 30px; color: var(--text3); font-size: 11px; }
+    @media (max-width: 900px) {
+      .gx-hero { padding-top: 120px; }
+      .gx-hero-grid { grid-template-columns: 1fr; gap: 58px; }
+      .gx-visual { margin: 0 auto; }
+      .gx-grid { grid-template-columns: 1fr 1fr; }
+      .gx-steps { grid-template-columns: 1fr 1fr; }
+      .gx-proof-grid { grid-template-columns: 1fr 1fr; }
+      .gx-proof-item:nth-child(2) { border-right: 0; }
+      .gx-proof-item:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+    }
+    @media (max-width: 620px) {
+      .gx-shell { width: min(100% - 28px, 1180px); }
+      .gx-hero { min-height: auto; padding: 112px 0 72px; }
+      .gx-title { font-size: 56px; }
+      .gx-actions { flex-direction: column; }
+      .gx-btn { width: 100%; }
+      .gx-float { left: 14px; right: 14px; bottom: 14px; }
+      .gx-section { padding: 78px 0; }
+      .gx-grid, .gx-formats, .gx-steps { grid-template-columns: 1fr; }
+      .gx-card { min-height: 215px; }
+      .gx-proof-item { padding: 22px 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <main>
+    <section class="gx-hero">
+      <div class="gx-shell gx-hero-grid">
+        <div>
+          <div class="gx-kicker">New Maya 2026 Plugin</div>
+          <h1 class="gx-title">glTF<br><span>Exporter</span></h1>
+          <p class="gx-lead">Maya to GLB. Done right. Export clean, portable glTF 2.0 files with modern materials, embedded textures, scene hierarchy, and production geometry intact.</p>
+          <div class="gx-actions">
+            <a class="gx-btn gx-btn-primary" href="/downloads/RFX_glTF_Exporter.zip" download>Download Direct <span aria-hidden="true">&darr;</span></a>
+            <a class="gx-btn gx-btn-secondary" href="https://reimagine-fx.gumroad.com/l/gltfexporter" target="_blank" rel="noopener">Get on Gumroad <span aria-hidden="true">&nearr;</span></a>
+          </div>
+          <p class="gx-note"><strong>Free / pay what you want.</strong> Includes the Maya plugin and installation guide.</p>
+        </div>
+        <div class="gx-visual">
+          <img class="gx-poster" src="/products/product-21.png" alt="RFX glTF Exporter for Maya">
+          <div class="gx-float">
+            <img src="/gltf-exporter/icon.png" alt="">
+            <div><strong>Built for Maya 2026</strong><span>PySide6 &middot; glTF 2.0 &middot; GLB</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gx-proof" aria-label="Product highlights">
+      <div class="gx-shell gx-proof-grid">
+        <div class="gx-proof-item"><strong>glTF + GLB</strong><span>Two delivery formats</span></div>
+        <div class="gx-proof-item"><strong>PBR Materials</strong><span>Portable look development</span></div>
+        <div class="gx-proof-item"><strong>Embedded Textures</strong><span>One-file delivery</span></div>
+        <div class="gx-proof-item"><strong>Maya 2026</strong><span>Production tested</span></div>
+      </div>
+    </section>
+
+    <section class="gx-section">
+      <div class="gx-shell">
+        <div class="gx-section-label">What it exports</div>
+        <h2 class="gx-section-title">More than geometry.<br>Your scene, translated.</h2>
+        <p class="gx-section-copy">Built for artists who need Maya assets to arrive in web, mobile, AR, and real-time viewers with the important data still attached.</p>
+        <div class="gx-grid">
+          <article class="gx-card"><span class="gx-card-num">01 / GEOMETRY</span><h3>Production mesh data</h3><p>Exports triangulated geometry with positions, normals, tangents, UVs, optional vertex colors, and multi-material primitive splits.</p></article>
+          <article class="gx-card"><span class="gx-card-num">02 / MATERIALS</span><h3>Portable PBR</h3><p>Translates modern Maya shading into glTF metallic-roughness materials with base color, normal, emissive, opacity, occlusion, metallic, and roughness support.</p></article>
+          <article class="gx-card"><span class="gx-card-num">03 / TEXTURES</span><h3>Texture-ready delivery</h3><p>Copy external textures or embed them in GLB. Unsupported source formats can be converted, resized, and packed for portable viewing.</p></article>
+          <article class="gx-card"><span class="gx-card-num">04 / HIERARCHY</span><h3>Transforms preserved</h3><p>Keeps Maya hierarchy and local matrices, including pivots, shear, and orientation. Flat export mode uses world matrices when needed.</p></article>
+          <article class="gx-card"><span class="gx-card-num">05 / LIGHTS</span><h3>Punctual lights</h3><p>Exports supported point, spot, and directional lights through the standard KHR_lights_punctual extension.</p></article>
+          <article class="gx-card"><span class="gx-card-num">06 / FEEDBACK</span><h3>Clear completion state</h3><p>Live progress, warnings, export statistics, cancellation, and an unmistakable Done state make delivery easy to verify.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gx-section gx-section-alt">
+      <div class="gx-shell">
+        <div class="gx-section-label">Choose your format</div>
+        <h2 class="gx-section-title">One file or an open package.</h2>
+        <div class="gx-formats">
+          <article class="gx-format gx-format-recommended">
+            <div class="gx-format-top"><h3>GLB</h3><span class="gx-pill">Recommended</span></div>
+            <p>A self-contained binary file with geometry, materials, and embedded textures. Best for iPhone, web viewers, sharing, and handoff.</p>
+            <ul class="gx-list"><li>Single portable file</li><li>Embedded images</li><li>Simple upload and delivery</li></ul>
+          </article>
+          <article class="gx-format">
+            <div class="gx-format-top"><h3>glTF</h3></div>
+            <p>A readable JSON scene plus a binary buffer and texture folder. Best when developers need inspectable, replaceable assets.</p>
+            <ul class="gx-list"><li>Human-readable scene data</li><li>External textures</li><li>Pipeline-friendly structure</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gx-section">
+      <div class="gx-shell">
+        <div class="gx-section-label">Modern shading support</div>
+        <h2 class="gx-section-title">Built around the materials artists actually use.</h2>
+        <p class="gx-section-copy">The exporter walks connected shading graphs, resolves texture nodes, neutralizes textured factors correctly, and prepares the maps glTF viewers expect.</p>
+        <div class="gx-materials" aria-label="Supported material workflows">
+          <span class="gx-material">Standard Surface</span><span class="gx-material">OpenPBR Surface</span><span class="gx-material">Arnold aiStandardSurface</span><span class="gx-material">Arnold aiImage</span><span class="gx-material">MaterialX</span><span class="gx-material">Lambert / Blinn / Phong</span><span class="gx-material">Metallic-Roughness Packing</span><span class="gx-material">Normal + Opacity Maps</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="gx-section gx-section-alt">
+      <div class="gx-shell">
+        <div class="gx-section-label">Fast setup</div>
+        <h2 class="gx-section-title">Installed in minutes.</h2>
+        <div class="gx-steps">
+          <article class="gx-step"><h3>Download</h3><p>Choose the direct ZIP or get the same package through Gumroad.</p></article>
+          <article class="gx-step"><h3>Copy</h3><p>Place RFX_GLTF_Exporter in your Maya 2026 scripts folder.</p></article>
+          <article class="gx-step"><h3>Install</h3><p>Run the included installer command from Maya's Python Script Editor.</p></article>
+          <article class="gx-step"><h3>Export</h3><p>Launch from the RFXglTF shelf icon or Reimagine Fx Tools menu.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gx-download">
+      <div class="gx-shell">
+        <img class="gx-download-icon" src="/gltf-exporter/icon.png" alt="RFX glTF Exporter icon">
+        <div class="gx-section-label">Ready to export</div>
+        <h2>Maya to GLB. Done right.</h2>
+        <p>Download directly from Reimagine Fx or use Gumroad for library access and optional support. Both options deliver the same plugin package.</p>
+        <div class="gx-actions">
+          <a class="gx-btn gx-btn-primary" href="/downloads/RFX_glTF_Exporter.zip" download>Download ZIP <span aria-hidden="true">&darr;</span></a>
+          <a class="gx-btn gx-btn-secondary" href="https://reimagine-fx.gumroad.com/l/gltfexporter" target="_blank" rel="noopener">Choose Gumroad <span aria-hidden="true">&nearr;</span></a>
+        </div>
+        <div class="gx-requirements">Requires Autodesk Maya 2026 and Windows 10/11 &middot; Version 1.1.0</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="/js/shared.js"></script>
+  <script src="/js/motion.js"></script>
+  <script>
+    document.getElementById('nav-placeholder').outerHTML = buildNav('Products');
+    document.getElementById('footer-placeholder').outerHTML = buildFooter();
+  </script>
+</body>
+</html>
