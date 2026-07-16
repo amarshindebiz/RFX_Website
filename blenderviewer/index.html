@@ -10,6 +10,8 @@
   <meta property="og:description" content="Review Blender scenes on iPhone with live materials, cameras, inspection tools, transforms and AR." />
   <meta property="og:image" content="https://www.reimaginefx.com/bvimages/blender-viewer-icon.png" />
   <meta property="og:url" content="https://www.reimaginefx.com/blenderviewer/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/blenderviewer.css" />
 </head>
@@ -22,17 +24,26 @@
         <div>
           <div class="mv-eyebrow">Reimagine Fx iOS Tool</div>
           <h1 class="mv-title">Blender Viewer</h1>
-          <h2 class="mv-tagline">Review Blender scenes live on iPhone and in AR.</h2>
+          <h2 class="mv-tagline">Review Blender scenes live on iPhone, iPad and in AR.</h2>
           <p class="mv-intro">
             Blender Viewer is a focused companion for artists who want their Blender scene within reach away from the desktop. A lightweight Blender add-on streams geometry, materials, textures, cameras, lights and real scene statistics over your local network to a professional mobile viewport — with inspection tools, object transforms and AR placement built in.
           </p>
 
           <div class="mv-actions">
-            <a class="btn btn-primary" href="#features">Explore Features</a>
+            <a class="btn btn-primary"
+               href="/downloads/RFX_BlenderViewer-1.0.6-Addon.zip"
+               download>
+              Blender 4.5 Add-on
+            </a>
+            <a class="btn btn-outline"
+               href="/downloads/RFX_BlenderViewer-1.0.6-Extension.zip"
+               download>
+              Blender 5.x Extension
+            </a>
             <span class="btn btn-disabled" aria-disabled="true">Coming Soon on iOS</span>
           </div>
 
-          <p class="mv-note">App Store link and app screenshots will be added after approval. A free Blender add-on is required.</p>
+          <p class="mv-note"><strong>Free add-on version 1.0.6.</strong> Choose the package for your Blender version and install the ZIP directly. The App Store link will activate after approval.</p>
         </div>
 
         <div class="mv-logo-tile">
@@ -57,19 +68,98 @@
       </div>
     </section>
 
-    <section class="section-sm" id="setup">
+    <section class="section-sm" id="screenshots">
+      <div class="mv-container">
+        <div class="section-label">Screenshots</div>
+        <h2 class="section-title">A professional Blender review surface</h2>
+        <p class="section-subtitle">Live geometry, PBR materials, cameras, transforms and scene data — presented in a focused mobile viewport.</p>
+
+        <div class="mv-gallery">
+          <figure class="mv-shot">
+            <img src="/bvimages/screenshots/live-blender-viewport.png" alt="Blender scene rendered live in the Blender Viewer mobile viewport" loading="lazy">
+            <figcaption>Live Blender Viewport</figcaption>
+          </figure>
+          <figure class="mv-shot">
+            <img src="/bvimages/screenshots/transform-gizmo-history.png" alt="Move transform gizmo with Blender undo and redo history" loading="lazy">
+            <figcaption>Transform &amp; History</figcaption>
+          </figure>
+          <figure class="mv-shot">
+            <img src="/bvimages/screenshots/scene-inspector.png" alt="Blender Viewer scene inspector with real object and geometry statistics" loading="lazy">
+            <figcaption>Scene Inspector</figcaption>
+          </figure>
+          <figure class="mv-shot">
+            <img src="/bvimages/screenshots/viewport-display.png" alt="Blender Viewer display channels, lighting and overlay controls" loading="lazy">
+            <figcaption>Viewport Display</figcaption>
+          </figure>
+          <figure class="mv-shot">
+            <img src="/bvimages/screenshots/roughness-channel.png" alt="Roughness render channel in Blender Viewer" loading="lazy">
+            <figcaption>Roughness Channel</figcaption>
+          </figure>
+          <figure class="mv-shot">
+            <img src="/bvimages/screenshots/ar-placement.png" alt="Blender model placed in the real world using AR" loading="lazy">
+            <figcaption>AR Placement</figcaption>
+          </figure>
+          <figure class="mv-shot">
+            <img src="/bvimages/screenshots/home-connection.png" alt="Private local connection screen for Blender Viewer" loading="lazy">
+            <figcaption>Private Connection</figcaption>
+          </figure>
+          <figure class="mv-shot">
+            <img src="/bvimages/screenshots/viewer-settings.png" alt="Persistent rendering and privacy settings in Blender Viewer" loading="lazy">
+            <figcaption>Viewer Settings</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="setup">
       <div class="mv-container">
         <div class="section-label">Getting Started</div>
         <h2 class="section-title">How it works</h2>
 
         <div class="mv-steps">
-          <article class="card mv-step"><h3>Install the add-on</h3><p>Install the Blender Viewer add-on or Blender Extension package and enable it in Blender.</p></article>
+          <article class="card mv-step"><h3>Install the add-on</h3><p>Download the package for Blender 4.5 LTS or Blender 5.x below and install the ZIP directly.</p></article>
           <article class="card mv-step"><h3>Start the server</h3><p>Open Blender Viewer in the 3D View sidebar and start the local server.</p></article>
           <article class="card mv-step"><h3>Use one network</h3><p>Keep Blender and your iPhone on the same trusted local Wi-Fi network.</p></article>
           <article class="card mv-step"><h3>Connect the app</h3><p>Scan the panel QR code or enter the displayed IP address and port.</p></article>
           <article class="card mv-step"><h3>Snap the scene</h3><p>Request the current scene, then use Live Sync to receive supported updates.</p></article>
           <article class="card mv-step"><h3>Review anywhere</h3><p>Orbit, inspect, transform, switch cameras and place the scene in AR.</p></article>
         </div>
+      </div>
+    </section>
+
+    <section class="section-sm" id="download">
+      <div class="mv-container">
+        <div class="section-label">Free Blender Add-on</div>
+        <h2 class="section-title">Choose your Blender version</h2>
+        <p class="section-subtitle">Both packages contain the same Blender Viewer 1.0.6 server and scene-streaming tools. Keep the downloaded file zipped when installing it in Blender.</p>
+
+        <div class="bv-download-grid">
+          <article class="bv-download-card">
+            <span class="bv-version">Blender 4.5 LTS</span>
+            <h3>Standard Add-on</h3>
+            <p>For the long-term-support add-on workflow. In Blender, open Preferences → Add-ons and choose Install from Disk.</p>
+            <div class="bv-file">RFX_BlenderViewer-1.0.6-Addon.zip</div>
+            <a class="btn btn-primary"
+               href="/downloads/RFX_BlenderViewer-1.0.6-Addon.zip"
+               download>
+              Download Add-on
+            </a>
+          </article>
+
+          <article class="bv-download-card">
+            <span class="bv-version">Blender 5.x</span>
+            <h3>Blender Extension</h3>
+            <p>For Blender’s Extensions workflow. Open Preferences → Get Extensions, use the menu, and choose Install from Disk.</p>
+            <div class="bv-file">RFX_BlenderViewer-1.0.6-Extension.zip</div>
+            <a class="btn btn-outline"
+               href="/downloads/RFX_BlenderViewer-1.0.6-Extension.zip"
+               download>
+              Download Extension
+            </a>
+          </article>
+        </div>
+
+        <p class="bv-download-note">After installation, open the <strong>Blender Viewer</strong> panel in the 3D View sidebar, start the local server, then scan its QR code from the iOS app. Scene data stays on your local network.</p>
       </div>
     </section>
 
@@ -81,7 +171,7 @@
           <ul class="mv-list">
             <li>Blender 4.5 LTS or a supported Blender 5.x release.</li>
             <li>Blender Viewer add-on enabled on the desktop.</li>
-            <li>iPhone running iOS 17 or later.</li>
+            <li>iPhone or iPad running iOS 17 or later.</li>
             <li>Same trusted local network for Blender and iPhone.</li>
             <li>Camera permission only when using QR scan or AR.</li>
           </ul>
@@ -112,7 +202,7 @@
           <article class="mv-faq"><h3>Are materials and textures supported?</h3><p>Yes. The viewer supports key Principled PBR values and connected color, metallic, roughness and normal textures that the add-on can resolve.</p></article>
           <article class="mv-faq"><h3>Can I edit my Blender scene from iPhone?</h3><p>You can select supported objects and use Move, Rotate and Scale gizmos. Completed transform gestures create Blender undo history, with Undo and Redo available in the viewer.</p></article>
           <article class="mv-faq"><h3>Can I use it without Blender?</h3><p>An included offline demo lets you explore the viewer. Live scene review requires the Blender add-on and a running Blender session.</p></article>
-          <article class="mv-faq"><h3>When will it be available?</h3><p>The app is being prepared for App Store submission. The download button and screenshots will be added here after Apple approval.</p></article>
+          <article class="mv-faq"><h3>When will the iOS app be available?</h3><p>Blender Viewer has been prepared for App Store review. The free Blender add-on is available now, and the iOS download button will activate after Apple approval.</p></article>
         </div>
       </div>
     </section>
@@ -140,14 +230,14 @@
         <div class="section-label">Apple Review Support</div>
         <h2 class="section-title">App Store metadata</h2>
         <div class="mv-meta">
-          <div><span>App name</span><strong>Blender Viewer</strong></div>
+          <div><span>App Store name</span><strong>Blender Scene Viewer</strong></div>
           <div><span>Developer</span><strong>Amar Shinde / Reimagine Fx</strong></div>
           <div><span>Website</span><strong>https://www.reimaginefx.com</strong></div>
           <div><span>Support URL</span><strong>https://www.reimaginefx.com/blenderviewer</strong></div>
           <div><span>Privacy Policy URL</span><strong>https://www.reimaginefx.com/blenderviewer/privacy</strong></div>
           <div><span>Contact</span><strong>reimaginefx@gmail.com</strong></div>
           <div><span>Bundle ID</span><strong>com.reimaginefx.blenderviewer</strong></div>
-          <div><span>Version / Build</span><strong>1.0.0 / 1</strong></div>
+          <div><span>Version / Build</span><strong>1.0.0 / 2</strong></div>
         </div>
         <p class="bv-trademark-note">Blender is a trademark of Blender Foundation. Blender Viewer is an independent Reimagine Fx product and is not affiliated with or endorsed by Blender Foundation.</p>
       </div>

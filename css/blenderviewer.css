@@ -104,6 +104,7 @@
 #blenderviewer-page .btn-primary { background: var(--bv-accent); color: #051014; border-color: var(--bv-accent); }
 #blenderviewer-page .btn-outline, #blenderviewer-page .btn-ghost { color: var(--bv-accent); background: rgba(255,123,57,.05); }
 #blenderviewer-page .mv-note { margin-top: 18px; font-size: 14px; }
+#blenderviewer-page .mv-note strong { color: var(--bv-text); }
 
 #blenderviewer-page .mv-device {
   width: 100%;
@@ -247,6 +248,71 @@
 #blenderviewer-page .mv-meta strong { color: var(--bv-text); word-break: break-word; }
 #blenderviewer-page .mv-faq-wrap { display:grid; gap:14px; }
 
+/* Version-specific Blender downloads */
+#blenderviewer-page .bv-download-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 34px;
+}
+#blenderviewer-page .bv-download-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,123,57,.24);
+  background:
+    radial-gradient(circle at 92% 6%, rgba(255,123,57,.12), transparent 34%),
+    linear-gradient(180deg, var(--bv-panel), var(--bv-panel-2));
+  box-shadow: 0 24px 72px rgba(0,0,0,.22);
+}
+#blenderviewer-page .bv-version {
+  display: inline-flex;
+  padding: 7px 11px;
+  border: 1px solid rgba(255,123,57,.32);
+  border-radius: 999px;
+  background: rgba(255,123,57,.07);
+  color: var(--bv-accent);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+#blenderviewer-page .bv-download-card h3 {
+  margin: 20px 0 10px;
+  color: var(--bv-text);
+  font-size: 26px;
+  letter-spacing: -.025em;
+}
+#blenderviewer-page .bv-download-card p {
+  flex: 1;
+  margin: 0;
+  color: var(--bv-muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+#blenderviewer-page .bv-file {
+  width: 100%;
+  margin: 22px 0 18px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.26);
+  color: rgba(243,245,248,.68);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+#blenderviewer-page .bv-download-note {
+  max-width: 900px;
+  margin: 24px 0 0;
+  color: var(--bv-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+#blenderviewer-page .bv-download-note strong { color: var(--bv-text); }
+
 #blenderviewer-page .btn-disabled {
   color: rgba(243,245,248,.48);
   border-color: rgba(243,245,248,.16);
@@ -291,6 +357,7 @@
 @media (max-width: 620px) {
   #blenderviewer-page .mv-container, #blenderviewer-page .mv-hero-grid { width: min(100% - 32px, 1180px); }
   #blenderviewer-page .mv-hero { padding-top: 132px; }
-  #blenderviewer-page .mv-grid, #blenderviewer-page .mv-steps, #blenderviewer-page .mv-gallery, #blenderviewer-page .mv-meta { grid-template-columns: 1fr; }
+  #blenderviewer-page .mv-grid, #blenderviewer-page .mv-steps, #blenderviewer-page .mv-gallery, #blenderviewer-page .mv-meta, #blenderviewer-page .bv-download-grid { grid-template-columns: 1fr; }
   #blenderviewer-page .mv-actions .btn { width: 100%; }
+  #blenderviewer-page .bv-download-card { padding: 24px; }
 }
