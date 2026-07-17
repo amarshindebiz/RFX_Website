@@ -71,7 +71,7 @@ function buildNav(activePage) {
           <div class="nav-mega-grid">
             <a class="mega-cat" href="/products/#maya" style="--acc:#64D2A3">
               <span class="mega-cat-name">Maya Plugins</span>
-              <span class="mega-cat-desc">glTF Exporter · Smart Organizer · Area Light Maps Pro · Focus Picker · Light Target</span>
+              <span class="mega-cat-desc">Ramp Generator · glTF Exporter · Smart Organizer · Area Light Maps Pro · Focus Picker · Light Target</span>
             </a>
             <a class="mega-cat" href="/products/#nuke" style="--acc:#FF9670">
               <span class="mega-cat-name">Nuke Plugins</span>
