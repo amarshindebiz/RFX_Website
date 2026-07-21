@@ -3,17 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RFX glTF Exporter for Maya | Reimagine FX</title>
-  <meta name="description" content="Export production-ready glTF 2.0 and GLB files from Maya 2026 with materials, textures, lights, hierarchy, UVs, normals, and tangents preserved.">
-  <meta property="og:title" content="RFX glTF Exporter for Maya">
-  <meta property="og:description" content="Maya to GLB. Done right. Export clean, portable glTF 2.0 files with modern material and texture support.">
+  <title>RFX glTF Importer &amp; Exporter for Maya | Reimagine FX</title>
+  <meta name="description" content="Import and export production-ready glTF 2.0 and GLB files in Maya 2026 with PBR materials, textures, lights, cameras, hierarchy, UVs, normals, and tangents.">
+  <meta property="og:title" content="RFX glTF Importer &amp; Exporter for Maya">
+  <meta property="og:description" content="A two-way glTF workflow for Maya. Export portable GLB files and reconstruct glTF scenes with PBR materials, textures, cameras, lights, and hierarchy.">
   <meta property="og:image" content="https://reimaginefx.com/products/product-21.png">
   <meta property="og:url" content="https://reimaginefx.com/gltf-exporter/">
   <meta property="og:type" content="product">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RFX glTF Importer &amp; Exporter for Maya">
+  <meta name="twitter:description" content="Import and export GLB and glTF 2.0 directly in Maya 2026.">
+  <meta name="twitter:image" content="https://reimaginefx.com/products/product-21.png">
   <link rel="canonical" href="https://reimaginefx.com/gltf-exporter/">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RFX glTF Exporter",
+    "softwareVersion": "1.3.0",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows 10, Windows 11",
+    "description": "A Maya 2026 plugin for importing and exporting glTF 2.0 and GLB scenes with PBR materials, textures, hierarchy, cameras, and punctual lights.",
+    "url": "https://reimaginefx.com/gltf-exporter/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
   <style>
     :root {
       --gltf: #24d9e8;
@@ -146,11 +167,11 @@
     <section class="gx-hero">
       <div class="gx-shell gx-hero-grid">
         <div>
-          <div class="gx-kicker">New Maya 2026 Plugin</div>
+          <div class="gx-kicker">Now with glTF + GLB Import</div>
           <h1 class="gx-title">glTF<br><span>Exporter</span></h1>
-          <p class="gx-lead">Maya to GLB. Done right. Export clean, portable glTF 2.0 files with modern materials, embedded textures, scene hierarchy, and production geometry intact.</p>
+          <p class="gx-lead">A two-way glTF workflow for Maya. Export clean, portable glTF 2.0 files, then bring GLB and glTF scenes back with geometry, PBR materials, textures, hierarchy, cameras, and supported lights reconstructed.</p>
           <div class="gx-actions">
-            <a class="gx-btn gx-btn-primary" href="/downloads/RFX_glTF_Exporter.zip" download>Download Direct <span aria-hidden="true">&darr;</span></a>
+            <a class="gx-btn gx-btn-primary" href="/downloads/RFX_GLTF_Exporter.zip" download>Download Direct <span aria-hidden="true">&darr;</span></a>
             <a class="gx-btn gx-btn-secondary" href="https://reimagine-fx.gumroad.com/l/gltfexporter" target="_blank" rel="noopener">Get on Gumroad <span aria-hidden="true">&nearr;</span></a>
           </div>
           <p class="gx-note"><strong>Free / pay what you want.</strong> Includes the Maya plugin and installation guide.</p>
@@ -163,30 +184,50 @@
 
     <section class="gx-proof" aria-label="Product highlights">
       <div class="gx-shell gx-proof-grid">
-        <div class="gx-proof-item"><strong>glTF + GLB</strong><span>Two delivery formats</span></div>
-        <div class="gx-proof-item"><strong>PBR Materials</strong><span>Portable look development</span></div>
+        <div class="gx-proof-item"><strong>Import + Export</strong><span>One Maya workflow</span></div>
+        <div class="gx-proof-item"><strong>glTF + GLB</strong><span>Two portable formats</span></div>
         <div class="gx-proof-item"><strong>Embedded Textures</strong><span>One-file delivery</span></div>
-        <div class="gx-proof-item"><strong>Maya 2026</strong><span>Production tested</span></div>
+        <div class="gx-proof-item"><strong>Version 1.3</strong><span>Maya 2026 tested</span></div>
       </div>
     </section>
 
     <section class="gx-section">
       <div class="gx-shell">
-        <div class="gx-section-label">What it exports</div>
-        <h2 class="gx-section-title">More than geometry.<br>Your scene, translated.</h2>
-        <p class="gx-section-copy">Built for artists who need Maya assets to arrive in web, mobile, AR, and real-time viewers with the important data still attached.</p>
+        <div class="gx-section-label">Two-way scene translation</div>
+        <h2 class="gx-section-title">Send it out.<br>Bring it back.</h2>
+        <p class="gx-section-copy">Built for artists who move assets between Maya, web, mobile, AR, Blender, and real-time tools without wanting to rebuild the important scene data by hand.</p>
         <div class="gx-grid">
-          <article class="gx-card"><span class="gx-card-num">01 / GEOMETRY</span><h3>Production mesh data</h3><p>Exports triangulated geometry with positions, normals, tangents, UVs, optional vertex colors, and multi-material primitive splits.</p></article>
-          <article class="gx-card"><span class="gx-card-num">02 / MATERIALS</span><h3>Portable PBR</h3><p>Translates modern Maya shading into glTF metallic-roughness materials with base color, normal, emissive, opacity, occlusion, metallic, and roughness support.</p></article>
-          <article class="gx-card"><span class="gx-card-num">03 / TEXTURES</span><h3>Texture-ready delivery</h3><p>Copy external textures or embed them in GLB. Unsupported source formats can be converted, resized, and packed for portable viewing.</p></article>
-          <article class="gx-card"><span class="gx-card-num">04 / HIERARCHY</span><h3>Transforms preserved</h3><p>Keeps Maya hierarchy and local matrices, including pivots, shear, and orientation. Flat export mode uses world matrices when needed.</p></article>
-          <article class="gx-card"><span class="gx-card-num">05 / LIGHTS</span><h3>Punctual lights</h3><p>Exports supported point, spot, and directional lights through the standard KHR_lights_punctual extension.</p></article>
-          <article class="gx-card"><span class="gx-card-num">06 / FEEDBACK</span><h3>Clear completion state</h3><p>Live progress, warnings, export statistics, cancellation, and an unmistakable Done state make delivery easy to verify.</p></article>
+          <article class="gx-card"><span class="gx-card-num">01 / IMPORT</span><h3>Reconstruct glTF in Maya</h3><p>Imports GLB and glTF meshes, transforms, hierarchy, normals, UVs, vertex colors, multi-material assignments, cameras, and supported lights.</p></article>
+          <article class="gx-card"><span class="gx-card-num">02 / EXPORT</span><h3>Production mesh delivery</h3><p>Exports triangulated geometry with positions, normals, tangents, UVs, optional vertex colors, and multi-material primitive splits.</p></article>
+          <article class="gx-card"><span class="gx-card-num">03 / MATERIALS</span><h3>Portable PBR</h3><p>Translates modern Maya shading to metallic-roughness PBR and rebuilds imported materials as connected Maya standardSurface networks.</p></article>
+          <article class="gx-card"><span class="gx-card-num">04 / TEXTURES</span><h3>Textures travel with the scene</h3><p>Copy external textures, embed them in GLB, or extract embedded images on import so Maya scenes keep persistent file paths.</p></article>
+          <article class="gx-card"><span class="gx-card-num">05 / SCENE DATA</span><h3>Hierarchy, cameras, lights</h3><p>Preserves transform matrices and hierarchy, with perspective and orthographic cameras plus point, spot, and directional lights.</p></article>
+          <article class="gx-card"><span class="gx-card-num">06 / SAFETY</span><h3>Validated and reversible</h3><p>Strict accessor bounds checks, clear unsupported-feature warnings, structured reports, and complete Maya Undo rollback protect the scene.</p></article>
         </div>
       </div>
     </section>
 
     <section class="gx-section gx-section-alt">
+      <div class="gx-shell">
+        <div class="gx-section-label">New in version 1.3</div>
+        <h2 class="gx-section-title">Bring GLB and glTF back into Maya.</h2>
+        <p class="gx-section-copy">The importer reads standard glTF buffers, embedded GLB images, matrix or TRS transforms, interleaved accessors, normalized vertex data, and triangle list, strip, and fan primitives.</p>
+        <div class="gx-formats">
+          <article class="gx-format gx-format-recommended">
+            <div class="gx-format-top"><h3>Scene reconstruction</h3><span class="gx-pill">New</span></div>
+            <p>Rebuild usable Maya nodes instead of receiving a flattened display-only asset.</p>
+            <ul class="gx-list"><li>standardSurface PBR networks</li><li>External and embedded textures</li><li>Hierarchy, cameras, and punctual lights</li></ul>
+          </article>
+          <article class="gx-format">
+            <div class="gx-format-top"><h3>Honest diagnostics</h3></div>
+            <p>Unsupported data is reported instead of silently disappearing, and failed imports roll back as one Maya Undo action.</p>
+            <ul class="gx-list"><li>Strict buffer bounds validation</li><li>Required extension checks</li><li>Animation, skin, morph, and compression warnings</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gx-section">
       <div class="gx-shell">
         <div class="gx-section-label">Choose your format</div>
         <h2 class="gx-section-title">One file or an open package.</h2>
@@ -205,18 +246,18 @@
       </div>
     </section>
 
-    <section class="gx-section">
+    <section class="gx-section gx-section-alt">
       <div class="gx-shell">
         <div class="gx-section-label">Modern shading support</div>
         <h2 class="gx-section-title">Built around the materials artists actually use.</h2>
-        <p class="gx-section-copy">The exporter walks connected shading graphs, resolves texture nodes, neutralizes textured factors correctly, and prepares the maps glTF viewers expect.</p>
+        <p class="gx-section-copy">Export walks connected shading graphs and prepares the maps glTF viewers expect. Import rebuilds portable metallic-roughness data as connected standardSurface materials with usable Maya texture nodes.</p>
         <div class="gx-materials" aria-label="Supported material workflows">
           <span class="gx-material">Standard Surface</span><span class="gx-material">OpenPBR Surface</span><span class="gx-material">Arnold aiStandardSurface</span><span class="gx-material">Arnold aiImage</span><span class="gx-material">MaterialX</span><span class="gx-material">Lambert / Blinn / Phong</span><span class="gx-material">Metallic-Roughness Packing</span><span class="gx-material">Normal + Opacity Maps</span>
         </div>
       </div>
     </section>
 
-    <section class="gx-section gx-section-alt">
+    <section class="gx-section">
       <div class="gx-shell">
         <div class="gx-section-label">Fast setup</div>
         <h2 class="gx-section-title">Installed in minutes.</h2>
@@ -224,7 +265,7 @@
           <article class="gx-step"><h3>Download</h3><p>Choose the direct ZIP or get the same package through Gumroad.</p></article>
           <article class="gx-step"><h3>Copy</h3><p>Place RFX_GLTF_Exporter in your Maya 2026 scripts folder.</p></article>
           <article class="gx-step"><h3>Install</h3><p>Run the included installer command from Maya's Python Script Editor.</p></article>
-          <article class="gx-step"><h3>Export</h3><p>Launch from the RFXglTF shelf icon or Reimagine Fx Tools menu.</p></article>
+          <article class="gx-step"><h3>Import or Export</h3><p>Launch from the RFXglTF shelf icon, then choose Import on the left or Export on the right.</p></article>
         </div>
       </div>
     </section>
@@ -232,14 +273,14 @@
     <section class="gx-download">
       <div class="gx-shell">
         <img class="gx-download-icon" src="/gltf-exporter/icon.png" alt="RFX glTF Exporter icon">
-        <div class="gx-section-label">Ready to export</div>
-        <h2>Maya to GLB. Done right.</h2>
+        <div class="gx-section-label">Ready for both directions</div>
+        <h2>Maya and glTF. Connected.</h2>
         <p>Download directly from Reimagine Fx or use Gumroad for library access and optional support. Both options deliver the same plugin package.</p>
         <div class="gx-actions">
-          <a class="gx-btn gx-btn-primary" href="/downloads/RFX_glTF_Exporter.zip" download>Download ZIP <span aria-hidden="true">&darr;</span></a>
+          <a class="gx-btn gx-btn-primary" href="/downloads/RFX_GLTF_Exporter.zip" download>Download ZIP <span aria-hidden="true">&darr;</span></a>
           <a class="gx-btn gx-btn-secondary" href="https://reimagine-fx.gumroad.com/l/gltfexporter" target="_blank" rel="noopener">Choose Gumroad <span aria-hidden="true">&nearr;</span></a>
         </div>
-        <div class="gx-requirements">Requires Autodesk Maya 2026 and Windows 10/11 &middot; Version 1.1.0</div>
+        <div class="gx-requirements">Requires Autodesk Maya 2026 and Windows 10/11 &middot; Version 1.3.0</div>
       </div>
     </section>
   </main>
