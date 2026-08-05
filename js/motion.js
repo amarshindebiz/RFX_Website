@@ -196,6 +196,10 @@
           el.textContent = Math.round(parseFloat(el.dataset.count)) + (el.dataset.countSuffix || '');
         }
       });
+      /* The split-letter hero title must never be left mid-animation / hidden. */
+      document.querySelectorAll('[data-split] .split-char').forEach(function (el) {
+        gsap.set(el, { opacity: 1, yPercent: 0, rotateX: 0 });
+      });
     }, 3000);
   };
 })();
