@@ -26,13 +26,13 @@
       width: 100vw; height: 56.25vw;          /* 16:9 sized by width … */
       min-width: 177.78vh; min-height: 100%;  /* …and by height, so it always covers */
       transform: translate(-50%, -50%);
-      border: 0; opacity: 0.34; pointer-events: none;
+      border: 0; opacity: 0.52; pointer-events: none;
     }
     .hero-scrim {
       position: absolute; inset: 0; z-index: 1; pointer-events: none;
       background:
-        radial-gradient(ellipse 72% 62% at 50% 44%, rgba(5,5,7,0.30), rgba(5,5,7,0.72) 68%, rgba(5,5,7,0.94)),
-        linear-gradient(to bottom, rgba(5,5,7,0.55) 0%, rgba(5,5,7,0.15) 38%, rgba(5,5,7,0.90) 100%);
+        radial-gradient(ellipse 72% 62% at 50% 44%, rgba(5,5,7,0.28), rgba(5,5,7,0.58) 68%, rgba(5,5,7,0.86)),
+        linear-gradient(to bottom, rgba(5,5,7,0.45) 0%, rgba(5,5,7,0.10) 38%, rgba(5,5,7,0.85) 100%);
     }
     /* Keep decorative layers above the video, content above everything */
     .hero-grid-lines, .hero-orb, .hero-still { z-index: 1; }
@@ -241,7 +241,6 @@
     <div class="hero-scrim"></div>
     <div class="hero-grid-lines"></div>
     <div class="hero-orb" data-parallax="0.25"></div>
-    <img class="hero-still" src="/features/featured-1.jpg" alt="" aria-hidden="true" data-parallax="0.12">
     <p class="hero-eyebrow fade-up">VFX Tools · Plugins · Training</p>
     <h1 class="hero-title"><span data-split>REIMAGINE</span><br><span class="fx" data-split data-split-delay="0.55">FX</span></h1>
     <p class="hero-tag fade-up fade-up-d4">Crafting worlds. Compositing reality.</p>
