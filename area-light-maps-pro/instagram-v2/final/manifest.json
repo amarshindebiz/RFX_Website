@@ -1,0 +1,26 @@
+{
+  "product": "Area Light Maps Pro",
+  "version": "2.0",
+  "generated": "2026-08-25",
+  "publication": "offline_only",
+  "files": [
+    {"file": "gumroad/alm-pro-cover-01.png", "width": 1280, "height": 720, "sha256": "2377f2a8e174d4f2d9c4060e712fecc7efd19d3c4fa447252d39108443a43236"},
+    {"file": "gumroad/alm-pro-cover-02.png", "width": 1280, "height": 720, "sha256": "2d0b526f178b21924e561d1931b1f17c1a1c50281de55390da8d52fe4a488be1"},
+    {"file": "gumroad/alm-pro-cover-03.png", "width": 1280, "height": 720, "sha256": "ede53ab50b80c9639ee6b656e0131969465bef00dd80ae35cfb6d92d749b0246"},
+    {"file": "gumroad/alm-pro-cover-04.png", "width": 1280, "height": 720, "sha256": "3a76c40708cbb86fb0f0ca6004449628afa4cacc40d874e9beec24cb3eb4e589"},
+    {"file": "gumroad/alm-pro-cover-05.png", "width": 1280, "height": 720, "sha256": "99ac1602d600a72292d5af1f4f4c8ad2b6b72b9e066b872e71de8923615143d0"},
+    {"file": "gumroad/alm-pro-cover-06.png", "width": 1280, "height": 720, "sha256": "8d94405d686be776910c0a7307759226bec934c93e513739537c95a35cbf5f60"},
+    {"file": "gumroad/alm-pro-cover-07.png", "width": 1280, "height": 720, "sha256": "4ed9ae7d3d7580c3a519acd9120c9ebca7b4ebb1f1c29eed582e8721c5073eba"},
+    {"file": "gumroad/alm-pro-cover-08.png", "width": 1280, "height": 720, "sha256": "1dd3fd1addbd12a81ae83efcabaef0bb5e08645d4269ecc71c6a37009a6ff436"},
+    {"file": "gumroad/alm-pro-thumbnail.png", "width": 600, "height": 600, "sha256": "a95c6313365752afde1babed564f4081f51410246b2939cee151448ef04ae2e3"},
+    {"file": "instagram/alm-pro-carousel-01.png", "width": 1080, "height": 1350, "sha256": "f125590e38ac389624ac0ffa0140f5af95cba5f5dc94348f5a1697b426719948"},
+    {"file": "instagram/alm-pro-carousel-02.png", "width": 1080, "height": 1350, "sha256": "be446a4b95b2fd438bea3647d8fa027bc53e2edfe7b0c573f4f32c9c3f9147cd"},
+    {"file": "instagram/alm-pro-carousel-03.png", "width": 1080, "height": 1350, "sha256": "86eb267add7c954220298e25bdd9ec6eb7ec9527ab4c4ecfabd6c3e0c83950e4"},
+    {"file": "instagram/alm-pro-carousel-04.png", "width": 1080, "height": 1350, "sha256": "e34b927aa7ec1d64526bcee329c6f736938b3f321049bf1973f1c025018b8f42"},
+    {"file": "instagram/alm-pro-carousel-05.png", "width": 1080, "height": 1350, "sha256": "5ab6e97e4e2bf9e1be2e61e4f60116d947164b6c08b57d116f3d6148939cc531"},
+    {"file": "instagram/alm-pro-carousel-06.png", "width": 1080, "height": 1350, "sha256": "5bf242a65ea22560a5410f1f888562d890874ece183b355e85123de6dcaee60d"},
+    {"file": "instagram/alm-pro-carousel-07.png", "width": 1080, "height": 1350, "sha256": "ed4b071865d00ba593de957cb53ee62412eb62d8eed0c07be0b93518268e731b"},
+    {"file": "instagram/alm-pro-carousel-08.png", "width": 1080, "height": 1350, "sha256": "e1aae5d511172f04c84a202615ae9f071223ddd22076c91d67ca28fd2f91bbc7"},
+    {"file": "instagram/alm-pro-poster.png", "width": 1080, "height": 1350, "sha256": "bde7de28e694a109c112d25b003b1b84326e715a1c01969181d033f8d8df6156"}
+  ]
+}

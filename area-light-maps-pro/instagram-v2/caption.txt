@@ -1,0 +1,10 @@
+An area-light map decides how a highlight breaks across glass, metal, plastic, or skin.
+
+Area Light Maps Pro puts 145 16-bit EXR maps inside a visual Maya browser. Apply one to an existing light, create a new Arnold or Redshift light, then manage exposure, temperature, tint, linking, and mute/solo controls from one panel.
+
+Version 2.0 also adds five starting rigs, reflection placement, saved rig presets, and one-click conversion between Arnold and Redshift area lights. The map and scene setup stay with the light.
+
+Built for Maya 2026.
+reimaginefx.com/area-light-maps-pro/
+
+#AreaLightMapsPro #ReimagineFX #AutodeskMaya #Maya3D #ArnoldRenderer #RedshiftRenderer #3DLighting #LightingArtist #LookDevelopment #ProductVisualization #CGI #VFX #3DArtist #Rendering

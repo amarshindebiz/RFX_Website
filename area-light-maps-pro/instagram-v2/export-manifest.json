@@ -1,0 +1,25 @@
+{
+  "product": "Area Light Maps Pro",
+  "version": "2.0",
+  "campaign": "Light Has A Shape",
+  "date": "2026-08-25",
+  "publication": "offline_only",
+  "source_policy": "The eight supplied Maya screenshots are reproduced without crop, filter, tint, rotation, or overlay.",
+  "outputs": {
+    "instagram": {
+      "width": 1080,
+      "height": 1350,
+      "carousel_slides": 8,
+      "poster_count": 1,
+      "directory": "final/instagram"
+    },
+    "gumroad": {
+      "cover_width": 1280,
+      "cover_height": 720,
+      "carousel_covers": 8,
+      "thumbnail_width": 600,
+      "thumbnail_height": 600,
+      "directory": "final/gumroad"
+    }
+  }
+}

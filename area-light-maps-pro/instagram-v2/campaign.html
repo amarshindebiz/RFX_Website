@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Area Light Maps Pro Campaign</title>
+  <style>
+    :root {
+      --black: #040609;
+      --surface: #0b1118;
+      --white: #f5f8fb;
+      --grey: #a5b0ba;
+      --dim: #657483;
+      --blue: #168fff;
+      --cyan: #00d5ff;
+      --red: #ff6969;
+      --line: rgba(255, 255, 255, 0.12);
+      --cyan-line: rgba(0, 213, 255, 0.34);
+      --sans: "Segoe UI", Arial, sans-serif;
+      --mono: "Cascadia Mono", Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: var(--black); }
+    body { color: var(--white); font-family: var(--sans); }
+    img { display: block; }
+    .canvas { display: none; position: fixed; inset: 0; overflow: hidden; background: var(--black); }
+    .canvas.active { display: block; }
+    .canvas::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.34;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 42px 42px;
+      pointer-events: none;
+    }
+    .canvas::after { content: ""; position: absolute; inset: 20px; border: 1px solid rgba(255, 255, 255, 0.075); pointer-events: none; z-index: 30; }
+    .portrait { width: 1080px; height: 1350px; }
+    .gumroad { width: 1280px; height: 720px; }
+    .thumb { width: 600px; height: 600px; }
+    .grain { position: absolute; inset: 0; z-index: 25; opacity: 0.11; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"); }
+    .brand { display: flex; align-items: center; gap: 12px; font: 700 14px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; }
+    .brand img { width: 30px; height: 30px; object-fit: contain; }
+    .index { color: var(--dim); font: 650 13px/1 var(--mono); letter-spacing: 0.12em; }
+    .index b { color: var(--cyan); }
+    .eyebrow { color: var(--cyan); font: 720 14px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; }
+    .blue { color: var(--blue); }
+    h1, h2 { margin: 0; font-weight: 790; letter-spacing: -0.066em; }
+    p { margin: 0; }
+    .screen { overflow: hidden; border: 1px solid var(--cyan-line); background: #030507; box-shadow: 0 34px 96px rgba(0, 0, 0, 0.72), 0 0 70px rgba(0, 158, 255, 0.09); }
+    .screen img { width: 100%; height: auto; object-fit: contain; }
+    .renderer-chip { display: inline-flex; align-items: center; padding: 10px 13px; border: 1px solid var(--line); color: var(--grey); font: 700 11px/1 var(--mono); letter-spacing: 0.11em; text-transform: uppercase; }
+    .renderer-chip.arnold { border-color: rgba(22, 143, 255, 0.45); color: #7fc1ff; }
+    .renderer-chip.redshift { border-color: rgba(255, 105, 105, 0.45); color: #ff9292; }
+
+    .p-chrome { position: absolute; z-index: 12; left: 58px; right: 58px; top: 50px; display: flex; align-items: center; justify-content: space-between; }
+    .p-title { position: absolute; z-index: 8; left: 58px; right: 58px; top: 140px; }
+    .p-title h2 { margin-top: 26px; max-width: 940px; font-size: 74px; line-height: 0.94; }
+    .p-title .deck { margin-top: 20px; max-width: 760px; color: var(--grey); font-size: 22px; line-height: 1.42; }
+    .p-footer { position: absolute; z-index: 14; left: 58px; right: 58px; bottom: 43px; display: flex; justify-content: space-between; color: var(--dim); font: 650 12px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
+    .p-footer strong { color: var(--cyan); }
+    .p-cover { background: radial-gradient(circle at 79% 42%, rgba(0, 213, 255, 0.17), transparent 34%), linear-gradient(145deg, #08121b, #020305 72%); }
+    .p-cover .map { position: absolute; width: 775px; height: 775px; right: -235px; top: 155px; border-radius: 50%; object-fit: cover; filter: contrast(1.08) brightness(0.76); box-shadow: 0 0 0 1px rgba(0, 213, 255, 0.46), 0 0 120px rgba(0, 213, 255, 0.18); }
+    .p-cover .orbit { position: absolute; width: 930px; height: 930px; right: -315px; top: 78px; border: 1px solid rgba(0, 213, 255, 0.22); border-radius: 50%; }
+    .p-cover .copy { position: absolute; z-index: 7; left: 58px; top: 196px; width: 820px; }
+    .p-cover h1 { margin-top: 34px; font-size: 112px; line-height: 0.86; }
+    .p-cover .deck { margin-top: 36px; width: 595px; color: #b7c2cb; font-size: 25px; line-height: 1.45; }
+    .p-stats { position: absolute; z-index: 8; left: 58px; bottom: 128px; display: flex; gap: 58px; }
+    .p-stats strong { display: block; font: 760 34px/1 var(--mono); }
+    .p-stats span { display: block; margin-top: 10px; color: var(--dim); font: 650 11px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+    .p-shot { background: radial-gradient(circle at 82% 12%, rgba(0, 213, 255, 0.11), transparent 31%), var(--black); }
+    .p-shot .screen { position: absolute; z-index: 7; left: 58px; right: 58px; top: 405px; padding: 7px; }
+    .p-shot.compact .screen { top: 420px; }
+    .p-duo { background: linear-gradient(145deg, #060a0f, #030507 66%, #07131b); }
+    .p-duo .pair { position: absolute; z-index: 8; left: 58px; right: 58px; top: 430px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .p-panel { min-width: 0; margin: 0; border: 1px solid var(--line); background: #080c11; }
+    .p-panel img { width: 100%; height: auto; object-fit: contain; }
+    .p-panel figcaption { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 17px; border-top: 1px solid var(--line); color: var(--grey); font: 650 12px/1 var(--mono); text-transform: uppercase; }
+    .p-close { background: radial-gradient(circle at 76% 36%, rgba(0, 213, 255, 0.19), transparent 33%), #030507; }
+    .p-close .map { position: absolute; width: 840px; height: 840px; right: -255px; bottom: -95px; border-radius: 50%; object-fit: cover; filter: contrast(1.08) brightness(0.72); box-shadow: 0 0 100px rgba(0, 213, 255, 0.16); }
+    .p-close .copy { position: absolute; z-index: 7; left: 58px; top: 180px; width: 900px; }
+    .p-close h1 { margin-top: 34px; font-size: 102px; line-height: 0.88; }
+    .p-close .deck { margin-top: 34px; width: 625px; color: var(--grey); font-size: 24px; line-height: 1.46; }
+    .p-cta { position: absolute; z-index: 9; left: 58px; bottom: 160px; padding: 20px 25px; background: var(--cyan); color: #00121a; font: 800 15px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+    .poster .copy { top: 170px; }
+    .poster .p-stats { left: 58px; right: 58px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .poster .p-stats div { padding: 22px 20px; border-right: 1px solid var(--line); }
+    .poster .p-stats div:last-child { border-right: 0; }
+
+    .g-chrome { position: absolute; z-index: 14; left: 42px; right: 42px; top: 30px; display: flex; align-items: center; justify-content: space-between; }
+    .g-copy { position: absolute; z-index: 9; left: 48px; top: 120px; width: 450px; }
+    .g-copy h1 { margin-top: 25px; font-size: 82px; line-height: 0.87; }
+    .g-copy h2 { margin-top: 24px; font-size: 61px; line-height: 0.92; }
+    .g-copy .deck { margin-top: 24px; color: var(--grey); font-size: 19px; line-height: 1.45; }
+    .g-footer { position: absolute; z-index: 14; left: 48px; right: 48px; bottom: 28px; display: flex; justify-content: space-between; color: var(--dim); font: 650 11px/1 var(--mono); letter-spacing: 0.11em; text-transform: uppercase; }
+    .g-footer strong { color: var(--cyan); }
+    .g-cover { background: radial-gradient(circle at 77% 50%, rgba(0, 213, 255, 0.18), transparent 34%), linear-gradient(145deg, #08131c, #020305 73%); }
+    .g-cover .map { position: absolute; width: 650px; height: 650px; right: -100px; top: 62px; border-radius: 50%; object-fit: cover; filter: contrast(1.08) brightness(0.76); box-shadow: 0 0 0 1px rgba(0, 213, 255, 0.44), 0 0 115px rgba(0, 213, 255, 0.17); }
+    .g-cover .orbit { position: absolute; width: 740px; height: 740px; right: -145px; top: 18px; border: 1px solid rgba(0, 213, 255, 0.22); border-radius: 50%; }
+    .g-cover .g-copy { width: 620px; top: 132px; }
+    .g-cover .g-copy .deck { width: 520px; }
+    .g-stats { position: absolute; z-index: 10; left: 48px; bottom: 70px; display: flex; gap: 48px; }
+    .g-stats strong { display: block; font: 750 25px/1 var(--mono); }
+    .g-stats span { display: block; margin-top: 8px; color: var(--dim); font: 650 10px/1 var(--mono); text-transform: uppercase; }
+    .g-feature { background: radial-gradient(circle at 86% 18%, rgba(0, 213, 255, 0.10), transparent 29%), #040609; }
+    .g-feature .screen { position: absolute; z-index: 8; left: 530px; top: 78px; width: 700px; padding: 6px; }
+    .g-duo { background: linear-gradient(145deg, #060a0f, #030507 66%, #07131b); }
+    .g-duo .g-copy { top: 110px; }
+    .g-duo .pair { position: absolute; z-index: 8; left: 520px; right: 40px; top: 110px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .g-duo .p-panel figcaption { padding: 13px 14px; }
+    .g-close { background: radial-gradient(circle at 75% 47%, rgba(0, 213, 255, 0.19), transparent 35%), #030507; }
+    .g-close .map { position: absolute; width: 680px; height: 680px; right: -130px; bottom: -175px; border-radius: 50%; object-fit: cover; filter: contrast(1.08) brightness(0.72); }
+    .g-close .g-copy { width: 650px; top: 135px; }
+    .g-button { display: inline-block; margin-top: 30px; padding: 17px 22px; background: var(--cyan); color: #00121a; font: 800 13px/1 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; }
+
+    .thumb { background: radial-gradient(circle at 82% 76%, rgba(0, 213, 255, 0.20), transparent 34%), linear-gradient(145deg, #08121b, #020305 72%); }
+    .thumb .map { position: absolute; width: 460px; height: 460px; right: -165px; bottom: -118px; border-radius: 50%; object-fit: cover; filter: contrast(1.08) brightness(0.70); box-shadow: 0 0 0 1px rgba(0, 213, 255, 0.44), 0 0 80px rgba(0, 213, 255, 0.16); }
+    .thumb .brand { position: absolute; z-index: 10; left: 36px; top: 34px; font-size: 11px; }
+    .thumb .brand img { width: 26px; height: 26px; }
+    .thumb .copy { position: absolute; z-index: 9; left: 36px; top: 120px; width: 500px; }
+    .thumb h1 { margin-top: 24px; font-size: 66px; line-height: 0.87; }
+    .thumb .sub { margin-top: 24px; width: 355px; color: var(--grey); font-size: 17px; line-height: 1.4; }
+    .thumb .tags { position: absolute; z-index: 10; left: 36px; bottom: 34px; display: flex; gap: 8px; }
+  </style>
+</head>
+<body>
+  <section class="canvas portrait p-cover" data-format="instagram" data-page="1">
+    <div class="orbit"></div><img class="map" src="assets/silver-reflector.png" alt="">
+    <div class="p-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Reimagine Fx</div><div class="index"><b>01</b> / 08</div></div>
+    <div class="copy"><div class="eyebrow">Area Light Maps Pro / Maya</div><h1>LIGHT HAS<br>A <span class="blue">SHAPE.</span></h1><p class="deck">Build reflections and highlights with a mapped area-light workflow for Arnold and Redshift.</p></div>
+    <div class="p-stats"><div><strong>145</strong><span>Light maps</span></div><div><strong>16-bit</strong><span>EXR files</span></div><div><strong>A + R</strong><span>Arnold / Redshift</span></div></div>
+    <div class="p-footer"><span>@reimaginefx</span><strong>Swipe for the workflow</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas portrait p-shot" data-format="instagram" data-page="2">
+    <div class="p-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>02</b> / 08</div></div>
+    <div class="p-title"><div class="eyebrow">Visual library</div><h2>145 MAPS.<br><span class="blue">PICK BY SIGHT.</span></h2><p class="deck">Search, filter, preview, apply, or create a mapped light from one panel.</p></div>
+    <div class="screen"><img src="assets/library.png" alt="Area Light Maps Pro library"></div>
+    <div class="p-footer"><span>2048 x 2048 / 16-bit EXR</span><strong>Browse to light</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas portrait p-shot" data-format="instagram" data-page="3">
+    <div class="p-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>03</b> / 08</div></div>
+    <div class="p-title"><div class="eyebrow">Favourites</div><h2>KEEP THE MAPS<br><span class="blue">YOU RETURN TO.</span></h2><p class="deck">Build a short list for the lighting patterns that earn a place in the next shot.</p></div>
+    <div class="screen"><img src="assets/favourites.png" alt="Area Light Maps Pro favourites"></div>
+    <div class="p-footer"><span>Seven shown / 145 available</span><strong>Your working set</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas portrait p-duo" data-format="instagram" data-page="4">
+    <div class="p-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>04</b> / 08</div></div>
+    <div class="p-title"><div class="eyebrow">Light Mixer</div><h2>TWO RENDERERS.<br><span class="blue">ONE MIXER.</span></h2><p class="deck">Exposure, Kelvin temperature, tint, maps, mute, and solo stay close to the shot.</p></div>
+    <div class="pair"><figure class="p-panel"><img src="assets/mixer-arnold.png" alt="Arnold Light Mixer"><figcaption><span>Arnold</span><span class="renderer-chip arnold">AR_</span></figcaption></figure><figure class="p-panel"><img src="assets/mixer-redshift.png" alt="Redshift Light Mixer"><figcaption><span>Redshift</span><span class="renderer-chip redshift">RS_</span></figcaption></figure></div>
+    <div class="p-footer"><span>Every ALM area light</span><strong>Scene-wide control</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas portrait p-duo" data-format="instagram" data-page="5">
+    <div class="p-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>05</b> / 08</div></div>
+    <div class="p-title"><div class="eyebrow">Light Linking</div><h2>DIRECT<br><span class="blue">EACH LIGHT.</span></h2><p class="deck">Link a light to the selected geometry, or return it to the full scene.</p></div>
+    <div class="pair"><figure class="p-panel"><img src="assets/linking-arnold.png" alt="Arnold light linking"><figcaption><span>Arnold</span><span class="renderer-chip arnold">Links</span></figcaption></figure><figure class="p-panel"><img src="assets/linking-redshift.png" alt="Redshift light linking"><figcaption><span>Redshift</span><span class="renderer-chip redshift">Links</span></figcaption></figure></div>
+    <div class="p-footer"><span>Selection or all geometry</span><strong>Links survive conversion</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas portrait p-shot compact" data-format="instagram" data-page="6">
+    <div class="p-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>06</b> / 08</div></div>
+    <div class="p-title"><div class="eyebrow">Rigs + placement</div><h2>BUILD AROUND<br><span class="blue">THE SUBJECT.</span></h2><p class="deck">Five rigs, camera placement, object aiming, reflection placement, and saved presets.</p></div>
+    <div class="screen"><img src="assets/rigs.png" alt="Area Light Maps Pro rigs"></div>
+    <div class="p-footer"><span>Three-point / clamshell / rim pair / ring / key</span><strong>Start from a useful rig</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas portrait p-shot compact" data-format="instagram" data-page="7">
+    <div class="p-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>07</b> / 08</div></div>
+    <div class="p-title"><div class="eyebrow">Renderer conversion</div><h2>CHANGE ENGINE.<br><span class="blue">KEEP THE SETUP.</span></h2><p class="deck">Convert all ALM lights or only the selected lights between Arnold and Redshift.</p></div>
+    <div class="screen"><img src="assets/settings.png" alt="Area Light Maps Pro renderer conversion"></div>
+    <div class="p-footer"><span>Maps / placement / values / links</span><strong>One Maya undo step</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas portrait p-close" data-format="instagram" data-page="8">
+    <img class="map" src="assets/round-softbox.png" alt="">
+    <div class="p-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Reimagine Fx</div><div class="index"><b>08</b> / 08</div></div>
+    <div class="copy"><div class="eyebrow">Area Light Maps Pro</div><h1>AREA LIGHTS<br>WITH MORE<br><span class="blue">CHARACTER.</span></h1><p class="deck">Browse, mix, link, rig, place, save, and convert from one Maya panel.</p></div>
+    <div class="p-cta">reimaginefx.com</div><div class="p-footer"><span>Autodesk Maya 2026</span><strong>Arnold + Redshift</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas portrait p-cover poster" data-format="instagram" data-page="poster">
+    <div class="orbit"></div><img class="map" src="assets/silver-reflector.png" alt="">
+    <div class="p-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Reimagine Fx</div><div class="index">Autodesk Maya 2026</div></div>
+    <div class="copy"><div class="eyebrow">Area Light Maps Pro</div><h1>LIGHT HAS<br>A <span class="blue">SHAPE.</span></h1><p class="deck">The mapped area-light workflow for Arnold and Redshift.</p></div>
+    <div class="p-stats"><div><strong>145</strong><span>Studio light maps</span></div><div><strong>16-bit</strong><span>2048 x 2048 EXR</span></div><div><strong>A + R</strong><span>Arnold / Redshift</span></div></div>
+    <div class="p-footer"><span>@reimaginefx</span><strong>Shape the highlight</strong></div><div class="grain"></div>
+  </section>
+
+  <section class="canvas gumroad g-cover" data-format="gumroad" data-page="1">
+    <div class="orbit"></div><img class="map" src="assets/silver-reflector.png" alt="">
+    <div class="g-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Reimagine Fx</div><div class="index"><b>01</b> / 08</div></div>
+    <div class="g-copy"><div class="eyebrow">Area Light Maps Pro / Maya 2026</div><h1>LIGHT HAS<br>A <span class="blue">SHAPE.</span></h1><p class="deck">145 mapped light patterns and one area-light workflow for Arnold and Redshift.</p></div>
+    <div class="g-stats"><div><strong>145</strong><span>Light maps</span></div><div><strong>16-bit</strong><span>EXR files</span></div><div><strong>A + R</strong><span>Arnold / Redshift</span></div></div>
+    <div class="g-footer"><span>Area Light Maps Pro v2.0</span><strong>Reimagine FX</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas gumroad g-feature" data-format="gumroad" data-page="2">
+    <div class="g-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>02</b> / 08</div></div>
+    <div class="g-copy"><div class="eyebrow">Visual library</div><h2>BROWSE 145 MAPS<br><span class="blue">BY SIGHT.</span></h2><p class="deck">Search, filter, preview, apply, or create a mapped light without leaving the panel.</p></div>
+    <div class="screen"><img src="assets/library.png" alt="Area Light Maps Pro library"></div>
+    <div class="g-footer"><span>2048 x 2048 / 16-bit EXR</span><strong>Browse to light</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas gumroad g-feature" data-format="gumroad" data-page="3">
+    <div class="g-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>03</b> / 08</div></div>
+    <div class="g-copy"><div class="eyebrow">Favourites</div><h2>KEEP FAVOURITES<br><span class="blue">CLOSE.</span></h2><p class="deck">Build a working set for the lighting patterns you want in reach.</p></div>
+    <div class="screen"><img src="assets/favourites.png" alt="Area Light Maps Pro favourites"></div>
+    <div class="g-footer"><span>Seven shown / 145 available</span><strong>Your working set</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas gumroad g-duo" data-format="gumroad" data-page="4">
+    <div class="g-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>04</b> / 08</div></div>
+    <div class="g-copy"><div class="eyebrow">Light Mixer</div><h2>ARNOLD AND REDSHIFT.<br><span class="blue">ONE MIXER.</span></h2><p class="deck">Exposure, Kelvin temperature, tint, maps, mute, and solo.</p></div>
+    <div class="pair"><figure class="p-panel"><img src="assets/mixer-arnold.png" alt="Arnold Light Mixer"><figcaption><span>Arnold</span><span class="renderer-chip arnold">AR_</span></figcaption></figure><figure class="p-panel"><img src="assets/mixer-redshift.png" alt="Redshift Light Mixer"><figcaption><span>Redshift</span><span class="renderer-chip redshift">RS_</span></figcaption></figure></div>
+    <div class="g-footer"><span>Every ALM area light</span><strong>Scene-wide control</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas gumroad g-duo" data-format="gumroad" data-page="5">
+    <div class="g-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>05</b> / 08</div></div>
+    <div class="g-copy"><div class="eyebrow">Light Linking</div><h2>LINK EACH LIGHT<br><span class="blue">WHERE IT BELONGS.</span></h2><p class="deck">Choose the selected geometry, or return the light to the full scene.</p></div>
+    <div class="pair"><figure class="p-panel"><img src="assets/linking-arnold.png" alt="Arnold light linking"><figcaption><span>Arnold</span><span class="renderer-chip arnold">Links</span></figcaption></figure><figure class="p-panel"><img src="assets/linking-redshift.png" alt="Redshift light linking"><figcaption><span>Redshift</span><span class="renderer-chip redshift">Links</span></figcaption></figure></div>
+    <div class="g-footer"><span>Selection or all geometry</span><strong>Links survive conversion</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas gumroad g-feature" data-format="gumroad" data-page="6">
+    <div class="g-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>06</b> / 08</div></div>
+    <div class="g-copy"><div class="eyebrow">Rigs + placement</div><h2>START WITH<br><span class="blue">A USEFUL RIG.</span></h2><p class="deck">Five rigs, camera placement, object aiming, reflection placement, and saved presets.</p></div>
+    <div class="screen"><img src="assets/rigs.png" alt="Area Light Maps Pro rigs"></div>
+    <div class="g-footer"><span>Three-point / clamshell / rim pair / ring / key</span><strong>Built around the subject</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas gumroad g-feature" data-format="gumroad" data-page="7">
+    <div class="g-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Area Light Maps Pro</div><div class="index"><b>07</b> / 08</div></div>
+    <div class="g-copy"><div class="eyebrow">Renderer conversion</div><h2>CHANGE RENDERER.<br><span class="blue">KEEP THE SETUP.</span></h2><p class="deck">Convert all lights or only the selection between Arnold and Redshift.</p></div>
+    <div class="screen"><img src="assets/settings.png" alt="Area Light Maps Pro renderer conversion"></div>
+    <div class="g-footer"><span>Maps / placement / values / links</span><strong>One Maya undo step</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas gumroad g-close" data-format="gumroad" data-page="8">
+    <img class="map" src="assets/round-softbox.png" alt="">
+    <div class="g-chrome"><div class="brand"><img src="assets/alm-icon.png" alt="">Reimagine Fx</div><div class="index"><b>08</b> / 08</div></div>
+    <div class="g-copy"><div class="eyebrow">Area Light Maps Pro</div><h1>AREA LIGHTS<br>WITH MORE<br><span class="blue">CHARACTER.</span></h1><p class="deck">Maya 2026 / Arnold + Redshift / 145 EXR maps</p><div class="g-button">reimaginefx.com</div></div>
+    <div class="g-footer"><span>Area Light Maps Pro v2.0</span><strong>Reimagine FX</strong></div><div class="grain"></div>
+  </section>
+  <section class="canvas thumb" data-format="gumroad" data-page="thumbnail">
+    <img class="map" src="assets/silver-reflector.png" alt="">
+    <div class="brand"><img src="assets/alm-icon.png" alt="">Reimagine Fx</div>
+    <div class="copy"><div class="eyebrow">Area Light Maps Pro</div><h1>LIGHT HAS<br>A <span class="blue">SHAPE.</span></h1><p class="sub">145 EXR light maps for Maya area lights.</p></div>
+    <div class="tags"><span class="renderer-chip arnold">Arnold</span><span class="renderer-chip redshift">Redshift</span></div><div class="grain"></div>
+  </section>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const format = params.get("format") || "instagram";
+    const page = params.get("page") || "1";
+    const selector = '[data-format="' + format + '"][data-page="' + page + '"]';
+    const target = document.querySelector(selector) || document.querySelector('[data-format="instagram"][data-page="1"]');
+    target.classList.add("active");
+  </script>
+</body>
+</html>
