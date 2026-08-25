@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focus Picker for Maya | Arnold + Redshift</title>
+  <meta name="description" content="Pick camera focus directly in the Maya viewport. Focus Picker controls depth of field, focal length, Arnold aperture, and Redshift F-stop from one compact panel.">
+  <link rel="canonical" href="https://reimaginefx.com/focus-picker/">
+  <meta name="theme-color" content="#080b10">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Focus Picker for Maya">
+  <meta property="og:description" content="Click a surface. Set camera focus. Keep Arnold and Redshift lens controls close.">
+  <meta property="og:url" content="https://reimaginefx.com/focus-picker/">
+  <meta property="og:image" content="https://reimaginefx.com/focus-picker/assets/focus-picker-auto.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Focus Picker",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows 10, Windows 11",
+    "softwareVersion": "1.2",
+    "description": "A compact Maya camera focus tool with Arnold and Redshift lens controls.",
+    "image": "https://reimaginefx.com/focus-picker/assets/focus-picker-auto.png",
+    "author": {
+      "@type": "Person",
+      "name": "Amar Shinde"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Reimagine FX"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD",
+      "url": "https://reimagine-fx.gumroad.com/l/rfxfocuspicker",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --canvas: #080b10;
+      --surface: #0e131a;
+      --surface-2: #141b24;
+      --ink: #f4f7fb;
+      --muted: #9aa7b8;
+      --line: #253142;
+      --line-soft: rgba(105, 133, 168, 0.2);
+      --accent: #168cff;
+      --accent-bright: #46b2ff;
+      --signal: #27d66b;
+      --header: 68px;
+      --radius: 10px;
+      --shadow: 0 26px 70px rgba(0, 0, 0, 0.48);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 76% 13%, rgba(22, 140, 255, 0.14), transparent 27rem),
+        linear-gradient(180deg, #080b10 0%, #0a0e14 52%, #07090d 100%);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    :focus-visible {
+      outline: 3px solid rgba(70, 178, 255, 0.9);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(1080px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      height: var(--header);
+      border-bottom: 1px solid rgba(105, 133, 168, 0.16);
+      background: rgba(8, 11, 16, 0.84);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      box-shadow: 0 0 28px rgba(22, 140, 255, 0.28);
+    }
+
+    .brand-copy { display: grid; line-height: 1.1; }
+    .brand-copy strong { font-size: 14px; letter-spacing: -0.01em; }
+    .brand-copy span { margin-top: 4px; color: var(--accent-bright); font-size: 11px; font-weight: 700; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: var(--ink); }
+
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--ink);
+      background: var(--surface-2);
+      font-size: 13.5px;
+      font-weight: 750;
+      line-height: 1;
+      text-decoration: none;
+      transition: transform 150ms ease, background-color 150ms ease, border-color 150ms ease;
+    }
+
+    .button-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      box-shadow: 0 10px 30px rgba(22, 140, 255, 0.22);
+    }
+
+    .button-secondary { background: rgba(20, 27, 36, 0.72); }
+    .button:active { transform: scale(0.98); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 78px 0 68px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 540px;
+      height: 540px;
+      right: -210px;
+      top: -190px;
+      border: 1px solid rgba(70, 178, 255, 0.2);
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 74px rgba(22, 140, 255, 0.015), inset 0 0 0 150px rgba(22, 140, 255, 0.012);
+    }
+
+    .hero::after {
+      inset: 0;
+      opacity: 0.12;
+      background-image: linear-gradient(rgba(70, 178, 255, 0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(70, 178, 255, 0.18) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.72fr);
+      align-items: center;
+      gap: 70px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--accent-bright);
+      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--signal);
+      box-shadow: 0 0 14px rgba(39, 214, 107, 0.6);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 650px;
+      margin: 22px 0 22px;
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 0.96;
+      letter-spacing: -0.065em;
+      text-wrap: balance;
+    }
+
+    .hero-accent { color: var(--accent); }
+
+    .hero-copy {
+      max-width: 590px;
+      margin-bottom: 28px;
+      color: #b7c2d1;
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.55;
+      text-wrap: pretty;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .hero-note {
+      margin: 14px 0 0;
+      color: #78879a;
+      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+      font-size: 11px;
+    }
+
+    .instrument {
+      position: relative;
+      justify-self: center;
+      width: min(100%, 420px);
+      padding: 12px;
+      border: 1px solid rgba(90, 125, 164, 0.34);
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(25, 36, 49, 0.84), rgba(10, 14, 20, 0.95));
+      box-shadow: var(--shadow), 0 0 70px rgba(22, 140, 255, 0.1);
+    }
+
+    .instrument::before {
+      content: "FOCUS / LIVE";
+      position: absolute;
+      z-index: 3;
+      top: 26px;
+      right: -45px;
+      padding: 7px 10px;
+      border: 1px solid rgba(70, 178, 255, 0.38);
+      border-radius: 4px;
+      color: var(--accent-bright);
+      background: #0b1017;
+      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+    }
+
+    .instrument-image {
+      display: grid;
+      overflow: hidden;
+      aspect-ratio: 580 / 770;
+      border-radius: 8px;
+      background: #0b0d10;
+    }
+
+    .instrument-image img {
+      grid-area: 1 / 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transform: scale(0.99);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .instrument-image img.is-active { opacity: 1; transform: scale(1); }
+
+    .mode-switcher {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .mode-button {
+      min-height: 42px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      color: var(--muted);
+      background: #111821;
+      font: 700 12px/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+      cursor: pointer;
+      transition: transform 150ms ease, color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+    }
+
+    .mode-button[aria-selected="true"] {
+      border-color: rgba(70, 178, 255, 0.55);
+      color: white;
+      background: rgba(22, 140, 255, 0.18);
+    }
+
+    .mode-button:active { transform: scale(0.96); }
+
+    .facts {
+      border-bottom: 1px solid var(--line-soft);
+      background: rgba(10, 14, 20, 0.74);
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .fact {
+      min-height: 112px;
+      display: grid;
+      align-content: center;
+      padding: 22px 24px;
+      border-left: 1px solid var(--line-soft);
+    }
+
+    .fact:last-child { border-right: 1px solid var(--line-soft); }
+    .fact strong { font-size: 16px; }
+    .fact span { margin-top: 4px; color: var(--muted); font-size: 12px; }
+
+    .section { padding: 84px 0; border-bottom: 1px solid var(--line-soft); }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 0.7fr 1.1fr;
+      gap: 70px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+    }
+
+    .section-heading p {
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 16px;
+      text-wrap: pretty;
+    }
+
+    .focus-sequence {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 72px 1fr;
+      align-items: stretch;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .sequence-panel { padding: 34px; }
+    .sequence-panel + .sequence-panel { border-left: 1px solid var(--line); }
+
+    .sequence-kicker {
+      display: block;
+      margin-bottom: 16px;
+      color: var(--accent-bright);
+      font: 750 10px/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .sequence-panel h3 { margin-bottom: 12px; font-size: 24px; letter-spacing: -0.025em; }
+    .sequence-panel p { margin: 0; color: var(--muted); }
+
+    .sequence-line {
+      display: grid;
+      place-items: center;
+      color: var(--accent-bright);
+      background: linear-gradient(180deg, transparent, rgba(22, 140, 255, 0.12), transparent);
+      font: 800 22px/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+    }
+
+    .control-list {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .control-row {
+      display: grid;
+      grid-template-columns: 48px 0.72fr 1.2fr;
+      gap: 24px;
+      align-items: start;
+      padding: 22px 4px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .control-index {
+      color: var(--accent-bright);
+      font: 700 11px/1.5 ui-monospace, "SFMono-Regular", Consolas, monospace;
+    }
+
+    .control-row strong { font-size: 17px; }
+    .control-row span:last-child { color: var(--muted); font-size: 14px; }
+
+    .requirements {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .requirements-copy p { margin: 20px 0 0; color: var(--muted); }
+
+    .specs { border-top: 1px solid var(--line); }
+
+    .spec {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .spec dt {
+      color: var(--muted);
+      font: 700 11px/1.5 ui-monospace, "SFMono-Regular", Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .spec dd { margin: 0; font-weight: 650; }
+
+    .faq { max-width: 790px; margin: 0 auto; }
+    .faq h2 { margin-bottom: 32px; text-align: center; }
+
+    details { border-top: 1px solid var(--line); }
+    details:last-child { border-bottom: 1px solid var(--line); }
+
+    summary {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      cursor: pointer;
+      font-weight: 720;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--accent-bright); font: 500 22px/1 ui-monospace, monospace; }
+    details[open] summary::after { content: "−"; }
+    details p { max-width: 680px; margin: -4px 0 22px; color: var(--muted); }
+
+    .closing {
+      padding: 84px 0;
+      text-align: center;
+    }
+
+    .closing-inner {
+      position: relative;
+      overflow: hidden;
+      padding: 60px 32px;
+      border: 1px solid rgba(70, 178, 255, 0.35);
+      border-radius: 12px;
+      background: radial-gradient(circle at 50% 0%, rgba(22, 140, 255, 0.22), transparent 60%), var(--surface);
+    }
+
+    .closing h2 { max-width: 720px; margin: 0 auto 20px; }
+    .closing p { max-width: 590px; margin: 0 auto 26px; color: var(--muted); }
+    .closing .button { min-width: 210px; }
+
+    footer {
+      padding: 28px 0 36px;
+      color: #6f7d90;
+      font-size: 12px;
+    }
+
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { text-decoration: none; }
+    .footer-links a:hover { color: var(--ink); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(7px);
+      transition: opacity 420ms ease, transform 420ms ease;
+    }
+
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (hover: hover) and (pointer: fine) {
+      .button:hover { transform: translateY(-2px); border-color: rgba(70, 178, 255, 0.65); }
+      .button-primary:hover { background: #2a9bff; }
+      .mode-button:hover { color: var(--ink); }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links a:not(.nav-product-link) { display: none; }
+      .hero { padding-top: 54px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 50px; }
+      .hero-copy-wrap { max-width: 680px; }
+      .instrument { width: min(100%, 390px); }
+      .instrument::before { right: -18px; }
+      .facts-grid { grid-template-columns: repeat(2, 1fr); }
+      .fact:nth-child(2) { border-right: 1px solid var(--line-soft); }
+      .fact:nth-child(n + 3) { border-top: 1px solid var(--line-soft); }
+      .section-heading, .requirements { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    @media (max-width: 620px) {
+      .container { width: min(100% - 28px, 560px); }
+      .site-header { height: 62px; }
+      .brand-copy span { display: none; }
+      .nav-product-link { display: none; }
+      .hero { padding: 46px 0 50px; }
+      h1 { font-size: clamp(48px, 16vw, 68px); }
+      .hero-copy { font-size: 17px; }
+      .hero-actions { display: grid; }
+      .button { width: 100%; }
+      .instrument::before { display: none; }
+      .facts-grid { grid-template-columns: 1fr 1fr; }
+      .fact { min-height: 100px; padding: 18px 16px; }
+      .section { padding: 62px 0; }
+      .focus-sequence { grid-template-columns: 1fr; }
+      .sequence-line { min-height: 52px; transform: rotate(90deg); }
+      .sequence-panel + .sequence-panel { border-top: 1px solid var(--line); border-left: 0; }
+      .control-row { grid-template-columns: 36px 1fr; gap: 12px; }
+      .control-row span:last-child { grid-column: 2; }
+      .spec { grid-template-columns: 104px 1fr; gap: 14px; }
+      .closing { padding: 62px 0; }
+      .closing-inner { padding: 46px 20px; }
+      .footer-inner { display: grid; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Focus Picker home">
+        <img src="assets/focus-picker-icon.png" width="38" height="38" alt="">
+        <span class="brand-copy">
+          <strong>Focus Picker</strong>
+          <span>Reimagine FX</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#workflow">Workflow</a>
+        <a href="#controls">Controls</a>
+        <a href="#requirements">Requirements</a>
+        <a class="nav-product-link" href="/products">All products</a>
+      </nav>
+
+      <a class="button button-primary" href="https://reimagine-fx.gumroad.com/l/rfxfocuspicker" target="_blank" rel="noopener">Get it free</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy-wrap reveal">
+          <div class="eyebrow">Maya 2026 · Arnold + Redshift</div>
+          <h1>Click the shot <span class="hero-accent">into focus.</span></h1>
+          <p class="hero-copy">Pick any visible surface in the Maya viewport. Focus Picker writes the camera distance, then keeps depth of field, focal length, and renderer-specific lens controls within reach.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://reimagine-fx.gumroad.com/l/rfxfocuspicker" target="_blank" rel="noopener">Get Focus Picker free</a>
+            <a class="button button-secondary" href="#workflow">See how it works</a>
+          </div>
+          <p class="hero-note">v1.2 / Windows / compact PySide6 panel</p>
+        </div>
+
+        <div class="instrument reveal" aria-label="Focus Picker renderer modes">
+          <div class="instrument-image">
+            <img class="is-active" src="assets/focus-picker-auto.png" width="580" height="770" alt="Focus Picker in Auto renderer mode" data-mode-image="auto">
+            <img src="assets/focus-picker-arnold.png" width="580" height="770" alt="Focus Picker controlling an Arnold camera" data-mode-image="arnold">
+            <img src="assets/focus-picker-redshift.png" width="580" height="770" alt="Focus Picker controlling a Redshift camera" data-mode-image="redshift">
+          </div>
+          <div class="mode-switcher" role="tablist" aria-label="Renderer screenshot">
+            <button class="mode-button" type="button" role="tab" aria-selected="true" data-mode="auto">Auto</button>
+            <button class="mode-button" type="button" role="tab" aria-selected="false" data-mode="arnold">Arnold</button>
+            <button class="mode-button" type="button" role="tab" aria-selected="false" data-mode="redshift">Redshift</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="facts">
+      <div class="container facts-grid">
+        <div class="fact"><strong>One viewport click</strong><span>Ray-casts the visible surface.</span></div>
+        <div class="fact"><strong>Auto mode</strong><span>Follows Maya's active renderer.</span></div>
+        <div class="fact"><strong>Two-way sync</strong><span>Camera edits return to the panel.</span></div>
+        <div class="fact"><strong>One undo step</strong><span>Scrubs stay grouped in Maya.</span></div>
+      </div>
+    </div>
+
+    <section class="section" id="workflow">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow">Viewport workflow</div>
+            <h2>Surface in. Distance out.</h2>
+          </div>
+          <p>Press Pick focus in viewport, then click the point that should read sharp. The active camera gets the measured focus distance from the real viewport ray.</p>
+        </div>
+
+        <div class="focus-sequence reveal">
+          <article class="sequence-panel">
+            <span class="sequence-kicker">01 / target</span>
+            <h3>Click the visible surface.</h3>
+            <p>Use the shot itself. No locator setup and no focus-distance guesswork.</p>
+          </article>
+          <div class="sequence-line" aria-hidden="true">→</div>
+          <article class="sequence-panel">
+            <span class="sequence-kicker">02 / camera</span>
+            <h3>Focus distance updates.</h3>
+            <p>Arnold or Redshift receives the value through the camera controls it already uses.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="controls">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow">Compact controls</div>
+            <h2>Enough control. Nothing buried.</h2>
+          </div>
+          <p>Auto, Arnold, and Redshift share the same panel. Only the renderer-specific aperture control changes: aperture radius for Arnold, F-stop for Redshift.</p>
+        </div>
+
+        <div class="control-list reveal">
+          <div class="control-row"><span class="control-index">01</span><strong>Renderer + camera</strong><span>Follow Maya automatically, choose a renderer directly, then switch, create, delete, or refresh cameras.</span></div>
+          <div class="control-row"><span class="control-index">02</span><strong>Focus distance</strong><span>Type a value, use the arrow controls, scrub it with the label, or set it from the viewport.</span></div>
+          <div class="control-row"><span class="control-index">03</span><strong>Depth of field</strong><span>Turn camera DOF on or off without leaving the panel.</span></div>
+          <div class="control-row"><span class="control-index">04</span><strong>Lens values</strong><span>Adjust focal length plus Arnold aperture or Redshift F-stop. Changes remain undoable.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="requirements">
+      <div class="container requirements">
+        <div class="requirements-copy reveal">
+          <div class="eyebrow">Current release</div>
+          <h2>Small install. Ready for Maya.</h2>
+          <p>The download has one self-contained plugin folder and a one-page PDF. Copy the folder into Maya's scripts directory, then add the shelf button.</p>
+        </div>
+
+        <dl class="specs reveal">
+          <div class="spec"><dt>Version</dt><dd>Focus Picker 1.2</dd></div>
+          <div class="spec"><dt>Host</dt><dd>Autodesk Maya 2026</dd></div>
+          <div class="spec"><dt>Renderers</dt><dd>Arnold and Redshift</dd></div>
+          <div class="spec"><dt>Platform</dt><dd>Windows 10 / 11</dd></div>
+          <div class="spec"><dt>Included</dt><dd>Plugin folder + installation PDF</dd></div>
+          <div class="spec"><dt>Price</dt><dd>Free</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container faq">
+        <h2 class="reveal">Before you install it.</h2>
+        <div class="reveal">
+          <details>
+            <summary>Does Focus Picker work with Arnold and Redshift?</summary>
+            <p>Yes. Choose Arnold or Redshift directly, or leave the renderer on Auto so the panel follows Maya's current renderer.</p>
+          </details>
+          <details>
+            <summary>What changes between the two renderers?</summary>
+            <p>The core workflow stays the same. Arnold exposes aperture radius; Redshift exposes camera F-stop.</p>
+          </details>
+          <details>
+            <summary>Can I edit values without using the viewport picker?</summary>
+            <p>Yes. Distance, focal length, aperture, and F-stop accept typed values, arrow steps, and Maya-style label scrubbing.</p>
+          </details>
+          <details>
+            <summary>Will the panel track camera edits made elsewhere?</summary>
+            <p>Yes. Focus Picker watches the selected camera and updates its controls when supported camera attributes change.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="container closing-inner reveal">
+        <div class="eyebrow">Free Maya camera tool</div>
+        <h2>Pick the surface. Keep working.</h2>
+        <p>Focus Picker turns a viewport click into the camera distance you need, with Arnold and Redshift lens controls beside it.</p>
+        <a class="button button-primary" href="https://reimagine-fx.gumroad.com/l/rfxfocuspicker" target="_blank" rel="noopener">Get Focus Picker on Gumroad</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>Focus Picker 1.2 · Amar Shinde / Reimagine FX</span>
+      <span class="footer-links">
+        <a href="/products">Products</a>
+        <a href="https://www.reimaginefx.com" target="_blank" rel="noreferrer">Reimagine FX</a>
+        <a href="#top">Back to top</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    const modeButtons = Array.from(document.querySelectorAll("[data-mode]"));
+    const modeImages = Array.from(document.querySelectorAll("[data-mode-image]"));
+
+    function selectMode(mode) {
+      modeButtons.forEach((button) => {
+        button.setAttribute("aria-selected", String(button.dataset.mode === mode));
+      });
+      modeImages.forEach((image) => {
+        image.classList.toggle("is-active", image.dataset.modeImage === mode);
+      });
+    }
+
+    modeButtons.forEach((button) => {
+      button.addEventListener("click", () => selectMode(button.dataset.mode));
+      button.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        const step = event.key === "ArrowRight" ? 1 : -1;
+        const current = modeButtons.indexOf(button);
+        const next = (current + step + modeButtons.length) % modeButtons.length;
+        modeButtons[next].focus();
+        selectMode(modeButtons[next].dataset.mode);
+      });
+    });
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach((item) => observer.observe(item));
+    }
+  </script>
+</body>
+</html>
