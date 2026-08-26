@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Reframe 1.1 campaign exports</title>
+  <style>
+    :root { --ink:#070a0d; --panel:#10151a; --teal:#23d1a5; --red:#ef5a4f; --white:#f4f5f2; --muted:#9aa4aa; --line:rgba(255,255,255,.11); --display:"Arial Narrow","Segoe UI",Arial,sans-serif; --mono:"Cascadia Mono",Consolas,monospace; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; background:#1a1d20; color:var(--white); font-family:var(--display); }
+    body { padding:40px; display:grid; gap:40px; justify-content:center; }
+    .artboard { position:relative; overflow:hidden; background-color:var(--ink); background-image:linear-gradient(180deg,rgba(7,10,13,.08),rgba(7,10,13,.84)),url("assets/campaign-background.png"); background-size:cover; background-position:center; box-shadow:0 20px 70px rgba(0,0,0,.48); }
+    .instagram { width:1080px; height:1350px; }
+    .gumroad { width:1280px; height:720px; }
+    .thumbnail { width:1200px; height:1200px; }
+    .top { position:absolute; z-index:4; left:64px; right:64px; top:54px; display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; align-items:center; gap:16px; }
+    .brand img { width:54px; height:54px; border-radius:10px; background:#080b0e; }
+    .brand strong { display:block; font-size:24px; letter-spacing:-.03em; }
+    .brand span { display:block; margin-top:5px; color:var(--muted); font:600 12px/1 var(--mono); letter-spacing:.13em; text-transform:uppercase; }
+    .count { color:var(--muted); font:700 13px/1 var(--mono); letter-spacing:.14em; }
+    .count b { color:var(--teal); }
+    .copy { position:absolute; z-index:3; left:64px; right:64px; top:155px; }
+    .kicker { color:var(--teal); font:700 14px/1 var(--mono); letter-spacing:.16em; text-transform:uppercase; }
+    .kicker .rs { color:#ff7b70; }
+    h1,h2 { margin:22px 0 0; font-weight:800; letter-spacing:-.062em; line-height:.93; }
+    h1 { font-size:94px; }
+    h2 { font-size:68px; max-width:880px; }
+    .accent { color:var(--teal); }
+    .lead { max-width:880px; margin:24px 0 0; color:#b7c0c4; font-size:26px; line-height:1.48; }
+    .screen { position:absolute; z-index:2; left:64px; right:64px; bottom:88px; padding:10px; border:1px solid var(--line); border-radius:16px; background:#090c0f; box-shadow:0 26px 80px rgba(0,0,0,.5); }
+    .screen img { display:block; width:100%; height:auto; border-radius:8px; }
+    .screen-note { display:flex; justify-content:space-between; padding:14px 8px 4px; color:var(--muted); font:600 11px/1 var(--mono); letter-spacing:.1em; text-transform:uppercase; }
+    .screen-note span:last-child { color:var(--teal); }
+    .footer { position:absolute; z-index:4; left:64px; right:64px; bottom:42px; display:flex; justify-content:space-between; color:var(--muted); font:600 12px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; }
+    .footer span:last-child { color:var(--teal); }
+    .cover .copy { top:174px; }
+    .cover .screen { bottom:78px; transform:rotate(-1.2deg); transform-origin:center; }
+    .cover h1 { font-size:104px; max-width:900px; }
+    .feature .screen { bottom:82px; }
+    .feature .copy { top:150px; }
+    .feature h2 { font-size:65px; }
+    .feature .lead { font-size:24px; max-width:850px; }
+    .renderer-pills { display:flex; gap:12px; margin-top:34px; }
+    .renderer-pills span { padding:13px 18px; border:1px solid rgba(35,209,165,.35); background:rgba(35,209,165,.07); font:700 13px/1 var(--mono); letter-spacing:.1em; text-transform:uppercase; }
+    .renderer-pills span:last-child { border-color:rgba(239,90,79,.4); color:#ff8b82; background:rgba(239,90,79,.08); }
+    .closing .copy { top:220px; }
+    .closing h1 { font-size:110px; max-width:930px; }
+    .facts { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:64px; }
+    .fact { min-height:118px; padding:22px; border:1px solid var(--line); background:rgba(8,11,14,.74); }
+    .fact strong { color:var(--teal); font:700 12px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; }
+    .fact span { display:block; margin-top:14px; color:#c4cbce; font-size:19px; line-height:1.35; }
+    .cta-bar { position:absolute; left:64px; right:64px; bottom:110px; min-height:78px; padding:0 28px; display:flex; align-items:center; justify-content:space-between; border:1px solid rgba(35,209,165,.38); background:rgba(35,209,165,.09); font-weight:700; font-size:20px; }
+    .cta-bar span:last-child { color:var(--teal); font:700 14px/1 var(--mono); letter-spacing:.08em; }
+    .gumroad .top { left:54px; right:54px; top:42px; }
+    .gumroad .brand img { width:46px; height:46px; }
+    .gumroad .copy { left:62px; right:690px; top:154px; }
+    .gumroad h1 { font-size:78px; }
+    .gumroad .lead { font-size:20px; line-height:1.45; }
+    .gumroad .screen { left:650px; right:44px; bottom:76px; transform:rotate(1deg); }
+    .gumroad .screen-note { display:none; }
+    .gumroad .footer { left:62px; right:62px; bottom:42px; }
+    .gumroad.two .copy { right:740px; }
+    .gumroad.two .screen { left:570px; }
+    .thumbnail .top { left:64px; right:64px; top:58px; }
+    .thumbnail .copy { top:190px; }
+    .thumbnail h1 { font-size:126px; line-height:.86; }
+    .thumbnail .renderer-pills { margin-top:42px; }
+    .thumbnail .screen { left:220px; right:220px; bottom:92px; }
+    .thumbnail .renderer-pills { display:none; }
+    .thumbnail .footer { bottom:54px; }
+  </style>
+</head>
+<body>
+  <article class="artboard instagram cover" data-asset="poster-01-renderers">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count">V1.1</div></div>
+    <div class="copy"><div class="kicker">Maya delivery / <span class="rs">Redshift update</span></div><h1>One queue.<br><span class="accent">Two renderers.</span></h1><p class="lead">Ordered stills and image sequences through Arnold or Redshift.</p><div class="renderer-pills"><span>Arnold</span><span>Redshift</span></div></div>
+    <div class="screen"><img src="assets/batch.png" alt=""><div class="screen-note"><span>Exact Reframe UI</span><span>Renderer-aware delivery</span></div></div>
+    <div class="footer"><span>reimaginefx.com/reframe</span><span>Available now</span></div>
+  </article>
+
+  <article class="artboard instagram feature" data-asset="poster-02-guides">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count">LIVE GUIDES</div></div>
+    <div class="copy"><div class="kicker">Plan before rendering</div><h2>See every crop inside the shot.</h2><p class="lead">Compare formats, adjust each outside mask, and keep overlapping guides readable.</p></div>
+    <div class="screen"><img src="assets/preview.png" alt=""><div class="screen-note"><span>Preview tab</span><span>39 production presets</span></div></div>
+    <div class="footer"><span>reimaginefx.com/reframe</span><span>Autodesk Maya 2025+</span></div>
+  </article>
+
+  <article class="artboard instagram feature" data-asset="poster-03-delivery">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count">BATCH</div></div>
+    <div class="copy"><div class="kicker">Three formats / one scene</div><h2>Queue the list. Keep the folders clean.</h2><p class="lead">Each image sequence lands in its own preset-named folder.</p></div>
+    <div class="screen"><img src="assets/batch.png" alt=""><div class="screen-note"><span>Ordered delivery</span><span>Escape to cancel</span></div></div>
+    <div class="footer"><span>reimaginefx.com/reframe</span><span>Arnold + Redshift</span></div>
+  </article>
+
+  <article class="artboard instagram cover" data-asset="carousel-01-cover">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count"><b>01</b> / 07</div></div>
+    <div class="copy"><div class="kicker">Autodesk Maya / version 1.1</div><h1>One scene.<br><span class="accent">Every format.</span></h1><p class="lead">Plan the crops. Keep the camera. Deliver through Arnold or Redshift.</p></div>
+    <div class="screen"><img src="assets/presets.png" alt=""><div class="screen-note"><span>Reframe preset library</span><span>Swipe to explore</span></div></div>
+    <div class="footer"><span>@reimaginefx</span><span>Arnold + Redshift</span></div>
+  </article>
+
+  <article class="artboard instagram feature" data-asset="carousel-02-presets">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count"><b>02</b> / 07</div></div>
+    <div class="copy"><div class="kicker">01 / Preset library</div><h2>Choose the frame you need.</h2><p class="lead">Search 39 production presets, inspect the crop, apply it, save a favourite, or add it to the queue.</p></div>
+    <div class="screen"><img src="assets/presets.png" alt=""><div class="screen-note"><span>Presets tab</span><span>12 format families</span></div></div>
+    <div class="footer"><span>@reimaginefx</span><span>Swipe</span></div>
+  </article>
+
+  <article class="artboard instagram feature" data-asset="carousel-03-guides">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count"><b>03</b> / 07</div></div>
+    <div class="copy"><div class="kicker">02 / Format preview</div><h2>Compare every crop before you commit.</h2><p class="lead">Stack several formats, tune each mask, and keep the labels readable when frames overlap.</p></div>
+    <div class="screen"><img src="assets/preview.png" alt=""><div class="screen-note"><span>Preview tab</span><span>Live camera guides</span></div></div>
+    <div class="footer"><span>@reimaginefx</span><span>Swipe</span></div>
+  </article>
+
+  <article class="artboard instagram feature" data-asset="carousel-04-camera">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count"><b>04</b> / 07</div></div>
+    <div class="copy"><div class="kicker">03 / Camera-safe framing</div><h2>Change the format, not the lens.</h2><p class="lead">Reframe adjusts film aperture and preserves the vertical or horizontal field of view you choose.</p></div>
+    <div class="screen"><img src="assets/settings.png" alt=""><div class="screen-note"><span>Settings tab</span><span>Live scene state</span></div></div>
+    <div class="footer"><span>@reimaginefx</span><span>Swipe</span></div>
+  </article>
+
+  <article class="artboard instagram feature" data-asset="carousel-05-batch">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count"><b>05</b> / 07</div></div>
+    <div class="copy"><div class="kicker">04 / Ordered delivery</div><h2>Render the queue from top to bottom.</h2><p class="lead">Move presets into order, open the render camera, and keep output settings visible in one panel.</p></div>
+    <div class="screen"><img src="assets/batch.png" alt=""><div class="screen-note"><span>Batch tab</span><span>Stills + sequences</span></div></div>
+    <div class="footer"><span>@reimaginefx</span><span>Swipe</span></div>
+  </article>
+
+  <article class="artboard instagram feature" data-asset="carousel-06-renderers">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count"><b>06</b> / 07</div></div>
+    <div class="copy"><div class="kicker">New in 1.1 / <span class="rs">Redshift</span></div><h2>The same queue for both renderers.</h2><p class="lead">Arnold and Redshift share one workflow for stills, sequences, frame range, padding, per-preset folders, and cancellation.</p><div class="renderer-pills"><span>Arnold</span><span>Redshift</span></div></div>
+    <div class="screen"><img src="assets/batch.png" alt=""><div class="screen-note"><span>Current renderer</span><span>Scene state restored</span></div></div>
+    <div class="footer"><span>@reimaginefx</span><span>Swipe</span></div>
+  </article>
+
+  <article class="artboard instagram closing" data-asset="carousel-07-cta">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count">07 / 07</div></div>
+    <div class="copy"><div class="kicker">Available now</div><h1>Finish the frame.<br><span class="accent">Then deliver it.</span></h1><p class="lead">Reframe 1.1 is built for Maya artists delivering one scene to many formats.</p><div class="facts"><div class="fact"><strong>Presets</strong><span>39 formats across 12 families</span></div><div class="fact"><strong>Guides</strong><span>Live frames and outside masks</span></div><div class="fact"><strong>Renderers</strong><span>Arnold and Redshift</span></div><div class="fact"><strong>Delivery</strong><span>Ordered stills and sequences</span></div></div></div>
+    <div class="cta-bar"><span>Get Reframe on Gumroad</span><span>reimaginefx.com/reframe</span></div>
+    <div class="footer"><span>Autodesk Maya 2025+</span><span>Version 1.1.0</span></div>
+  </article>
+
+  <article class="artboard gumroad" data-asset="gumroad-01-cover">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count">VERSION 1.1</div></div>
+    <div class="copy"><div class="kicker">Maya format delivery</div><h1>One scene.<br><span class="accent">Every format.</span></h1><p class="lead">Live composition guides and ordered Arnold + Redshift rendering.</p><div class="renderer-pills"><span>Arnold</span><span>Redshift</span></div></div>
+    <div class="screen"><img src="assets/preview.png" alt=""></div>
+    <div class="footer"><span>Autodesk Maya 2025+</span><span>reimaginefx.com/reframe</span></div>
+  </article>
+
+  <article class="artboard gumroad two" data-asset="gumroad-02-delivery">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count">ORDERED DELIVERY</div></div>
+    <div class="copy"><div class="kicker">Stills + sequences</div><h1>Queue once.<br><span class="accent">Render in order.</span></h1><p class="lead">Three formats, separate folders, current renderer.</p></div>
+    <div class="screen"><img src="assets/batch.png" alt=""></div>
+    <div class="footer"><span>Arnold + Redshift</span><span>Version 1.1.0</span></div>
+  </article>
+
+  <article class="artboard gumroad two" data-asset="gumroad-03-presets">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count">39 PRESETS</div></div>
+    <div class="copy"><div class="kicker">Format planning</div><h1>Choose it.<br><span class="accent">See it. Ship it.</span></h1><p class="lead">Search, inspect, preview, apply, and queue every delivery format.</p></div>
+    <div class="screen"><img src="assets/presets.png" alt=""></div>
+    <div class="footer"><span>12 format families</span><span>Autodesk Maya 2025+</span></div>
+  </article>
+
+  <article class="artboard thumbnail" data-asset="gumroad-thumbnail">
+    <div class="top"><div class="brand"><img src="assets/icon.png" alt=""><div><strong>Reframe</strong><span>Reimagine Fx</span></div></div><div class="count">V1.1</div></div>
+    <div class="copy"><div class="kicker">Autodesk Maya</div><h1>One scene.<br><span class="accent">Every format.</span></h1><div class="renderer-pills"><span>Arnold</span><span>Redshift</span></div></div>
+    <div class="screen"><img src="assets/preview.png" alt=""></div>
+    <div class="footer"><span>Multi-format composition</span><span>Ordered delivery</span></div>
+  </article>
+</body>
+</html>

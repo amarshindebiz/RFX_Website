@@ -4,21 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
-  <title>Reframe for Maya | Multi-Format Composition &amp; Arnold Delivery | Reimagine FX</title>
-  <meta name="description" content="Plan crops, compare delivery frames, protect camera composition, and batch render multiple formats through Arnold with Reframe for Autodesk Maya.">
+  <title>Reframe for Maya | Multi-Format Arnold + Redshift Delivery | Reimagine FX</title>
+  <meta name="description" content="Plan crops, compare live guides, preserve camera composition, and render ordered stills or image sequences through Arnold or Redshift with Reframe for Autodesk Maya.">
   <link rel="canonical" href="https://reimaginefx.com/reframe/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Reframe for Maya | One Scene. Every Format.">
-  <meta property="og:description" content="Multi-format composition, viewport guides, camera-safe framing, and Arnold delivery inside Autodesk Maya.">
+  <meta property="og:description" content="Multi-format composition, live viewport guides, camera-safe framing, and Arnold or Redshift delivery inside Autodesk Maya.">
   <meta property="og:url" content="https://reimaginefx.com/reframe/">
-  <meta property="og:image" content="https://reimaginefx.com/products/product-reframe.png">
+  <meta property="og:image" content="https://reimaginefx.com/reframe/campaign/exports/gumroad-01-cover.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reframe for Maya | Arnold + Redshift delivery">
+  <meta name="twitter:description" content="Plan every crop in one scene, then render ordered stills or sequences through Arnold or Redshift.">
+  <meta name="twitter:image" content="https://reimaginefx.com/reframe/campaign/exports/gumroad-01-cover.png">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
   <style>
     :root {
       --rf-teal: #23d1a5;
       --rf-teal-bright: #53e6bf;
+      --rf-redshift: #ef5a4f;
       --rf-soft: rgba(35, 209, 165, 0.10);
       --rf-line: rgba(255, 255, 255, 0.10);
       --rf-panel: #101317;
@@ -37,7 +43,7 @@
     .rf-hero { min-height: min(820px, calc(100svh - 40px)); padding: 136px 0 76px; display: flex; align-items: center; border-bottom: 1px solid var(--rf-line); overflow: hidden; }
     .rf-hero-grid { display: grid; grid-template-columns: minmax(360px, 0.78fr) minmax(520px, 1.22fr); gap: clamp(48px, 7vw, 92px); align-items: center; }
     .rf-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; }
-    .rf-brand-dot { width: 12px; height: 12px; border-radius: 3px; background: var(--rf-teal); box-shadow: 0 0 20px rgba(35,209,165,0.44); }
+    .rf-brand-icon { width: 58px; height: 58px; border-radius: 10px; background: #080b0e; box-shadow: 0 0 28px rgba(35,209,165,0.12); }
     .rf-brand strong { display: block; font-family: var(--rf-display); font-size: 22px; letter-spacing: -0.025em; }
     .rf-brand small { display: block; margin-top: 4px; color: var(--rf-muted); font: 500 10px/1.2 var(--rf-mono); letter-spacing: 0.12em; text-transform: uppercase; }
     .rf-title { margin-top: 22px; font-family: var(--rf-display); font-size: clamp(62px, 8.2vw, 108px); line-height: 0.87; letter-spacing: -0.065em; }
@@ -70,6 +76,18 @@
     .rf-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 7px; height: 7px; border-radius: 50%; background: var(--rf-teal); }
     .rf-media-caption { margin-top: 13px; color: rgba(245,242,235,0.34); font: 500 10px/1.5 var(--rf-mono); letter-spacing: 0.09em; text-transform: uppercase; }
 
+    .rf-renderers { position: relative; overflow: hidden; }
+    .rf-renderers::before { content: ''; position: absolute; inset: 0; background: linear-gradient(112deg, rgba(35,209,165,0.08), transparent 42%, rgba(239,90,79,0.075)); pointer-events: none; }
+    .rf-renderer-grid { position: relative; display: grid; grid-template-columns: 0.84fr 1.16fr; gap: clamp(48px, 7vw, 84px); align-items: center; }
+    .rf-renderer-panel { padding: 26px; border: 1px solid var(--rf-line); border-radius: 10px; background: rgba(8,11,14,0.76); box-shadow: 0 30px 90px rgba(0,0,0,0.36); }
+    .rf-renderer-row { display: grid; grid-template-columns: 13px 90px 1fr; gap: 15px; align-items: start; padding: 19px 0; border-bottom: 1px solid var(--rf-line); }
+    .rf-renderer-row:last-child { border-bottom: 0; }
+    .rf-renderer-dot { width: 10px; height: 10px; margin-top: 5px; border-radius: 50%; background: var(--rf-teal); box-shadow: 0 0 18px rgba(35,209,165,0.42); }
+    .rf-renderer-row-red .rf-renderer-dot { background: var(--rf-redshift); box-shadow: 0 0 18px rgba(239,90,79,0.42); }
+    .rf-renderer-row strong { font-family: var(--rf-display); font-size: 16px; }
+    .rf-renderer-row span { color: var(--rf-muted); font-size: 13px; line-height: 1.65; }
+    .rf-update { display: inline-flex; align-items: center; min-height: 28px; margin-left: 8px; padding: 0 11px; border: 1px solid rgba(239,90,79,0.42); border-radius: 999px; color: #ff8a80; background: rgba(239,90,79,0.08); font-size: 9px; letter-spacing: 0.12em; vertical-align: middle; }
+
     .rf-viewport-section .rf-heading { max-width: 760px; margin-top: 18px; }
     .rf-viewport-section .rf-copy { max-width: 660px; margin-top: 20px; }
     .rf-viewport-section .rf-shot { margin-top: 48px; }
@@ -88,7 +106,7 @@
 
     @media (max-width: 980px) {
       .rf-hero { min-height: auto; }
-      .rf-hero-grid, .rf-showcase, .rf-showcase-reverse { grid-template-columns: 1fr; }
+      .rf-hero-grid, .rf-showcase, .rf-showcase-reverse, .rf-renderer-grid { grid-template-columns: 1fr; }
       .rf-hero-copy { max-width: 700px; }
       .rf-showcase-reverse .rf-media { order: 2; }
       .rf-features { grid-template-columns: 1fr 1fr; }
@@ -111,6 +129,20 @@
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Reframe",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows",
+    "softwareVersion": "1.1.0",
+    "description": "Multi-format composition and ordered Arnold or Redshift delivery for Autodesk Maya.",
+    "url": "https://reimaginefx.com/reframe/",
+    "downloadUrl": "https://reimagine-fx.gumroad.com/l/reframev1",
+    "author": { "@type": "Organization", "name": "Reimagine Fx" }
+  }
+  </script>
 </head>
 <body>
   <div id="nav-placeholder"></div>
@@ -119,12 +151,12 @@
     <section class="rf-hero">
       <div class="rf-shell rf-hero-grid">
         <div class="rf-hero-copy">
-          <div class="rf-brand"><span class="rf-brand-dot" aria-hidden="true"></span><div><strong>Reframe</strong><small>Reimagine Fx</small></div></div>
-          <div class="rf-eyebrow">Maya format delivery / available now</div>
+          <div class="rf-brand"><img class="rf-brand-icon" src="/reframe/assets/icon.png" alt=""><div><strong>Reframe</strong><small>Reimagine Fx</small></div></div>
+          <div class="rf-eyebrow">Maya format delivery <span class="rf-update">Now with Redshift</span></div>
           <h1 class="rf-title">One scene.<span>Every format.</span></h1>
-          <p class="rf-lead">Plan crops, compare delivery frames, preserve the camera, and send multiple outputs through Arnold without rebuilding the shot for every platform.</p>
+          <p class="rf-lead">Plan crops, compare delivery frames, preserve the camera, and render ordered stills or image sequences through Arnold or Redshift without rebuilding the shot for every platform.</p>
           <div class="rf-actions"><a class="rf-btn rf-btn-primary" href="https://reimagine-fx.gumroad.com/l/reframev1" target="_blank" rel="noopener">Get Reframe on Gumroad &rarr;</a><a class="rf-btn rf-btn-outline" href="#presets">Explore the workflow &darr;</a></div>
-          <p class="rf-note">Version 1.0 &middot; $14.99 &middot; Instant download from Gumroad</p>
+          <p class="rf-note">Version 1.1.0 &middot; Arnold + Redshift &middot; Instant download from Gumroad</p>
         </div>
         <div class="rf-hero-media"><img class="rf-shot" src="/reframe/assets/maya-viewport.png" alt="Reframe delivery guides shown in an Autodesk Maya viewport"></div>
       </div>
@@ -135,7 +167,7 @@
         <div class="rf-proof-item"><strong>39 presets</strong><span>Production formats</span></div>
         <div class="rf-proof-item"><strong>12 families</strong><span>Social and delivery</span></div>
         <div class="rf-proof-item"><strong>Live guides</strong><span>Inside Maya</span></div>
-        <div class="rf-proof-item"><strong>Arnold queue</strong><span>Stills and sequences</span></div>
+        <div class="rf-proof-item"><strong>2 renderers</strong><span>Arnold + Redshift</span></div>
       </div>
     </section>
 
@@ -176,12 +208,26 @@
     <section class="rf-section rf-section-alt">
       <div class="rf-shell rf-showcase">
         <div>
-          <div class="rf-eyebrow">Arnold delivery</div>
+          <div class="rf-eyebrow">Renderer-aware delivery</div>
           <h2 class="rf-heading">Queue once. Render in order.</h2>
-          <p class="rf-copy">Build an ordered output list, select and open the render camera, then keep Arnold Common image format, frame extension, padding, and frame range synchronized.</p>
-          <ul class="rf-list"><li>Still images and frame sequences in preset-specific folders</li><li>Explicit Up and Down queue ordering</li><li>Escape cancellation with scene state restored after delivery</li></ul>
+          <p class="rf-copy">Build an ordered output list, select the render camera, then keep the current renderer's image format, frame extension, padding, and frame range synchronized.</p>
+          <ul class="rf-list"><li>Arnold and Redshift still or sequence delivery</li><li>Preset-specific folders keep frame sequences separated</li><li>Escape cancellation with scene state restored after delivery</li></ul>
         </div>
-        <figure class="rf-media"><img class="rf-shot" src="/reframe/assets/batch.png" alt="Reframe Delivery queue and Arnold render setup"><figcaption class="rf-media-caption">Batch tab / delivery queue and Arnold Common output</figcaption></figure>
+        <figure class="rf-media"><img class="rf-shot" src="/reframe/assets/batch.png" alt="Reframe Delivery queue and renderer-aware render setup"><figcaption class="rf-media-caption">Batch tab / ordered queue and current-renderer output</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="rf-section rf-renderers">
+      <div class="rf-shell rf-renderer-grid">
+        <div>
+          <div class="rf-eyebrow">New in version 1.1.0</div>
+          <h2 class="rf-heading" style="margin-top:18px">The same delivery queue for both renderers.</h2>
+          <p class="rf-copy" style="margin-top:20px">Reframe reads the active Maya renderer and uses the matching batch path. The queue, camera controls, frame range, padding, output folders, and cancellation behavior stay in one place.</p>
+        </div>
+        <div class="rf-renderer-panel" aria-label="Supported renderers">
+          <div class="rf-renderer-row"><span class="rf-renderer-dot" aria-hidden="true"></span><strong>Arnold</strong><span>Ordered stills and image sequences through MtoA, with output settings synchronized from Maya Render Settings.</span></div>
+          <div class="rf-renderer-row rf-renderer-row-red"><span class="rf-renderer-dot" aria-hidden="true"></span><strong>Redshift</strong><span>The same multi-format queue through redshift4maya, including per-preset sequence folders and clean scene-state restoration.</span></div>
+        </div>
       </div>
     </section>
 
@@ -205,7 +251,7 @@
           <article class="rf-feature"><span>01 / CHOOSE</span><h3>Find the format</h3><p>Search the library or create a custom output size.</p></article>
           <article class="rf-feature"><span>02 / COMPARE</span><h3>Review the crop</h3><p>Stack delivery frames and tune outside masks.</p></article>
           <article class="rf-feature"><span>03 / APPLY</span><h3>Protect the shot</h3><p>Adjust film aperture under an explicit FOV lock.</p></article>
-          <article class="rf-feature"><span>04 / DELIVER</span><h3>Render the queue</h3><p>Send ordered stills or sequences through Arnold.</p></article>
+          <article class="rf-feature"><span>04 / DELIVER</span><h3>Render the queue</h3><p>Send ordered stills or sequences through Arnold or Redshift.</p></article>
         </div>
       </div>
     </section>
@@ -215,8 +261,8 @@
         <div class="rf-eyebrow">Available now</div>
         <h2 class="rf-heading">One scene. Every format. Delivered.</h2>
         <p class="rf-copy">Plan, compare, apply, and render every delivery format without rebuilding the shot for each platform.</p>
-        <div class="rf-actions"><a class="rf-btn rf-btn-primary" href="https://reimagine-fx.gumroad.com/l/reframev1" target="_blank" rel="noopener">Get Reframe for $14.99 &rarr;</a></div>
-        <div class="rf-requirements">Version 1.0.0 &middot; Autodesk Maya 2025+ &middot; Windows 10/11 &middot; Arnold required for batch delivery</div>
+        <div class="rf-actions"><a class="rf-btn rf-btn-primary" href="https://reimagine-fx.gumroad.com/l/reframev1" target="_blank" rel="noopener">Get Reframe on Gumroad &rarr;</a></div>
+        <div class="rf-requirements">Version 1.1.0 &middot; Autodesk Maya 2025+ &middot; Windows 10/11 &middot; Arnold requires MtoA &middot; Redshift requires redshift4maya</div>
       </div>
     </section>
   </main>

@@ -1,0 +1,107 @@
+{
+  "product": "Reframe",
+  "version": "1.1.0",
+  "generated": "2026-08-26",
+  "source_policy": "Supplied screenshots are embedded unchanged: no drawn overlays, filters, rotation, or crop inside the image bounds.",
+  "background_prompt": "Subtle dark graphite campaign texture with restrained teal and warm red light; no text, UI, logos, grids, borders, or guide lines.",
+  "assets": [
+    {
+      "file": "exports/poster-01-renderers.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 702713,
+      "sha256": "04b677839b2c1eef02dea6b0116437b03d0f22c2b10e5c4cf7e63681d127a5e2"
+    },
+    {
+      "file": "exports/poster-02-guides.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 652989,
+      "sha256": "274d1bfa7aa6a086ae51554fcadf3c3300e80d4199621e8eaba22b7febb6336b"
+    },
+    {
+      "file": "exports/poster-03-delivery.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 649791,
+      "sha256": "baa0603f8b8c63172adfb2f0aa526824afe155bfa1cbe7d94e5e2d186810a10d"
+    },
+    {
+      "file": "exports/carousel-01-cover.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 707412,
+      "sha256": "2e3ca963deb923ed5f230558e0c2294e3583108a02fc8ae5ec049c4b7a61fdf5"
+    },
+    {
+      "file": "exports/carousel-02-presets.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 654094,
+      "sha256": "8936fe17b02a64de44907da2885abbcac026ed425e4139ce815ed8f59b55afbb"
+    },
+    {
+      "file": "exports/carousel-03-guides.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 651097,
+      "sha256": "add30fbd1f74cc21928732fe0bbe8e24b709f9b5af975541c82e1ca4ddeda0d9"
+    },
+    {
+      "file": "exports/carousel-04-camera.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 668106,
+      "sha256": "accaf0c0f3ec812e6f9a1dab1b295b6abab68a165171378f468682d62a2b53bf"
+    },
+    {
+      "file": "exports/carousel-05-batch.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 649947,
+      "sha256": "67c8141e5f7ab2c71b12a4a0f4d1fd0496ed9a977fbeffc43f6a81081fffb3a7"
+    },
+    {
+      "file": "exports/carousel-06-renderers.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 660361,
+      "sha256": "5ffafa2cdd5367b21ba8986edd6b9d6306cccc7d13e926680647db546a77c306"
+    },
+    {
+      "file": "exports/carousel-07-cta.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 895694,
+      "sha256": "616acc397fca56dc2baf43403ab06a1c717d7bb9c6d539eae716826a15c5d5dd"
+    },
+    {
+      "file": "exports/gumroad-01-cover.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 615420,
+      "sha256": "1be1f589a6a974be5cc4d01ba7a2a4c5f7bcb71f4dd9ebd2053f924410a3a4ef"
+    },
+    {
+      "file": "exports/gumroad-02-delivery.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 565063,
+      "sha256": "7ab5a350feb2eed751537cad9a4922791a33bc50befda3311123f0d3f98b9494"
+    },
+    {
+      "file": "exports/gumroad-03-presets.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 572812,
+      "sha256": "27e06242edcb3365c8334b132936cdd2974e29727dc7268cb747f789c1bff45a"
+    },
+    {
+      "file": "exports/gumroad-thumbnail.png",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 817804,
+      "sha256": "4027492c27dbb2821a6543f5760801c9cf63b3fdf9c5c36b1cdb6349af1aa3f0"
+    }
+  ]
+}
