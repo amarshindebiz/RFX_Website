@@ -136,7 +136,7 @@ function buildFooter() {
         <div class="footer-socials">${socialsHTML}</div>
       </div>
       <div class="footer-col">
-        <h4>Products</h4>
+        <h2>Products</h2>
         <ul>
           <li><a href="/products/#maya">Maya Plugins</a></li>
           <li><a href="/products/#nuke">Nuke Plugins</a></li>
@@ -147,7 +147,7 @@ function buildFooter() {
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Studio</h4>
+        <h2>Studio</h2>
         <ul>
           <li><a href="/portfolio">Portfolio</a></li>
           <li><a href="/reel">Showreel</a></li>
@@ -157,7 +157,7 @@ function buildFooter() {
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Connect</h4>
+        <h2>Connect</h2>
         <ul>
           <li><a href="${SOCIAL_LINKS.youtube}" target="_blank" rel="noopener">YouTube</a></li>
           <li><a href="${SOCIAL_LINKS.instagram}" target="_blank" rel="noopener">Instagram</a></li>

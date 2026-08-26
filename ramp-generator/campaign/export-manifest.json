@@ -1,0 +1,120 @@
+{
+  "product": "Ramp Generator",
+  "version": "1.1.0",
+  "studio": "Reimagine Fx",
+  "generated": "2026-08-26",
+  "source_assets": [
+    "assets/editor.png",
+    "assets/library.png",
+    "assets/presets.png",
+    "assets/icon.png"
+  ],
+  "copy_file": "campaign-copy.md",
+  "assets": [
+    {
+      "file": "exports/poster-01-redshift.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 950257,
+      "sha256": "b66cce7e04aa4c1c9b16252f6c12d5d1b9f6b2ed2abd8a0083900dbbee733283"
+    },
+    {
+      "file": "exports/poster-02-library.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 908182,
+      "sha256": "5473b68ab9a4a84bf041fe3f0dc73628c13213a11d1efae72c32277b0f089bca"
+    },
+    {
+      "file": "exports/poster-03-presets.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 888575,
+      "sha256": "fd7acc08068980ff46b6541502e99f3cede0fdd860d1d76c65c682f8473eea42"
+    },
+    {
+      "file": "exports/carousel-01-cover.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 888165,
+      "sha256": "ed355e6e45af499043f6bc027b30bb1e8f040d44d079d4c30928459018add710"
+    },
+    {
+      "file": "exports/carousel-02-editor.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 927385,
+      "sha256": "9c46d4053f6e704a905b636209ebd5d909916fb8909d0d3293836f5b88c0ccca"
+    },
+    {
+      "file": "exports/carousel-03-library.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 923841,
+      "sha256": "4e3e5d434da05172e289f13aa8422d83ad816a154855c5c7f2856f6ccfb1b4e4"
+    },
+    {
+      "file": "exports/carousel-04-tools.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 865337,
+      "sha256": "132d010b0290b7b0a91a31663d38c92645e5c32915fde7c41bf584e268d1dc58"
+    },
+    {
+      "file": "exports/carousel-05-presets.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 886542,
+      "sha256": "4dec0b8e92f4d41801b143cd6bee547673f710832689f0c7e535565353a0b444"
+    },
+    {
+      "file": "exports/carousel-06-renderers.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 928652,
+      "sha256": "ee3d3fac66648285d44eb1d10ceac3281c5057f49d98a9b4086b916527ddcee0"
+    },
+    {
+      "file": "exports/carousel-07-cta.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 844776,
+      "sha256": "3ec38948db338f6db9b53391b6b2622146da317bd69a81c885f764b20a0ea1ca"
+    },
+    {
+      "file": "exports/gumroad-01-cover.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 551892,
+      "sha256": "08e9f145910d95242e452f052422271b05b5a4be27a100fae83d430c399e645b"
+    },
+    {
+      "file": "exports/gumroad-02-library.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 565050,
+      "sha256": "a298935e9b578a6aed70e1e48a204ad63b4195d57581b2c58aef5302b7bcd142"
+    },
+    {
+      "file": "exports/gumroad-03-renderers.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 511131,
+      "sha256": "02dbd1dda496eef1fb34baa21434eff8261e4d56075e9289ae6e9e73cb9e37d3"
+    },
+    {
+      "file": "exports/instagram-contact-sheet.jpg",
+      "width": 1322,
+      "height": 710,
+      "bytes": 155270,
+      "sha256": "fd3accb98dd3b435f13cef36021f2c30f4ad81becaae795b16c88f3bba385ad7"
+    },
+    {
+      "file": "exports/gumroad-contact-sheet.jpg",
+      "width": 1248,
+      "height": 273,
+      "bytes": 56046,
+      "sha256": "380aa8fcb1b1d2057dfffca261e3c7ad3684565ecb753b4afdeba0e5d989c1a8"
+    }
+  ]
+}

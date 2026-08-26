@@ -4,13 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ramp Generator for Maya | Reimagine FX</title>
-  <meta name="description" content="Create, edit, randomize and apply procedural gradients in Autodesk Maya. Includes 100 curated gradients, presets, image sampling, PNG baking, Maya ramps and Arnold aiRampRgb support.">
+  <meta name="description" content="Create, edit and apply procedural gradients in Autodesk Maya. Includes 100 curated gradients, presets, image sampling, PNG baking, and Maya, Arnold and Redshift shader workflows.">
   <link rel="canonical" href="https://reimaginefx.com/ramp-generator/">
   <meta property="og:title" content="Ramp Generator for Maya">
-  <meta property="og:description" content="Procedural gradients for Maya artists. Visual editing, 100 curated gradients, presets, randomization and Maya + Arnold shader workflows.">
+  <meta property="og:description" content="Procedural gradients for Maya artists. Visual editing, 100 curated gradients, presets, randomization, and Maya, Arnold and Redshift shader workflows.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://reimaginefx.com/ramp-generator/">
-  <meta property="og:image" content="https://reimaginefx.com/products/product-22.webp">
+  <meta property="og:image" content="https://reimaginefx.com/ramp-generator/campaign/exports/gumroad-01-cover.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ramp Generator for Maya">
+  <meta name="twitter:description" content="Design gradients visually and apply them to Maya, Arnold or Redshift materials.">
+  <meta name="twitter:image" content="https://reimaginefx.com/ramp-generator/campaign/exports/gumroad-01-cover.png">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +29,7 @@
       --rg-orange: #ff6a18;
       --rg-border: rgba(102, 104, 255, 0.34);
       --rg-soft: rgba(102, 104, 255, 0.09);
+      --text3: rgba(245,242,235,0.56);
     }
     body { background: #080b0f; }
     .rg-shell { width: min(calc(100% - 64px), 1180px); margin: 0 auto; }
@@ -69,7 +76,8 @@
     .rg-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
     .rg-brand img { width: 48px; height: 48px; border-radius: 8px; }
     .rg-brand span { color: var(--text2); font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; }
-    .rg-kicker { color: var(--rg-cyan); font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 20px; }
+    .rg-kicker { color: var(--rg-cyan); display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 20px; }
+    .rg-update { padding: 7px 10px; border: 1px solid rgba(255,106,24,0.48); border-radius: 999px; color: #ff9a63; background: rgba(255,106,24,0.08); font-size: 9px; letter-spacing: 0.16em; }
     .rg-title { font-family: var(--font-display); font-size: clamp(56px, 8vw, 112px); line-height: 0.88; letter-spacing: -0.055em; max-width: 720px; }
     .rg-title span { color: var(--rg-blue); }
     .rg-lead { max-width: 600px; margin-top: 28px; color: var(--text2); font-size: clamp(17px, 2vw, 21px); line-height: 1.65; }
@@ -88,7 +96,7 @@
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
     .rg-btn:hover { transform: translateY(-2px); }
-    .rg-btn-primary { color: #fff; background: var(--rg-blue); box-shadow: 0 16px 46px rgba(102,104,255,0.28); }
+    .rg-btn-primary { color: #fff; background: #5d5ff0; box-shadow: 0 16px 46px rgba(102,104,255,0.28); }
     .rg-btn-primary:hover { background: #797bff; }
     .rg-btn-secondary { color: var(--text); border: 1px solid var(--border2); background: rgba(255,255,255,0.035); }
     .rg-btn-secondary:hover { border-color: var(--rg-cyan); }
@@ -99,7 +107,7 @@
     .rg-proof-item { padding: 27px 20px; border-right: 1px solid var(--border); text-align: center; }
     .rg-proof-item:last-child { border-right: 0; }
     .rg-proof-item strong { display: block; color: var(--text); font-family: var(--font-display); font-size: 16px; }
-    .rg-proof-item span { display: block; margin-top: 5px; color: var(--text3); font-size: 11px; }
+    .rg-proof-item span { display: block; margin-top: 5px; color: #929493; font-size: 11px; }
 
     .rg-section { padding: 108px 0; }
     .rg-section-alt { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -123,7 +131,10 @@
 
     .rg-features { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .rg-feature { padding: 26px; min-height: 220px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
-    .rg-feature-num { color: var(--rg-blue); font-size: 10px; font-weight: 800; letter-spacing: 0.18em; }
+    .rg-feature-num { color: #7476ff; font-size: 10px; font-weight: 800; letter-spacing: 0.18em; }
+    .site-nav .nav-links a,
+    .site-nav .nav-chevron { color: rgba(245,242,235,0.53); }
+    .site-nav .nav-links a.nav-cta-pill { color: #08090c; }
     .rg-feature h3 { margin-top: 38px; color: var(--text); font-family: var(--font-display); font-size: 19px; }
     .rg-feature p { margin-top: 11px; color: var(--text2); font-size: 13px; line-height: 1.65; }
 
@@ -134,6 +145,15 @@
 
     .rg-renderers { margin-top: 46px; display: flex; flex-wrap: wrap; gap: 10px; }
     .rg-renderers span { padding: 12px 15px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text2); font-size: 12px; }
+    .rg-renderer-showcase { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1.1fr); align-items: center; gap: 64px; }
+    .rg-renderer-panel { width: 100%; margin: 0; }
+    .rg-renderer-panel img { display: block; width: 100%; border: 1px solid var(--border2); border-radius: 8px; box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+    .rg-renderer-panel figcaption { margin-top: 13px; color: var(--text3); font-size: 11px; line-height: 1.5; }
+    .rg-renderer-list { margin-top: 34px; border-top: 1px solid var(--border); }
+    .rg-renderer-item { display: grid; grid-template-columns: 92px 1fr; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .rg-renderer-item strong { color: var(--text); font-family: var(--font-display); font-size: 14px; }
+    .rg-renderer-item span { color: var(--text2); font-size: 12px; line-height: 1.6; }
+    .rg-limit { margin-top: 16px; color: var(--text3); font-size: 11px; line-height: 1.6; }
 
     .rg-cta { padding: 112px 0; text-align: center; position: relative; overflow: hidden; }
     .rg-cta::before { content: ''; position: absolute; left: 50%; bottom: 0; width: min(900px, 100%); height: 3px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--rg-pink), var(--rg-blue), var(--rg-cyan), transparent); }
@@ -147,6 +167,7 @@
       .rg-hero::before { background: linear-gradient(90deg, #080b0f 0%, rgba(8,11,15,0.96) 58%, rgba(8,11,15,0.48) 100%); }
       .rg-hero-shot { right: -10%; max-width: 66vw; opacity: 0.68; }
       .rg-showcase, .rg-showcase-reverse { grid-template-columns: 1fr; gap: 50px; }
+      .rg-renderer-showcase { grid-template-columns: 1fr; gap: 48px; }
       .rg-showcase-reverse .rg-media { order: 2; }
       .rg-features { grid-template-columns: 1fr 1fr; }
     }
@@ -177,7 +198,7 @@
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "Windows",
     "softwareVersion": "1.1.0",
-    "description": "Visual procedural gradient editor for Autodesk Maya with Maya Ramp and Arnold aiRampRgb support.",
+    "description": "Visual procedural gradient editor for Autodesk Maya with Maya Ramp, Arnold aiRampRgb and Redshift material support.",
     "url": "https://reimaginefx.com/ramp-generator/",
     "downloadUrl": "https://reimagine-fx.gumroad.com/l/rampgen",
     "author": { "@type": "Organization", "name": "Reimagine Fx" }
@@ -192,10 +213,10 @@
       <img class="rg-hero-shot" src="/ramp-generator/editor.webp" alt="Ramp Generator visual gradient editor inside Autodesk Maya">
       <div class="rg-shell">
         <div class="rg-hero-copy">
-          <div class="rg-brand"><img src="/ramp-generator/icon.png" alt=""><span>Reimagine Fx</span></div>
-          <div class="rg-kicker">Maya 2026 Plugin</div>
+          <div class="rg-brand"><img src="/ramp-generator/icon-192.png" alt=""><span>Reimagine Fx</span></div>
+          <div class="rg-kicker"><span>Maya 2026 Plugin</span><span class="rg-update">Now with Redshift</span></div>
           <h1 class="rg-title">Ramp<br><span>Generator</span></h1>
-          <p class="rg-lead">Procedural gradients for Maya artists. Design ramps visually, explore 100 curated palettes, generate variations, and apply them directly to Maya and Arnold shaders.</p>
+          <p class="rg-lead">Procedural gradients for Maya artists. Design ramps visually, explore 100 curated palettes, generate variations, and apply them directly to Maya, Arnold or Redshift materials.</p>
           <div class="rg-actions">
             <a class="rg-btn rg-btn-primary" href="https://reimagine-fx.gumroad.com/l/rampgen" target="_blank" rel="noopener">Get on Gumroad <span aria-hidden="true">&nearr;</span></a>
             <a class="rg-btn rg-btn-secondary" href="#editor">Explore features <span aria-hidden="true">&darr;</span></a>
@@ -208,7 +229,7 @@
     <section class="rg-proof" aria-label="Product highlights">
       <div class="rg-shell rg-proof-grid">
         <div class="rg-proof-item"><strong>100 Gradients</strong><span>Curated and editable</span></div>
-        <div class="rg-proof-item"><strong>Maya + Arnold</strong><span>Native ramp workflows</span></div>
+        <div class="rg-proof-item"><strong>3 Renderer Modes</strong><span>Maya, Arnold + Redshift</span></div>
         <div class="rg-proof-item"><strong>2-16 Stops</strong><span>Precise visual control</span></div>
         <div class="rg-proof-item"><strong>PNG Bake</strong><span>Up to 4096 px</span></div>
       </div>
@@ -238,7 +259,7 @@
         <div class="rg-features">
           <article class="rg-feature"><span class="rg-feature-num">01 / CREATE</span><h3>Edit visually</h3><p>Control every stop directly on the gradient canvas, with an inspector that stays in sync.</p></article>
           <article class="rg-feature"><span class="rg-feature-num">02 / EXPLORE</span><h3>Find a direction</h3><p>Start from 100 curated palettes or generate variations by category, stop count and interpolation.</p></article>
-          <article class="rg-feature"><span class="rg-feature-num">03 / APPLY</span><h3>Connect in one click</h3><p>Create a Maya ramp or Arnold aiRampRgb and connect it to the selected shader input.</p></article>
+          <article class="rg-feature"><span class="rg-feature-num">03 / APPLY</span><h3>Connect in one click</h3><p>Create a native ramp for Maya or Redshift materials, or an Arnold aiRampRgb, and connect it to the selected input.</p></article>
           <article class="rg-feature"><span class="rg-feature-num">04 / REUSE</span><h3>Save the result</h3><p>Store personal presets, share preset packs or bake the final gradient as a PNG texture.</p></article>
         </div>
       </div>
@@ -272,25 +293,39 @@
       </div>
     </section>
 
-    <section class="rg-section">
+    <section class="rg-section" id="renderers">
+      <div class="rg-shell rg-renderer-showcase">
+        <div>
+          <div class="rg-label">New in version 1.1.0</div>
+          <h2 class="rg-heading">One editor. Three shader paths.</h2>
+          <p class="rg-copy">Select a shader, choose an input, then apply. Ramp Generator builds the node network, handles color or scalar connections, and keeps renderer controls beside the gradient.</p>
+          <div class="rg-renderer-list">
+            <div class="rg-renderer-item"><strong>Maya</strong><span>Native ramp plus place2dTexture, six ramp types, batch apply, and live type updates.</span></div>
+            <div class="rg-renderer-item"><strong>Arnold</strong><span>aiRampRgb with direction controls, scene sync, shader input detection, and undoable connections.</span></div>
+            <div class="rg-renderer-item"><strong>Redshift</strong><span>Native ramps connected to supported Redshift materials, with shader refresh, batch apply, and live ramp-type updates.</span></div>
+          </div>
+          <p class="rg-limit">Redshift mode supports up to eight ramp stops. Arnold features require MtoA; Redshift features require redshift4maya.</p>
+        </div>
+        <figure class="rg-renderer-panel">
+          <img src="/ramp-generator/renderers.webp" alt="Ramp Generator target renderer controls showing Maya Ramp, Arnold and Redshift modes" loading="lazy" width="1008" height="516">
+          <figcaption>The renderer switch sits inside the same Editor workflow. No separate tool or duplicated setup.</figcaption>
+        </figure>
+      </div>
       <div class="rg-shell">
-        <div class="rg-label">Shader Workflow</div>
-        <h2 class="rg-heading">Built for Maya and Arnold look development.</h2>
-        <p class="rg-copy">Select a shader, choose an input, and apply. Ramp Generator builds the required node network, supports color and scalar inputs, and keeps Maya ramp type or Arnold direction controls close to the creative work.</p>
         <div class="rg-renderers" aria-label="Supported workflows">
-          <span>Maya Ramp</span><span>Arnold aiRampRgb</span><span>OpenPBR Surface</span><span>Standard Surface</span><span>aiStandardSurface</span><span>Batch Apply</span><span>Undo / Redo</span><span>Live Direction Sync</span>
+          <span>Maya Ramp</span><span>Arnold aiRampRgb</span><span>Redshift materials</span><span>OpenPBR Surface</span><span>Standard Surface</span><span>aiStandardSurface</span><span>Batch Apply</span><span>Undo / Redo</span><span>Live Sync</span>
         </div>
       </div>
     </section>
 
     <section class="rg-cta rg-section-alt">
       <div class="rg-shell">
-        <img src="/ramp-generator/icon.png" alt="Ramp Generator icon">
+        <img src="/ramp-generator/icon-192.png" alt="Ramp Generator icon">
         <div class="rg-label">Available now</div>
         <h2 class="rg-heading">Build better ramps, faster.</h2>
         <p class="rg-copy">Get Ramp Generator on Gumroad and bring visual gradient authoring directly into your Maya shading workflow.</p>
         <div class="rg-actions"><a class="rg-btn rg-btn-primary" href="https://reimagine-fx.gumroad.com/l/rampgen" target="_blank" rel="noopener">Download on Gumroad <span aria-hidden="true">&nearr;</span></a></div>
-        <div class="rg-requirements">Autodesk Maya 2026 &middot; Windows 10/11 &middot; Arnold features require MtoA &middot; Version 1.1.0</div>
+        <div class="rg-requirements">Autodesk Maya 2026 &middot; Windows 10/11 &middot; Arnold requires MtoA &middot; Redshift requires redshift4maya &middot; Version 1.1.0</div>
       </div>
     </section>
   </main>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramp Generator campaign exports</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #080b0f; }
+    body { color: #f5f7fa; font-family: Inter, "Segoe UI", Arial, sans-serif; }
+    .artboard { position: relative; display: none; overflow: hidden; isolation: isolate; background: #0b0e12; }
+    .artboard.active { display: block; }
+    .instagram { width: 1080px; height: 1350px; }
+    .gumroad { width: 1280px; height: 720px; }
+    .grain { position: absolute; inset: 0; z-index: 8; opacity: .12; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"); }
+    .rail { position: absolute; z-index: 7; left: 0; right: 0; height: 8px; background: linear-gradient(90deg, #e71aa8, #6668ff 35%, #22d8c4 68%, #ff6a18); }
+    .rail.top { top: 0; }
+    .rail.bottom { bottom: 0; }
+    .grid { position: absolute; inset: 0; z-index: -1; opacity: .45; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 72px 72px; }
+    .eyebrow { color: #77e8db; font-size: 18px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .brand { display: flex; align-items: center; gap: 16px; color: #a4acb8; font-size: 17px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+    .brand img { width: 56px; height: 56px; border-radius: 10px; }
+    h1, h2, p { margin: 0; }
+    h1, h2 { font-weight: 760; letter-spacing: -.055em; line-height: .92; }
+    .accent { color: #797bff; }
+    .orange { color: #ff8c4e; }
+    .lede { color: #aab2bf; font-size: 30px; line-height: 1.45; letter-spacing: -.015em; }
+    .footer { position: absolute; z-index: 6; left: 60px; right: 60px; bottom: 38px; display: flex; align-items: center; justify-content: space-between; color: #737c89; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; }
+    .footer strong { color: #f5f7fa; font-weight: 650; }
+    .shot { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+    .screen { overflow: hidden; background: #0c0f13; border: 1px solid #303640; border-radius: 18px; box-shadow: 0 32px 90px rgba(0,0,0,.58); }
+    .tag { display: inline-flex; align-items: center; min-height: 42px; padding: 0 16px; border: 1px solid #3b424d; border-radius: 999px; color: #b8c0cb; background: rgba(255,255,255,.035); font-size: 15px; font-weight: 650; }
+    .tag.redshift { border-color: rgba(255,106,24,.5); color: #ff9a63; background: rgba(255,106,24,.08); }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .metric strong { display: block; color: #fff; font-size: 54px; line-height: 1; }
+    .metric span { display: block; margin-top: 8px; color: #8993a1; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; }
+
+    /* Instagram posters */
+    .poster .copy { position: absolute; z-index: 3; left: 62px; right: 62px; top: 70px; }
+    .poster h1 { max-width: 880px; margin-top: 34px; font-size: 108px; }
+    .poster .lede { max-width: 780px; margin-top: 28px; }
+    .poster .screen { position: absolute; z-index: 2; }
+    .poster-one .screen { width: 530px; height: 741px; right: 56px; bottom: -48px; transform: rotate(1.5deg); }
+    .poster-one .copy { right: 350px; }
+    .poster-one h1 { font-size: 104px; }
+    .poster-one .tags { margin-top: 34px; max-width: 520px; }
+    .poster-one::before { content: ''; position: absolute; width: 560px; height: 560px; right: -150px; bottom: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(102,104,255,.24), transparent 68%); }
+    .poster-two .copy { right: 52px; }
+    .poster-two h1 { max-width: 860px; font-size: 118px; }
+    .poster-two .screen { left: 54px; right: 54px; bottom: 80px; height: 680px; }
+    .poster-two .screen img { object-position: center top; }
+    .poster-two .metric { position: absolute; z-index: 4; right: 78px; top: 320px; padding: 24px 28px; border-left: 4px solid #22d8c4; background: rgba(8,11,15,.86); }
+    .poster-three .copy { right: 450px; }
+    .poster-three h1 { font-size: 100px; }
+    .poster-three .screen { width: 600px; height: 842px; right: 36px; bottom: -110px; }
+    .poster-three .steps { position: absolute; z-index: 4; left: 64px; bottom: 150px; display: grid; gap: 16px; }
+    .poster-three .step { display: grid; grid-template-columns: 42px 1fr; gap: 14px; align-items: center; color: #aab2bf; font-size: 21px; }
+    .poster-three .step b { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid #6668ff; color: #9395ff; border-radius: 50%; font-size: 14px; }
+
+    /* Carousel */
+    .carousel { padding: 62px; }
+    .carousel .brand { position: relative; z-index: 4; }
+    .carousel .index { position: absolute; z-index: 5; top: 64px; right: 62px; color: #596270; font: 650 17px/1 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .12em; }
+    .carousel h2 { margin-top: 66px; max-width: 900px; font-size: 100px; }
+    .carousel .lede { margin-top: 30px; max-width: 840px; }
+    .carousel .screen { position: absolute; z-index: 2; }
+    .carousel-one h2 { font-size: 118px; }
+    .carousel-one .gradient-specimen { position: absolute; left: 62px; right: 62px; bottom: 220px; height: 230px; border: 1px solid #303640; border-radius: 18px; background: linear-gradient(90deg, #3ec9ac 0%, #51ddd3 34%, #118a78 55%, #35279a 79%, #35063f 100%); }
+    .carousel-one .stops { position: absolute; left: 72px; right: 72px; bottom: 180px; display: flex; justify-content: space-between; }
+    .carousel-one .stops i { width: 30px; height: 30px; border-radius: 50%; border: 7px solid #1b2027; box-shadow: 0 0 0 2px #fff; }
+    .carousel-two .screen { width: 525px; height: 735px; right: 58px; bottom: 35px; }
+    .carousel-two .copy-narrow { max-width: 430px; }
+    .carousel-two h2 { font-size: 92px; }
+    .carousel-two .tags { margin-top: 42px; max-width: 410px; }
+    .carousel-three h2 { max-width: 760px; font-size: 82px; }
+    .carousel-three .lede { max-width: 760px; }
+    .carousel-three .screen { left: 54px; right: 54px; bottom: 58px; height: 720px; }
+    .carousel-three .metric { position: absolute; z-index: 4; right: 76px; top: 445px; padding: 22px 28px; background: #0b0e12; border-left: 4px solid #e71aa8; }
+    .carousel-four .feature-grid { position: absolute; left: 62px; right: 62px; top: 460px; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #303640; border-left: 1px solid #303640; }
+    .carousel-four .feature { min-height: 245px; padding: 32px; border-right: 1px solid #303640; border-bottom: 1px solid #303640; }
+    .carousel-four .feature b { display: block; color: #fff; font-size: 28px; }
+    .carousel-four .feature span { display: block; margin-top: 16px; color: #8993a1; font-size: 20px; line-height: 1.5; }
+    .carousel-four .feature em { display: block; margin-bottom: 38px; color: #6668ff; font-style: normal; font: 650 14px/1 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .carousel-five .screen { width: 620px; height: 868px; right: -12px; top: 640px; }
+    .carousel-five .copy-narrow { max-width: 470px; position: relative; z-index: 4; }
+    .carousel-five h2 { font-size: 78px; }
+    .carousel-six .renderer-image { position: absolute; left: 62px; right: 62px; top: 470px; padding: 20px; background: #0f1318; border: 1px solid #303640; border-radius: 18px; box-shadow: 0 32px 90px rgba(0,0,0,.5); }
+    .carousel-six .renderer-image img { width: 100%; display: block; border-radius: 8px; }
+    .carousel-six .renderer-notes { position: absolute; left: 62px; right: 62px; bottom: 110px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .carousel-six .renderer-notes div { padding: 22px; border: 1px solid #303640; background: #11151a; }
+    .carousel-six .renderer-notes strong { display: block; font-size: 22px; }
+    .carousel-six .renderer-notes span { display: block; margin-top: 8px; color: #8993a1; font-size: 16px; line-height: 1.45; }
+    .carousel-seven { display: none; place-items: center; text-align: center; }
+    .carousel-seven.active { display: grid; }
+    .carousel-seven .center { position: relative; z-index: 4; width: 880px; }
+    .carousel-seven .brand { justify-content: center; }
+    .carousel-seven h2 { margin: 54px auto 0; font-size: 124px; }
+    .carousel-seven .lede { margin: 34px auto 0; max-width: 760px; }
+    .carousel-seven .button { display: inline-flex; align-items: center; justify-content: center; min-height: 64px; margin-top: 44px; padding: 0 30px; border-radius: 999px; background: #6668ff; color: #fff; font-size: 20px; font-weight: 750; }
+    .carousel-seven .renderers { margin-top: 38px; color: #858e9b; font-size: 17px; letter-spacing: .09em; text-transform: uppercase; }
+
+    /* Gumroad gallery */
+    .gumroad { padding: 54px 60px; }
+    .gumroad .brand { position: relative; z-index: 4; }
+    .gumroad h2 { margin-top: 60px; max-width: 730px; font-size: 82px; }
+    .gumroad .lede { max-width: 650px; margin-top: 24px; font-size: 24px; }
+    .gumroad .screen { position: absolute; z-index: 2; }
+    .gumroad-one .screen { width: 390px; height: 545px; right: 55px; bottom: -40px; transform: rotate(1.2deg); }
+    .gumroad-one .tags { margin-top: 30px; max-width: 690px; }
+    .gumroad-two h2 { max-width: 520px; font-size: 74px; }
+    .gumroad-two .screen { width: 560px; height: 600px; right: 54px; bottom: -52px; }
+    .gumroad-two .metrics { position: absolute; z-index: 4; left: 60px; bottom: 54px; display: flex; gap: 42px; }
+    .gumroad-two .metric strong { font-size: 44px; }
+    .gumroad-three h2 { max-width: 620px; font-size: 76px; }
+    .gumroad-three .renderer-image { position: absolute; z-index: 3; right: 54px; top: 118px; width: 580px; padding: 16px; border: 1px solid #303640; border-radius: 16px; background: #101419; }
+    .gumroad-three .renderer-image img { display: block; width: 100%; border-radius: 7px; }
+    .gumroad-three .tags { position: absolute; left: 60px; bottom: 76px; max-width: 560px; }
+  </style>
+</head>
+<body>
+  <article class="artboard instagram poster poster-one" data-asset="poster-01-redshift">
+    <div class="rail top"></div><div class="grid"></div>
+    <div class="copy"><div class="eyebrow">Ramp Generator / Maya 2026</div><h1>Ramps now reach <span class="orange">Redshift.</span></h1><p class="lede">Design once. Apply to Maya, Arnold or Redshift materials from the same editor.</p><div class="tags"><span class="tag">100 gradients</span><span class="tag redshift">New Redshift mode</span></div></div>
+    <div class="screen"><img class="shot" src="assets/editor.png" alt=""></div>
+    <div class="footer"><strong>Reimagine Fx</strong><span>reimaginefx.com/ramp-generator</span></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard instagram poster poster-two" data-asset="poster-02-library">
+    <div class="rail top"></div><div class="grid"></div>
+    <div class="copy"><div class="eyebrow">100 curated gradients</div><h1>Start with a palette worth editing.</h1></div>
+    <div class="metric"><strong>100</strong><span>Editable gradients</span></div>
+    <div class="screen"><img class="shot" src="assets/library.png" alt=""></div>
+    <div class="footer"><strong>Ramp Generator</strong><span>Search / Load / Edit</span></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard instagram poster poster-three" data-asset="poster-03-presets">
+    <div class="rail top"></div><div class="grid"></div>
+    <div class="copy"><div class="eyebrow">A reusable ramp workflow</div><h1>Keep the gradients that work.</h1><p class="lede">Save presets, move packs between artists, or bake the result as a PNG.</p></div>
+    <div class="steps"><div class="step"><b>01</b><span>Save personal presets</span></div><div class="step"><b>02</b><span>Export or import packs</span></div><div class="step"><b>03</b><span>Bake up to 4096 px</span></div></div>
+    <div class="screen"><img class="shot" src="assets/presets.png" alt=""></div>
+    <div class="footer"><strong>Ramp Generator</strong><span>Reimagine Fx</span></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard instagram carousel carousel-one" data-asset="carousel-01-cover">
+    <div class="rail top"></div><div class="grid"></div><span class="index">01 / 07</span>
+    <div class="brand"><img src="assets/icon.png" alt=""><span>Reimagine Fx</span></div>
+    <h2>Ramp <span class="accent">Generator</span></h2><p class="lede">A visual gradient editor built inside Autodesk Maya.</p>
+    <div class="gradient-specimen"></div><div class="stops"><i style="background:#3ec9ac"></i><i style="background:#51ddd3"></i><i style="background:#118a78"></i><i style="background:#35279a"></i><i style="background:#35063f"></i></div>
+    <div class="footer"><strong>Version 1.1.0</strong><span>Swipe to inspect the workflow</span></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard instagram carousel carousel-two" data-asset="carousel-02-editor">
+    <div class="rail top"></div><div class="grid"></div><span class="index">02 / 07</span>
+    <div class="brand"><img src="assets/icon.png" alt=""><span>Visual editor</span></div>
+    <div class="copy-narrow"><h2>Build the ramp where you can see it.</h2><p class="lede">Drag stops, choose interpolation, flip, space evenly, and keep the gradient visible while you work.</p><div class="tags"><span class="tag">2-16 stops</span><span class="tag">Smooth / Linear / Constant</span></div></div>
+    <div class="screen"><img class="shot" src="assets/editor.png" alt=""></div>
+    <div class="footer"><strong>Ramp Generator</strong><span>Direct canvas control</span></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard instagram carousel carousel-three" data-asset="carousel-03-library">
+    <div class="rail top"></div><div class="grid"></div><span class="index">03 / 07</span>
+    <div class="brand"><img src="assets/icon.png" alt=""><span>Curated library</span></div>
+    <h2>100 starting points. Every one editable.</h2><p class="lede">Search A-Z, load a gradient, then change any color, stop or interpolation.</p>
+    <div class="metric"><strong>100</strong><span>Curated gradients</span></div><div class="screen"><img class="shot" src="assets/library.png" alt=""></div>
+    <div class="footer"><strong>Ramp Generator</strong><span>Library / Search / Load</span></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard instagram carousel carousel-four" data-asset="carousel-04-tools">
+    <div class="rail top"></div><div class="grid"></div><span class="index">04 / 07</span>
+    <div class="brand"><img src="assets/icon.png" alt=""><span>Idea to texture</span></div>
+    <h2>More than a color strip.</h2><p class="lede">Generate, sample, refine, then take the gradient wherever the shot needs it.</p>
+    <div class="feature-grid"><div class="feature"><em>01</em><b>Randomize</b><span>Choose a category, stop count and interpolation.</span></div><div class="feature"><em>02</em><b>Sample images</b><span>Pull a horizontal palette from PNG, JPG, TIF and more.</span></div><div class="feature"><em>03</em><b>Save presets</b><span>Keep personal gradients between Maya sessions.</span></div><div class="feature"><em>04</em><b>Bake PNG</b><span>Export a reusable gradient up to 4096 px wide.</span></div></div>
+    <div class="footer"><strong>Ramp Generator</strong><span>Create / Sample / Bake</span></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard instagram carousel carousel-five" data-asset="carousel-05-presets">
+    <div class="rail top"></div><div class="grid"></div><span class="index">05 / 07</span>
+    <div class="brand"><img src="assets/icon.png" alt=""><span>My Presets</span></div>
+    <div class="copy-narrow"><h2>Save it before the good version disappears.</h2><p class="lede">Personal presets persist. Packs let you move a gradient collection to another artist or workstation.</p></div>
+    <div class="screen"><img class="shot" src="assets/presets.png" alt=""></div>
+    <div class="footer"><strong>Ramp Generator</strong><span>Save / Export / Import</span></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard instagram carousel carousel-six" data-asset="carousel-06-renderers">
+    <div class="rail top"></div><div class="grid"></div><span class="index">06 / 07</span>
+    <div class="brand"><img src="assets/icon.png" alt=""><span>Renderer targets</span></div>
+    <h2>One editor. <span class="orange">Three shader paths.</span></h2><p class="lede">Apply the current gradient without rebuilding the network by hand.</p>
+    <div class="renderer-image"><img src="../renderers.webp" alt=""></div>
+    <div class="renderer-notes"><div><strong>Maya</strong><span>Native ramp workflow</span></div><div><strong>Arnold</strong><span>aiRampRgb + sync</span></div><div><strong>Redshift</strong><span>Material inputs + batch</span></div></div>
+    <div class="footer"><strong>Ramp Generator</strong><span>New Redshift support</span></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard instagram carousel carousel-seven" data-asset="carousel-07-cta">
+    <div class="rail top"></div><div class="rail bottom"></div><div class="grid"></div><span class="index">07 / 07</span>
+    <div class="center"><div class="brand"><img src="assets/icon.png" alt=""><span>Reimagine Fx</span></div><h2>Build better ramps, faster.</h2><p class="lede">Ramp Generator for Autodesk Maya 2026. Available now on Gumroad.</p><div class="button">reimaginefx.com/ramp-generator</div><div class="renderers">Maya / Arnold / Redshift</div></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard gumroad gumroad-one" data-asset="gumroad-01-cover">
+    <div class="rail top"></div><div class="grid"></div><div class="brand"><img src="assets/icon.png" alt=""><span>Reimagine Fx / Maya 2026</span></div>
+    <h2>Ramp <span class="accent">Generator</span></h2><p class="lede">Procedural gradients for Maya artists. Now with Redshift material support.</p><div class="tags"><span class="tag">100 gradients</span><span class="tag">Visual editor</span><span class="tag redshift">Maya / Arnold / Redshift</span></div>
+    <div class="screen"><img class="shot" src="assets/editor.png" alt=""></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard gumroad gumroad-two" data-asset="gumroad-02-library">
+    <div class="rail top"></div><div class="grid"></div><div class="brand"><img src="assets/icon.png" alt=""><span>Ramp Generator</span></div>
+    <h2>A full ramp workflow inside Maya.</h2><p class="lede">Start from a palette, randomize it, save the result, or bake a PNG.</p>
+    <div class="metrics"><div class="metric"><strong>100</strong><span>Gradients</span></div><div class="metric"><strong>4096</strong><span>Max bake width</span></div><div class="metric"><strong>2-16</strong><span>Editor stops</span></div></div>
+    <div class="screen"><img class="shot" src="assets/library.png" alt=""></div><div class="grain"></div>
+  </article>
+
+  <article class="artboard gumroad gumroad-three" data-asset="gumroad-03-renderers">
+    <div class="rail top"></div><div class="grid"></div><div class="brand"><img src="assets/icon.png" alt=""><span>Shader workflow</span></div>
+    <h2>Apply to Maya, Arnold or <span class="orange">Redshift.</span></h2><p class="lede">Choose the shader and input. Ramp Generator builds the connection.</p>
+    <div class="renderer-image"><img src="../renderers.webp" alt=""></div><div class="tags"><span class="tag">Maya Ramp</span><span class="tag">Arnold aiRampRgb</span><span class="tag redshift">Redshift materials</span></div><div class="grain"></div>
+  </article>
+
+  <script>
+    const requested = new URLSearchParams(location.search).get('asset') || 'poster-01-redshift';
+    const artboard = document.querySelector('[data-asset="' + requested + '"]');
+    if (artboard) artboard.classList.add('active');
+  </script>
+</body>
+</html>

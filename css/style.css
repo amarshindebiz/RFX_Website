@@ -175,8 +175,9 @@ nav.scrolled {
 
 /* Chevron toggles (Products / Work) */
 .nav-chevron {
-  background: none; border: none; padding: 4px 2px;
-  color: var(--text3); display: flex; align-items: center;
+  background: none; border: none; padding: 4px;
+  min-width: 24px; min-height: 24px;
+  color: var(--text3); display: flex; align-items: center; justify-content: center;
   transition: color var(--dur-fast), transform var(--dur-fast);
 }
 .nav-chevron svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
@@ -496,7 +497,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 7
 }
 .footer-social:hover { border-color: var(--gold-border); color: var(--gold); background: var(--gold-dim); transform: translateY(-2px); }
 .footer-social svg { width: 15px; height: 15px; fill: currentColor; }
-.footer-col h4 {
+.footer-col h2 {
   font-family: var(--font-body);
   font-size: 11px; font-weight: 700; letter-spacing: 2px;
   color: var(--text); text-transform: uppercase; margin-bottom: 20px;
