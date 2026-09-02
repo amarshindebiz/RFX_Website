@@ -110,10 +110,11 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      min-width: max-content;
+      min-width: 0;
     }
 
     .brand-mark {
+      flex-shrink: 0;
       position: relative;
       width: 42px;
       height: 42px;
@@ -1121,9 +1122,11 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="/css/product-navigation.css">
 </head>
 
 <body>
+  <div class="rfx-product-return" role="navigation" aria-label="Product navigation"><a class="rfx-studio-home" href="/">Reimagine FX</a><a href="/products/"><span aria-hidden="true">&#8592;</span> Back to products</a></div>
   <div class="noise" aria-hidden="true"></div>
 
   <div class="page">

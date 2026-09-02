@@ -51,14 +51,26 @@ function _activeKey(activePage) {
 function buildNav(activePage) {
   const active = _activeKey(activePage);
   const cls = k => (active === k ? 'active' : '');
+  const productPages = ['ramp-generator', 'reframe', 'gltf-exporter', 'viewport', 'mayaviewer', 'blenderviewer'];
+  const isProduct = productPages.includes(location.pathname.split('/').filter(Boolean)[0]);
+  // Run after the caller inserts this markup, including pages that only init motion.
+  if (isProduct) queueMicrotask(initNav);
+  if (isProduct && !document.getElementById('rfx-product-navigation-style')) {
+    const style = document.createElement('link');
+    style.id = 'rfx-product-navigation-style';
+    style.rel = 'stylesheet';
+    style.href = '/css/product-navigation.css';
+    document.head.appendChild(style);
+  }
 
   const drawerSocials = ['instagram', 'youtube', 'discord', 'vimeo'].map(k =>
     `<a href="${SOCIAL_LINKS[k]}" target="_blank" rel="noopener" aria-label="${k}">${SOCIAL_ICONS[k]}</a>`
   ).join('');
 
   return `
-  <nav class="site-nav">
-    <a href="/" class="nav-logo"><img src="/logo.png" alt="Reimagine FX" style="height:28px;width:auto;display:inline-block !important;">REIMAGINE FX</a>
+  <nav class="site-nav${isProduct ? ' rfx-product-nav' : ''}">
+    <a href="/" class="nav-logo" aria-label="Reimagine FX home">${isProduct ? 'Reimagine FX' : '<img src="/logo.png" alt="" style="height:28px;width:auto;display:inline-block !important;">REIMAGINE FX'}</a>
+    ${isProduct ? '<a class="rfx-products-back" href="/products/"><span aria-hidden="true">&#8592;</span> Back to products</a>' : ''}
     <ul class="nav-links" id="navLinks">
       <li><a href="/" class="${cls('home')}">Home</a></li>
 
@@ -178,6 +190,8 @@ function initNav() {
   /* Use querySelector('nav') — never getElementById('nav'): the viewport/mayaviewer
      pages wrap the injected markup in <div id="nav">, which would shadow it. */
   const nav = document.querySelector('nav');
+  if (!nav || nav.dataset.rfxNavReady === 'true') return;
+  nav.dataset.rfxNavReady = 'true';
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
 

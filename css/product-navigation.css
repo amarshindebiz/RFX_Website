@@ -1,0 +1,47 @@
+/* Product return navigation, independent of each landing page's visual theme. */
+.rfx-product-return {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 max(20px, calc((100vw - 1220px) / 2));
+  background: #100e15;
+  border-bottom: 1px solid #3b3447;
+  color: #f5f1fa;
+  font: 600 13px/1.4 Arial, sans-serif;
+}
+.rfx-product-return a, a.rfx-products-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: inherit;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.rfx-product-return a:hover, a.rfx-products-back:hover { text-decoration: underline; text-underline-offset: 4px; }
+.rfx-product-return a:focus-visible, a.rfx-products-back:focus-visible { outline: 2px solid #c9adff; outline-offset: 2px; }
+.rfx-product-return .rfx-studio-home { font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+.rfx-product-return ~ header.nav, .rfx-product-return ~ header.site-header,
+.rfx-product-return ~ header.sticky { top: 48px; }
+.rfx-product-return ~ .skip:focus { top: 50px; z-index: 1200; }
+nav.rfx-product-nav { gap: 18px; }
+nav.rfx-product-nav .nav-logo { font-size: 18px; letter-spacing: 1px; }
+nav.rfx-product-nav .rfx-products-back { font: 600 12px/1.4 var(--font-body, Arial, sans-serif); }
+nav.rfx-product-nav > .nav-links { margin-left: auto; }
+@media (max-width: 1200px) {
+  nav.rfx-product-nav { padding-inline: 20px; gap: 12px; }
+  nav.rfx-product-nav .nav-logo { font-size: 15px; letter-spacing: .5px; }
+}
+@media (max-width: 1024px) {
+  nav.rfx-product-nav .rfx-products-back { margin-left: auto; }
+}
+@media (max-width: 370px) {
+  nav.rfx-product-nav { padding-inline: 12px; gap: 8px; }
+  nav.rfx-product-nav .nav-logo { font-size: 14px; letter-spacing: 0; }
+  .rfx-product-return { padding-inline: 14px; gap: 12px; }
+}
