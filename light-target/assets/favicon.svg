@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Reimagine FX">
+<rect width="512" height="512" rx="96" fill="#0F0D0A"/>
+<g transform="translate(51.20 51.20) scale(0.8000)"><g fill="none" stroke="#C7A253" stroke-width="13" stroke-linejoin="miter" stroke-linecap="butt"><path d="M236 236 L96 96 L416 96 L276 236"/><path d="M236 276 L96 416 L416 416 L276 276"/></g><g fill="#C7A253"><polygon points="256,236 276,256 256,276 236,256"/></g></g>
+</svg>
