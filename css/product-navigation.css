@@ -26,6 +26,9 @@
 .rfx-product-return a:hover, a.rfx-products-back:hover { text-decoration: underline; text-underline-offset: 4px; }
 .rfx-product-return a:focus-visible, a.rfx-products-back:focus-visible { outline: 2px solid #c9adff; outline-offset: 2px; }
 .rfx-product-return .rfx-studio-home { font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+.rfx-studio-home img { width: 28px; height: 28px; flex-shrink: 0; transition: filter .35s ease; }
+.rfx-studio-home:hover img { filter: brightness(1.18); }
+@media (prefers-reduced-motion: reduce) { .rfx-studio-home img { transition: none; } }
 .rfx-product-return ~ header.nav, .rfx-product-return ~ header.site-header,
 .rfx-product-return ~ header.sticky { top: 48px; }
 .rfx-product-return ~ .skip:focus { top: 50px; z-index: 1200; }

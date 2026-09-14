@@ -142,7 +142,16 @@ nav.scrolled {
   flex-shrink: 0;
   display: flex; align-items: center; gap: 10px;
 }
-.nav-logo img { height: 28px; width: auto; }
+.nav-logo img { height: 32px; width: 32px; flex-shrink: 0; }
+.rfx-aikya { transition: filter .35s ease, transform .35s ease; }
+.nav-logo:hover .rfx-aikya, .nav-logo:focus-visible .rfx-aikya {
+  filter: brightness(1.18);
+  transform: scale(1.06);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rfx-aikya { transition: none; }
+  .nav-logo:hover .rfx-aikya, .nav-logo:focus-visible .rfx-aikya { transform: none; }
+}
 
 .nav-links {
   display: flex; gap: 6px; list-style: none; align-items: center;

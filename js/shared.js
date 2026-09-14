@@ -69,7 +69,7 @@ function buildNav(activePage) {
 
   return `
   <nav class="site-nav${isProduct ? ' rfx-product-nav' : ''}">
-    <a href="/" class="nav-logo" aria-label="Reimagine FX home">${isProduct ? 'Reimagine FX' : '<img src="/logo.png" alt="" style="height:28px;width:auto;display:inline-block !important;">REIMAGINE FX'}</a>
+    <a href="/" class="nav-logo" aria-label="Reimagine FX home"><img class="rfx-aikya" src="/brand/aikya-mark.svg" alt="" width="32" height="32">${isProduct ? 'Reimagine FX' : 'REIMAGINE FX'}</a>
     ${isProduct ? '<a class="rfx-products-back" href="/products/"><span aria-hidden="true">&#8592;</span> Back to products</a>' : ''}
     <ul class="nav-links" id="navLinks">
       <li><a href="/" class="${cls('home')}">Home</a></li>
@@ -143,7 +143,7 @@ function buildFooter() {
   <footer>
     <div class="footer-grid">
       <div>
-        <div class="footer-logo"><img src="/logo.png" alt="Reimagine FX" style="height:32px;width:auto;display:inline-block !important;">REIMAGINE FX</div>
+        <div class="footer-logo"><img class="rfx-aikya" src="/brand/aikya-mark.svg" alt="" width="36" height="36">REIMAGINE FX</div>
         <p class="footer-tagline">Crafting Worlds.<br>Compositing Reality.</p>
         <div class="footer-socials">${socialsHTML}</div>
       </div>
