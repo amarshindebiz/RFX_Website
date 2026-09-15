@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/css/brand-experience.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reimagine FX — VFX Tools, Plugins & Training | Amar Shinde</title>
@@ -67,23 +68,6 @@
       color: var(--gold); text-transform: uppercase;
       margin-bottom: 26px; position: relative;
     }
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: var(--fs-hero);
-      font-weight: 700; line-height: 0.9; letter-spacing: -0.035em;
-      color: var(--text); position: relative;
-      perspective: 1000px;
-      margin-bottom: 8px;
-    }
-    .hero-title .fx, .hero-title .fx .split-char {
-      background: linear-gradient(115deg, var(--gold-deep) 10%, var(--gold2) 42%, #FFF3C4 50%, var(--gold2) 58%, var(--gold-deep) 90%);
-      background-size: 220% 100%;
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent; color: transparent;
-      animation: shimmer 5.5s ease-in-out infinite;
-      display: inline-block;
-    }
-    @keyframes shimmer { 0%,100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
     .hero-tag {
       font-size: 14px; letter-spacing: 4px; text-transform: uppercase;
       color: var(--text3); margin: 26px 0 40px; position: relative;
@@ -227,8 +211,12 @@
       .disc-arrow { display: none; }
     }
   </style>
+  <link rel="preload" href="/brand/fonts/cormorant-garamond-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/home-brand.css">
+  <script src="/js/home-brand.js" defer></script>
 </head>
 <body>
+  <script src="/js/brand-intro.js"></script>
   <div id="nav-placeholder"></div>
 
   <!-- ============ S1 · HERO ============ -->
@@ -242,13 +230,45 @@
     <div class="hero-grid-lines"></div>
     <div class="hero-orb" data-parallax="0.25"></div>
     <p class="hero-eyebrow fade-up">VFX Tools · Plugins · Training</p>
-    <h1 class="hero-title"><span data-split>REIMAGINE</span><br><span class="fx" data-split data-split-delay="0.55">FX</span></h1>
+    <div class="hero-brand">
+      <div class="hero-logo-stage" aria-hidden="true">
+        <svg class="hero-logo" viewBox="72 72 368 368">
+          <defs>
+            <mask id="hero-aikya-mask" maskUnits="userSpaceOnUse" x="72" y="72" width="368" height="368">
+              <g fill="none" stroke="white" stroke-width="12" stroke-linejoin="miter" stroke-linecap="butt">
+                <path d="M236 236 L96 96 L416 96 L276 236"/>
+                <path d="M276 276 L416 416 L96 416 L236 276"/>
+              </g>
+              <polygon fill="white" points="256,236 276,256 256,276 236,256"/>
+            </mask>
+            <linearGradient id="hero-gold-light">
+              <stop stop-color="#fff3d4" stop-opacity="0"/>
+              <stop offset=".5" stop-color="#fff3d4"/>
+              <stop offset="1" stop-color="#fff3d4" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke="#C7A253" stroke-width="12" stroke-linejoin="miter" stroke-linecap="butt">
+            <path d="M236 236 L96 96 L416 96 L276 236"/>
+            <path d="M276 276 L416 416 L96 416 L236 276"/>
+          </g>
+          <polygon fill="#C7A253" points="256,236 276,256 256,276 236,256"/>
+          <g mask="url(#hero-aikya-mask)">
+            <rect class="hero-logo-glint" x="80" y="-100" width="110" height="750" fill="url(#hero-gold-light)"/>
+          </g>
+        </svg>
+      </div>
+      <h1 class="hero-title">REIMAGINE FX</h1>
+    </div>
     <p class="hero-tag fade-up fade-up-d4">Crafting worlds. Compositing reality.</p>
     <div class="hero-actions fade-up fade-up-d5">
       <a href="/products" class="btn btn-primary" data-magnetic>Explore Products</a>
       <a href="/reel" class="btn btn-ghost" data-magnetic>Watch Showreel</a>
     </div>
     <div class="hero-scroll">Scroll</div>
+    <button class="hero-motion-toggle" type="button" aria-pressed="false" hidden>
+      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1h3v10H2zM7 1h3v10H7z"/></svg>
+      <span>Pause logo motion</span>
+    </button>
   </section>
 
   <!-- ============ S2 · TOOL MARQUEE ============ -->
