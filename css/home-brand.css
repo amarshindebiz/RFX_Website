@@ -28,15 +28,6 @@
 .hero .hero-video { opacity: .65; }
 .hero .hero-grid-lines { opacity: .4; }
 .hero .hero-scroll::after { animation: none; opacity: .6; }
-.hero-motion-toggle {
-  position: absolute; right: 24px; bottom: 26px; z-index: 2;
-  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 12px;
-  border: 1px solid rgba(199,162,83,.25); border-radius: 4px; background: rgba(5,5,7,.6);
-  color: #c0b8a8; font: 10px/1.4 var(--font-body); letter-spacing: .04em; cursor: pointer;
-}
-.hero-motion-toggle[hidden] { display: none; }
-.hero-motion-toggle:focus-visible { outline: 2px solid #C7A253; outline-offset: 4px; }
-.hero-motion-toggle svg { width: 12px; height: 12px; fill: currentColor; }
 .hero[data-logo-paused] .hero-logo, .hero[data-logo-paused] .hero-logo-glint,
 html.rfx-intro-active .hero-logo, html.rfx-intro-active .hero-logo-glint { animation-play-state: paused; }
 @keyframes rfx-logo-breathe {
@@ -54,7 +45,6 @@ html.rfx-intro-active .hero-logo, html.rfx-intro-active .hero-logo-glint { anima
   .hero .hero-eyebrow { font-size: 9px; letter-spacing: .2em; }
   .hero-logo-stage { margin-bottom: 26px; }
   .hero .hero-tag { max-width: 280px; line-height: 1.8; letter-spacing: .18em; }
-  .hero-motion-toggle { right: 16px; bottom: 20px; }
   .hero .hero-scroll { left: 28px; bottom: 28px; transform: none; align-items: flex-start; }
   .hero .hero-scroll::after { height: 26px; }
 }
@@ -66,5 +56,5 @@ html.rfx-intro-active .hero-logo, html.rfx-intro-active .hero-logo-glint { anima
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-logo, .hero-logo-glint { animation: none; }
-  .hero-logo-glint, .hero-motion-toggle { display: none; }
+  .hero-logo-glint { display: none; }
 }

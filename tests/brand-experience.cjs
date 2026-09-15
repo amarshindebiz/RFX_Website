@@ -23,7 +23,7 @@ fs.mkdirSync(output, { recursive: true });
       });
       const intro = await page.locator('.rfx-intro').evaluate(el => ({ background: getComputedStyle(el).backgroundColor, modal: el.matches(':modal') }));
       assert.equal(intro.background, 'rgb(0, 0, 0)'); assert(intro.modal);
-      assert.equal(await page.evaluate(() => document.activeElement.className), 'rfx-intro-skip');
+      assert.equal(await page.locator('.rfx-intro button').count(), 0);
       if (width === 1440) {
         await page.waitForTimeout(1000);
         await page.screenshot({ path: path.join(output, 'welcome-drawing.png') });
@@ -48,9 +48,7 @@ fs.mkdirSync(output, { recursive: true });
       });
       assert.notEqual(motion.before, motion.after);
       await page.screenshot({ path: path.join(output, `homepage-${width}.png`) });
-      await page.getByRole('button', { name: 'Pause logo motion' }).click();
-      assert.equal(await page.locator('.hero-logo').evaluate(el => getComputedStyle(el).animationPlayState), 'paused');
-      await page.getByRole('button', { name: 'Resume logo motion' }).click();
+      assert.equal(await page.locator('.hero-motion-toggle').count(), 0);
       if (width < 500) {
         await page.locator('#hamburger').click();
         assert.equal(await page.locator('#hamburger').getAttribute('aria-expanded'), 'true');
@@ -67,11 +65,10 @@ fs.mkdirSync(output, { recursive: true });
       await context.close();
     }
 
-    for (const action of ['skip', 'escape', 'wheel', 'touch', 'motion-change']) {
+    for (const action of ['escape', 'wheel', 'touch', 'motion-change']) {
       const context = await browser.newContext(); const page = await context.newPage();
       await page.goto(base + '/products/', { waitUntil: 'commit' });
       await page.locator('.rfx-intro[open]').waitFor();
-      if (action === 'skip') await page.getByRole('button', { name: 'Skip intro' }).click();
       if (action === 'escape') await page.keyboard.press('Escape');
       if (action === 'wheel') await page.mouse.wheel(0, 600);
       if (action === 'touch') await page.evaluate(() => window.dispatchEvent(new Event('touchmove')));
@@ -112,7 +109,7 @@ fs.mkdirSync(output, { recursive: true });
       const errors = []; page.on('pageerror', e => errors.push(e.message));
       await page.goto(base + route, { waitUntil: 'commit' });
       await page.locator('.rfx-intro[open]').waitFor();
-      await page.getByRole('button', { name: 'Skip intro' }).click();
+      await page.keyboard.press('Escape');
       await page.waitForLoadState('domcontentloaded');
       assert(await page.locator('.nav-logo, .rfx-studio-home').first().isVisible());
       assert.equal(errors.length, 0, errors.join('\n'));

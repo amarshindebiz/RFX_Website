@@ -20,14 +20,6 @@ html.rfx-intro-mounted::before { display: none; }
 .rfx-intro-line { stroke-dasharray: 1; stroke-dashoffset: 0; animation: rfx-intro-draw 1.55s cubic-bezier(.4,0,.2,1) both; }
 .rfx-intro-line--lower { animation-delay: 120ms; }
 .rfx-intro-center { transform-origin: 256px 256px; animation: rfx-intro-center 450ms 1.15s both; }
-.rfx-intro-skip {
-  position: absolute; bottom: max(24px, env(safe-area-inset-bottom)); right: 24px;
-  min-height: 44px; padding: 10px 16px; border: 1px solid #494131; border-radius: 4px;
-  background: transparent; color: #c6bca7; font: 12px/1.4 system-ui, sans-serif;
-  letter-spacing: .06em; cursor: pointer;
-}
-.rfx-intro-skip:focus-visible { outline: 2px solid #C7A253; outline-offset: 5px; }
-@media (hover: hover) and (pointer: fine) { .rfx-intro-skip:hover { color: #fff3d8; border-color: #C7A253; } }
 @keyframes rfx-intro-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes rfx-intro-center { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
 @media (prefers-reduced-motion: reduce) {

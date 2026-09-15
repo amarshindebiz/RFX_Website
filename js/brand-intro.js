@@ -69,12 +69,10 @@
         '<g fill="none" stroke="#C7A253" stroke-width="12" stroke-linejoin="miter" stroke-linecap="butt">' +
         '<path class="rfx-intro-line" pathLength="1" d="M236 236 L96 96 L416 96 L276 236"/>' +
         '<path class="rfx-intro-line rfx-intro-line--lower" pathLength="1" d="M276 276 L416 416 L96 416 L236 276"/></g>' +
-        '<polygon class="rfx-intro-center" fill="#C7A253" points="256,236 276,256 256,276 236,256"/></svg>' +
-        '<button class="rfx-intro-skip" type="button" autofocus>Skip intro</button>';
+        '<polygon class="rfx-intro-center" fill="#C7A253" points="256,236 276,256 256,276 236,256"/></svg>';
       document.body.appendChild(dialog);
       // Fail open if the companion stylesheet is blocked or absent.
       if (getComputedStyle(dialog).position !== 'fixed') { cleanup(); return; }
-      dialog.querySelector('button').addEventListener('click', skip);
       dialog.addEventListener('cancel', function (event) { event.preventDefault(); skip(); });
       dialog.showModal();
       root.classList.add('rfx-intro-mounted');
