@@ -233,28 +233,11 @@
     <div class="hero-brand">
       <div class="hero-logo-stage" aria-hidden="true">
         <svg class="hero-logo" viewBox="72 72 368 368">
-          <defs>
-            <mask id="hero-aikya-mask" maskUnits="userSpaceOnUse" x="72" y="72" width="368" height="368">
-              <g fill="none" stroke="white" stroke-width="12" stroke-linejoin="miter" stroke-linecap="butt">
-                <path d="M236 236 L96 96 L416 96 L276 236"/>
-                <path d="M276 276 L416 416 L96 416 L236 276"/>
-              </g>
-              <polygon fill="white" points="256,236 276,256 256,276 236,256"/>
-            </mask>
-            <linearGradient id="hero-gold-light">
-              <stop stop-color="#fff3d4" stop-opacity="0"/>
-              <stop offset=".5" stop-color="#fff3d4"/>
-              <stop offset="1" stop-color="#fff3d4" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
           <g fill="none" stroke="#C7A253" stroke-width="12" stroke-linejoin="miter" stroke-linecap="butt">
-            <path d="M236 236 L96 96 L416 96 L276 236"/>
-            <path d="M276 276 L416 416 L96 416 L236 276"/>
+            <path class="hero-logo-line" pathLength="1" d="M236 236 L96 96 L416 96 L276 236"/>
+            <path class="hero-logo-line hero-logo-line--lower" pathLength="1" d="M276 276 L416 416 L96 416 L236 276"/>
           </g>
-          <polygon fill="#C7A253" points="256,236 276,256 256,276 236,256"/>
-          <g mask="url(#hero-aikya-mask)">
-            <rect class="hero-logo-glint" x="80" y="-100" width="110" height="750" fill="url(#hero-gold-light)"/>
-          </g>
+          <polygon class="hero-logo-center" fill="#C7A253" points="256,236 276,256 256,276 236,256"/>
         </svg>
       </div>
       <h1 class="hero-title">REIMAGINE FX</h1>

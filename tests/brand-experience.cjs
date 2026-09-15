@@ -42,11 +42,24 @@ fs.mkdirSync(output, { recursive: true });
       assert(geometry.fontReady); assert(geometry.font.includes('Cormorant')); assert(!geometry.overflow);
       assert.equal(geometry.animation, 'none'); assert.equal(geometry.transform, 'none');
       const motion = await page.locator('.hero-logo').evaluate(el => {
-        const a = el.getAnimations()[0]; a.pause(); a.currentTime = 0;
-        const before = getComputedStyle(el).transform; a.currentTime = 4000;
-        const after = getComputedStyle(el).transform; a.play(); return { before, after };
+        const animations = el.getAnimations({ subtree: true });
+        animations.forEach(a => a.pause());
+        function sample(time) {
+          animations.forEach(a => { a.currentTime = time; });
+          return [...el.querySelectorAll('path, polygon')].map(node => {
+            const style = getComputedStyle(node);
+            return [style.strokeDashoffset, style.opacity, style.transform];
+          });
+        }
+        const result = { draw: sample(750), holdStart: sample(1700), holdEnd: sample(10650), repeat: sample(11750) };
+        animations.forEach(a => { a.currentTime = 2000; a.play(); });
+        return result;
       });
-      assert.notEqual(motion.before, motion.after);
+      assert(Number.parseFloat(motion.draw[0][0]) > 0 && Number.parseFloat(motion.draw[0][0]) < 1);
+      assert.deepEqual(motion.holdStart, motion.holdEnd, 'Logo must stay fully still for nine seconds');
+      assert.deepEqual(motion.draw, motion.repeat, 'Drawing must repeat each cycle');
+      assert.equal(motion.holdStart[0][0], '0px');
+      assert.equal(motion.holdStart[2][1], '1');
       await page.screenshot({ path: path.join(output, `homepage-${width}.png`) });
       assert.equal(await page.locator('.hero-motion-toggle').count(), 0);
       if (width < 500) {
@@ -96,7 +109,7 @@ fs.mkdirSync(output, { recursive: true });
       const bounds = await page.locator('.hero-title').boundingBox();
       assert(bounds.x >= 0 && bounds.x + bounds.width <= 321, 'Fallback title must fit');
       if (mode === 'reduced') {
-        assert.equal(await page.locator('.hero-logo').evaluate(el => getComputedStyle(el).animationName), 'none');
+        assert.equal(await page.locator('.hero-logo-line').first().evaluate(el => getComputedStyle(el).animationName), 'none');
         assert(!(await page.locator('.hero-motion-toggle').isVisible()));
       }
       await page.mouse.wheel(0, 600); await page.waitForTimeout(300);

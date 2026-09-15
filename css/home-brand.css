@@ -7,12 +7,13 @@
 .hero-logo-stage { position: relative; width: clamp(132px, 15vw, 194px); margin: 0 0 30px; }
 .hero-logo {
   display: block; width: 100%; height: auto; overflow: visible;
-  animation: rfx-logo-breathe 8s cubic-bezier(.45,0,.55,1) infinite;
 }
-.hero-logo-glint {
-  animation: rfx-logo-glint 8s cubic-bezier(.45,0,.55,1) infinite;
-  transform: translate(-450px, -120px); opacity: 0;
+.hero-logo-line {
+  stroke-dasharray: 1; stroke-dashoffset: 0;
+  animation: rfx-logo-draw 11s cubic-bezier(.4,0,.2,1) infinite;
 }
+.hero-logo-line--lower { animation-name: rfx-logo-draw-lower; }
+.hero-logo-center { transform-origin: 256px 256px; animation: rfx-logo-center 11s ease-out infinite; }
 .hero-title {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(30px, 7.2vw, 104px); font-weight: 500;
@@ -28,17 +29,23 @@
 .hero .hero-video { opacity: .65; }
 .hero .hero-grid-lines { opacity: .4; }
 .hero .hero-scroll::after { animation: none; opacity: .6; }
-.hero[data-logo-paused] .hero-logo, .hero[data-logo-paused] .hero-logo-glint,
-html.rfx-intro-active .hero-logo, html.rfx-intro-active .hero-logo-glint { animation-play-state: paused; }
-@keyframes rfx-logo-breathe {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-5px) scale(1.018); }
+.hero[data-logo-paused] .hero-logo-line, .hero[data-logo-paused] .hero-logo-center,
+html.rfx-intro-active .hero-logo-line, html.rfx-intro-active .hero-logo-center { animation-play-state: paused; }
+/* 1.67s draw, 9s fully still, then a 0.33s fade to reset the stroke. */
+@keyframes rfx-logo-draw {
+  0% { stroke-dashoffset: 1; opacity: 1; }
+  14.09%, 97% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
 }
-@keyframes rfx-logo-glint {
-  0%, 38% { transform: translate(-450px, -120px); opacity: 0; }
-  42% { opacity: .7; }
-  60% { opacity: .7; }
-  67%, 100% { transform: translate(550px, 120px); opacity: 0; }
+@keyframes rfx-logo-draw-lower {
+  0%, 1.09% { stroke-dashoffset: 1; opacity: 1; }
+  15.18%, 97% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes rfx-logo-center {
+  0%, 10.45% { opacity: 0; transform: scale(.92); }
+  14.55%, 97% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
 }
 @media (max-width: 600px) {
   .hero { padding: 106px 20px 110px; }
@@ -55,6 +62,5 @@ html.rfx-intro-active .hero-logo, html.rfx-intro-active .hero-logo-glint { anima
   .hero .hero-eyebrow { margin-bottom: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-logo, .hero-logo-glint { animation: none; }
-  .hero-logo-glint { display: none; }
+  .hero-logo-line, .hero-logo-center { animation: none; }
 }
