@@ -175,7 +175,7 @@ function buildFooter() {
           <li><a href="${SOCIAL_LINKS.instagram}" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="${SOCIAL_LINKS.discord}" target="_blank" rel="noopener">Discord</a></li>
           <li><a href="${SOCIAL_LINKS.vimeo}" target="_blank" rel="noopener">Vimeo</a></li>
-          <li><a href="https://www.skillshare.com/user/reimagine" target="_blank" rel="noopener">Skillshare</a></li>
+          <li><a href="https://www.skillshare.com/en/profile/Reimagine-Fx/3319666" target="_blank" rel="noopener">Skillshare</a></li>
         </ul>
       </div>
     </div>
