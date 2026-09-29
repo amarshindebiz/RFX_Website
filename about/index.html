@@ -4,117 +4,498 @@
   <link rel="stylesheet" href="/css/brand-experience.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Reimagine FX</title>
+  <title>About Amar Shinde · 3D Motion &amp; FX Artist, Creative Technologist | Reimagine FX</title>
   <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
-  <meta name="description" content="About Amar Shinde — Founder of Reimagine FX. 8+ years of professional VFX, 3D compositing, and motion design.">
+  <meta name="description" content="Amar Shinde is a 3D motion designer, FX artist and creative technologist, and the founder of Reimagine FX. He builds Maya and Nuke plugins, iOS apps and AI systems for artists.">
+  <link rel="canonical" href="https://reimaginefx.com/about/">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="About Amar Shinde · Reimagine FX">
+  <meta property="og:description" content="3D motion designer, FX artist and creative technologist. Founder of Reimagine FX.">
+  <meta property="og:url" content="https://reimaginefx.com/about/">
+  <meta property="og:image" content="https://reimaginefx.com/portrait.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
   <link rel="stylesheet" href="/css/style.css">
-  <style>
-    .about-hero { padding: 140px 48px 80px; background: var(--bg); border-bottom: 1px solid var(--border); }
-    .about-hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-hero-img { position: relative; aspect-ratio: 3/4; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
-    .about-hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-    .about-hero-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30%; background: linear-gradient(to top, var(--bg), transparent); pointer-events: none; }
-    .about-name { font-family: var(--font-display); font-size: clamp(48px, 7vw, 80px); letter-spacing: 4px; line-height: 0.95; color: var(--text); margin-bottom: 8px; }
-    .about-role { font-family: var(--font-head); font-size: 13px; font-weight: 600; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 32px; }
-    .about-bio p { font-size: 16px; color: var(--text2); line-height: 1.85; margin-bottom: 20px; }
-    .about-bio p strong { color: var(--text); font-weight: 500; }
-    .about-bio p:last-child { margin-bottom: 0; }
-    .about-ctas { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
-    .toolkit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .toolkit-item { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 20px 16px; text-align: center; transition: border-color 0.3s, background 0.3s; }
-    .toolkit-item:hover { border-color: var(--gold-border); background: var(--surface2); }
-    .toolkit-name { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .toolkit-type { font-size: 11px; color: var(--text3); font-family: var(--font-head); letter-spacing: 1px; }
-    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px; }
-    .about-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 32px; text-align: center; }
-    .about-stat-num { font-family: var(--font-display); font-size: 52px; letter-spacing: 2px; color: var(--gold); line-height: 1; margin-bottom: 8px; }
-    .about-stat-label { font-family: var(--font-head); font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--text3); text-transform: uppercase; }
-    .timeline { display: flex; flex-direction: column; }
-    .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 32px; padding: 32px 0; border-bottom: 1px solid var(--border); }
-    .timeline-item:last-child { border-bottom: none; }
-    .timeline-year { font-family: var(--font-display); font-size: 14px; letter-spacing: 2px; color: var(--text3); padding-top: 4px; }
-    .timeline-title { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .timeline-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
-    @media (max-width: 768px) {
-      .about-hero { padding: 100px 20px 60px; }
-      .about-hero-inner { grid-template-columns: 1fr; gap: 40px; }
-      .about-hero-img { aspect-ratio: 1/1; max-width: 320px; }
-      .toolkit-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-stats { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns: 80px 1fr; gap: 16px; }
-    }
-  </style>
+  <link rel="stylesheet" href="/about/about.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Amar Shinde",
+    "url": "https://reimaginefx.com/about/",
+    "image": "https://reimaginefx.com/portrait.jpg",
+    "jobTitle": "3D Motion Designer, FX Artist and Creative Technologist",
+    "worksFor": { "@type": "Organization", "name": "Reimagine FX", "url": "https://reimaginefx.com/" },
+    "knowsAbout": ["Visual effects", "3D motion design", "Houdini", "Autodesk Maya", "Nuke", "Cinema 4D", "Python", "Model Context Protocol", "Multi-agent AI systems", "OpenUSD", "iOS development"],
+    "sameAs": [
+      "https://www.linkedin.com/in/amarshindebiz/",
+      "https://www.youtube.com/@reimaginefx",
+      "https://www.instagram.com/reimaginefx",
+      "https://x.com/Reimagine_Fx",
+      "https://vimeo.com/reimaginefx",
+      "https://www.behance.net/reimaginefx",
+      "https://www.skillshare.com/en/profile/Reimagine-Fx/3319666",
+      "https://reimagine-fx.gumroad.com/"
+    ]
+  }
+  </script>
 </head>
-<body>
+<body class="ab-page">
   <script src="/js/brand-intro.js"></script>
   <div id="nav-placeholder"></div>
-  <section class="about-hero">
-    <div class="about-hero-inner">
-      <div class="about-hero-img fade-up">
-        <img src="/portrait.jpg" alt="Amar Shinde — Founder, Reimagine FX">
-      </div>
-      <div class="about-hero-content">
-        <p class="section-label fade-up">Founder · Reimagine FX</p>
-        <h1 class="about-name fade-up fade-up-d1">AMAR<br>SHINDE</h1>
-        <p class="about-role fade-up fade-up-d2">3D Compositor · FX Artist · Motion Designer</p>
-        <div class="about-bio fade-up fade-up-d3">
-          <p>With <strong>8+ years in the visual effects industry</strong>, I've built a career around one obsession: making the impossible look inevitable on screen. I'm a 3D Compositor, FX Artist, and Motion Designer who lives at the intersection of technical precision and cinematic storytelling.</p>
-          <p>My toolkit spans the full spectrum of professional VFX — from simulating destruction in <strong>Houdini</strong> to building photorealistic worlds in <strong>Unreal Engine</strong>, compositing seamless shots in <strong>Nuke</strong>, and crafting fluid motion in <strong>After Effects</strong>. Every tool is a means to one end: transporting audiences to worlds that don't exist yet.</p>
-          <p>Beyond client work, I'm deeply invested in the <strong>next generation of VFX artists</strong>. Through YouTube, Skillshare, and my Gumroad store, I share the actual workflows, assets, and techniques I use on real productions — no fluff, just what works.</p>
+
+  <main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="ab-hero" aria-labelledby="ab-name">
+    <svg class="ab-hero-mark" viewBox="72 72 368 368" aria-hidden="true" focusable="false">
+      <g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter">
+        <path pathLength="1" d="M236 236 L96 96 L416 96 L276 236"/>
+        <path pathLength="1" d="M276 276 L416 416 L96 416 L236 276"/>
+      </g>
+      <polygon fill="currentColor" points="256,236 276,256 256,276 236,256"/>
+    </svg>
+
+    <div class="ab-hero-inner">
+      <figure class="vf fade-up" aria-label="Portrait of Amar Shinde">
+        <img src="/portrait.jpg" alt="Amar Shinde, founder of Reimagine FX" width="810" height="1080" fetchpriority="high">
+        <span class="vf-c vf-c--tl" aria-hidden="true"></span>
+        <span class="vf-c vf-c--tr" aria-hidden="true"></span>
+        <span class="vf-c vf-c--bl" aria-hidden="true"></span>
+        <span class="vf-c vf-c--br" aria-hidden="true"></span>
+        <span class="vf-rec" aria-hidden="true"><i></i>REC</span>
+        <span class="vf-fmt" aria-hidden="true">4K · 25P</span>
+        <span class="vf-tc" id="vf-tc" aria-hidden="true">01:00:00:00</span>
+      </figure>
+
+      <div class="ab-hero-copy">
+        <div class="ab-hero-top fade-up">
+          <p class="section-label" data-i18n="hero.eyebrow">Founder · Reimagine FX</p>
+          <div class="ab-lang" role="group" aria-label="Language" data-i18n-attr="aria-label:ui.langGroup">
+            <button type="button" class="ab-lang-btn" data-lang="en" aria-pressed="true" lang="en">EN</button>
+            <button type="button" class="ab-lang-btn" data-lang="de" aria-pressed="false" lang="de">DE</button>
+          </div>
         </div>
-        <div class="about-ctas fade-up fade-up-d4">
-          <a href="/contact" class="btn btn-primary">Work with me</a>
-          <a href="/reel" class="btn btn-outline">Watch my reel</a>
+        <h1 class="ab-name" id="ab-name" aria-label="Amar Shinde"><span data-split data-split-delay="0.25" aria-hidden="true">Amar</span><br><span data-split data-split-delay="0.5" aria-hidden="true">Shinde</span></h1>
+        <p class="ab-role fade-up fade-up-d2" data-i18n="hero.role">3D Motion &amp; FX Artist · Creative Technologist · AI Systems Builder</p>
+        <div class="ab-bio fade-up fade-up-d3">
+          <p data-i18n="hero.p1">I've spent more than eight years in production. Compositing, 3D, simulation in Houdini, motion design for brands. Somewhere in there I started writing the tools I kept wishing someone else would write.</p>
+          <p data-i18n="hero.p2">That habit turned into <strong>Reimagine FX</strong> in 2018. It has since released seven Maya plugins and a Nuke diagnostic suite, plus three iOS apps for viewing 3D on a phone (two of them stream live scenes from Maya and Blender). Artists in 79 countries have downloaded the tools.</p>
+          <p data-i18n="hero.p3">Most of that software now gets built with <strong>AI in the loop</strong>. I run coding agents from a command center I wrote myself, and I've connected them to Maya, Houdini, Cinema 4D and Premiere Pro through typed, reviewable tools. I still make the calls. The agents do a lot of the typing.</p>
+        </div>
+        <p class="ab-sig fade-up fade-up-d4" data-i18n="hero.sig">When the pipeline is the bottleneck, I fix the pipeline.</p>
+        <div class="ab-ctas fade-up fade-up-d5">
+          <a href="/contact" class="btn btn-primary" data-magnetic data-i18n="hero.cta1">Work with me</a>
+          <a href="/reel" class="btn btn-ghost" data-magnetic data-i18n="hero.cta2">Watch the reel</a>
         </div>
       </div>
     </div>
   </section>
-  <section class="section" style="background: var(--bg2);">
-    <div class="container">
-      <p class="section-label" data-reveal>Technical skills</p>
-      <h2 class="section-title" data-reveal>The toolkit</h2>
-      <p class="section-subtitle" data-reveal>Industry-standard software used on professional productions.</p>
-      <div class="toolkit-grid" data-reveal>
-        <div class="toolkit-item"><div class="toolkit-name">Maya</div><div class="toolkit-type">3D · Rigging · FX</div></div>
-        <div class="toolkit-item"><div class="toolkit-name">Nuke</div><div class="toolkit-type">Compositing</div></div>
-        <div class="toolkit-item"><div class="toolkit-name">Houdini</div><div class="toolkit-type">FX · Simulation</div></div>
-        <div class="toolkit-item"><div class="toolkit-name">Unreal Engine</div><div class="toolkit-type">Real-time 3D</div></div>
-        <div class="toolkit-item"><div class="toolkit-name">After Effects</div><div class="toolkit-type">Motion Design</div></div>
-        <div class="toolkit-item"><div class="toolkit-name">Cinema 4D</div><div class="toolkit-type">3D Motion</div></div>
-        <div class="toolkit-item"><div class="toolkit-name">DaVinci Resolve</div><div class="toolkit-type">Colour · Edit</div></div>
-        <div class="toolkit-item"><div class="toolkit-name">Substance</div><div class="toolkit-type">Texturing</div></div>
+
+  <!-- ============ STATS ============ -->
+  <section class="ab-stats" aria-label="In numbers" data-i18n-attr="aria-label:stats.aria">
+    <div class="ab-stats-grid">
+      <div class="ab-stat" data-reveal><span class="ab-stat-num" data-stat="8" data-suf="+">8+</span><span class="ab-stat-label" data-i18n="stats.years">years in production</span></div>
+      <div class="ab-stat" data-reveal><span class="ab-stat-num" data-stat="3">3</span><span class="ab-stat-label" data-i18n="stats.apps">iOS apps shipped</span></div>
+      <div class="ab-stat" data-reveal><span class="ab-stat-num" data-stat="7">7</span><span class="ab-stat-label" data-i18n="stats.plugins">Maya plugins released</span></div>
+      <div class="ab-stat" data-reveal><span class="ab-stat-num" data-stat="79">79</span><span class="ab-stat-label" data-i18n="stats.countries">countries with downloads</span></div>
+      <div class="ab-stat" data-reveal><span class="ab-stat-num" data-stat="20000" data-group="1" data-suf="+">20,000+</span><span class="ab-stat-label" data-i18n="stats.subs">YouTube subscribers</span></div>
+      <div class="ab-stat" data-reveal><span class="ab-stat-num" data-stat="1.9" data-dec="1" data-suf="M+" data-suf-de=" Mio.+">1.9M+</span><span class="ab-stat-label" data-i18n="stats.views">views on YouTube</span></div>
+    </div>
+  </section>
+
+  <!-- ============ TIMELINE ============ -->
+  <section class="ab-tl" id="timeline" data-view="list" aria-labelledby="tl-title">
+    <div class="ab-tl-head">
+      <div>
+        <p class="section-label" data-reveal data-i18n="tl.label">Timeline</p>
+        <h2 class="section-title" id="tl-title" data-reveal data-i18n="tl.title">The edit so far</h2>
+        <p class="ab-tl-sub" data-reveal>
+          <span class="tl-sub-tl" data-i18n="tl.sub">Scroll to move the playhead. Every clip is a chapter; click one to jump straight to it.</span>
+          <span class="tl-sub-list" data-i18n="tl.subList">Every chapter so far, from the first camera to the current R&amp;D.</span>
+        </p>
       </div>
-      <div class="about-stats" data-reveal>
-        <div class="about-stat"><div class="about-stat-num" data-count="8" data-count-suffix="+">0</div><div class="about-stat-label">Years in VFX</div></div>
-        <div class="about-stat"><div class="about-stat-num" data-count="50" data-count-suffix="+">0</div><div class="about-stat-label">Projects delivered</div></div>
-        <div class="about-stat"><div class="about-stat-num" data-count="1000" data-count-suffix="+">0</div><div class="about-stat-label">Students reached</div></div>
+      <div class="ab-tl-tools" data-reveal>
+        <div class="tl-view" role="group" aria-label="Timeline view" data-i18n-attr="aria-label:ui.viewGroup" hidden>
+          <button type="button" class="tl-view-btn" data-view-set="timeline" aria-pressed="true" data-i18n="tl.viewTimeline">Timeline</button>
+          <button type="button" class="tl-view-btn" data-view-set="list" aria-pressed="false" data-i18n="tl.viewList">List</button>
+        </div>
+        <a class="tl-skip" href="#ai-lab" data-i18n="tl.skip">Skip the timeline</a>
+      </div>
+    </div>
+
+    <!-- Desktop editing-timeline stage (built by about.js; hidden in list view) -->
+    <div class="tl-scroller" id="tl-scroller">
+      <div class="tl-stage" id="tl-stage" role="region" aria-label="Career timeline" data-i18n-attr="aria-label:ui.stageAria">
+        <div class="tl-top">
+          <div class="tl-monitor" aria-hidden="true">
+            <div class="mon-safe"></div>
+            <div class="mon-year" id="mon-year"></div>
+            <div class="mon-ico" id="mon-ico"></div>
+            <div class="mon-tl" id="mon-tl"></div>
+            <div class="mon-tr" id="mon-tr"></div>
+            <div class="mon-bl"><i class="mon-rec"></i><span id="mon-tc">01:00:00:00</span></div>
+            <div class="mon-br" id="mon-br"></div>
+          </div>
+          <div class="tl-inspector" id="tl-inspector" tabindex="-1">
+            <div class="tl-insp-card" id="tl-insp-card"></div>
+            <div class="tl-insp-foot">
+              <span class="tl-insp-foot-label" data-i18n="tl.collected">Skills on the timeline</span>
+              <span class="tl-count"><b id="tl-count-n">0</b><span> / </span><span id="tl-count-t">0</span></span>
+              <span class="tl-bar" aria-hidden="true"><span id="tl-bar-fill"></span></span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-edit" id="tl-edit">
+          <div class="tl-ruler-row"><div class="tl-hdr tl-hdr--ruler" aria-hidden="true"></div><div class="tl-ruler" id="tl-ruler" aria-hidden="true"></div></div>
+          <div class="tl-tracks" id="tl-tracks"></div>
+          <div class="tl-playhead" id="tl-playhead" aria-hidden="true"><span class="tl-ph-tag" id="tl-ph-tag">2016</span></div>
+          <p class="tl-hint" data-i18n="tl.hint">Scroll to scrub · ← → to step · click any clip</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapters: the source of truth. Shown as a list on mobile / list view. -->
+    <ol class="tl-list" id="tl-list">
+
+      <li class="tl-ch" id="ch-origins" data-track="v1" data-start="origins" data-at="origins" data-icon="origins" data-short="Origins" data-short-de="Ursprünge" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="v1">V1</span><span class="tl-when" data-i18n="ch.origins.when">Before 2016</span></header>
+          <h3 class="tl-title" data-i18n="ch.origins.title">Origins</h3>
+          <div class="tl-body" data-i18n="ch.origins.body">
+            <p>It started with games. I wanted to build the worlds I was playing in, and the first step turned out to be learning how to see.</p>
+            <ol class="tl-beats">
+              <li><b>Games</b><span>The spark. Playing them made me want to build them.</span></li>
+              <li><b>Photography</b><span>Commercial shoots and portraits, taken on while I was still a student.</span></li>
+              <li><b>Cinematography</b><span>DSLRs and cinema cameras on short films. Most of what I know about light comes from here.</span></li>
+            </ol>
+          </div>
+          <ul class="chips" data-i18n="ch.origins.skills"><li class="chip">Photography</li><li class="chip">Composition</li><li class="chip">Lighting</li><li class="chip">Cinematography</li><li class="chip">Cinema cameras</li><li class="chip">Short films</li></ul>
+        </article>
+      </li>
+
+      <li class="tl-ch" id="ch-design" data-track="v1" data-start="2016.85" data-end="2017.2" data-at="2016.98" data-icon="design" data-short="GD" data-short-de="GD" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="v1">V1</span><span class="tl-when">2016 – 2017</span></header>
+          <h3 class="tl-title" data-i18n="ch.design.title">Graphic designer</h3>
+          <div class="tl-body" data-i18n="ch.design.body"><p>My first paid design work: campaign visuals, promo graphics and early motion pieces for ad clients. Fast turnarounds in flat 2D, which turned out to be a crash course in typography and layout.</p></div>
+          <ul class="chips" data-i18n="ch.design.skills"><li class="chip">Photoshop</li><li class="chip">Illustrator</li><li class="chip">After Effects</li><li class="chip">Premiere Pro</li><li class="chip">Typography</li><li class="chip">Layout</li><li class="chip">Motion graphics</li></ul>
+        </article>
+      </li>
+
+      <li class="tl-ch" id="ch-vfx" data-track="v1" data-start="2017.2" data-end="2018.17" data-at="2017.62" data-icon="vfx" data-short="VFX" data-short-de="VFX" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="v1">V1</span><span class="tl-when">2017 – 2018</span></header>
+          <h3 class="tl-title" data-i18n="ch.vfx.title">VFX artist</h3>
+          <div class="tl-body" data-i18n="ch.vfx.body"><p>Back then a junior did everything, and I'm glad I did. Keying, roto, 2D, planar and 3D tracking, compositing, matte paintings, camera projections and stereo conversion, mostly in Nuke, for commercial and broadcast work.</p></div>
+          <ul class="chips" data-i18n="ch.vfx.skills"><li class="chip">Nuke</li><li class="chip">Keying</li><li class="chip">Rotoscoping</li><li class="chip">Planar tracking</li><li class="chip">3D tracking</li><li class="chip">Matte painting</li><li class="chip">Camera projection</li><li class="chip">Stereo conversion</li></ul>
+        </article>
+      </li>
+
+      <li class="tl-ch" id="ch-3d" data-track="v1" data-start="2018.17" data-end="2019.25" data-at="2018.5" data-icon="cube" data-short="3D" data-short-de="3D" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="v1">V1</span><span class="tl-when">2018 – 2019</span></header>
+          <h3 class="tl-title" data-i18n="ch.3d.title">3D artist</h3>
+          <div class="tl-body" data-i18n="ch.3d.body"><p>Then I went properly into 3D: modeling, PBR texturing in Substance 3D Painter, shading, lighting and a lot of look development. I handled layout and matchmove too, solving cameras in 3DEqualizer so the CG sat right in the plate.</p></div>
+          <ul class="chips" data-i18n="ch.3d.skills"><li class="chip">Maya</li><li class="chip">Modeling</li><li class="chip">Substance 3D Painter</li><li class="chip">PBR materials</li><li class="chip">Shading</li><li class="chip">Lighting</li><li class="chip">Look development</li><li class="chip">Arnold</li><li class="chip">3DEqualizer</li></ul>
+        </article>
+      </li>
+
+      <li class="tl-ch" id="ch-rfx" data-track="v2" data-start="2018.2" data-end="now" data-at="2018.95" data-icon="aikya" data-short="Reimagine FX" data-short-de="Reimagine FX" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="v2">V2</span><span class="tl-when" data-i18n="ch.rfx.when">2018 – now</span></header>
+          <h3 class="tl-title">Reimagine FX</h3>
+          <div class="tl-body" data-i18n="ch.rfx.body">
+            <p>I started Reimagine FX next to the day job and kept building it through every role that followed. It became my full-time work in 2024.</p>
+            <ul class="tl-points">
+              <li>Three iOS apps: Viewport 3D, Maya Viewer and Blender Scene Viewer</li>
+              <li>Seven Maya plugins and the RFX Nuke Diagnostic Suite</li>
+              <li>12 asset collections, from HDRIs to VDB volumes and terrains</li>
+              <li>800+ downloads in 79 countries</li>
+            </ul>
+            <p class="tl-link"><a href="/products">Browse the products →</a></p>
+          </div>
+          <ul class="chips" data-i18n="ch.rfx.skills"><li class="chip">Python</li><li class="chip">MEL</li><li class="chip">PySide6 / Qt</li><li class="chip">Plugin architecture</li><li class="chip">Product design</li><li class="chip">Go-to-market</li></ul>
+        </article>
+      </li>
+
+      <li class="tl-ch" id="ch-fx" data-track="v1" data-start="2019.25" data-end="2020.42" data-at="2019.8" data-icon="flame" data-short="FX" data-short-de="FX" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="v1">V1</span><span class="tl-when">2019 – 2020</span></header>
+          <h3 class="tl-title" data-i18n="ch.fx.title">FX artist</h3>
+          <div class="tl-body" data-i18n="ch.fx.body"><p>Then simulation took over. I started on FumeFX, TurbulenceFD, Maya Fluids and Bifrost, moved to Houdini and stayed: pyro for smoke, fire and explosions, Axiom, FLIP fluids, RBD destruction, particles, Vellum cloth, VDBs. I lit, rendered and comped my own sims, which is how I learned that a sim is only done when the shot is.</p></div>
+          <ul class="chips" data-i18n="ch.fx.skills"><li class="chip">FumeFX</li><li class="chip">TurbulenceFD</li><li class="chip">Maya Fluids</li><li class="chip">Bifrost</li><li class="chip">Houdini</li><li class="chip">Axiom</li><li class="chip">Pyro</li><li class="chip">FLIP fluids</li><li class="chip">RBD destruction</li><li class="chip">Particles</li><li class="chip">Vellum</li><li class="chip">VDB</li></ul>
+        </article>
+      </li>
+
+      <li class="tl-ch" id="ch-motion" data-track="v1" data-start="2020.42" data-end="2024.1" data-at="2022.1" data-icon="motion" data-short="3D motion design" data-short-de="3D Motion Design" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="v1">V1</span><span class="tl-when">2020 – 2024</span></header>
+          <h3 class="tl-title" data-i18n="ch.motion.title">3D motion designer</h3>
+          <div class="tl-body" data-i18n="ch.motion.body"><p>Almost four years of 3D motion for brands: product ads, title sequences, kinetic type, and the look development that makes a campaign feel like one piece. I led productions from concept and blockout to final delivery, built Arnold lighting rigs that kept multi-shot campaigns consistent, and mentored more than 200 junior artists and students.</p></div>
+          <ul class="chips" data-i18n="ch.motion.skills"><li class="chip">Cinema 4D</li><li class="chip">Redshift</li><li class="chip">Product visualization</li><li class="chip">Title sequences</li><li class="chip">Kinetic typography</li><li class="chip">Art direction</li><li class="chip">Lighting rigs</li><li class="chip">Mentoring</li></ul>
+        </article>
+      </li>
+
+      <li class="tl-ch" id="ch-teach" data-track="a1" data-start="2020" data-end="now" data-at="2022.9" data-icon="teach" data-short="Teaching" data-short-de="Tutorials &amp; Kurse" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="a1">A1</span><span class="tl-when" data-i18n="ch.teach.when">2020 – now</span></header>
+          <h3 class="tl-title" data-i18n="ch.teach.title">Teaching</h3>
+          <div class="tl-body" data-i18n="ch.teach.body"><p>I started putting my workflows on YouTube and never stopped. The channel passed 20,000 subscribers and 1.9 million views, and people have watched it for more than 70,000 hours. My four Cinema 4D courses on Skillshare have more than 500 students, and a few tutorials got featured on Lesterbanks.</p></div>
+          <ul class="chips" data-i18n="ch.teach.skills"><li class="chip">Course design</li><li class="chip">Tutorial writing</li><li class="chip">Video production</li><li class="chip">Community</li></ul>
+        </article>
+      </li>
+
+      <li class="tl-ch" id="ch-ai" data-track="v1" data-start="2024.1" data-end="now" data-at="2025.3" data-icon="agents" data-short="Creative tech + AI" data-short-de="Creative Tech + KI" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="v1">V1</span><span class="tl-when" data-i18n="ch.ai.when">2024 – now</span></header>
+          <h3 class="tl-title" data-i18n="ch.ai.title">Creative technologist</h3>
+          <div class="tl-body" data-i18n="ch.ai.body">
+            <p>Full-time on Reimagine FX, and the work changed shape. I design and direct software now, with AI agents doing much of the implementation: Maya and Nuke plugins, iOS apps in Swift, MCP servers that let agents operate Maya, Houdini, Cinema 4D and Premiere Pro, and RFX Manager, the command center that coordinates all of it.</p>
+            <p class="tl-link"><a href="#ai-lab">Open the AI Lab ↓</a></p>
+          </div>
+          <ul class="chips" data-i18n="ch.ai.skills"><li class="chip">Claude Code</li><li class="chip">Codex</li><li class="chip">MCP</li><li class="chip">Multi-agent orchestration</li><li class="chip">Swift / SwiftUI</li><li class="chip">TypeScript</li><li class="chip">React</li><li class="chip">Electron</li><li class="chip">OpenUSD</li><li class="chip">C++</li><li class="chip">PyTorch</li><li class="chip">three.js</li></ul>
+        </article>
+      </li>
+
+      <li class="tl-ch tl-ch--x" id="ch-rnd" data-track="v3" data-start="2026" data-end="now" data-at="2026.4" data-icon="chip" data-short="R&amp;D" data-short-de="F&amp;E" data-reveal>
+        <article class="tl-card">
+          <header class="tl-card-head"><span class="tl-badge" data-track="v3">V3</span><span class="tl-when" data-i18n="ch.rnd.when">2026 – now</span></header>
+          <h3 class="tl-title" data-i18n="ch.rnd.title">Classified</h3>
+          <div class="tl-body" data-i18n="ch.rnd.body"><p>Something bigger than a plugin. A native GPU compute framework: CUDA kernels, operator graphs, out-of-process workers, deterministic checkpoints. That's all I'm saying until it ships.</p></div>
+          <ul class="chips" data-i18n="ch.rnd.skills"><li class="chip">CUDA</li><li class="chip">GPU compute</li><li class="chip chip-x" aria-hidden="true"><span></span></li></ul>
+        </article>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- ============ AI LAB ============ -->
+  <section class="ab-lab section" id="ai-lab" aria-labelledby="lab-title">
+    <div class="container">
+      <p class="section-label" data-reveal data-i18n="lab.label">AI Lab</p>
+      <h2 class="section-title" id="lab-title" data-reveal data-i18n="lab.title">AI in the loop, artist in charge</h2>
+      <p class="ab-lead" data-reveal data-i18n="lab.intro">Everything here is in real use at Reimagine FX. One rule runs through all of it: agents get typed tools with guardrails, and nothing goes out without permission I've given explicitly.</p>
+
+      <div class="lab-grid">
+        <article class="lab-card lab-card--wide" data-reveal>
+          <div class="lab-card-top"><span class="lab-kicker" data-i18n="lab.c1.kicker">Multi-agent operations</span><span class="lab-status is-live" data-i18n="lab.status.daily">Daily driver</span></div>
+          <h3 class="lab-title">RFX Manager</h3>
+          <p data-i18n="lab.c1.body">A local-first desktop command center I built in TypeScript, React and Electron. It coordinates more than 500 product and skill workspaces and a library of 200+ AI skills. Codex, Claude Code, Cursor and Antigravity check in there, claim bounded tasks, log evidence and hand work to each other.</p>
+          <ul class="lab-chips"><li>Electron</li><li>React</li><li>TypeScript</li><li>MCP</li><li>CLI</li></ul>
+          <div class="lab-agents" aria-hidden="true">
+            <span class="lab-agent">codex</span><span class="lab-agent">claude-code</span><span class="lab-agent">cursor</span><span class="lab-agent">antigravity</span>
+          </div>
+        </article>
+
+        <article class="lab-card" data-reveal>
+          <div class="lab-card-top"><span class="lab-kicker" data-i18n="lab.c2.kicker">Local voice assistant</span><span class="lab-status" data-i18n="lab.status.private">Private build</span></div>
+          <h3 class="lab-title">Aikya</h3>
+          <p data-i18n="lab.c2.body">Push-to-talk voice inside RFX Manager. Whisper.cpp handles speech, Qwen3 runs through Ollama, and the reply is spoken back by a local TTS model. Nothing goes to the cloud and there's no API bill. Ask for the morning briefing and it reads it from live project records.</p>
+          <ul class="lab-chips"><li>Whisper.cpp</li><li>Ollama</li><li>Qwen3</li><li>Local TTS</li></ul>
+          <div class="lab-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </article>
+
+        <article class="lab-card" data-reveal>
+          <div class="lab-card-top"><span class="lab-kicker" data-i18n="lab.c3.kicker">Agents inside the DCC</span><span class="lab-status" data-i18n="lab.status.privates">Private builds</span></div>
+          <h3 class="lab-title" data-i18n="lab.c3.title">MCP bridges</h3>
+          <p data-i18n="lab.c3.body">Model Context Protocol servers that let an AI agent work inside Maya, Houdini 21, Cinema 4D 2026 with Redshift, and Premiere Pro. The Cinema 4D server alone has 90 typed tools and 115 tests. Scene edits are planned first and applied only on confirmation, with undo and rollback. In Maya, Houdini and Cinema 4D, arbitrary code execution is switched off on purpose.</p>
+          <ul class="lab-chips"><li>MCP</li><li>Python</li><li>TypeScript</li><li>Maya</li><li>Houdini</li><li>Cinema 4D</li></ul>
+        </article>
+
+        <article class="lab-card" data-reveal>
+          <div class="lab-card-top"><span class="lab-kicker" data-i18n="lab.c4.kicker">Data pipeline</span><span class="lab-status is-live" data-i18n="lab.status.auto">Fully autonomous</span></div>
+          <h3 class="lab-title" data-i18n="lab.c4.title">Autonomous research pipeline</h3>
+          <p data-i18n="lab.c4.body">Runs unattended every morning at 09:00 and acts on its own within written rules. It works through a map of roughly 90 sources and search queries over the week, including sites that need a logged-in browser. Records are de-duplicated by canonical URL, scored on a strict 1–10 rubric and written to a tracker, a daily brief and a Notion mirror. Incoming email gets sorted into status updates. It never guesses a fact it can't verify.</p>
+          <ul class="lab-chips"><li>Scheduled agents</li><li>Browser automation</li><li>Scoring rubric</li><li>Notion</li></ul>
+        </article>
+
+        <article class="lab-card" data-reveal>
+          <div class="lab-card-top"><span class="lab-kicker" data-i18n="lab.c5.kicker">Standalone software</span><span class="lab-status" data-i18n="lab.status.desktop">Desktop apps</span></div>
+          <h3 class="lab-title">Chipset Generator &amp; Procedural Maps</h3>
+          <p data-i18n="lab.c5.body">Chipset Generator builds PCB-style texture maps from real netlists and multi-layer routing, so the traces read like actual electronics. It exports up to 8K, normal maps included. Procedural Maps turns out grayscale maps from 1K to 8K.</p>
+          <ul class="lab-chips"><li>Python</li><li data-i18n="lab.c5.chip">Procedural generation</li><li>8K</li></ul>
+          <div class="lab-pcb" aria-hidden="true"></div>
+        </article>
+
+        <article class="lab-card lab-card--full" data-reveal>
+          <div class="lab-card-top"><span class="lab-kicker" data-i18n="lab.c6.kicker">Shipped</span><span class="lab-status is-live">Live</span></div>
+          <h3 class="lab-title" data-i18n="lab.c6.title">Apps and plugins</h3>
+          <p data-i18n="lab.c6.body">Three iOS apps in Swift, using SceneKit, RealityKit and ARKit, plus seven Maya plugins and a Nuke suite that went through 100+ diagnostic test cases before release. Area Light Maps Pro ships with a per-file SHA-256 integrity manifest.</p>
+          <ul class="lab-chips"><li>Swift</li><li>SwiftUI</li><li>SceneKit</li><li>RealityKit</li><li>PySide6</li><li>Nuke Python</li></ul>
+          <a class="lab-more" href="/products" data-i18n="lab.c6.link">See the products →</a>
+        </article>
+      </div>
+
+      <div class="lab-rules">
+        <h3 class="lab-sub" data-reveal data-i18n="lab.rules.title">How I work with agents</h3>
+        <ol class="lab-rules-grid">
+          <li data-reveal><span class="lab-rule-n">01</span><b data-i18n="lab.r1.t">Typed tools only</b><p data-i18n="lab.r1.b">Agents call validated tools with typed inputs. They don't get a raw Python prompt inside a live scene.</p></li>
+          <li data-reveal><span class="lab-rule-n">02</span><b data-i18n="lab.r2.t">Explicit permission</b><p data-i18n="lab.r2.b">Outbound actions need permission I've given on purpose, either per action or as a written standing rule with limits. A stored login never counts as permission.</p></li>
+          <li data-reveal><span class="lab-rule-n">03</span><b data-i18n="lab.r3.t">Evidence before done</b><p data-i18n="lab.r3.b">A task closes on tests, audits or a live check. A model saying it's finished doesn't count.</p></li>
+          <li data-reveal><span class="lab-rule-n">04</span><b data-i18n="lab.r4.t">Local first</b><p data-i18n="lab.r4.b">Speech, models and project data stay on my machine wherever possible. Maya Viewer streams over the local network with no cloud upload and no account.</p></li>
+        </ol>
+      </div>
+
+      <div class="lab-stack" data-reveal>
+        <div class="lab-stack-col">
+          <h3 class="lab-sub" data-i18n="lab.stack.lang">Languages</h3>
+          <ul class="lab-chips lab-chips--lg"><li>Python</li><li>C++</li><li>TypeScript</li><li>JavaScript</li><li>Swift</li><li>MEL</li><li>CUDA</li></ul>
+        </div>
+        <div class="lab-stack-col">
+          <h3 class="lab-sub" data-i18n="lab.stack.fw">Frameworks and formats</h3>
+          <ul class="lab-chips lab-chips--lg"><li>PySide6 / Qt</li><li>React</li><li>Electron</li><li>Node.js</li><li>SwiftUI</li><li>SceneKit</li><li>RealityKit</li><li>three.js</li><li>PyTorch</li><li>OpenUSD</li><li>MCP</li></ul>
+        </div>
+      </div>
+
+      <div class="lab-tools">
+        <h3 class="lab-sub" data-reveal data-i18n="lab.tools.title">AI tools I use</h3>
+        <div class="lab-tools-grid">
+          <div class="lab-tool-group" data-reveal><span class="lab-tool-cat" data-i18n="lab.tools.g1">Agents and code</span><ul><li>Claude Code</li><li>Codex</li><li>Cursor</li><li>Antigravity</li><li>Manus</li></ul></div>
+          <div class="lab-tool-group" data-reveal><span class="lab-tool-cat" data-i18n="lab.tools.g2">Models and research</span><ul><li>Claude</li><li>ChatGPT</li><li>Perplexity</li></ul></div>
+          <div class="lab-tool-group" data-reveal><span class="lab-tool-cat" data-i18n="lab.tools.g3">Image and video</span><ul><li>Google Flow</li><li>Higgsfield</li><li>ComfyUI</li><li>Flux</li><li>Runway</li><li>Midjourney</li></ul></div>
+          <div class="lab-tool-group" data-reveal><span class="lab-tool-cat" data-i18n="lab.tools.g4">Design and prototyping</span><ul><li>Google Stitch</li><li>Lovable</li></ul></div>
+          <div class="lab-tool-group" data-reveal><span class="lab-tool-cat" data-i18n="lab.tools.g5">Knowledge</span><ul><li>Obsidian</li></ul></div>
+          <div class="lab-tool-group" data-reveal><span class="lab-tool-cat" data-i18n="lab.tools.g6">Local models</span><ul><li>Ollama</li><li>Qwen3</li><li>Whisper.cpp</li></ul></div>
+        </div>
+        <p class="lab-studied" data-reveal data-i18n="lab.studied">Studied with NVIDIA's Deep Learning Institute: OpenUSD fundamentals and stage composition, generative AI and agentic AI.</p>
       </div>
     </div>
   </section>
-  <section class="section" style="background: var(--bg);">
+
+  <!-- ============ CLASSIFIED ============ -->
+  <section class="ab-cl section" id="classified" aria-labelledby="cl-title">
     <div class="container">
-      <p class="section-label" data-reveal>Journey</p>
-      <h2 class="section-title" data-reveal>The story so far</h2>
-      <div class="timeline" data-reveal>
-        <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-content"><div class="timeline-title">Reimagine FX — Expanded</div><div class="timeline-desc">Launched new digital asset store on Gumroad, VDB packs, HDRI maps, Maya plugins and more.</div></div></div>
-        <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-content"><div class="timeline-title">Reimagine FX — Founded</div><div class="timeline-desc">Launched Reimagine FX as an independent creative studio, offering freelance VFX, 3D compositing, and motion design services worldwide.</div></div></div>
-        <div class="timeline-item"><div class="timeline-year">2020</div><div class="timeline-content"><div class="timeline-title">Education platform launched</div><div class="timeline-desc">Started sharing knowledge on YouTube and Skillshare — tutorials and full courses covering professional VFX workflows.</div></div></div>
-        <div class="timeline-item"><div class="timeline-year">2017</div><div class="timeline-content"><div class="timeline-title">Professional VFX career begins</div><div class="timeline-desc">Began working professionally in visual effects and motion design, developing expertise across Maya, Nuke, and Houdini.</div></div></div>
+      <article class="cl-file" id="cl-file" data-reveal>
+        <div class="cl-bar" aria-hidden="true">
+          <span data-i18n="cl.file">FILE RFX/RD-26</span>
+          <span data-i18n="cl.status">STATUS: ACTIVE</span>
+          <span data-i18n="cl.access">ACCESS: RESTRICTED</span>
+        </div>
+        <div class="cl-body">
+          <p class="section-label" data-i18n="cl.label">In development</p>
+          <h2 class="cl-title" id="cl-title" data-i18n="cl.title">Classified</h2>
+          <p class="sr-only" data-i18n="cl.sr">Parts of this file are redacted on purpose.</p>
+          <div class="cl-lines">
+            <p class="cl-line" data-i18n="cl.l1">A native GPU compute framework, written from scratch.</p>
+            <p class="cl-redact" aria-hidden="true"><i style="--w:38%"></i><i style="--w:22%"></i><i style="--w:27%"></i></p>
+            <p class="cl-line" data-i18n="cl.l2">CUDA kernels and operator graphs.</p>
+            <p class="cl-line" data-i18n="cl.l3">Out-of-process workers with deterministic checkpoints and branchable A/B states.</p>
+            <p class="cl-redact" aria-hidden="true"><i style="--w:18%"></i><i style="--w:44%"></i></p>
+            <p class="cl-line cl-line--last" data-i18n="cl.l4">It's the largest thing Reimagine FX has taken on. More when it ships.</p>
+          </div>
+          <div class="cl-actions">
+            <button type="button" class="cl-btn" id="cl-btn" data-i18n="cl.btn">Request access</button>
+            <span class="cl-toast" id="cl-toast" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+        <span class="cl-stamp" aria-hidden="true" data-i18n="cl.stamp">Classified</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ SOFTWARE ============ -->
+  <section class="ab-ars section" id="software" aria-labelledby="ars-title">
+    <div class="container">
+      <p class="section-label" data-reveal data-i18n="ars.label">Software</p>
+      <h2 class="section-title" id="ars-title" data-reveal data-i18n="ars.title">Daily drivers, and everything else</h2>
+      <p class="ab-lead" data-reveal data-i18n="ars.sub">Gold dots mark the programs I open most days.</p>
+
+      <div class="ars-filters" role="group" aria-label="Filter software" data-i18n-attr="aria-label:ui.filterGroup" data-reveal>
+        <button type="button" class="ars-f" data-filter="all" aria-pressed="true" data-i18n="ars.f.all">All</button>
+        <button type="button" class="ars-f" data-filter="3d" aria-pressed="false" data-i18n="cat.3d">3D &amp; motion</button>
+        <button type="button" class="ars-f" data-filter="fx" aria-pressed="false" data-i18n="cat.fx">FX &amp; simulation</button>
+        <button type="button" class="ars-f" data-filter="render" aria-pressed="false" data-i18n="cat.render">Rendering</button>
+        <button type="button" class="ars-f" data-filter="comp" aria-pressed="false" data-i18n="cat.comp">Compositing &amp; post</button>
+        <button type="button" class="ars-f" data-filter="design" aria-pressed="false" data-i18n="cat.design">Design &amp; texturing</button>
+        <button type="button" class="ars-f" data-filter="world" aria-pressed="false" data-i18n="cat.world">Worlds &amp; terrain</button>
+      </div>
+      <p class="ars-count" id="ars-count" aria-live="polite">33 tools</p>
+
+      <ul class="ars-grid" id="ars-grid">
+        <li class="ars-item is-daily" data-cat="3d"><b>Maya</b><span data-i18n="cat.3d">3D &amp; motion</span></li>
+        <li class="ars-item is-daily" data-cat="3d fx"><b>Houdini</b><span data-i18n="cat.3dfx">3D &amp; FX</span></li>
+        <li class="ars-item is-daily" data-cat="3d"><b>Cinema 4D</b><span data-i18n="cat.3d">3D &amp; motion</span></li>
+        <li class="ars-item is-daily" data-cat="comp"><b>Nuke</b><span data-i18n="cat.comp">Compositing &amp; post</span></li>
+        <li class="ars-item is-daily" data-cat="comp"><b>After Effects</b><span data-i18n="cat.comp">Compositing &amp; post</span></li>
+        <li class="ars-item is-daily" data-cat="render"><b>Arnold</b><span data-i18n="cat.render">Rendering</span></li>
+        <li class="ars-item is-daily" data-cat="render"><b>Redshift</b><span data-i18n="cat.render">Rendering</span></li>
+        <li class="ars-item" data-cat="3d"><b>Blender</b><span data-i18n="cat.3d">3D &amp; motion</span></li>
+        <li class="ars-item" data-cat="3d"><b>Unreal Engine 5</b><span data-i18n="cat.3d">3D &amp; motion</span></li>
+        <li class="ars-item" data-cat="3d"><b>DAZ Studio</b><span data-i18n="cat.3d">3D &amp; motion</span></li>
+        <li class="ars-item" data-cat="3d"><b>Marvelous Designer</b><span data-i18n="cat.3d">3D &amp; motion</span></li>
+        <li class="ars-item" data-cat="fx"><b>Axiom</b><span data-i18n="cat.fx">FX &amp; simulation</span></li>
+        <li class="ars-item" data-cat="fx"><b>Bifrost</b><span data-i18n="cat.fx">FX &amp; simulation</span></li>
+        <li class="ars-item" data-cat="fx"><b>FumeFX</b><span data-i18n="cat.fx">FX &amp; simulation</span></li>
+        <li class="ars-item" data-cat="fx"><b>TurbulenceFD</b><span data-i18n="cat.fx">FX &amp; simulation</span></li>
+        <li class="ars-item" data-cat="fx"><b>Maya Fluids</b><span data-i18n="cat.fx">FX &amp; simulation</span></li>
+        <li class="ars-item" data-cat="render"><b>Karma</b><span data-i18n="cat.render">Rendering</span></li>
+        <li class="ars-item" data-cat="render"><b>Octane</b><span data-i18n="cat.render">Rendering</span></li>
+        <li class="ars-item" data-cat="render"><b>Corona</b><span data-i18n="cat.render">Rendering</span></li>
+        <li class="ars-item" data-cat="render"><b>Eevee</b><span data-i18n="cat.render">Rendering</span></li>
+        <li class="ars-item" data-cat="render"><b>Lumen</b><span data-i18n="cat.render">Rendering</span></li>
+        <li class="ars-item" data-cat="comp"><b>DaVinci Resolve</b><span data-i18n="cat.comp">Compositing &amp; post</span></li>
+        <li class="ars-item" data-cat="comp"><b>Premiere Pro</b><span data-i18n="cat.comp">Compositing &amp; post</span></li>
+        <li class="ars-item" data-cat="comp"><b>Media Encoder</b><span data-i18n="cat.comp">Compositing &amp; post</span></li>
+        <li class="ars-item" data-cat="comp"><b>Audition</b><span data-i18n="cat.comp">Compositing &amp; post</span></li>
+        <li class="ars-item" data-cat="comp"><b>3DEqualizer</b><span data-i18n="cat.comp">Compositing &amp; post</span></li>
+        <li class="ars-item" data-cat="design"><b>Photoshop</b><span data-i18n="cat.design">Design &amp; texturing</span></li>
+        <li class="ars-item" data-cat="design"><b>Illustrator</b><span data-i18n="cat.design">Design &amp; texturing</span></li>
+        <li class="ars-item" data-cat="design"><b>Substance 3D Painter</b><span data-i18n="cat.design">Design &amp; texturing</span></li>
+        <li class="ars-item" data-cat="design"><b>Marmoset Toolbag</b><span data-i18n="cat.design">Design &amp; texturing</span></li>
+        <li class="ars-item" data-cat="world"><b>World Machine</b><span data-i18n="cat.world">Worlds &amp; terrain</span></li>
+        <li class="ars-item" data-cat="world"><b>World Creator</b><span data-i18n="cat.world">Worlds &amp; terrain</span></li>
+        <li class="ars-item" data-cat="world"><b>Gaea</b><span data-i18n="cat.world">Worlds &amp; terrain</span></li>
+      </ul>
+      <p class="ars-edu" data-reveal data-i18n="ars.edu"><b>Education</b> B.A. Visual Effects &amp; 3D Animation, 2026 · B.Sc. Animation &amp; Multimedia, 2021</p>
+    </div>
+  </section>
+
+  <!-- ============ TEACHING ============ -->
+  <section class="ab-teach section" id="teaching" aria-labelledby="teach-title">
+    <div class="container">
+      <p class="section-label" data-reveal data-i18n="teach.label">Teaching</p>
+      <h2 class="section-title" id="teach-title" data-reveal data-i18n="teach.title">I teach what I use on real jobs</h2>
+      <div class="teach-grid">
+        <a class="teach-card" href="https://www.youtube.com/@reimaginefx" target="_blank" rel="noopener" data-reveal>
+          <span class="teach-plat">YouTube</span>
+          <span class="teach-stat" data-i18n="teach.yt.stat">20K+ subscribers · 1.9M+ views</span>
+          <span class="teach-desc" data-i18n="teach.yt.desc">Free lessons on Maya, Arnold lighting, MASH, Bifrost and nCloth, plus walkthroughs of my own tools.</span>
+          <span class="teach-go" data-i18n="teach.yt.go">Watch on YouTube →</span>
+        </a>
+        <a class="teach-card" href="https://www.skillshare.com/en/profile/Reimagine-Fx/3319666" target="_blank" rel="noopener" data-reveal>
+          <span class="teach-plat">Skillshare</span>
+          <span class="teach-stat" data-i18n="teach.ss.stat">4 courses · 500+ students</span>
+          <span class="teach-desc" data-i18n="teach.ss.desc">Four Cinema 4D classes for motion designers.</span>
+          <span class="teach-go" data-i18n="teach.ss.go">Open Skillshare →</span>
+        </a>
+        <a class="teach-card" href="https://www.patreon.com/cw/reimaginefx" target="_blank" rel="noopener" data-reveal>
+          <span class="teach-plat">Patreon</span>
+          <span class="teach-stat" data-i18n="teach.pt.stat">Membership</span>
+          <span class="teach-desc" data-i18n="teach.pt.desc">Direct support for the channel and the free tools.</span>
+          <span class="teach-go" data-i18n="teach.pt.go">Join on Patreon →</span>
+        </a>
+      </div>
+      <p class="teach-note" data-reveal data-i18n="teach.note">Tutorials featured on Lesterbanks.</p>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="ab-cta section-sm" aria-labelledby="cta-title">
+    <div class="container">
+      <h2 class="ab-cta-title" id="cta-title" data-reveal data-i18n="cta.title">Got a shot or a pipeline problem?</h2>
+      <p class="ab-cta-sub" data-reveal data-i18n="cta.sub">I take on freelance 3D and FX work, and I build custom tools and AI workflows for studios. Either way, it starts with an email.</p>
+      <div class="ab-cta-btns" data-reveal>
+        <a href="/contact" class="btn btn-primary" data-magnetic data-i18n="cta.btn1">Get in touch</a>
+        <a href="/products" class="btn btn-outline" data-i18n="cta.btn2">Browse products</a>
       </div>
     </div>
   </section>
-  <section class="section-sm" style="background: var(--bg2); border-top: 1px solid var(--border); text-align:center;">
-    <div class="container">
-      <h2 style="font-family:var(--font-display); font-size:clamp(36px,5vw,64px); letter-spacing:4px; color:var(--text); margin-bottom:16px;"  data-reveal>READY TO COLLABORATE?</h2>
-      <p style="font-size:16px; color:var(--text2); margin-bottom:32px; max-width:440px; margin-left:auto; margin-right:auto;"  data-reveal>Open for freelance projects, brand collaborations, and commercial work.</p>
-      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;"  data-reveal>
-        <a href="/contact" class="btn btn-primary">Get in touch</a>
-        <a href="/products" class="btn btn-outline">Shop my assets</a>
-      </div>
-    </div>
-  </section>
+
+  </main>
+
   <div id="footer-placeholder"></div>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -126,5 +507,7 @@
     initNav();
     initMotion();
   </script>
+  <script src="/about/about-de.js"></script>
+  <script src="/about/about.js"></script>
 </body>
 </html>
