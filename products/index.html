@@ -125,6 +125,8 @@
     .product-thumb { aspect-ratio: 3/4; background: var(--bg3); overflow: hidden; position: relative; cursor: pointer; }
     .product-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s var(--ease-out); }
     .product-card:hover .product-thumb img { transform: scale(1.045); }
+    .product-card[data-landing="/unfold/"] .product-thumb img { object-fit: contain; }
+    .product-card[data-landing="/unfold/"]:hover .product-thumb img { transform: none; }
     .product-thumb-hint {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
@@ -282,7 +284,7 @@
           </div>
           <span class="bento-tile-cat">Maya Plugins</span>
           <span class="bento-tile-name">Production tools for Maya, Arnold &amp; Redshift</span>
-          <span class="bento-tile-desc">RFX Unfold &middot; Reframe &middot; Ramp Generator &middot; glTF Exporter &middot; Smart Organizer &middot; Area Light Maps Pro &middot; Focus Picker &middot; Light Target</span>
+          <span class="bento-tile-desc">Unfold &middot; Reframe &middot; Ramp Generator &middot; glTF Exporter &middot; Smart Organizer &middot; Area Light Maps Pro &middot; Focus Picker &middot; Light Target</span>
           <span class="bento-tile-link">Browse Maya plugins →</span>
         </button>
 
@@ -341,10 +343,10 @@
       <div class="products-grid" id="productsGrid">
 
         <div class="product-card" style="--acc:#d8bb78" data-cat="mayaplugin" data-landing="/unfold/" data-tilt data-reveal>
-          <div class="product-thumb"><img src="/unfold/assets/engine-beauty.webp" alt="RFX Unfold exploded engine concept illustration" loading="lazy"><span class="product-thumb-hint">View product +</span></div>
+          <div class="product-thumb"><img src="/unfold/assets/catalogue-poster.jpg" width="1080" height="1440" alt="Unfold poster: exploded views for Maya, radial and axis layouts, weights, pins and keyframes" loading="lazy"><span class="product-thumb-hint">View product +</span></div>
           <div class="product-body">
             <div class="product-cat">Maya Plugin &middot; Modeling</div>
-            <div class="product-name">RFX Unfold</div>
+            <div class="product-name">Unfold</div>
             <div class="product-desc">Create exploded views from polygon parts. Adjust radial or axis spacing, pin individual pieces and build an assembly animation with stagger, hold and return.</div>
             <div class="product-footer"><button class="product-details-btn" type="button">Details</button><div class="product-footer-right"><span class="product-badge badge-new">€4.99</span><a href="/unfold/" class="product-cta">View Unfold</a></div></div>
           </div>
