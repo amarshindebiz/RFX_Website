@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RFX Unfold | Exploded views for Maya | Reimagine Fx</title>
+  <meta name="description" content="Create exploded views from your polygon models in Maya. Control the spacing, pin individual parts and animate the assembly with RFX Unfold.">
+  <link rel="canonical" href="https://reimaginefx.com/unfold/">
+  <meta property="og:title" content="RFX Unfold — Exploded views for Maya">
+  <meta property="og:description" content="Take your model apart. Control the spacing and animate it back together. Exploded views for Maya 2026.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://reimaginefx.com/unfold/">
+  <meta property="og:image" content="https://reimaginefx.com/unfold/assets/engine-beauty.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="./unfold.css">
+</head>
+<body class="unfold-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="nav-placeholder"></div>
+  <main id="main">
+    <section class="hero shell" aria-labelledby="title">
+      <div class="hero-top">
+        <div class="product-name"><img src="./assets/icon.png" width="56" height="56" alt=""><p>Exploded views for Maya</p><h1 id="title">RFX Unfold</h1></div>
+        <div class="hero-copy"><p>Show how it fits together.<br>Then take it apart.</p><p class="copy">Select your model, create an exploded view and adjust the space between its parts. Key the amount yourself or build an assembly animation from the panel.</p><div class="actions"><a class="button primary" href="#purchase">Get Unfold <span>€4.99</span></a><a class="text-link" href="#workflow">See how it works</a></div></div>
+      </div>
+      <figure class="hero-stage">
+        <div class="render-tabs" role="tablist" aria-label="Engine illustration style">
+          <button id="tab-beauty" type="button" role="tab" aria-selected="true" aria-controls="hero-render" tabindex="0" data-image="engine-beauty.webp" data-alt="Exploded turbojet engine with separated metal casings, compressor stages and accessory parts">Beauty</button>
+          <button id="tab-grayscale" type="button" role="tab" aria-selected="false" aria-controls="hero-render" tabindex="-1" data-image="engine-grayscale.webp" data-alt="Grayscale concept illustration of an exploded turbojet engine">Grayscale</button>
+          <button id="tab-wireframe" type="button" role="tab" aria-selected="false" aria-controls="hero-render" tabindex="-1" data-image="engine-wireframe.webp" data-alt="Wireframe concept illustration of an exploded turbojet engine">Wireframe</button>
+        </div>
+        <div id="hero-render" role="tabpanel" aria-labelledby="tab-beauty" tabindex="0"><img id="hero-image" src="./assets/engine-beauty.webp" width="1536" height="1024" fetchpriority="high" alt="Exploded turbojet engine with separated metal casings, compressor stages and accessory parts"></div>
+        <figcaption>Turbojet assembly <span>AI concept illustration. Visual direction, not a Maya output.</span></figcaption>
+      </figure>
+      <div class="capabilities" aria-label="Main controls"><span>Radial &amp; axis layouts</span><span>Individual piece weights</span><span>Keyframes &amp; stagger</span><span>Dock or float</span></div>
+    </section>
+
+    <section id="workflow" class="workflow shell section" aria-labelledby="workflow-title">
+      <div class="workflow-copy"><h2 id="workflow-title">Your model.<br>A different perspective.</h2><p class="copy">Unfold captures polygon copies of your selected objects at the current frame. The assembled shape stays as your starting point; Amount controls how far the pieces travel.</p>
+        <ol class="steps"><li><h3>Select the parts</h3><p>Choose a model group or its meshes. Use Split disconnected shells when separate parts live inside one combined mesh.</p></li><li><h3>Set the spacing</h3><p>Choose radial spacing or stack along X, Y or Z. Adjust the spread, reverse an axis, or set a custom center.</p></li><li><h3>Keep control</h3><p>Pin the parts that should stay still. Give the others their own travel weights, then key or animate the setup.</p></li></ol>
+        <p class="small">Copies keep their UVs and share the source materials. A welded mesh remains one piece unless you separate its parts first.</p>
+      </div>
+      <figure class="panel-shot"><div class="panel-heading">Inside Maya 2026 <span>Actual plugin panel</span></div><img src="./assets/maya-panel.webp" width="442" height="896" loading="lazy" alt="RFX Unfold panel in Maya showing31 pieces, Amount, radial layout, axis gains and custom center"><figcaption>Opens beside the Attribute Editor and Channel Box. Float it when you need more room; closing the floating window returns it to the dock.</figcaption></figure>
+    </section>
+
+    <section class="animation-section section" aria-labelledby="animation-title"><div class="shell animation-grid"><figure><img src="./assets/camera.webp" width="1536" height="1024" loading="lazy" alt="Camera concept illustration with body panels, sensor assembly and lens elements spaced apart"><figcaption>Camera assembly <span>AI concept illustration</span></figcaption></figure><div><h2 id="animation-title">Give every part<br>its moment.</h2><p class="copy">Set a start frame and travel duration. Stagger delays each piece after the one before it, while Hold and Return control the pause and the journey back.</p><div class="timing-example"><h3>A timing example</h3><dl><div><dt>Pieces</dt><dd>10</dd></div><div><dt>Travel</dt><dd>24 frames</dd></div><div><dt>Stagger</dt><dd>2 frames</dd></div><div><dt>Last piece arrives</dt><dd>Start + 42</dd></div></dl></div><p class="small">Once created, the animation lives in the Maya scene. You can close the panel and keep scrubbing. Use Key amount for individual poses, or replace the existing Amount keys to rebuild the sequence.</p></div></div></section>
+
+    <section class="gallery shell section" aria-labelledby="gallery-title"><div class="section-intro"><h2 id="gallery-title">Make the structure visible.</h2><p class="copy">Product internals, mechanical assemblies or an architectural breakdown. Prepare the real parts in your model, then decide how you want them to move.</p></div><div class="gallery-grid">
+      <figure class="clockwork"><a href="./assets/clockwork.webp" target="_blank" rel="noopener" aria-label="Open full clockwork illustration"><img src="./assets/clockwork.webp" width="1536" height="1024" loading="lazy" alt="Brass clockwork movement with gears and plates separated into an exploded arrangement"></a><figcaption>Clockwork <span>Reveal the assembly</span></figcaption></figure>
+      <figure><a href="./assets/gearbox.webp" target="_blank" rel="noopener" aria-label="Open full gearbox illustration"><img src="./assets/gearbox.webp" width="1536" height="1024" loading="lazy" alt="Clay concept illustration of separated gearbox housing, shafts and gears"></a><figcaption>Gearbox <span>Read the spacing in clay</span></figcaption></figure>
+      <figure><a href="./assets/gripper.webp" target="_blank" rel="noopener" aria-label="Open full gripper illustration"><img src="./assets/gripper.webp" width="1536" height="1024" loading="lazy" alt="Exploded robotic gripper in a grayscale clay illustration"></a><figcaption>Robotic gripper <span>Separate moving parts</span></figcaption></figure>
+      <figure class="architecture"><a href="./assets/architecture.webp" target="_blank" rel="noopener" aria-label="Open full architectural illustration"><img src="./assets/architecture.webp" width="1536" height="1024" loading="lazy" alt="Architectural concept illustration with building levels spaced vertically"></a><figcaption>Architecture <span>Build a vertical breakdown</span></figcaption></figure>
+    </div><p class="small gallery-note">These are AI concept illustrations, not renders produced by RFX Unfold. Models and example scenes aren't included. Beauty, clay and wireframe are presentation styles you create with your Maya materials and viewport settings.</p></section>
+
+    <section class="section utility shell" aria-labelledby="details-title"><h2 id="details-title">A setup you can keep working with.</h2><div class="details-grid"><article><h3>Keep the sources</h3><p>Hide your originals while you work, then restore their recorded visibility. Remove setup cleans up its generated nodes and restores the sources; Maya Undo brings the setup back.</p></article><article><h3>Choose what moves</h3><p>Pin selected parts at their assembled position. Weight 2 doubles a piece's travel; weight 0 keeps it still. Select in Maya picks the same pieces in the viewport and Outliner.</p></article><article><h3>Use existing animation carefully</h3><p>Keyed Amount follows the timeline. Type a new value and click Key amount to apply it at the current frame. Locked inputs and external drivers are protected from replacement.</p></article><article><h3>Know the geometry</h3><p>Unfold works with polygon objects and disconnected shells. It captures the current deformation; it doesn't copy live source animation, fracture welded geometry or solve collisions.</p></article></div></section>
+
+    <section id="purchase" class="purchase section" aria-labelledby="purchase-title"><div class="shell purchase-grid"><div><img class="purchase-icon" src="./assets/icon.png" width="72" height="72" alt=""><h2 id="purchase-title">Take your next<br>model apart.</h2><p class="copy">RFX Unfold 0.2.3 for Autodesk Maya 2026.<br>The download includes the plugin, Reimagine Fx Tools Installer and a short installation guide.</p><div class="price">€4.99 <span>One-time purchase</span></div><a class="button primary" href="https://reimagine-fx.gumroad.com/l/rfxunfold" target="_blank" rel="noopener">Buy on Gumroad</a><p class="small">Download the plugin, bundled installer and two-page PDF guide.</p></div><div class="install"><h3>Start with the installer</h3><ol><li>Extract the entire ZIP.</li><li>Drag <code>RFX_Installer/install.py</code> into a Maya viewport.</li><li>Select RFX Unfold and Maya 2026, then click Install.</li><li>Open the ReimagineFx_Tools shelf and click RFX Unfold.</li></ol><a class="text-link" href="./installation-guide.pdf" target="_blank" rel="noopener">Read the installation guide (PDF)</a><div class="requirements"><h3>Compatibility</h3><p>Verified in Maya 2026.3.2 on Windows. Polygon geometry only. Make instances unique before capture. Each setup has a 1,000-piece limit; playback speed depends on your scene.</p><p>Other Maya versions, operating systems, production render and export workflows haven't been qualified.</p></div></div></div></section>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/js/shared.js"></script>
+  <script src="./unfold.js"></script>
+</body>
+</html>
