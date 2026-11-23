@@ -47,6 +47,8 @@ section[id], main[id] { scroll-margin-top: 64px; }
 .alm-art { display: block; width: 100%; height: auto; background: var(--alm-panel); border-radius: 10px; }
 .alm-art-link { display: block; border-radius: 10px; }
 .alm-art-link:hover { outline: 1px solid var(--alm-accent); }
+.alm-render { margin: 0; }
+.alm-render figcaption { margin-top: 8px; color: var(--alm-muted); font-size: .875rem; }
 .alm-video { margin-top: 22px; max-width: 960px; aspect-ratio: 16 / 9; }
 .alm-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 22px; }
 .alm-grid p { margin-bottom: 0; }
