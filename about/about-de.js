@@ -113,7 +113,7 @@ window.RFX_ABOUT_DE = {
   'lab.c5.chip': 'Prozedurale Generierung',
   'lab.c6.kicker': 'Veröffentlicht',
   'lab.c6.title': 'Apps und Plugins',
-  'lab.c6.body': 'Drei iOS-Apps in Swift mit SceneKit, RealityKit und ARKit, dazu sieben Maya-Plugins und eine Nuke-Suite, die vor dem Release mehr als 100 Diagnose-Testfälle durchlaufen hat. Area Light Maps Pro wird mit einem SHA-256-Integritätsmanifest pro Datei ausgeliefert.',
+  'lab.c6.body': 'Drei iOS-Apps in Swift mit SceneKit, RealityKit und ARKit, dazu sieben Maya-Plugins und eine Nuke-Suite, die vor dem Release mehr als 100 Diagnose-Testfälle durchlaufen hat. Area Light Maps Pro 2.0 enthält 350 statische EXR-Maps und eine SHA-256-Prüfsumme für jede Datei.',
   'lab.c6.link': 'Zu den Produkten →',
   'lab.rules.title': 'So arbeite ich mit Agents',
   'lab.r1.t': 'Nur typisierte Tools',
