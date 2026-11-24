@@ -126,9 +126,23 @@
     .product-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s var(--ease-out); }
     .product-card:hover .product-thumb img { transform: scale(1.045); }
     .product-card[data-landing="/unfold/"] .product-thumb img,
+    .product-card[data-landing="/focus-picker/"] .product-thumb img,
     .product-card[data-landing="/area-light-maps-pro/"] .product-thumb img { object-fit: contain; }
     .product-card[data-landing="/unfold/"]:hover .product-thumb img,
+    .product-card[data-landing="/focus-picker/"]:hover .product-thumb img,
     .product-card[data-landing="/area-light-maps-pro/"]:hover .product-thumb img { transform: none; }
+    .product-card[data-landing="/focus-picker/"] .product-thumb {
+      background: #070c14;
+    }
+    .product-card[data-landing="/focus-picker/"] .product-thumb::before {
+      content: '';
+      position: absolute;
+      inset: -24px;
+      background: url('/focus-picker/assets/focus-picker-gumroad-cover.webp') center / cover;
+      filter: blur(22px) brightness(.45);
+      pointer-events: none;
+    }
+    .product-card[data-landing="/focus-picker/"] .product-thumb img { position: relative; }
     .product-thumb-hint {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
@@ -467,7 +481,7 @@
         </div>
 
         <div class="product-card" style="--acc:var(--acc-free)" data-cat="mayaplugin free" data-landing="/focus-picker/" data-tilt data-reveal>
-          <div class="product-thumb"><img src="/products/product-15.png" alt="Focus Picker" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
+          <div class="product-thumb"><img src="/focus-picker/assets/focus-picker-gumroad-cover.webp" alt="Focus Picker" width="1536" height="1024" loading="lazy"><span class="product-thumb-hint">View details +</span></div>
           <div class="product-body">
             <div class="product-cat">Maya Plugin · Camera</div>
             <div class="product-name">Focus Picker — Free Maya Tool</div>
