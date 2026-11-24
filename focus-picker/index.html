@@ -4,15 +4,18 @@
   <link rel="stylesheet" href="/css/brand-experience.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Focus Picker for Maya | Arnold + Redshift</title>
-  <meta name="description" content="Pick camera focus directly in the Maya viewport. Focus Picker controls depth of field, focal length, Arnold aperture, and Redshift F-stop from one compact panel.">
+  <title>Focus Picker 1.3 for Maya | Arnold + Redshift</title>
+  <meta name="description" content="Click a Maya viewport surface to set camera focus. Focus Picker 1.3 adds Focus Lock and puts Arnold and Redshift lens controls in one panel.">
   <link rel="canonical" href="https://reimaginefx.com/focus-picker/">
   <meta name="theme-color" content="#080b10">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Focus Picker for Maya">
-  <meta property="og:description" content="Click a surface. Set camera focus. Keep Arnold and Redshift lens controls close.">
+  <meta property="og:title" content="Focus Picker 1.3 for Maya">
+  <meta property="og:description" content="Click a viewport surface to set focus. Lock onto the point as the shot moves, then adjust Arnold or Redshift lens controls.">
   <meta property="og:url" content="https://reimaginefx.com/focus-picker/">
-  <meta property="og:image" content="https://reimaginefx.com/focus-picker/assets/focus-picker-auto.png">
+  <meta property="og:image" content="https://reimaginefx.com/focus-picker/assets/focus-picker-v13-poster.jpg">
+  <meta property="og:image:width" content="1080">
+  <meta property="og:image:height" content="1350">
+  <meta property="og:image:alt" content="Focus Picker campaign poster with an amber perfume render by Amar Shinde.">
   <meta name="twitter:card" content="summary_large_image">
 
   <script type="application/ld+json">
@@ -22,9 +25,9 @@
     "name": "Focus Picker",
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "Windows 10, Windows 11",
-    "softwareVersion": "1.2",
-    "description": "A compact Maya camera focus tool with Arnold and Redshift lens controls.",
-    "image": "https://reimaginefx.com/focus-picker/assets/focus-picker-auto.png",
+    "softwareVersion": "1.3",
+    "description": "Set camera focus by clicking a Maya viewport surface. Focus Lock tracks the picked point, with lens controls for Arnold and Redshift.",
+    "image": "https://reimaginefx.com/focus-picker/assets/focus-picker-v13-poster.jpg",
     "author": {
       "@type": "Person",
       "name": "Amar Shinde"
@@ -263,6 +266,16 @@
       font-size: 11px;
     }
 
+    .campaign-poster {
+      display: block;
+      justify-self: center;
+      width: min(100%, 490px);
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
     .instrument {
       position: relative;
       justify-self: center;
@@ -274,26 +287,10 @@
       box-shadow: var(--shadow), 0 0 70px rgba(22, 140, 255, 0.1);
     }
 
-    .instrument::before {
-      content: "FOCUS / LIVE";
-      position: absolute;
-      z-index: 3;
-      top: 26px;
-      right: -45px;
-      padding: 7px 10px;
-      border: 1px solid rgba(70, 178, 255, 0.38);
-      border-radius: 4px;
-      color: var(--accent-bright);
-      background: #0b1017;
-      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-      font-size: 9px;
-      letter-spacing: 0.12em;
-    }
-
     .instrument-image {
       display: grid;
       overflow: hidden;
-      aspect-ratio: 580 / 770;
+      aspect-ratio: 576 / 746;
       border-radius: 8px;
       background: #0b0d10;
     }
@@ -312,7 +309,7 @@
 
     .mode-switcher {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 6px;
       margin-top: 10px;
     }
@@ -417,8 +414,15 @@
       font: 800 22px/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
     }
 
-    .control-list {
+    .control-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      align-items: start;
+      gap: clamp(28px, 5vw, 72px);
       margin-top: 28px;
+    }
+
+    .control-list {
       border-top: 1px solid var(--line);
     }
 
@@ -537,11 +541,11 @@
       .hero-grid { grid-template-columns: 1fr; gap: 50px; }
       .hero-copy-wrap { max-width: 680px; }
       .instrument { width: min(100%, 390px); }
-      .instrument::before { right: -18px; }
       .facts-grid { grid-template-columns: repeat(2, 1fr); }
       .fact:nth-child(2) { border-right: 1px solid var(--line-soft); }
       .fact:nth-child(n + 3) { border-top: 1px solid var(--line-soft); }
       .section-heading, .requirements { grid-template-columns: 1fr; gap: 24px; }
+      .control-layout { grid-template-columns: minmax(0, 1fr); }
     }
 
     @media (max-width: 620px) {
@@ -554,7 +558,6 @@
       .hero-copy { font-size: 17px; }
       .hero-actions { display: grid; }
       .button { width: 100%; }
-      .instrument::before { display: none; }
       .facts-grid { grid-template-columns: 1fr 1fr; }
       .fact { min-height: 100px; padding: 18px 16px; }
       .section { padding: 62px 0; }
@@ -608,26 +611,15 @@
         <div class="hero-copy-wrap reveal">
           <div class="eyebrow">Maya 2026 · Arnold + Redshift</div>
           <h1>Click the shot <span class="hero-accent">into focus.</span></h1>
-          <p class="hero-copy">Pick any visible surface in the Maya viewport. Focus Picker writes the camera distance, then keeps depth of field, focal length, and renderer-specific lens controls within reach.</p>
+          <p class="hero-copy">Click a surface in the Maya viewport to set your camera’s focus distance. Use Focus Lock to keep tracking that point as the camera or subject moves. Adjust depth of field and focal length from the same panel in Arnold or Redshift.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="https://reimagine-fx.gumroad.com/l/rfxfocuspicker" target="_blank" rel="noopener">Get Focus Picker free</a>
             <a class="button button-secondary" href="#workflow">See how it works</a>
           </div>
-          <p class="hero-note">v1.2 / Windows / compact PySide6 panel</p>
+          <p class="hero-note">v1.3 / Windows / Focus Lock</p>
         </div>
 
-        <div class="instrument reveal" aria-label="Focus Picker renderer modes">
-          <div class="instrument-image">
-            <img class="is-active" src="assets/focus-picker-auto.png" width="580" height="770" alt="Focus Picker in Auto renderer mode" data-mode-image="auto">
-            <img src="assets/focus-picker-arnold.png" width="580" height="770" alt="Focus Picker controlling an Arnold camera" data-mode-image="arnold">
-            <img src="assets/focus-picker-redshift.png" width="580" height="770" alt="Focus Picker controlling a Redshift camera" data-mode-image="redshift">
-          </div>
-          <div class="mode-switcher" role="tablist" aria-label="Renderer screenshot">
-            <button class="mode-button" type="button" role="tab" aria-selected="true" data-mode="auto">Auto</button>
-            <button class="mode-button" type="button" role="tab" aria-selected="false" data-mode="arnold">Arnold</button>
-            <button class="mode-button" type="button" role="tab" aria-selected="false" data-mode="redshift">Redshift</button>
-          </div>
-        </div>
+        <img class="campaign-poster" src="assets/focus-picker-v13-poster.jpg" width="1080" height="1350" alt="Focus Picker campaign poster with an amber perfume render by Amar Shinde." fetchpriority="high">
       </div>
     </section>
 
@@ -647,7 +639,7 @@
             <div class="eyebrow">Viewport workflow</div>
             <h2>Surface in. Distance out.</h2>
           </div>
-          <p>Press Pick focus in viewport, then click the point that should read sharp. The active camera gets the measured focus distance from the real viewport ray.</p>
+          <p>Press Pick focus in viewport, then click the part of the shot you want sharp. Turn on Focus Lock to keep focus on the picked point as the camera or subject moves.</p>
         </div>
 
         <div class="focus-sequence reveal">
@@ -673,14 +665,26 @@
             <div class="eyebrow">Compact controls</div>
             <h2>Enough control. Nothing buried.</h2>
           </div>
-          <p>Auto, Arnold, and Redshift share the same panel. Only the renderer-specific aperture control changes: aperture radius for Arnold, F-stop for Redshift.</p>
+          <p>Arnold uses aperture radius. Redshift uses F-stop or circle-of-confusion radius when a Redshift Bokeh shader controls depth of field.</p>
         </div>
 
-        <div class="control-list reveal">
-          <div class="control-row"><span class="control-index">01</span><strong>Renderer + camera</strong><span>Follow Maya automatically, choose a renderer directly, then switch, create, delete, or refresh cameras.</span></div>
-          <div class="control-row"><span class="control-index">02</span><strong>Focus distance</strong><span>Type a value, use the arrow controls, scrub it with the label, or set it from the viewport.</span></div>
-          <div class="control-row"><span class="control-index">03</span><strong>Depth of field</strong><span>Turn camera DOF on or off without leaving the panel.</span></div>
-          <div class="control-row"><span class="control-index">04</span><strong>Lens values</strong><span>Adjust focal length plus Arnold aperture or Redshift F-stop. Changes remain undoable.</span></div>
+        <div class="control-layout">
+          <div class="control-list reveal">
+            <div class="control-row"><span class="control-index">01</span><strong>Renderer + camera</strong><span>Follow Maya automatically, choose a renderer directly, then switch, create, delete, or refresh cameras.</span></div>
+            <div class="control-row"><span class="control-index">02</span><strong>Focus distance</strong><span>Type a value, use the arrow controls, scrub it with the label, or set it from the viewport.</span></div>
+            <div class="control-row"><span class="control-index">03</span><strong>Depth of field</strong><span>Turn camera DOF on or off without leaving the panel.</span></div>
+            <div class="control-row"><span class="control-index">04</span><strong>Lens values</strong><span>Adjust focal length and the active renderer’s blur control.</span></div>
+          </div>
+          <div class="instrument reveal" aria-label="Focus Picker 1.3 renderer screenshots">
+            <div class="instrument-image">
+              <img class="is-active" src="assets/focus-picker-v13-arnold.png" width="576" height="746" alt="Focus Picker 1.3 in Arnold mode with focus locked on the bottle and aperture radius visible." data-mode-image="arnold" loading="lazy">
+              <img src="assets/focus-picker-v13-redshift.png" width="576" height="746" alt="Focus Picker 1.3 in Redshift mode with focus locked on the bottle and F-stop visible." data-mode-image="redshift" loading="lazy" aria-hidden="true">
+            </div>
+            <div class="mode-switcher" role="tablist" aria-label="Renderer screenshot">
+              <button class="mode-button" type="button" role="tab" aria-selected="true" data-mode="arnold">Arnold</button>
+              <button class="mode-button" type="button" role="tab" aria-selected="false" data-mode="redshift">Redshift</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -688,17 +692,16 @@
     <section class="section" id="requirements">
       <div class="container requirements">
         <div class="requirements-copy reveal">
-          <div class="eyebrow">Current release</div>
-          <h2>Small install. Ready for Maya.</h2>
-          <p>The download has one self-contained plugin folder and a one-page PDF. Copy the folder into Maya's scripts directory, then add the shelf button.</p>
+          <div class="eyebrow">Compatibility</div>
+          <h2>Focus Picker 1.3 requirements</h2>
+          <p>Use Maya 2026 on Windows with Arnold or Redshift. Follow the installation guide supplied with your download.</p>
         </div>
 
         <dl class="specs reveal">
-          <div class="spec"><dt>Version</dt><dd>Focus Picker 1.2</dd></div>
+          <div class="spec"><dt>Version</dt><dd>Focus Picker 1.3</dd></div>
           <div class="spec"><dt>Host</dt><dd>Autodesk Maya 2026</dd></div>
           <div class="spec"><dt>Renderers</dt><dd>Arnold and Redshift</dd></div>
           <div class="spec"><dt>Platform</dt><dd>Windows 10 / 11</dd></div>
-          <div class="spec"><dt>Included</dt><dd>Plugin folder + installation PDF</dd></div>
           <div class="spec"><dt>Price</dt><dd>Free</dd></div>
         </dl>
       </div>
@@ -714,7 +717,7 @@
           </details>
           <details>
             <summary>What changes between the two renderers?</summary>
-            <p>The core workflow stays the same. Arnold exposes aperture radius; Redshift exposes camera F-stop.</p>
+            <p>Arnold exposes aperture radius. Redshift exposes camera F-stop, or circle-of-confusion radius if the camera has a Redshift Bokeh shader.</p>
           </details>
           <details>
             <summary>Can I edit values without using the viewport picker?</summary>
@@ -740,7 +743,7 @@
 
   <footer>
     <div class="container footer-inner">
-      <span>Focus Picker 1.2 · Amar Shinde / Reimagine FX</span>
+      <span>Focus Picker 1.3 · Amar Shinde / Reimagine FX</span>
       <span class="footer-links">
         <a href="/products">Products</a>
         <a href="https://www.reimaginefx.com" target="_blank" rel="noreferrer">Reimagine FX</a>
@@ -758,7 +761,9 @@
         button.setAttribute("aria-selected", String(button.dataset.mode === mode));
       });
       modeImages.forEach((image) => {
-        image.classList.toggle("is-active", image.dataset.modeImage === mode);
+        const active = image.dataset.modeImage === mode;
+        image.classList.toggle("is-active", active);
+        image.setAttribute("aria-hidden", String(!active));
       });
     }
 
